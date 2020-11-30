@@ -33,6 +33,21 @@ public class PortalCO extends OAControllerImpl
     super.processRequest(pageContext, webBean);
     String strUserName =  pageContext.getUserName();
     pageContext.writeDiagnostics(this,"strUserName:"+strUserName,OAFwkConstants.STATEMENT);
+    System.out.println("strUserName:"+strUserName);
+    String strShasLogin = (String)pageContext.getSessionValue("sHasLogin");
+    System.out.println("strShasLogin:"+strShasLogin);
+      if(null==strShasLogin||"".equals(strShasLogin)){
+          pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/ss/webui/LoginPG" /*url*/
+                                    ,null /*functionName*/
+                                    ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                    ,null /*menuName*/
+                                    ,null /*parameters*/
+                                    ,false /*retainAM*/
+                                    ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                    ,OAException.ERROR /*messagingLevel*/
+                                    );
+                                    return; 
+      }
   }
 
   /**
@@ -44,6 +59,10 @@ public class PortalCO extends OAControllerImpl
   public void processFormRequest(OAPageContext pageContext, OAWebBean webBean)
   {
     super.processFormRequest(pageContext, webBean);
+    
+   
+    
+    
     String strEventParam =pageContext.getParameter(this.EVENT_PARAM);
     pageContext.writeDiagnostics(this,"strEventParam:"+strEventParam,OAFwkConstants.STATEMENT);
       if("ConsultaFichaTecnicaEvt".equals(strEventParam)){
@@ -62,6 +81,20 @@ public class PortalCO extends OAControllerImpl
             com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
             parameters.put("pClienteExtern","Y");
             pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/conscliente/webui/ConsultaDeClientePG" /*url*/
+                                      ,null /*functionName*/
+                                      ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                      ,null /*menuName*/
+                                      ,parameters /*parameters*/
+                                      ,false /*retainAM*/
+                                      ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                      ,OAException.ERROR /*messagingLevel*/
+                                      );
+            return;
+          }else if("ReportesEvt".equals(strEventParam)){
+              
+            com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
+            parameters.put("pClienteExtern","Y");
+            pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/webui/ReportesPG" /*url*/
                                       ,null /*functionName*/
                                       ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
                                       ,null /*menuName*/

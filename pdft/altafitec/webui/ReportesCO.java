@@ -31,6 +31,7 @@ import oracle.apps.fnd.framework.webui.beans.message.OAMessageLovInputBean;
 
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageStyledTextBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageTextInputBean;
+import oracle.apps.fnd.framework.webui.beans.nav.OALinkBean;
 import oracle.apps.xdo.XDOException;
 import oracle.apps.xdo.oa.schema.server.TemplateHelper;
 
@@ -59,6 +60,13 @@ public class ReportesCO extends OAControllerImpl
       OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
       if(null!=NombreUsuarioEBSBean){
           NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
+      }
+      /** java.lang.ClassCastException: oracle.apps.fnd.framework.webui.beans.nav.OALinkBean**/
+      OALinkBean  oALinkBean = (OALinkBean)webBean.findChildRecursive("RegresarPantallaPrincipal");
+      if("Y".equals(pageContext.getParameter("pClienteExtern"))){
+       if(null!=oALinkBean){
+           oALinkBean.setDestination("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/ss/webui/PortalPG");
+       }
       }
   }
 

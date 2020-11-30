@@ -83,6 +83,7 @@ public class LoginCO extends OAControllerImpl
        
            com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
            parameters.put("pClienteExtern","Y");
+           pageContext.putSessionValue("sHasLogin","Y");
            pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/ss/webui/PortalPG" /*url*/
                                      ,null /*functionName*/
                                      ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/

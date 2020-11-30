@@ -43,6 +43,20 @@
                               </oa:button>
                            </ui:contents>
                         </oa:cellFormat>
+                        <oa:cellFormat id="CellSpacer21">
+                           <ui:contents>
+                              <oa:spacer id="Spacer21" width="40"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellReportes">
+                           <ui:contents>
+                              <oa:button id="Reportes" text="Reportes" prompt="Reportes">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="ReportesEvt" id="fireAction41"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
                      </ui:contents>
                   </oa:rowLayout>
                </ui:contents>
