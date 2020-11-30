@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="EstadoVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="xxqp.oracle.apps.ar.pdft.conscliente.server.EstadoVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.conscliente.server.EstadoVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT distinct hl.state
+          FROM hz_parties p,
+               hz_party_sites ps,
+               hz_locations     hl,
+               fnd_territories_vl terr,
+               fnd_lookup_values partytype,
+               fnd_lookup_values certification,
+               fnd_lookup_values registrystatus
+         WHERE  1=1     
+               /** and p.party_type IN ('PERSON', 'ORGANIZATION') **/
+               AND registrystatus.lookup_code = p.status
+               AND  ps.LOCATION_ID      =  hl.LOCATION_ID
+               AND ps.party_id(+) = p.party_id
+               AND ps.identifying_address_flag(+) = 'Y'
+               AND terr.territory_code(+) = p.country
+               AND partytype.view_application_id = 222 /** AR **/
+               AND partytype.lookup_type = 'PARTY_TYPE'
+               AND partytype.language = USERENV ('LANG')
+               AND partytype.lookup_code = p.party_type
+               AND certification.view_application_id(+) = 222  /** AR **/
+               AND certification.lookup_type(+) = 'HZ_PARTY_CERT_LEVEL'
+               AND certification.language(+) = USERENV ('LANG')
+               AND certification.lookup_code(+) = p.certification_level
+               AND registrystatus.lookup_type = 'HZ_CPUI_REGISTRY_STATUS'
+               AND registrystatus.language = USERENV ('LANG')
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="State"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="60"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATE"
+      Expression="STATE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="60" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

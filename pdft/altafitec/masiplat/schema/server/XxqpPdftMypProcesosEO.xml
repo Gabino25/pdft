@@ -1,0 +1,324 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+
+<Entity
+   Name="XxqpPdftMypProcesosEO"
+   DBObjectType="table"
+   DBObjectName="XXQP_PDFT_MYP_PROCESOS"
+   AliasName="XxqpPdftMypProcesosEO"
+   BindingStyle="OracleName"
+   UseGlueCode="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosEOImpl"
+   DefClass="oracle.apps.fnd.framework.server.OAEntityDefImpl"
+   CollClass="oracle.apps.fnd.framework.server.OAEntityCache" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <AttrArray Name="_publishEvents">
+      </AttrArray>
+      <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|Val" />
+   </DesignTime>
+   <Attribute
+      Name="Id"
+      ColumnName="ID"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_MYP_PROCESOS"
+      PrimaryKey="true" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="MypHeaderId"
+      ColumnName="MYP_HEADER_ID"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Region"
+      Precision="100"
+      ColumnName="REGION"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Proseso"
+      Precision="30"
+      ColumnName="PROSESO"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="OtrosProcesos"
+      Precision="30"
+      ColumnName="OTROS_PROCESOS"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Seleccionar"
+      Precision="10"
+      ColumnName="SELECCIONAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Precio"
+      ColumnName="PRECIO"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ComentariosInstrucc"
+      Precision="4000"
+      ColumnName="COMENTARIOS_INSTRUCC"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      ColumnName="CREATED_BY"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreationDate"
+      IsNotNull="true"
+      ColumnName="CREATION_DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      SQLType="DATE"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      ColumnName="LAST_UPDATED_BY"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      ColumnName="LAST_UPDATE_DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      SQLType="DATE"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LastUpdateLogin"
+      Precision="15"
+      Scale="0"
+      ColumnName="LAST_UPDATE_LOGIN"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="AttributeCategory"
+      Precision="250"
+      ColumnName="ATTRIBUTE_CATEGORY"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute1"
+      Precision="2000"
+      ColumnName="ATTRIBUTE1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute2"
+      Precision="2000"
+      ColumnName="ATTRIBUTE2"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute3"
+      Precision="2000"
+      ColumnName="ATTRIBUTE3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute4"
+      Precision="2000"
+      ColumnName="ATTRIBUTE4"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute5"
+      Precision="2000"
+      ColumnName="ATTRIBUTE5"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <AccessorAttribute
+      Name="XxqpPdftMypHeaderEO"
+      Association="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosFkAssoc"
+      AssociationEnd="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosFkAssoc.XxqpPdftMypHeaderEO"
+      AssociationOtherEnd="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosFkAssoc.XxqpPdftMypProcesosEO"
+      Type="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypHeaderEOImpl" >
+   </AccessorAttribute>
+   <Key
+      Name="SysC001448404" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosEO.CreatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001448404" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001448405" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosEO.CreationDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATION_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001448405" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001448406" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosEO.LastUpdatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001448406" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001448407" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosEO.LastUpdateDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001448407" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="XxqppdftmypprocesoseoPrimaryKey" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosEO.Id" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_isPrimary" Value="true" />
+         <Attr Name="_DBObjectName" Value="XXQPPDFTMYPPROCESOSEO_PRIMARY_" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="XxqpPdftMypProcesosFk" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosEO.MypHeaderId" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="XXQP_PDFT_MYP_HEADER_ID_PK" />
+         <Attr Name="_isForeign" Value="true" />
+         <Attr Name="_DBObjectName" Value="XXQP_PDFT_MYP_PROCESOS_FK" />
+      </DesignTime>
+   </Key>
+</Entity>

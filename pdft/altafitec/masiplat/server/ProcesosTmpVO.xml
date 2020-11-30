@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="ProcesosTmpVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.ProcesosTmpVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.ProcesosTmpVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+select 1                  proceso_id
+         ,'Ensobretado' Proceso
+         ,'N'                seleccionar
+      from dual
+   union 
+    select 2                  proceso_id
+         ,'Embolsado' Proceso
+         ,'N'                seleccionar
+      from dual
+   union 
+    select 3                  proceso_id
+         ,'Sellado/Cerrado' Proceso
+         ,'N'                seleccionar
+      from dual   
+       union 
+    select 4                  proceso_id
+         ,'Insercion' Proceso
+         ,'N'                seleccionar
+      from dual  
+      union
+       select 5                  proceso_id
+         ,'Clasificacion' Proceso
+         ,'N'                seleccionar
+      from dual   
+       union
+       select 6                  proceso_id
+         ,'Pegado Elemento' Proceso
+         ,'N'                seleccionar
+      from dual
+     union
+      select 7                  proceso_id
+         ,'Match' Proceso
+         ,'N'                seleccionar
+      from dual
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="ProcesoId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PROCESO_ID"
+      Expression="PROCESO_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Proceso"
+      IsPersistent="false"
+      Precision="15"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROCESO"
+      Expression="PROCESO"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="15" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Seleccionar"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="SELECCIONAR"
+      Expression="SELECCIONAR"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Precio"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+</ViewObject>

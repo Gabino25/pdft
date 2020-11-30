@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="XxqpPdftBpoHeaderEO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoHeaderEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoPagoEO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoPagoEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoPagoFkAssoc"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoPagoFkAssoc"
+      ObjectType="Association" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoPrecioEO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoPrecioEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoPrecioFkAssoc"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoPrecioFkAssoc"
+      ObjectType="Association" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoRegNegEO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoRegNegEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoRegNegFkAssoc"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoRegNegFkAssoc"
+      ObjectType="Association" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoRequeAdicioEO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoRequeAdicioEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoRequeAdicioFkAssoc"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoRequeAdicioFkAssoc"
+      ObjectType="Association" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoServicioEO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoServicioEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoServicioFkAssoc"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoServicioFkAssoc"
+      ObjectType="Association" >
+   </Containee>
+</JboPackage>

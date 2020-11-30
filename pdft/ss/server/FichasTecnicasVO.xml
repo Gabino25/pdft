@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="FichasTecnicasVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="xxqp.oracle.apps.ar.pdft.ss.server.FichasTecnicasVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.ss.server.FichasTecnicasVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+select myp.id
+        ,myp.numero_ft 
+        ,myp.status
+        ,myp.party_id
+       ,(select p.known_as 
+          from hz_parties p
+         where p.party_id = myp.party_id) nombre_del_cliente
+       ,myp.unidad_de_negocio_c
+       ,myp.empresa_que_factura_c
+       ,myp.frecuencia_facturacion_c
+       ,myp.created_by
+       ,(select  fu.user_name||' - '||fu.description
+          from fnd_user fu 
+        where fu.user_id =  myp.created_by) ejecutivo
+       ,trunc(myp.fecha_inicial_operacion) fecha_inicial_operacion
+       ,trunc(myp.creation_date) creation_date
+       ,'MYP' origin
+   from xxqp_pdft_myp_header myp
+ union
+     select bpo.id
+        ,bpo.numero_ft 
+        ,bpo.status
+        ,bpo.party_id
+       ,(select p.known_as 
+          from hz_parties p
+         where p.party_id = bpo.party_id) nombre_del_cliente
+       ,bpo.unidad_de_negocio_c
+       ,bpo.empresa_que_factura_c
+       ,bpo.frecuencia_facturacion_c
+       ,bpo.created_by
+       ,(select  fu.user_name||' - '||fu.description
+          from fnd_user fu 
+        where fu.user_id =  bpo.created_by) ejecutivo
+       ,trunc(bpo.fecha_inicial_operacion) fecha_inicial_operacion
+       ,trunc(bpo.creation_date) creation_date
+         ,'BPO' origin
+   from xxqp_pdft_bpo_header bpo
+   union
+     select qplabs.id
+        ,qplabs.numero_ft 
+        ,qplabs.status
+        ,qplabs.party_id
+       ,(select p.known_as 
+          from hz_parties p
+         where p.party_id = qplabs.party_id) nombre_del_cliente
+       ,qplabs.unidad_de_negocio_c
+       ,qplabs.empresa_que_factura_c
+       ,qplabs.frecuencia_facturacion_c
+       ,qplabs.created_by
+       ,(select  fu.user_name||' - '||fu.description
+          from fnd_user fu 
+        where fu.user_id =  qplabs.created_by) ejecutivo
+       ,trunc(qplabs.fecha_inicial_operacion) fecha_inicial_operacion
+       ,trunc(qplabs.creation_date) creation_date
+        ,'QP_LABS' origin
+   from xxqp_pdft_qplabs_header qplabs
+   order by numero_ft
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="Id"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="ID"
+      Expression="ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumeroFt"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="NUMERO_FT"
+      Expression="NUMERO_FT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS"
+      Expression="STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PartyId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PARTY_ID"
+      Expression="PARTY_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NombreDelCliente"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NOMBRE_DEL_CLIENTE"
+      Expression="NOMBRE_DEL_CLIENTE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UnidadDeNegocioC"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="UNIDAD_DE_NEGOCIO_C"
+      Expression="UNIDAD_DE_NEGOCIO_C"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpresaQueFacturaC"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EMPRESA_QUE_FACTURA_C"
+      Expression="EMPRESA_QUE_FACTURA_C"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FrecuenciaFacturacionC"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="FRECUENCIA_FACTURACION_C"
+      Expression="FRECUENCIA_FACTURACION_C"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="CREATED_BY"
+      Expression="CREATED_BY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ejecutivo"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="343"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EJECUTIVO"
+      Expression="EJECUTIVO"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="343" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FechaInicialOperacion"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="FECHA_INICIAL_OPERACION"
+      Expression="FECHA_INICIAL_OPERACION"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="CREATION_DATE"
+      Expression="CREATION_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Origin"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="7"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORIGIN"
+      Expression="ORIGIN"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsSelected"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+</ViewObject>

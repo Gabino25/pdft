@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftQplabsPrecClieVO"
+   SelectList="XxqpPdftQplabsPrecClieEO.ID, 
+       XxqpPdftQplabsPrecClieEO.QPLABS_HEADER_ID, 
+       XxqpPdftQplabsPrecClieEO.CONCEPTO, 
+       XxqpPdftQplabsPrecClieEO.PRECIO, 
+       XxqpPdftQplabsPrecClieEO.CREATED_BY, 
+       XxqpPdftQplabsPrecClieEO.CREATION_DATE, 
+       XxqpPdftQplabsPrecClieEO.LAST_UPDATED_BY, 
+       XxqpPdftQplabsPrecClieEO.LAST_UPDATE_DATE, 
+       XxqpPdftQplabsPrecClieEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftQplabsPrecClieEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftQplabsPrecClieEO.ATTRIBUTE1, 
+       XxqpPdftQplabsPrecClieEO.ATTRIBUTE2, 
+       XxqpPdftQplabsPrecClieEO.ATTRIBUTE3, 
+       XxqpPdftQplabsPrecClieEO.ATTRIBUTE4, 
+       XxqpPdftQplabsPrecClieEO.ATTRIBUTE5"
+   FromList="XXQP_PDFT_QPLABS_PREC_CLIE XxqpPdftQplabsPrecClieEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.server.XxqpPdftQplabsPrecClieVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.server.XxqpPdftQplabsPrecClieVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftQplabsPrecClieEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsPrecClieEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      IsNotNull="true"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QplabsHeaderId"
+      EntityAttrName="QplabsHeaderId"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="QPLABS_HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Concepto"
+      EntityAttrName="Concepto"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="CONCEPTO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Precio"
+      EntityAttrName="Precio"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="PRECIO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftQplabsPrecClieEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+</ViewObject>

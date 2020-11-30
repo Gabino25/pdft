@@ -1,0 +1,122 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="xxqp.oracle.apps.ar.pdft.conscliente.server.ConsultaDeClienteAM" windowTitle="Consulta De Clientes" title="Consulta De Clientes" controllerClass="xxqp.oracle.apps.ar.pdft.conscliente.webui.ConsultaDeClienteCO" scope="/" securityMode="selfSecured" rendered="${oa.FunctionSecurity.XXQP_PDFT_SS_CC_F}">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:tableLayout id="ParametrosTabLay" hAlign="center">
+               <ui:contents>
+                  <oa:rowLayout id="RowLay1">
+                     <ui:contents>
+                        <oa:cellFormat id="CellNombreDelCliente">
+                           <ui:contents>
+                              <oa:tableLayout id="TabLayNombreDelCliente" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageLovInput id="NombreDelCliente" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/NombreDelClienteRN" maximumLength="250" prompt="Nombre del Cliente">
+                                       <lovMappings>
+                                          <lovMap id="lovMap11" lovItem="PartyName" resultTo="NombreDelCliente" criteriaFrom="NombreDelCliente"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
+                                    <oa:messageLovInput id="RazonSocial" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/RazonSocialRN" maximumLength="200" prompt="Razon Social">
+                                       <lovMappings>
+                                          <lovMap id="lovMap31" lovItem="RazonSocial" resultTo="RazonSocial" criteriaFrom="RazonSocial"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region2" width="30%"/>
+                        <oa:cellFormat id="CellRFC">
+                           <ui:contents>
+                              <oa:tableLayout id="TabLayRFC" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageLovInput id="RFC" queryable="false" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/RfcRN" maximumLength="50" prompt="RFC">
+                                       <lovMappings>
+                                          <lovMap id="lovMap21" lovItem="TaxpayerId" resultTo="RFC" criteriaFrom="RFC"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
+                                    <oa:messageLovInput id="Estado" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/EstadoRN" prompt="Estado">
+                                       <lovMappings>
+                                          <lovMap id="lovMap41" lovItem="State" resultTo="Estado" criteriaFrom="Estado"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+                  <oa:rowLayout id="RowLay3">
+                     <ui:contents>
+                        <oa:cellFormat id="CellLimpiar">
+                           <ui:contents>
+                              <oa:button id="LimpiarBtn" text="Limpiar" prompt="Limpiar">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="LimpiarEvt"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellBuscar">
+                           <ui:contents>
+                              <oa:button id="BuscarBtn" text="Buscar" prompt="Buscar">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="BuscarEvt"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellConsultarTodo">
+                           <ui:contents>
+                              <oa:button id="ConsultarTodoBtn" text="Consultar Todo" prompt="Consultar Todo">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="ConsultarTodoEvt" id="fireAction1"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+               </ui:contents>
+            </oa:tableLayout>
+            <oa:table id="ClientesInfo" width="100%">
+               <ui:contents>
+                  <oa:link id="KnownAsLink" viewName="ClientesInfoVO1" viewAttr="KnownAs" text="Nombre">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="KnownAsLinkEvt">
+                           <ui:parameters>
+                              <ui:parameter key="pPdftClientesHeaderId" value="${oa.ClientesInfoVO1.Attribute2}"/>
+                              <ui:parameter key="pPartyId" value="${oa.ClientesInfoVO1.PartyId}"/>
+                           </ui:parameters>
+                        </ui:fireAction>
+                     </ui:primaryClientAction>
+                  </oa:link>
+                  <oa:messageStyledText id="KnownAs" dataType="VARCHAR2" prompt="Nombre" viewName="ClientesInfoVO1" viewAttr="KnownAs" maximumLength="240" rendered="false"/>
+                  <oa:messageStyledText id="RazonSocial1" dataType="VARCHAR2" prompt="Razon Social" viewName="ClientesInfoVO1" viewAttr="RazonSocial" maximumLength="360"/>
+                  <oa:messageStyledText id="JgzzFiscalCode" dataType="VARCHAR2" prompt="RFC Primario" viewName="ClientesInfoVO1" viewAttr="JgzzFiscalCode" maximumLength="20"/>
+                  <oa:messageStyledText id="State" dataType="VARCHAR2" prompt="Estado" viewName="ClientesInfoVO1" viewAttr="State"/>
+               </ui:contents>
+            </oa:table>
+            <oa:pageButtonBar id="PageButtonBarRN">
+               <ui:contents>
+                  <oa:button id="NuevoBtn" text="Nuevo" prompt="Nuevo">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="NuevoEvt"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+               </ui:contents>
+            </oa:pageButtonBar>
+            <oa:formValue id="FvClienteExtern"/>
+         </ui:contents>
+         <ui:userInfo>
+            <oa:messageStyledText id="NombreUsuarioEBS" prompt="Nombre Usuario:" styleClass="OraFieldText"/>
+         </ui:userInfo>
+         <ui:returnNavigation>
+            <oa:link id="RegresarPantallaPrincipal" text="Regresar a Pantalla Principal" destination=""/>
+         </ui:returnNavigation>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftMypDistribucionVO"
+   SelectList="XxqpPdftMypDistribucionEO.ID, 
+       XxqpPdftMypDistribucionEO.MYP_HEADER_ID, 
+       XxqpPdftMypDistribucionEO.DIGITALIZACION_ACUSES, 
+       XxqpPdftMypDistribucionEO.CAPTURA_DEVOLUCIONES, 
+       XxqpPdftMypDistribucionEO.REPORTE_GPS, 
+       XxqpPdftMypDistribucionEO.REPORTE_RECEPCION, 
+       XxqpPdftMypDistribucionEO.CAPTURA_ACUSES, 
+       XxqpPdftMypDistribucionEO.SEGUIMIENTO_QUEJAS, 
+       XxqpPdftMypDistribucionEO.PROPORCIONAMOS_INSUMOS, 
+       XxqpPdftMypDistribucionEO.ETIQUETADO, 
+       XxqpPdftMypDistribucionEO.ENSOBRETADO, 
+       XxqpPdftMypDistribucionEO.GENERACION_ACUSE, 
+       XxqpPdftMypDistribucionEO.DIAS_OPERACION_LOCAL, 
+       XxqpPdftMypDistribucionEO.DIAS_OPERACION_FORANEO, 
+       XxqpPdftMypDistribucionEO.CIERRE_ELECTRONICO, 
+       XxqpPdftMypDistribucionEO.ENVIO_PIEZAS_FISICAS, 
+       XxqpPdftMypDistribucionEO.COMENTARIOS_DISTRIBUCION, 
+       XxqpPdftMypDistribucionEO.CREATED_BY, 
+       XxqpPdftMypDistribucionEO.CREATION_DATE, 
+       XxqpPdftMypDistribucionEO.LAST_UPDATED_BY, 
+       XxqpPdftMypDistribucionEO.LAST_UPDATE_DATE, 
+       XxqpPdftMypDistribucionEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftMypDistribucionEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftMypDistribucionEO.ATTRIBUTE1, 
+       XxqpPdftMypDistribucionEO.ATTRIBUTE2, 
+       XxqpPdftMypDistribucionEO.ATTRIBUTE3, 
+       XxqpPdftMypDistribucionEO.ATTRIBUTE4, 
+       XxqpPdftMypDistribucionEO.ATTRIBUTE5"
+   FromList="XXQP_PDFT_MYP_DISTRIBUCION XxqpPdftMypDistribucionEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypDistribucionVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypDistribucionVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftMypDistribucionEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypDistribucionEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MypHeaderId"
+      EntityAttrName="MypHeaderId"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="MYP_HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DigitalizacionAcuses"
+      EntityAttrName="DigitalizacionAcuses"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="DIGITALIZACION_ACUSES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CapturaDevoluciones"
+      EntityAttrName="CapturaDevoluciones"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="CAPTURA_DEVOLUCIONES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReporteGps"
+      EntityAttrName="ReporteGps"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="REPORTE_GPS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReporteRecepcion"
+      EntityAttrName="ReporteRecepcion"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="REPORTE_RECEPCION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CapturaAcuses"
+      EntityAttrName="CapturaAcuses"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="CAPTURA_ACUSES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SeguimientoQuejas"
+      EntityAttrName="SeguimientoQuejas"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="SEGUIMIENTO_QUEJAS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProporcionamosInsumos"
+      EntityAttrName="ProporcionamosInsumos"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="PROPORCIONAMOS_INSUMOS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Etiquetado"
+      EntityAttrName="Etiquetado"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="ETIQUETADO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ensobretado"
+      EntityAttrName="Ensobretado"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="ENSOBRETADO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GeneracionAcuse"
+      EntityAttrName="GeneracionAcuse"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="GENERACION_ACUSE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DiasOperacionLocal"
+      EntityAttrName="DiasOperacionLocal"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="DIAS_OPERACION_LOCAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DiasOperacionForaneo"
+      EntityAttrName="DiasOperacionForaneo"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="DIAS_OPERACION_FORANEO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CierreElectronico"
+      EntityAttrName="CierreElectronico"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="CIERRE_ELECTRONICO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EnvioPiezasFisicas"
+      EntityAttrName="EnvioPiezasFisicas"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="ENVIO_PIEZAS_FISICAS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ComentariosDistribucion"
+      EntityAttrName="ComentariosDistribucion"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="COMENTARIOS_DISTRIBUCION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftQplabsHeaderVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.server.XxqpPdftQplabsHeaderVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.server.XxqpPdftQplabsHeaderVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT XxqpPdftQplabsHeaderEO.ID, 
+       XxqpPdftQplabsHeaderEO.NUMERO_FT, 
+       XxqpPdftQplabsHeaderEO.REV, 
+       XxqpPdftQplabsHeaderEO.STATUS, 
+       XxqpPdftQplabsHeaderEO.NUMERO_FT_REFERENCIA, 
+       XxqpPdftQplabsHeaderEO.PARTY_ID, 
+       XxqpPdftQplabsHeaderEO.PDFT_CLIENTE_HEADER_ID, 
+       XxqpPdftQplabsHeaderEO.EMPRESA_QUE_FACTURA_C, 
+       XxqpPdftQplabsHeaderEO.UNIDAD_DE_NEGOCIO_C, 
+       XxqpPdftQplabsHeaderEO.FRECUENCIA_FACTURACION_C, 
+       XxqpPdftQplabsHeaderEO.CONTRATO_FLAG, 
+       XxqpPdftQplabsHeaderEO.CONTRATO_FILE_NAME, 
+       XxqpPdftQplabsHeaderEO.CONTRATO_CONTENT_TYPE, 
+       XxqpPdftQplabsHeaderEO.CONTRATO_FILE, 
+       XxqpPdftQplabsHeaderEO.FECHA_INICIAL_OPERACION, 
+       XxqpPdftQplabsHeaderEO.CREATED_BY, 
+       XxqpPdftQplabsHeaderEO.CREATION_DATE, 
+       XxqpPdftQplabsHeaderEO.LAST_UPDATED_BY, 
+       XxqpPdftQplabsHeaderEO.LAST_UPDATE_DATE, 
+       XxqpPdftQplabsHeaderEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftQplabsHeaderEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftQplabsHeaderEO.ATTRIBUTE1, 
+       XxqpPdftQplabsHeaderEO.ATTRIBUTE2, 
+       XxqpPdftQplabsHeaderEO.ATTRIBUTE3, 
+       XxqpPdftQplabsHeaderEO.ATTRIBUTE4, 
+       XxqpPdftQplabsHeaderEO.ATTRIBUTE5,
+(select p.known_as 
+          from hz_parties p
+         where p.party_id = XxqpPdftQplabsHeaderEO.party_id) nombre_del_cliente,
+       (select  fu.user_name||' - '||fu.description
+          from fnd_user fu 
+        where fu.user_id =  XxqpPdftQplabsHeaderEO.created_by) ejecutivo
+FROM XXQP_PDFT_QPLABS_HEADER XxqpPdftQplabsHeaderEO
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftQplabsHeaderEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsHeaderEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      IsNotNull="true"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumeroFt"
+      EntityAttrName="NumeroFt"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="NUMERO_FT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rev"
+      EntityAttrName="Rev"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="REV" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumeroFtReferencia"
+      EntityAttrName="NumeroFtReferencia"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="NUMERO_FT_REFERENCIA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PartyId"
+      EntityAttrName="PartyId"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="PARTY_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PdftClienteHeaderId"
+      EntityAttrName="PdftClienteHeaderId"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="PDFT_CLIENTE_HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpresaQueFacturaC"
+      EntityAttrName="EmpresaQueFacturaC"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="EMPRESA_QUE_FACTURA_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UnidadDeNegocioC"
+      EntityAttrName="UnidadDeNegocioC"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="UNIDAD_DE_NEGOCIO_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FrecuenciaFacturacionC"
+      EntityAttrName="FrecuenciaFacturacionC"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="FRECUENCIA_FACTURACION_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ContratoFlag"
+      EntityAttrName="ContratoFlag"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="CONTRATO_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ContratoFileName"
+      EntityAttrName="ContratoFileName"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="CONTRATO_FILE_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ContratoContentType"
+      EntityAttrName="ContratoContentType"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="CONTRATO_CONTENT_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ContratoFile"
+      IsQueriable="false"
+      EntityAttrName="ContratoFile"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="CONTRATO_FILE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FechaInicialOperacion"
+      EntityAttrName="FechaInicialOperacion"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="FECHA_INICIAL_OPERACION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftQplabsHeaderEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NombreDelCliente"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NOMBRE_DEL_CLIENTE"
+      Expression="NOMBRE_DEL_CLIENTE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ejecutivo"
+      IsPersistent="false"
+      Precision="343"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EJECUTIVO"
+      Expression="EJECUTIVO"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="343" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

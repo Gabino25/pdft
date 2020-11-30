@@ -1,0 +1,251 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="xxqp.oracle.apps.ar.pdft.altafitec.server.AltaFichaTecnicaAM" windowTitle="Busqueda de Ficha Tecnica" title="Busqueda de Ficha Tecnica" controllerClass="xxqp.oracle.apps.ar.pdft.altafitec.webui.BusquedaDeFichaTecnicaCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:tableLayout id="TabLayHeader" hAlign="center">
+               <ui:contents>
+                  <oa:rowLayout id="RowLayHeader">
+                     <ui:contents>
+                        <oa:cellFormat id="CellNoFichaTecnica">
+                           <ui:contents>
+                              <oa:tableLayout id="TabLayNoFichaTecnica" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageTextInput id="NoFichaTecnica" prompt="No Ficha Tecnica" dataType="NUMBER" styleClass="OraFieldNumber"/>
+                                    <oa:messageChoice id="pStatus" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.StatusFichaTecnicaVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Status" styleClass="OraFieldText"/>
+                                    <oa:messageTextInput id="pFechaInicialOperacion" dataType="DATE" prompt="Fecha Inicial Operacion" styleClass="OraFieldText"/>
+                                    <oa:messageTextInput id="pFechaCreacion" dataType="DATE" prompt="Fecha Creacion" styleClass="OraFieldText"/>
+                                    <oa:messageLovInput id="pEjecutivo" prompt="Ejecutivo" styleClass="OraFieldText">
+                                       <lovContents>
+                                          <oa:listOfValues id="region8">
+                                             <ui:contents>
+                                                <oa:table name="region8" id="EjecutivosRN">
+                                                   <ui:contents>
+                                                      <oa:messageStyledText id="UserId" dataType="VARCHAR2" prompt="UserId" viewName="EjecutivosVO1" viewAttr="UserId" maximumLength="15"/>
+                                                      <oa:messageStyledText id="LovEjecutivo" dataType="VARCHAR2" prompt="Ejecutivo" viewName="EjecutivosVO1" viewAttr="Ejecutivo" maximumLength="343" queryable="true"/>
+                                                   </ui:contents>
+                                                </oa:table>
+                                             </ui:contents>
+                                          </oa:listOfValues>
+                                       </lovContents>
+                                       <lovMappings>
+                                          <lovMap id="lovMap1" lovItem="LovEjecutivo" resultTo="pEjecutivo" criteriaFrom="pEjecutivo"/>
+                                          <lovMap id="lovMap2" lovItem="UserId" resultTo="FvUserId"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellSpacer" width="10%"/>
+                        <oa:cellFormat id="CellNombreDelCliente">
+                           <ui:contents>
+                              <oa:tableLayout id="TabLayNombreDelCliente" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageTextInput id="pNombreDelCliente" prompt="Nombre del Cliente" styleClass="OraFieldText"/>
+                                    <oa:messageChoice id="pUnidadDeNegocio" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.UnidadDeNegocioVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Unidad de Negocio" styleClass="OraFieldText"/>
+                                    <oa:messageChoice id="pEmpresaQueFactura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EmpresaQueFacturaVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Empresa que Factura" styleClass="OraFieldText"/>
+                                    <oa:messageChoice id="pCicloFacturacion" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CicloDeFacturacionVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Frecuencia de Facturacion" styleClass="OraFieldText" readOnly="false"/>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+               </ui:contents>
+            </oa:tableLayout>
+            <oa:tableLayout id="TabLayButtons" hAlign="center">
+               <ui:contents>
+                  <oa:rowLayout id="RowLayButtons">
+                     <ui:contents>
+                        <oa:cellFormat id="CellLimpiar" hAlign="center">
+                           <ui:contents>
+                              <oa:button id="LimpiarBtn" text="Limpiar" prompt="Limpiar">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="LimpiarEvt"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region9" width="20%"/>
+                        <oa:cellFormat id="CellBuscar" hAlign="center">
+                           <ui:contents>
+                              <oa:button id="BuscarBtn" text="Buscar" prompt="Buscar">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="BuscarEvt"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+               </ui:contents>
+            </oa:tableLayout>
+            <oa:advancedTable id="FichasTecnicasAdvTab" viewName="FichasTecnicasVO1">
+               <ui:contents>
+                  <oa:column id="IdCol" rendered="false">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="IdSort" prompt="Id"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="Id" viewAttr="Id" styleClass="OraFieldNumber"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="NumeroFtCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="NumeroFtSort" prompt="#FT"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="NumeroFt" viewAttr="NumeroFt" styleClass="OraFieldNumber"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="StatusCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="StatusSort" prompt="Status"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageChoice id="Status" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.StatusFichaTecnicaVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Status" styleClass="OraFieldText" readOnly="true" viewAttr="Status"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="FechaInicialOperacionCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="FechaInicialOperacionSort" prompt="Fecha Inicial Operacion"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="FechaInicialOperacion" prompt="" styleClass="OraFieldText" viewAttr="FechaInicialOperacion" dataType="DATE"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="CreationDateCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="CreationDateSort" prompt="Fecha de Creacion"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="CreationDate" prompt="" styleClass="OraFieldText" viewAttr="CreationDate" dataType="DATE"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="EjecutivoCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="EjecutivoSort" prompt="Ejecutivo"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="Ejecutivo" prompt="" styleClass="OraFieldText" viewAttr="Ejecutivo" dataType="VARCHAR2"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="NombreDelClienteCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="NombreDelClienteSort" prompt="Nombre del Cliente"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="NombreDelCliente" prompt="" styleClass="OraFieldText" viewAttr="NombreDelCliente" dataType="VARCHAR2"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="UnidadDeNegocioCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="UnidadDeNegocioSort" prompt="Unidad de Negocio"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageChoice id="UnidadDeNegocio" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.UnidadDeNegocioVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Unidad de Negocio" styleClass="OraFieldText" viewAttr="UnidadDeNegocioC" readOnly="true"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="EmpresaQueFacturaCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="EmpresaQueFacturaSort" prompt="Empresa que Factura"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageChoice id="EmpresaQueFactura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EmpresaQueFacturaVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Empresa que Factura" styleClass="OraFieldText" viewAttr="EmpresaQueFacturaC" readOnly="true"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="FrecuenciaDeFacturacionCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="FrecuenciaDeFacturacionSort" prompt="Frecuencia de Facturacion"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageChoice id="CicloFacturacion" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CicloDeFacturacionVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="" styleClass="OraFieldText" readOnly="true" viewAttr="FrecuenciaFacturacionC"/>
+                     </ui:contents>
+                  </oa:column>
+               </ui:contents>
+               <ui:tableSelection>
+                  <oa:singleSelection id="singleSelection1" viewAttr="IsSelected"/>
+               </ui:tableSelection>
+            </oa:advancedTable>
+            <oa:formValue id="FvUserId"/>
+            <oa:tableLayout id="region11" hAlign="center">
+               <ui:contents>
+                  <oa:rowLayout id="region12">
+                     <ui:contents>
+                        <oa:cellFormat id="region13" width="20%">
+                           <ui:contents>
+                              <oa:button id="CancelarBtn" text="Cancelar Ficha Tecnica" prompt="Cancelar Ficha Tecnica">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="CancelarEvt" id="fireAction3"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region18" width="5%"/>
+                        <oa:cellFormat id="region131" width="20%">
+                           <ui:contents>
+                              <oa:button id="CambioDePrecioBtn" text="Cambio de Precio" prompt="Cambio de Precio">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="CambioDePrecioEvt" id="fireAction31"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region1811" width="5%"/>
+                        <oa:cellFormat id="region14">
+                           <ui:contents>
+                              <oa:button id="CopiarBtn" text="Copiar" prompt="Copiar">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="CopiarEvt" id="fireAction4"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region181" width="5%"/>
+                        <oa:cellFormat id="region15">
+                           <ui:contents>
+                              <oa:button id="ModificarBtn" text="Modificar" prompt="Modificar">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="ModificarEvt" id="fireAction2"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region182" width="5%"/>
+                        <oa:cellFormat id="region16">
+                           <ui:contents>
+                              <oa:button id="EnviarBtn" text="Enviar Por Correo" prompt="Enviar Por Correo">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="EnviarEvt" id="fireAction5"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region183" width="5%"/>
+                        <oa:cellFormat id="region17">
+                           <ui:contents>
+                              <oa:button id="ConsultarBtn" text="Consultar" prompt="Consultar">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="ConsultarEvt" id="fireAction1"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+               </ui:contents>
+            </oa:tableLayout>
+         </ui:contents>
+         <ui:returnNavigation>
+            <oa:link id="RegresarPantallaPrincipal" text="Regresar a Pantalla Principal" destination="OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/PortalDeFichaTecnicaPG"/>
+         </ui:returnNavigation>
+         <ui:userInfo>
+            <oa:messageStyledText id="NombreUsuarioEBS" prompt="Nombre Usuario:" styleClass="OraFieldText"/>
+         </ui:userInfo>
+      </oa:pageLayout>
+   </content>
+</page>

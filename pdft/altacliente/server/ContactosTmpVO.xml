@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="ContactosTmpVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="xxqp.oracle.apps.ar.pdft.altacliente.server.ContactosTmpVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altacliente.server.ContactosTmpVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+select 1 record_id
+         , 'Cierre y Seguimiento' tipo_de_contacto
+          , 'CIERRE_Y_SEGUIMIENTO' tipo_de_contacto_code
+         ,null nombre
+         ,null direccion
+         ,null telefono
+         ,null correo_electronico
+         ,null puesto
+         ,null numero_celular
+  from dual
+  union 
+  select 2 record_id
+          ,'Cobranza' tipo_de_contacto
+          ,'COBRANZA' tipo_de_contacto_code
+          ,null nombre
+          ,null direccion
+          ,null telefono
+          ,null correo_electronico
+          ,null puesto
+          ,null numero_celular
+   from dual
+   union
+   select 3 record_id
+            ,'Gerencial' tipo_de_contacto
+             ,'GERENCIAL' tipo_de_contacto_code
+            ,null nombre
+            ,null direccion
+            ,null telefono
+            ,null correo_electronico
+            ,null puesto
+            ,null numero_celular
+   from dual
+   union
+   select 4 record_id
+           ,'Directriz' tipo_de_contacto
+            ,'DIRECTRIZ' tipo_de_contacto_code
+           ,null nombre
+           ,null direccion
+           ,null telefono
+           ,null correo_electronico
+           ,null puesto
+           ,null numero_celular
+   from dual
+   union
+   select 5 record_id
+           ,'Auditoria' tipo_de_contacto
+             ,'AUDITORIA' tipo_de_contacto_code
+           ,null nombre
+           ,null direccion
+           ,null telefono
+           ,null correo_electronico
+           ,null puesto
+           ,null numero_celular
+   from dual
+   union
+     select 6 record_id
+             ,'Devoluciones' tipo_de_contacto
+              ,'DEVOLUCIONES' tipo_de_contacto_code
+             ,null nombre
+             ,null direccion
+             ,null telefono
+             ,null correo_electronico
+            ,null puesto
+            ,null numero_celular
+     from dual
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="RecordId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="RECORD_ID"
+      Expression="RECORD_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TipoDeContacto"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TIPO_DE_CONTACTO"
+      Expression="TIPO_DE_CONTACTO"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="19" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TipoDeContactoCode"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TIPO_DE_CONTACTO_CODE"
+      Expression="TIPO_DE_CONTACTO_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Nombre"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NOMBRE"
+      Expression="NOMBRE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Direccion"
+      IsPersistent="false"
+      Precision="300"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DIRECCION"
+      Expression="DIRECCION"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Telefono"
+      IsPersistent="false"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TELEFONO"
+      Expression="TELEFONO"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CorreoElectronico"
+      IsPersistent="false"
+      Precision="200"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CORREO_ELECTRONICO"
+      Expression="CORREO_ELECTRONICO"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Puesto"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PUESTO"
+      Expression="PUESTO"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsRequired"
+      IsSelected="false"
+      IsPersistent="false"
+      DefaultValue="no"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumeroCelular"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NUMERO_CELULAR"
+      Expression="NUMERO_CELULAR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+</ViewObject>

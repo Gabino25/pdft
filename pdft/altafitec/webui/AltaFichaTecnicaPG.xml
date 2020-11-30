@@ -1,0 +1,64 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="xxqp.oracle.apps.ar.pdft.altafitec.server.AltaFichaTecnicaAM" windowTitle="Alta de Ficha Tecnica" title="Alta de Ficha Tecnica" controllerClass="xxqp.oracle.apps.ar.pdft.altafitec.webui.AltaFichaTecnicaCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:tableLayout id="TableLayoutRN" hAlign="center">
+               <ui:contents>
+                  <oa:rowLayout id="RowLay1">
+                     <ui:contents>
+                        <oa:cellFormat id="CellFechaActual" vAlign="top">
+                           <ui:contents>
+                              <oa:tableLayout id="TabLayFechaActual" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageTextInput id="FechaActual" prompt="Fecha" styleClass="OraFieldText" readOnly="true" vAlign="top" required="yes"/>
+                                    <oa:messageLovInput id="NombreDelClienteLov" readOnly="true" prompt="Nombre del Cliente" vAlign="top" styleClass="OraFieldText" required="yes" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/NombreDelClienteRN">
+                                       <lovMappings>
+                                          <lovMap id="lovMap1" lovItem="PartyName" resultTo="NombreDelClienteLov" criteriaFrom="NombreDelClienteLov"/>
+                                          <lovMap id="lovMap2" lovItem="PartyId" resultTo="PartyId"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
+                                    <oa:messageTextInput id="NombreDelCliente" readOnly="true" prompt="Nombre del Cliente" vAlign="top" styleClass="OraFieldText" required="yes" rendered="false"/>
+                                    <oa:messageChoice id="UnidadDeNegocio" prompt="Unidad de Negocio" styleClass="OraFieldText" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.UnidadDeNegocioVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" required="yes"/>
+                                    <oa:messageChoice id="EmpresaQueFactura" prompt="Empresa que Factura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EmpresaQueFacturaVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" styleClass="OraFieldText" readOnly="false" required="yes"/>
+                                    <oa:messageChoice id="CicloFacturacion" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CicloDeFacturacionVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Frecuencia de Facturacion" styleClass="OraFieldText" required="yes"/>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellEjecutivo" vAlign="top">
+                           <ui:contents>
+                              <oa:tableLayout id="TabLayEjecutivo" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageChoice id="Ejecutivo" prompt="Ejecutivo" styleClass="OraFieldText" readOnly="false" vAlign="top" required="yes" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.MgrPdftUsuariosVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode"/>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+               </ui:contents>
+            </oa:tableLayout>
+            <oa:pageButtonBar id="PageButtonBarRN">
+               <ui:contents>
+                  <oa:button id="Continuar" text="Continuar" prompt="Continuar">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="ContinuarEvt"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+               </ui:contents>
+            </oa:pageButtonBar>
+            <oa:formValue id="PartyId"/>
+         </ui:contents>
+         <ui:userInfo>
+            <oa:messageStyledText id="NombreUsuarioEBS" prompt="Nombre Usuario:" styleClass="OraFieldText"/>
+         </ui:userInfo>
+         <ui:returnNavigation>
+            <oa:link id="RegresarPantallaBusquedaCiente" text="Regresar a Busqueda de Cliente para Alta de Ficha Tecnica" destination="OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/webui/BusquedaClienteParaFtPG"/>
+         </ui:returnNavigation>
+      </oa:pageLayout>
+   </content>
+</page>

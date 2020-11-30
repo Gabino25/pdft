@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="PortalDeFichaTecnicaAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>OAF</JDBCName>
+         <jbo.project>PDFTOAProj</jbo.project>
+         <AppModuleJndiName>xxqp.oracle.apps.ar.pdft.server.PortalDeFichaTecnicaAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>xxqp.oracle.apps.ar.pdft.server.PortalDeFichaTecnicaAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

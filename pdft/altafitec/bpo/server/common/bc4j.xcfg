@@ -1,0 +1,39 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="BpoAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>XXQP_TEST</JDBCName>
+         <jbo.project>PDFT_OAProj</jbo.project>
+         <AppModuleJndiName>xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.BpoAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.BpoAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <ConnectionDefinition name="XXQP_PROD">
+      <ENTRY name="JDBC_PORT" value="1523"/>
+      <ENTRY name="ConnectionType" value="JDBC"/>
+      <ENTRY name="HOSTNAME" value="192.168.0.100"/>
+      <ENTRY name="user" value="apps"/>
+      <ENTRY name="ConnectionName" value="XXQP_PROD"/>
+      <ENTRY name="ServiceName" value="PROD"/>
+      <ENTRY name="JdbcDriver" value="oracle.jdbc.OracleDriver"/>
+      <ENTRY name="password">{904}056A180314A7EEE1CBE804B333FF90E456</ENTRY>
+      <ENTRY name="ORACLE_JDBC_TYPE" value="thin"/>
+      <ENTRY name="DeployPassword" value="true"/>
+   </ConnectionDefinition>
+   <ConnectionDefinition name="XXQP_TEST">
+      <ENTRY name="JDBC_PORT" value="1522"/>
+      <ENTRY name="ConnectionType" value="JDBC"/>
+      <ENTRY name="HOSTNAME" value="192.168.0.220"/>
+      <ENTRY name="user" value="apps"/>
+      <ENTRY name="ConnectionName" value="XXQP_TEST"/>
+      <ENTRY name="SID" value="test"/>
+      <ENTRY name="JdbcDriver" value="oracle.jdbc.OracleDriver"/>
+      <ENTRY name="password">
+         <![CDATA[{904}05A00C9B4052E498A964F478A367BB663F30E55C6FD43D614A]]>
+      </ENTRY>
+      <ENTRY name="ORACLE_JDBC_TYPE" value="thin"/>
+      <ENTRY name="DeployPassword" value="true"/>
+   </ConnectionDefinition>
+</BC4JConfig>

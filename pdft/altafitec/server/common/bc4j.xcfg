@@ -1,0 +1,39 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="AltaFichaTecnicaAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>XXQP_TEST</JDBCName>
+         <jbo.project>PDFT_OAProj</jbo.project>
+         <AppModuleJndiName>xxqp.oracle.apps.ar.pdft.altafitec.server.AltaFichaTecnicaAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>xxqp.oracle.apps.ar.pdft.altafitec.server.AltaFichaTecnicaAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <ConnectionDefinition name="XXQP_PROD">
+      <ENTRY name="JDBC_PORT" value="1523"/>
+      <ENTRY name="ConnectionType" value="JDBC"/>
+      <ENTRY name="HOSTNAME" value="192.168.0.100"/>
+      <ENTRY name="user" value="apps"/>
+      <ENTRY name="ConnectionName" value="XXQP_PROD"/>
+      <ENTRY name="ServiceName" value="PROD"/>
+      <ENTRY name="JdbcDriver" value="oracle.jdbc.OracleDriver"/>
+      <ENTRY name="password">{904}05097ED6FAF9651F13F9BFEC6525C4F686</ENTRY>
+      <ENTRY name="ORACLE_JDBC_TYPE" value="thin"/>
+      <ENTRY name="DeployPassword" value="true"/>
+   </ConnectionDefinition>
+   <ConnectionDefinition name="XXQP_TEST">
+      <ENTRY name="JDBC_PORT" value="1522"/>
+      <ENTRY name="ConnectionType" value="JDBC"/>
+      <ENTRY name="HOSTNAME" value="192.168.0.220"/>
+      <ENTRY name="user" value="apps"/>
+      <ENTRY name="ConnectionName" value="XXQP_TEST"/>
+      <ENTRY name="SID" value="test"/>
+      <ENTRY name="JdbcDriver" value="oracle.jdbc.OracleDriver"/>
+      <ENTRY name="password">
+         <![CDATA[{904}05D09642C0ED2151D12955F9EB9A8BB13EAFFE769CBFBFB64B]]>
+      </ENTRY>
+      <ENTRY name="ORACLE_JDBC_TYPE" value="thin"/>
+      <ENTRY name="DeployPassword" value="true"/>
+   </ConnectionDefinition>
+</BC4JConfig>

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="AltaDeClienteAM"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altacliente.server.AltaDeClienteAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="ContactosTmpVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.ContactosTmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftClientesHeaderVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesHeaderVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftClientesDirFiscalVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesDirFiscalVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftClientesPuntoRecoVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesPuntoRecoVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftClientesContactosVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesContactosVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftClientesFactPagVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesFactPagVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CedulasTmpVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.CedulasTmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="OperatingUnitVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.OperatingUnitVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="DiasDeSemanaVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.DiasDeSemanaVO" >
+   </ViewUsage>
+</AppModule>

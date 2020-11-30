@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftBpoServicioVO"
+   SelectList="XxqpPdftBpoServicioEO.ID, 
+       XxqpPdftBpoServicioEO.BPO_HEADER_ID, 
+       XxqpPdftBpoServicioEO.COBRANZA, 
+       XxqpPdftBpoServicioEO.VENTAS, 
+       XxqpPdftBpoServicioEO.GESTOR_ADMINISTRATIVO, 
+       XxqpPdftBpoServicioEO.TECNICO, 
+       XxqpPdftBpoServicioEO.RECOLE_DOC_MATER, 
+       XxqpPdftBpoServicioEO.ENTREGA_A_DOMICILIO, 
+       XxqpPdftBpoServicioEO.OTROS, 
+       XxqpPdftBpoServicioEO.FECHA_INICIO_SERVICIO, 
+       XxqpPdftBpoServicioEO.EL_MENSAJERO_MANEJE_C, 
+       XxqpPdftBpoServicioEO.DIAS_SEMANA_LABORARA, 
+       XxqpPdftBpoServicioEO.NO_HRS_DIARIAS, 
+       XxqpPdftBpoServicioEO.HORARIO_DE_TRABAJO, 
+       XxqpPdftBpoServicioEO.DIRECCION_BASE, 
+       XxqpPdftBpoServicioEO.OBSERVACIONES, 
+       XxqpPdftBpoServicioEO.CREATED_BY, 
+       XxqpPdftBpoServicioEO.CREATION_DATE, 
+       XxqpPdftBpoServicioEO.LAST_UPDATED_BY, 
+       XxqpPdftBpoServicioEO.LAST_UPDATE_DATE, 
+       XxqpPdftBpoServicioEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftBpoServicioEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftBpoServicioEO.ATTRIBUTE1, 
+       XxqpPdftBpoServicioEO.ATTRIBUTE2, 
+       XxqpPdftBpoServicioEO.ATTRIBUTE3, 
+       XxqpPdftBpoServicioEO.ATTRIBUTE4, 
+       XxqpPdftBpoServicioEO.ATTRIBUTE5, 
+       XxqpPdftBpoServicioEO.HORA_INICIO, 
+       XxqpPdftBpoServicioEO.HORA_FINAL, 
+       XxqpPdftBpoServicioEO.DOMINGO, 
+       XxqpPdftBpoServicioEO.JUEVES, 
+       XxqpPdftBpoServicioEO.LUNES, 
+       XxqpPdftBpoServicioEO.MARTES, 
+       XxqpPdftBpoServicioEO.MIERCOLES, 
+       XxqpPdftBpoServicioEO.SABADO, 
+       XxqpPdftBpoServicioEO.VIERNES"
+   FromList="XXQP_PDFT_BPO_SERVICIO XxqpPdftBpoServicioEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoServicioVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoServicioVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftBpoServicioEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoServicioEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      IsNotNull="true"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BpoHeaderId"
+      EntityAttrName="BpoHeaderId"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="BPO_HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cobranza"
+      EntityAttrName="Cobranza"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="COBRANZA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ventas"
+      EntityAttrName="Ventas"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="VENTAS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GestorAdministrativo"
+      EntityAttrName="GestorAdministrativo"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="GESTOR_ADMINISTRATIVO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Tecnico"
+      EntityAttrName="Tecnico"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="TECNICO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RecoleDocMater"
+      EntityAttrName="RecoleDocMater"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="RECOLE_DOC_MATER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EntregaADomicilio"
+      EntityAttrName="EntregaADomicilio"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="ENTREGA_A_DOMICILIO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Otros"
+      EntityAttrName="Otros"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="OTROS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FechaInicioServicio"
+      EntityAttrName="FechaInicioServicio"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="FECHA_INICIO_SERVICIO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ElMensajeroManejeC"
+      EntityAttrName="ElMensajeroManejeC"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="EL_MENSAJERO_MANEJE_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DiasSemanaLaborara"
+      EntityAttrName="DiasSemanaLaborara"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="DIAS_SEMANA_LABORARA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NoHrsDiarias"
+      EntityAttrName="NoHrsDiarias"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="NO_HRS_DIARIAS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HorarioDeTrabajo"
+      EntityAttrName="HorarioDeTrabajo"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="HORARIO_DE_TRABAJO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DireccionBase"
+      EntityAttrName="DireccionBase"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="DIRECCION_BASE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Observaciones"
+      EntityAttrName="Observaciones"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="OBSERVACIONES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HoraInicio"
+      EntityAttrName="HoraInicio"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="HORA_INICIO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HoraFinal"
+      EntityAttrName="HoraFinal"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="HORA_FINAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Domingo"
+      EntityAttrName="Domingo"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="DOMINGO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Jueves"
+      EntityAttrName="Jueves"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="JUEVES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Lunes"
+      EntityAttrName="Lunes"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="LUNES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Martes"
+      EntityAttrName="Martes"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="MARTES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Miercoles"
+      EntityAttrName="Miercoles"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="MIERCOLES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Sabado"
+      EntityAttrName="Sabado"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="SABADO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Viernes"
+      EntityAttrName="Viernes"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="VIERNES" >
+   </ViewAttribute>
+</ViewObject>

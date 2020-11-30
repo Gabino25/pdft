@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="MgrCatalogosVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.mgr.server.MgrCatalogosVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.mgr.server.MgrCatalogosVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+select 1 record_id
+         ,'GIRO_EMPRESARIAL' lookup_code
+         ,'Giro Empresarial'    meaning
+  from dual
+ union
+select 2 record_id
+         ,'EMPRESA_QUE_FACTURA' lookup_code
+         ,'Empresa que Factura'    meaning
+  from dual
+ union 
+ select 3 record_id
+         ,'TIPO_DE_CLIENTE' lookup_code
+         ,'Tipo De Cliente'    meaning
+  from dual
+ union 
+ select 4 record_id
+        , 'ESTADO'   lookup_code
+         ,'Estado'      meaning
+  from dual
+   union 
+ select 6 record_id
+        ,'CICLO_DE_FACTURACION'  lookup_code
+         ,'Ciclo de Facturacion'     meaning
+  from dual
+ /**  union 
+ select 7 record_id
+        ,'USO_DEL_CFDI'  lookup_code
+         ,'Uso del CFDI'     meaning
+  from dual   Se tomara del flex field descriptivo**/
+  union  
+  select 8 record_id
+         ,'UNIDAD_DE_NEGOCIO' lookup_code
+         ,'Unidad De Negocio'    meaning
+  from dual
+  union
+ select 9 record_id
+        ,'FRECUENCIA_DE_FACTURACION'  lookup_code
+         ,'Frecuencia de Facturacion'     meaning
+  from dual
+  union
+ select 10 record_id
+        ,'TIPO_DE_PRODUCTO'  lookup_code
+         ,'Tipo de Producto'     meaning
+  from dual
+   union
+ select 11 record_id
+        ,'PESO_PRODUCTO'  lookup_code
+         ,'Peso Producto'     meaning
+  from dual
+  union
+  select 12 record_id
+        ,'DIMENSIONES'  lookup_code
+         ,'Dimensiones'     meaning
+  from dual
+union
+  select 13 record_id
+        ,'TIPO_COMISION'  lookup_code
+         ,'Tipo Comision'     meaning
+  from dual
+union
+  select 14 record_id
+        ,'FORMATO_CIERRE'  lookup_code
+         ,'Formato Cierre'     meaning
+  from dual
+  union
+  select 15 record_id
+        ,'POLITICA_DE_ENTREGA'  lookup_code
+         , 'Politica de Entrega'     meaning
+  from dual
+   union
+  select 16 record_id
+        ,'POLITICA_DE_ENTREGA'  lookup_code
+         , 'Politica de Entrega'     meaning
+  from dual
+     union
+  select 17 record_id
+        ,'PLAZA_PROPIETARIA'  lookup_code
+         , 'Plaza Propietaria'     meaning
+  from dual
+     union
+  select 18 record_id
+        ,'TIPO_DE_DEVOLUCION'  lookup_code
+         , 'Tipo de Devolucion'     meaning
+  from dual
+     union
+  select 19 record_id
+        ,'TIPO_DE_PRODUCTO_DELIVERY'  lookup_code
+         , 'Tipo de Producto Delivery'     meaning
+  from dual
+union
+  select 20 record_id
+        ,'TIPO_OPERATIVO'  lookup_code
+         , 'Tipo Operativo'     meaning
+  from dual
+  union
+  select 21 record_id
+        ,'TIPO_ADMINISTRATIVO'  lookup_code
+         , 'Tipo Administrativo'     meaning
+  from dual
+   union
+   select 22 record_id
+        ,'TIPO_COMERCIAL'  lookup_code
+         , 'Tipo Comercial'     meaning
+  from dual
+union
+   select 23 record_id
+        ,'PERIODICIDAD'  lookup_code
+         , 'Periodicidad'     meaning
+  from dual
+union
+select 24 record_id
+        ,'MYP_ACUSE'  lookup_code
+         , 'Acuse'     meaning
+  from dual
+  union
+ select 25 record_id
+        ,'MYP_ORDINARIO'  lookup_code
+         , 'Ordinario'     meaning
+  from dual 
+  union
+   select 26 record_id
+        ,'MYP_SEMI_ACUSE'  lookup_code
+         , 'Semi-Acuse'     meaning
+  from dual
+union
+   select 27 record_id
+        ,'MGR_PDFT_USUARIOS'  lookup_code
+         , 'Ejecutivos PDFT'     meaning
+  from dual
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="RecordId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="RECORD_ID"
+      Expression="RECORD_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LookupCode"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="25"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOOKUP_CODE"
+      Expression="LOOKUP_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="25" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Meaning"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="25"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MEANING"
+      Expression="MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="25" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

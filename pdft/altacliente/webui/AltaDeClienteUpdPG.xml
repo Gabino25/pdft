@@ -1,0 +1,458 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" windowTitle="Alta de Clientes solo Modificar" title="Alta de Clientes solo Modificar" amDefName="xxqp.oracle.apps.ar.pdft.altacliente.server.AltaDeClienteAM" controllerClass="xxqp.oracle.apps.ar.pdft.altacliente.webui.AltaDeClienteUpdCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:userInfo>
+            <oa:messageStyledText id="NombreUsuarioEBS" prompt="Nombre Usuario:" styleClass="OraFieldText"/>
+         </ui:userInfo>
+         <ui:contents>
+            <oa:tableLayout id="HeaderTabLay" hAlign="center" regionName="Table Layout">
+               <ui:contents>
+                  <oa:rowLayout id="HeaderRowLay">
+                     <ui:contents>
+                        <oa:cellFormat id="HeaderCell1">
+                           <ui:contents>
+                              <oa:tableLayout id="InnerTabLayou1" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageTextInput id="NombreCliente" prompt="Nombre Cliente" columns="90" maximumLength="250" viewName="XxqpPdftClientesHeaderVO1" viewAttr="NombreCliente" readOnly="true" styleClass="OraFieldText" disabled="false" required="yes"/>
+                                    <oa:messageChoice id="GiroEmpresarial" prompt="Giro Empresarial" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.GiroEmpresarialVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" disabled="false" viewName="XxqpPdftClientesHeaderVO1" viewAttr="GiroEmpresarialC" styleClass="OraFieldText" readOnly="false" required="yes"/>
+                                    <oa:messageChoice id="EmpresaQueFactura" prompt="Empresa Que Factura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.LegalEntityVO" pickListDispAttr="LegalEntityName" pickListValAttr="LegalEntityId" viewName="XxqpPdftClientesHeaderVO1" viewAttr="EmpresaQueFacturaC" disabled="false" styleClass="OraFieldText" readOnly="false" required="yes" serverUnvalidated="true">
+                                       <ui:primaryClientAction>
+                                          <ui:fireAction event="LegalEntityEvt" unvalidated="true"/>
+                                       </ui:primaryClientAction>
+                                    </oa:messageChoice>
+                                    <oa:messageTextInput id="Comentarios" prompt="Comentarios" columns="90" rows="2" maximumLength="1000" viewName="XxqpPdftClientesHeaderVO1" viewAttr="Comentarios" disabled="false" styleClass="OraFieldText" readOnly="false"/>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="HeaderCell2">
+                           <ui:contents>
+                              <oa:tableLayout id="InnerTabLay2" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageChoice id="TipoOperativo" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.TipoOperativoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" viewName="XxqpPdftClientesHeaderVO1" viewAttr="TipoOperativoC" disabled="false" styleClass="OraFieldText" prompt="Tipo Operativo" required="no" readOnly="false"/>
+                                    <oa:messageChoice id="TipoAdministrativo" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.TipoAdministrativoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" viewName="XxqpPdftClientesHeaderVO1" viewAttr="TipoAdministrativoC" disabled="false" styleClass="OraFieldText" prompt="Tipo Administrativo" required="no" readOnly="false"/>
+                                    <oa:messageChoice id="TipoComercial" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.TipoComercialVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" defaultValue="" allowBlankValue="true" viewName="XxqpPdftClientesHeaderVO1" viewAttr="TipoComercialC" disabled="false" styleClass="OraFieldText" prompt="Tipo Comercial" required="no" readOnly="false"/>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+               </ui:contents>
+            </oa:tableLayout>
+            <oa:subTabLayout id="SubTabLayoutRN">
+               <ui:contents>
+                  <oa:contentContainer id="DireccionFiscalCont" text="Direccion Fiscal" regionName="Direccion Fiscal" width="100%">
+                     <ui:contents>
+                        <oa:header id="HeaderDFPrimaria" text="Primaria">
+                           <ui:contents>
+                              <oa:tableLayout id="TableLayoutPrimaria" hAlign="center">
+                                 <ui:contents>
+                                    <oa:rowLayout id="RowLayRFCP">
+                                       <ui:contents>
+                                          <oa:cellFormat id="CellRFCP">
+                                             <ui:contents>
+                                                <oa:tableLayout id="TabLayRFCP">
+                                                   <ui:contents>
+                                                      <oa:messageChoice id="OperatingUnitP" pickListViewDef="" pickListValAttr="OrgId" pickListDispAttr="OuName" prompt="Unidad Operativa" readOnly="false" pickListViewName="AltaDeClienteAM.OperatingUnitVO1" required="yes" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimOperatingUnit"/>
+                                                      <oa:messageTextInput id="RFCP" cellNoWrapFormat="true" columns="45" maximumLength="13" prompt="RFC" required="yes" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimRfc"/>
+                                                      <oa:messageTextInput id="RazonSocialP" columns="90" maximumLength="200" prompt="Razon Social" required="yes" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimRazonSocial"/>
+                                                      <oa:messageTextInput id="DireccionP" columns="90" maximumLength="300" required="yes" prompt="Calle" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimDireccion"/>
+                                                      <oa:messageTextInput id="NumeroExtP" columns="90" maximumLength="240" required="yes" prompt="Numero Exterior" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimNumeroExt"/>
+                                                      <oa:messageTextInput id="NumeroIntP" columns="90" maximumLength="240" required="yes" prompt="Numero Interior" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimNumeroInt"/>
+                                                      <oa:messageTextInput id="EntreCallesP" columns="90" maximumLength="300" prompt="Entre Calles" styleClass="OraFieldText" required="no" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimEntreCalles"/>
+                                                      <oa:messageTextInput id="ColoniaP" columns="90" maximumLength="150" prompt="Colonia" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimColonia"/>
+                                                      <oa:messageTextInput id="CiudadOMunicipioP" columns="90" maximumLength="150" required="yes" prompt="Ciudad o Municipio" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCiudadOMpo" styleClass="OraFieldText"/>
+                                                      <oa:messageChoice id="EstadoP" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EstadoVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" required="yes" prompt="Estado" viewName="XxqpPdftClientesDirFiscalVO1" readOnly="false" viewAttr="PrimEstadoC" styleClass="OraFieldText"/>
+                                                   </ui:contents>
+                                                </oa:tableLayout>
+                                             </ui:contents>
+                                          </oa:cellFormat>
+                                          <oa:cellFormat id="CellMainCedulaP" vAlign="top">
+                                             <ui:contents>
+                                                <oa:tableLayout id="TabLayCedulaP" hAlign="center">
+                                                   <ui:contents>
+                                                      <oa:rowLayout id="RowRFCInfoP">
+                                                         <ui:contents>
+                                                            <oa:cellFormat id="CellCedulaP">
+                                                               <ui:contents>
+                                                                  <oa:messageCheckBox id="CedulaP" required="yes" readOnly="true" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCedula"/>
+                                                               </ui:contents>
+                                                            </oa:cellFormat>
+                                                            <oa:cellFormat id="CellCedulaExamineP">
+                                                               <ui:contents>
+                                                                  <oa:messageFileUpload id="CedulaUploadP" prompt="Cedula" dataType="BLOB" required="yes" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCedulaFile"/>
+                                                               </ui:contents>
+                                                            </oa:cellFormat>
+                                                         </ui:contents>
+                                                      </oa:rowLayout>
+                                                      <oa:rowLayout id="RowLaySpacerP">
+                                                         <ui:contents>
+                                                            <oa:cellFormat id="CellSpacerP" height="90"/>
+                                                         </ui:contents>
+                                                      </oa:rowLayout>
+                                                      <oa:rowLayout id="RowLayCPP">
+                                                         <ui:contents>
+                                                            <oa:cellFormat id="CellCPP">
+                                                               <ui:contents>
+                                                                  <oa:messageChoice id="CPPBkp" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CPPVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="CP" required="yes" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCodigoPostalC" rendered="false"/>
+                                                                  <oa:messageTextInput id="CPP" prompt="CP" required="yes" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCodigoPostalC" maximumLength="10" columns="10" shortDesc="OraFieldText"/>
+                                                               </ui:contents>
+                                                            </oa:cellFormat>
+                                                         </ui:contents>
+                                                      </oa:rowLayout>
+                                                   </ui:contents>
+                                                </oa:tableLayout>
+                                             </ui:contents>
+                                          </oa:cellFormat>
+                                       </ui:contents>
+                                    </oa:rowLayout>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:header>
+                        <oa:header id="HeaderDFSecundaria" text="Secundaria">
+                           <ui:contents>
+                              <oa:tableLayout id="TableLayoutSecundaria" hAlign="center">
+                                 <ui:contents>
+                                    <oa:rowLayout id="RowLayRFCS">
+                                       <ui:contents>
+                                          <oa:cellFormat id="CellRFCS">
+                                             <ui:contents>
+                                                <oa:tableLayout id="TabLayRFCS" hAlign="center">
+                                                   <ui:contents>
+                                                      <oa:messageChoice id="OperatingUnitS" pickListViewDef="" pickListValAttr="OrgId" pickListDispAttr="OuName" prompt="Unidad Operativa" readOnly="false" pickListViewName="AltaDeClienteAM.OperatingUnitVO1" required="no" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecOperatingUnit"/>
+                                                      <oa:messageTextInput id="RFCS" cellNoWrapFormat="true" columns="45" maximumLength="13" prompt="RFC" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecRfc"/>
+                                                      <oa:messageTextInput id="RazonSocialS" columns="90" maximumLength="200" prompt="Razon Social" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecRazonSocial"/>
+                                                      <oa:messageTextInput id="DireccionS" columns="90" maximumLength="300" prompt="Calle" styleClass="OraFieldText" required="no" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecDireccion"/>
+                                                      <oa:messageTextInput id="NumeroExtS" columns="90" maximumLength="240" prompt="Numero Exterior" styleClass="OraFieldText" required="no" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecNumeroExt"/>
+                                                      <oa:messageTextInput id="NumeroIntS" columns="90" maximumLength="240" prompt="Numero Interior" styleClass="OraFieldText" required="no" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecNumeroInt"/>
+                                                      <oa:messageTextInput id="EntreCallesS" columns="90" maximumLength="300" disabled="false" prompt="Entre Calles" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecEntreCalles"/>
+                                                      <oa:messageTextInput id="ColoniaS" columns="90" maximumLength="150" prompt="Colonia" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecColonia"/>
+                                                      <oa:messageTextInput id="CiudadOMunicipioS" columns="90" maximumLength="150" prompt="Ciudad o Municipio" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecCiudadOMpo"/>
+                                                      <oa:messageChoice id="EstadoS" pickListDispAttr="Meaning" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EstadoVO" pickListValAttr="LookupCode" prompt="Estado" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecEstadoC"/>
+                                                   </ui:contents>
+                                                </oa:tableLayout>
+                                             </ui:contents>
+                                          </oa:cellFormat>
+                                          <oa:cellFormat id="CellMainCedulaS" vAlign="top">
+                                             <ui:contents>
+                                                <oa:tableLayout id="TabLayCedulaS" hAlign="center">
+                                                   <ui:contents>
+                                                      <oa:rowLayout id="RowLayCedulaS">
+                                                         <ui:contents>
+                                                            <oa:cellFormat id="CellCedulaS">
+                                                               <ui:contents>
+                                                                  <oa:messageCheckBox id="CedulaS" required="no" readOnly="true" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecCedula"/>
+                                                               </ui:contents>
+                                                            </oa:cellFormat>
+                                                            <oa:cellFormat id="CellCedulaExamineS">
+                                                               <ui:contents>
+                                                                  <oa:messageFileUpload id="CedulaUploadS" prompt="Cedula" dataType="BLOB" required="no" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecCedulaFile"/>
+                                                               </ui:contents>
+                                                            </oa:cellFormat>
+                                                         </ui:contents>
+                                                      </oa:rowLayout>
+                                                      <oa:rowLayout id="RowLaySpacerS">
+                                                         <ui:contents>
+                                                            <oa:cellFormat id="CellSpacerS" height="90"/>
+                                                         </ui:contents>
+                                                      </oa:rowLayout>
+                                                      <oa:rowLayout id="RowLayCPS">
+                                                         <ui:contents>
+                                                            <oa:cellFormat id="CellCPS">
+                                                               <ui:contents>
+                                                                  <oa:messageChoice id="CPSBkp" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CPPVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="CP" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecCodigoPostalC" rendered="false"/>
+                                                                  <oa:messageTextInput id="CPS" prompt="CP" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecCodigoPostalC" maximumLength="10" columns="10"/>
+                                                               </ui:contents>
+                                                            </oa:cellFormat>
+                                                         </ui:contents>
+                                                      </oa:rowLayout>
+                                                   </ui:contents>
+                                                </oa:tableLayout>
+                                             </ui:contents>
+                                          </oa:cellFormat>
+                                       </ui:contents>
+                                    </oa:rowLayout>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:header>
+                     </ui:contents>
+                  </oa:contentContainer>
+                  <oa:contentContainer id="PuntoDeRecoleccionCont" text="Punto De Recoleccion" width="100%">
+                     <ui:contents>
+                        <oa:header id="HeaderPrimaria" text="Primaria">
+                           <ui:contents>
+                              <oa:tableLayout id="TabLayPuDeRePrimaria" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageChoice id="EntregaEnQPP" prompt="Entrega en QP" required="yes" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesPuntoRecoVO1" viewAttr="PrimEntregaEnQp" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode"/>
+                                    <oa:messageTextInput id="NombreP" maximumLength="300" columns="90" prompt="Nombre" required="no" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesPuntoRecoVO1" viewAttr="PrimNombre"/>
+                                    <oa:messageTextInput id="ContactoP" maximumLength="200" columns="90" prompt="Contacto" styleClass="OraFieldText" required="no" readOnly="false" viewName="XxqpPdftClientesPuntoRecoVO1" viewAttr="PrimContacto" rendered="false"/>
+                                    <oa:messageTextInput id="PuDeReDireccionP" maximumLength="300" columns="90" prompt="Direccion" required="no" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesPuntoRecoVO1" viewAttr="PrimDireccion"/>
+                                    <oa:messageTextInput id="DiaP" maximumLength="100" columns="90" prompt="Dia" required="no" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesPuntoRecoVO1" viewAttr="PrimDia"/>
+                                    <oa:messageTextInput id="HoraP" maximumLength="150" columns="90" prompt="Hora" required="no" styleClass="OraFieldText" viewName="XxqpPdftClientesPuntoRecoVO1" viewAttr="PrimHorario" readOnly="false"/>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:header>
+                        <oa:header id="HeaderSecundaria" text="Secundaria">
+                           <ui:contents>
+                              <oa:tableLayout id="TabLayPuDeReSecundaria" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageChoice id="EntregaEnQPS" prompt="Entrega en QP" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesPuntoRecoVO1" viewAttr="SecEntregaEnQp" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode"/>
+                                    <oa:messageTextInput id="NombreS" maximumLength="300" columns="90" prompt="Nombre" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesPuntoRecoVO1" viewAttr="SecNombre"/>
+                                    <oa:messageTextInput id="ContactoS" maximumLength="200" columns="90" prompt="Contacto" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesPuntoRecoVO1" viewAttr="SecContacto" rendered="false"/>
+                                    <oa:messageTextInput id="PuDeReDireccionS" maximumLength="300" columns="90" prompt="Direccion" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesPuntoRecoVO1" viewAttr="SecDireccion"/>
+                                    <oa:messageTextInput id="DiaS" maximumLength="100" columns="90" prompt="Dia" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesPuntoRecoVO1" viewAttr="SecDia"/>
+                                    <oa:messageTextInput id="HoraS" maximumLength="150" columns="90" prompt="Hora" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesPuntoRecoVO1" viewAttr="SecHorario"/>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:header>
+                     </ui:contents>
+                  </oa:contentContainer>
+                  <oa:contentContainer id="ContactosCont" text="Contactos" width="100%">
+                     <ui:contents>
+                        <oa:advancedTable id="AdvContactosTmp" viewName="XxqpPdftClientesContactosVO1">
+                           <ui:contents>
+                              <oa:column id="TipoDeContactoCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader1" prompt="Tipo De Contacto"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:flowLayout id="region2">
+                                       <ui:contents>
+                                          <oa:messageStyledText id="TipoDeContacto" dataType="VARCHAR2" prompt="Tipo De Contacto" viewAttr="TipoContacto" maximumLength="19"/>
+                                          <oa:switcher id="region1" viewAttr="TipoContactoCode">
+                                             <ui:case name="CIERRE_Y_SEGUIMIENTO">
+                                                <oa:image id="CIERRE_Y_SEGUIMIENTO" source="requiredicon_status.gif"/>
+                                             </ui:case>
+                                             <ui:case name="COBRANZA">
+                                                <oa:image id="COBRANZA" source="requiredicon_status.gif"/>
+                                             </ui:case>
+                                             <ui:case name="GERENCIAL">
+                                                <oa:image id="GERENCIAL" source="requiredicon_status.gif"/>
+                                             </ui:case>
+                                          </oa:switcher>
+                                       </ui:contents>
+                                    </oa:flowLayout>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="NombreCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader2" prompt="Nombre"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageTextInput id="Nombre" dataType="VARCHAR2" prompt="Nombre" viewAttr="Nombre" maximumLength="150" required="${oa.XxqpPdftClientesContactosVO1.IsRequired}" showRequired="false"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="DireccionCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader3" prompt="Direccion"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageTextInput id="Direccion" dataType="VARCHAR2" prompt="Direccion" viewAttr="Direccion" maximumLength="300" required="${oa.XxqpPdftClientesContactosVO1.IsRequired}"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="TelefonoCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader4" prompt="Telefono"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageTextInput id="Telefono" dataType="VARCHAR2" prompt="Telefono" viewAttr="Telefono" maximumLength="100" required="${oa.XxqpPdftClientesContactosVO1.IsRequired}"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="CorreoElectronicoCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader5" prompt="Correo Electronico"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageTextInput id="CorreoElectronico" dataType="VARCHAR2" prompt="Correo Electronico" viewAttr="CorreoElectronico" maximumLength="200" required="${oa.XxqpPdftClientesContactosVO1.IsRequired}"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="PuestoCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader6" prompt="Puesto"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageTextInput id="Puesto" dataType="VARCHAR2" prompt="Puesto" viewAttr="Puesto" maximumLength="150" required="${oa.XxqpPdftClientesContactosVO1.IsRequired}"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="NumeroCelularCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="sortableHeader61" prompt="Numero Celular"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageTextInput id="NumeroCelular" dataType="VARCHAR2" prompt="Numero Celular" viewAttr="NumeroCelular" maximumLength="100" required="${oa.XxqpPdftClientesContactosVO1.IsRequired}"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:advancedTable>
+                     </ui:contents>
+                  </oa:contentContainer>
+                  <oa:contentContainer id="FacturacionYPagoCont" text="Facturacion y Pago" width="100%">
+                     <ui:contents>
+                        <oa:tableLayout id="TabLayFactPag" hAlign="center">
+                           <ui:contents>
+                              <oa:rowLayout id="RowLayFactPag">
+                                 <ui:contents>
+                                    <oa:cellFormat id="CellCondicionesDePago" vAlign="top">
+                                       <ui:contents>
+                                          <oa:tableLayout id="TabLayCondicionesDePago" hAlign="center">
+                                             <ui:contents>
+                                                <oa:messageRadioGroup id="CondicionesDePago" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CondicionesDePagoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Condiciones de Pago" required="yes" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="CondicionesDePagoC"/>
+                                                <oa:messageTextInput id="Observaciones" maximumLength="200" columns="60" prompt="Observaciones" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="Observaciones" rows="2"/>
+                                                <oa:messageRadioGroup id="RequiereFactura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Requiere Factura" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="RequiereFacturaC"/>
+                                                <oa:messageRadioGroup id="MetodoDePago" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.MetodoDePagoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Forma de Pago SAT" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="MetodoDePagoC"/>
+                                                <oa:messageTextInput id="NumCuenta" maximumLength="11" dataType="VARCHAR2" prompt="Num Cuenta de Pago" styleClass="OraFieldNumber" required="yes" viewName="XxqpPdftClientesFactPagVO1" viewAttr="NumeroDeCuenta" readOnly="false"/>
+                                                <oa:messageTextInput id="NombreBanco" maximumLength="35" prompt="Nombre del Banco" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="NombreDelBanco"/>
+                                                <oa:messageChoice id="DiasNaturales" prompt="Terminos de Pagos" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="DiasNatDeCredito" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.TerminosPagosVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode"/>
+                                                <oa:messageTextInput id="DiasRecepcion" maximumLength="35" prompt="Dias Recepcion de Factura" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="DiasRecepcionFactur" rendered="false"/>
+                                             </ui:contents>
+                                          </oa:tableLayout>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="CellTipoDePago" vAlign="top">
+                                       <ui:contents>
+                                          <oa:tableLayout id="TabLayTipoDePago" hAlign="center">
+                                             <ui:contents>
+                                                <oa:messageRadioGroup id="TipoDePago" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.TipoDePagoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Tipo de Pago" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="TipoDePagoC"/>
+                                                <oa:messageRadioGroup id="RequiereAdendas" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Requiere Adendas" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="RequiereAdendasC"/>
+                                                <oa:messageChoice id="CicloFacturacion" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CicloDeFacturacionVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Ciclo Facturacion" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="CicloDeFacturacionC"/>
+                                                <oa:messageTextInput id="Motivo" maximumLength="150" prompt="Motivo" styleClass="OraFieldText" required="no" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="Motivo"/>
+                                                <oa:messageChoice id="UsoDelCFDI" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.UsoDelCFDIVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Uso del CFDI" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="UsoDelCfdiC"/>
+                                                <oa:messageRadioGroup id="UtilizaPortal" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Utiliza Portal" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="UtilizaPortalC"/>
+                                                <oa:messageTextInput id="PortalDeFacturas" maximumLength="200" prompt="Portal de Facturas (Link)" styleClass="OraFieldText" required="no" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="PortalLink"/>
+                                                <oa:messageRadioGroup id="OrdenDeCompra" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Orden de Compra" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="OrdenDeCompraC"/>
+                                                <oa:messageRadioGroup id="Contrato" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Contrato" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="ContratoC"/>
+                                                <oa:messageTextInput id="VigenciaDeContrato" maximumLength="30" prompt="Vigencia de Contrato" styleClass="OraFieldText" required="no" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="VigenciaContrato"/>
+                                             </ui:contents>
+                                          </oa:tableLayout>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="CellCicloFacturacion">
+                                       <ui:contents>
+                                          <oa:tableLayout id="TabLayCicloFacturacion" hAlign="center"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                 </ui:contents>
+                              </oa:rowLayout>
+                           </ui:contents>
+                        </oa:tableLayout>
+                        <oa:tableLayout id="DiasSemanaRN" hAlign="left">
+                           <ui:contents>
+                              <oa:rowLayout id="row1" hAlign="left">
+                                 <ui:contents>
+                                    <oa:cellFormat id="region571" width="60%"/>
+                                    <oa:cellFormat id="cellL">
+                                       <ui:contents>
+                                          <oa:messageStyledText id="L" prompt="L"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="cellMa">
+                                       <ui:contents>
+                                          <oa:messageStyledText id="Ma" prompt="M"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="cellMi">
+                                       <ui:contents>
+                                          <oa:messageStyledText id="Mi" prompt="M"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="cellJ">
+                                       <ui:contents>
+                                          <oa:messageStyledText id="J" prompt="J"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="cellV">
+                                       <ui:contents>
+                                          <oa:messageStyledText id="V" prompt="V"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="cellS">
+                                       <ui:contents>
+                                          <oa:messageStyledText id="S" prompt="S"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="cellD">
+                                       <ui:contents>
+                                          <oa:messageStyledText id="D" prompt="D"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                 </ui:contents>
+                              </oa:rowLayout>
+                              <oa:rowLayout id="row2" hAlign="left">
+                                 <ui:contents>
+                                    <oa:cellFormat id="region57" width="60%" hAlign="right">
+                                       <ui:contents>
+                                          <oa:messageStyledText id="item173" prompt="Dias Recepcion de Factura"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="cellLunes">
+                                       <ui:contents>
+                                          <oa:messageCheckBox id="Lunes" text="" prompt="" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="Lunes"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="cellMartes">
+                                       <ui:contents>
+                                          <oa:messageCheckBox id="Martes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="Martes"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="cellMiercoles">
+                                       <ui:contents>
+                                          <oa:messageCheckBox id="Miercoles" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="Miercoles"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="cellJueves">
+                                       <ui:contents>
+                                          <oa:messageCheckBox id="Jueves" viewName="XxqpPdftClientesFactPagVO1" viewAttr="Jueves"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="cellViernes">
+                                       <ui:contents>
+                                          <oa:messageCheckBox id="Viernes" viewName="XxqpPdftClientesFactPagVO1" viewAttr="Viernes" readOnly="false"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="cellSabado">
+                                       <ui:contents>
+                                          <oa:messageCheckBox id="Sabado" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="Sabado"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="cellDomingo">
+                                       <ui:contents>
+                                          <oa:messageCheckBox id="Domingo" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="Domingo"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                 </ui:contents>
+                              </oa:rowLayout>
+                           </ui:contents>
+                        </oa:tableLayout>
+                     </ui:contents>
+                  </oa:contentContainer>
+               </ui:contents>
+            </oa:subTabLayout>
+            <oa:pageButtonBar id="PageButtonBarRN">
+               <ui:contents>
+                  <oa:button id="GrabarBtn" text="Grabar" prompt="Grabar">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="GrabarEvt"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+         <ui:returnNavigation>
+            <oa:link id="RegresarPaginaAnterior" text="Regresar a Pagina Anterior" destination="" serverUnvalidated="true" rendered="true">
+               <ui:primaryClientAction>
+                  <ui:fireAction event="RegresarPaginaAnteriorEvt" unvalidated="true" id="fireAction1"/>
+               </ui:primaryClientAction>
+            </oa:link>
+         </ui:returnNavigation>
+      </oa:pageLayout>
+   </content>
+</page>

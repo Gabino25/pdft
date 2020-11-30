@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftMypComentsProcesosVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypComentsProcesosVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypComentsProcesosVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT XxqpPdftMypProcesosEO.ID, 
+       XxqpPdftMypProcesosEO.MYP_HEADER_ID, 
+       XxqpPdftMypProcesosEO.REGION, 
+       XxqpPdftMypProcesosEO.PROSESO, 
+       XxqpPdftMypProcesosEO.OTROS_PROCESOS, 
+       XxqpPdftMypProcesosEO.SELECCIONAR, 
+       XxqpPdftMypProcesosEO.PRECIO, 
+       XxqpPdftMypProcesosEO.COMENTARIOS_INSTRUCC, 
+       XxqpPdftMypProcesosEO.CREATED_BY, 
+       XxqpPdftMypProcesosEO.CREATION_DATE, 
+       XxqpPdftMypProcesosEO.LAST_UPDATED_BY, 
+       XxqpPdftMypProcesosEO.LAST_UPDATE_DATE, 
+       XxqpPdftMypProcesosEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftMypProcesosEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftMypProcesosEO.ATTRIBUTE1, 
+       XxqpPdftMypProcesosEO.ATTRIBUTE2, 
+       XxqpPdftMypProcesosEO.ATTRIBUTE3, 
+       XxqpPdftMypProcesosEO.ATTRIBUTE4, 
+       XxqpPdftMypProcesosEO.ATTRIBUTE5
+FROM XXQP_PDFT_MYP_PROCESOS XxqpPdftMypProcesosEO
+WHERE XxqpPdftMypProcesosEO.REGION = 'COMENTARIOS'
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftMypProcesosEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MypHeaderId"
+      EntityAttrName="MypHeaderId"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="MYP_HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Region"
+      EntityAttrName="Region"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="REGION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Proseso"
+      EntityAttrName="Proseso"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="PROSESO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OtrosProcesos"
+      EntityAttrName="OtrosProcesos"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="OTROS_PROCESOS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Seleccionar"
+      EntityAttrName="Seleccionar"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="SELECCIONAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Precio"
+      EntityAttrName="Precio"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="PRECIO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ComentariosInstrucc"
+      EntityAttrName="ComentariosInstrucc"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="COMENTARIOS_INSTRUCC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+</ViewObject>

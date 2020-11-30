@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="xxqp.oracle.apps.ar.pdft.altacliente.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="AltaDeClienteAM"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.server.AltaDeClienteAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="CedulasTmpVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.server.CedulasTmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ContactosTmpVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.server.ContactosTmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="DiasDeSemanaVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.server.DiasDeSemanaVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="OperatingUnitVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.server.OperatingUnitVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftClientesContactosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesContactosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftClientesDirFiscalVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesDirFiscalVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftClientesFactPagVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesFactPagVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftClientesHeaderVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesHeaderVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftClientesPuntoRecoVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesPuntoRecoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

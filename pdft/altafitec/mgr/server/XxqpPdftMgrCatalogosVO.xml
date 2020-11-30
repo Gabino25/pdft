@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftMgrCatalogosVO"
+   SelectList="XxqpPdftMgrCatalogosEO.ID, 
+       XxqpPdftMgrCatalogosEO.NUMERO_LINEA, 
+       XxqpPdftMgrCatalogosEO.LOOKUP_TYPE, 
+       XxqpPdftMgrCatalogosEO.LOOKUP_CODE, 
+       XxqpPdftMgrCatalogosEO.DESCRIPTION, 
+       XxqpPdftMgrCatalogosEO.STATUS, 
+       XxqpPdftMgrCatalogosEO.CREATED_BY, 
+       XxqpPdftMgrCatalogosEO.CREATION_DATE, 
+       XxqpPdftMgrCatalogosEO.LAST_UPDATED_BY, 
+       XxqpPdftMgrCatalogosEO.LAST_UPDATE_DATE, 
+       XxqpPdftMgrCatalogosEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftMgrCatalogosEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftMgrCatalogosEO.ATTRIBUTE1, 
+       XxqpPdftMgrCatalogosEO.ATTRIBUTE2, 
+       XxqpPdftMgrCatalogosEO.ATTRIBUTE3, 
+       XxqpPdftMgrCatalogosEO.ATTRIBUTE4, 
+       XxqpPdftMgrCatalogosEO.ATTRIBUTE5"
+   FromList="XXQP_PDFT_MGR_CATALOGOS XxqpPdftMgrCatalogosEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.mgr.server.XxqpPdftMgrCatalogosVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.mgr.server.XxqpPdftMgrCatalogosVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftMgrCatalogosEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altafitec.mgr.schema.server.XxqpPdftMgrCatalogosEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      IsNotNull="true"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumeroLinea"
+      IsNotNull="true"
+      EntityAttrName="NumeroLinea"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="NUMERO_LINEA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LookupType"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="LookupType"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="LOOKUP_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LookupCode"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="LookupCode"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="LOOKUP_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      IsNotNull="true"
+      EntityAttrName="Description"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="DESCRIPTION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      IsNotNull="true"
+      EntityAttrName="Status"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftMgrCatalogosEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+</ViewObject>

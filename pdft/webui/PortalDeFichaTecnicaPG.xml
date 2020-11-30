@@ -1,0 +1,107 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="xxqp.oracle.apps.ar.pdft.server.PortalDeFichaTecnicaAM" windowTitle="Pantalla Principal Ficha Tecnica" title="Pantalla Principal Ficha Tecnica" controllerClass="xxqp.oracle.apps.ar.pdft.webui.PortalDeFichaTecnicaCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:tableLayout id="TabLayFichaTecnica" hAlign="center">
+               <ui:contents>
+                  <oa:rowLayout id="RowLay1">
+                     <ui:contents>
+                        <oa:cellFormat id="CellAltaFichaTecnica">
+                           <ui:contents>
+                              <oa:button id="AltaFichaTecnica" text="Alta Ficha Tecnica" prompt="Alta Ficha Tecnica">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="AltaFichaTecnicaEvt"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellSpacer1">
+                           <ui:contents>
+                              <oa:spacer id="Spacer1" width="40"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellAltaDeCliente">
+                           <ui:contents>
+                              <oa:button id="AltaDeCliente" text="Alta de Cliente" prompt="Alta de Cliente">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="AltaDeClienteEvt"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+                  <oa:rowLayout id="RowLay2">
+                     <ui:contents>
+                        <oa:cellFormat id="CellSeparator" height="10">
+                           <ui:contents>
+                              <oa:separator id="Separator1"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+                  <oa:rowLayout id="RowLay3">
+                     <ui:contents>
+                        <oa:cellFormat id="CellConsultaFichaTecnica">
+                           <ui:contents>
+                              <oa:button id="ConsultaFichaTecnica" text="Consulta Ficha Tecnica" prompt="Consulta Ficha Tecnica">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="ConsultaFichaTecnicaEvt"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellSpacer2">
+                           <ui:contents>
+                              <oa:spacer id="Spacer2" width="40"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellConsultaDeCliente">
+                           <ui:contents>
+                              <oa:button id="ConsultaDeCliente" text="Consulta Cliente" prompt="Consulta Cliente">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="ConsultaDeClienteEvt"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+                  <oa:rowLayout id="RowLay4">
+                     <ui:contents>
+                        <oa:cellFormat id="CellSeparator2" height="10"/>
+                     </ui:contents>
+                  </oa:rowLayout>
+                  <oa:rowLayout id="RowLay5">
+                     <ui:contents>
+                        <oa:cellFormat id="CellReportes">
+                           <ui:contents>
+                              <oa:button id="Reportes" text="Reportes" prompt="Reportes">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="ReportesEvt"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+               </ui:contents>
+            </oa:tableLayout>
+         </ui:contents>
+         <ui:userInfo>
+            <oa:messageStyledText id="NombreUsuarioEBS" prompt="Nombre Usuario:" styleClass="OraFieldText"/>
+         </ui:userInfo>
+         <ui:returnNavigation>
+            <oa:link id="RegresarPaginaInicial" text="Regresar a Pagina Inicial" destination="" serverUnvalidated="true">
+               <ui:primaryClientAction>
+                  <ui:fireAction event="RegresarPaginaInicialEvt" unvalidated="true" id="fireAction1"/>
+               </ui:primaryClientAction>
+            </oa:link>
+         </ui:returnNavigation>
+      </oa:pageLayout>
+   </content>
+</page>

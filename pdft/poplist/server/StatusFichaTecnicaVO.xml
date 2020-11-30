@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="StatusFichaTecnicaVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.poplist.server.StatusFichaTecnicaVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+select 'PRELIMINAR' lookup_code
+        /* ,'Preliminar'    meaning  */
+      ,'En captura' meaning
+  from dual
+UNION
+select 'ABIERTA' lookup_code
+        /* ,'Abierta'    meaning  */
+       ,'Activa'  meaning
+  from dual
+UNION
+select 'CERRADA' lookup_code
+         ,'Cerrada'    meaning
+  from dual
+UNION
+select 'CANCELADA' lookup_code
+         ,'Cancelada'    meaning
+  from dual
+UNION
+select 'CAMBIO_DE_PRECIO' lookup_code
+         ,'Cambio de Precio'    meaning
+  from dual
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="LookupCode"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="LOOKUP_CODE"
+      Expression="LOOKUP_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Meaning"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="MEANING"
+      Expression="MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

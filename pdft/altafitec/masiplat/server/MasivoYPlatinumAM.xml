@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="MasivoYPlatinumAM"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.MasivoYPlatinumAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="XxqpPdftMypHeaderVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypHeaderVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftMypGeneralVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypGeneralVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftMypCoberturaVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypCoberturaVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftMypDistribucionVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypDistribucionVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ProcesosTmpVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.ProcesosTmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="OtrosProcesosTmpVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.OtrosProcesosTmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftMypProcesosVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypProcesosVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftMypOtrosProcesosVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypOtrosProcesosVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftMypComentsProcesosVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypComentsProcesosVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="MypHeaderTmpVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.MypHeaderTmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ReglasDeNegocioTmpVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.ReglasDeNegocioTmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftMypRegNegVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypRegNegVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftMypEstadosVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypEstadosVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftMypConceptosVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypConceptosVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="MtlSystemItemsBLOV1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.MtlSystemItemsBLOV" >
+   </ViewUsage>
+</AppModule>

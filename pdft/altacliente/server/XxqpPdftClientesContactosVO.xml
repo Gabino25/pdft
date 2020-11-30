@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftClientesContactosVO"
+   OrderBy="ID asc"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesContactosVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesContactosVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT XxqpPdftClientesContactosEO.ID, 
+       XxqpPdftClientesContactosEO.HEADER_ID, 
+       XxqpPdftClientesContactosEO.TIPO_CONTACTO, 
+       XxqpPdftClientesContactosEO.NOMBRE, 
+       XxqpPdftClientesContactosEO.DIRECCION, 
+       XxqpPdftClientesContactosEO.TELEFONO, 
+       XxqpPdftClientesContactosEO.CORREO_ELECTRONICO, 
+       XxqpPdftClientesContactosEO.PUESTO, 
+       XxqpPdftClientesContactosEO.CREATED_BY, 
+       XxqpPdftClientesContactosEO.CREATION_DATE, 
+       XxqpPdftClientesContactosEO.LAST_UPDATED_BY, 
+       XxqpPdftClientesContactosEO.LAST_UPDATE_DATE, 
+       XxqpPdftClientesContactosEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftClientesContactosEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftClientesContactosEO.ATTRIBUTE1, 
+       XxqpPdftClientesContactosEO.ATTRIBUTE2, 
+       XxqpPdftClientesContactosEO.ATTRIBUTE3, 
+       XxqpPdftClientesContactosEO.ATTRIBUTE4, 
+       XxqpPdftClientesContactosEO.ATTRIBUTE5,
+       decode( XxqpPdftClientesContactosEO.TIPO_CONTACTO,'Cierre y Seguimiento' , 'CIERRE_Y_SEGUIMIENTO'
+                       ,'Cobranza' ,'COBRANZA'
+                       ,'Gerencial' ,'GERENCIAL'
+                       ,'Directriz','DIRECTRIZ' 
+                       ,'Auditoria' ,'AUDITORIA' 
+                       ,'Devoluciones','DEVOLUCIONES'
+                       ) TIPO_CONTACTO_CODE,
+      XxqpPdftClientesContactosEO.NUMERO_CELULAR
+FROM XXQP_PDFT_CLIENTES_CONTACTOS XxqpPdftClientesContactosEO
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftClientesContactosEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesContactosEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="true" />
+         <Attr Name="_queryOrderBy" Value="XxqpPdftClientesContactosEO.ID asc" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HeaderId"
+      EntityAttrName="HeaderId"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TipoContacto"
+      EntityAttrName="TipoContacto"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="TIPO_CONTACTO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Nombre"
+      EntityAttrName="Nombre"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="NOMBRE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Direccion"
+      EntityAttrName="Direccion"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="DIRECCION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Telefono"
+      EntityAttrName="Telefono"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="TELEFONO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CorreoElectronico"
+      EntityAttrName="CorreoElectronico"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="CORREO_ELECTRONICO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Puesto"
+      EntityAttrName="Puesto"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="PUESTO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TipoContactoCode"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TIPO_CONTACTO_CODE"
+      Expression="TIPO_CONTACTO_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumeroCelular"
+      EntityAttrName="NumeroCelular"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="NUMERO_CELULAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsRequired"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+</ViewObject>

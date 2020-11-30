@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="AltaFichaTecnicaAM"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.server.AltaFichaTecnicaAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="ClientesInfoFiTecVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.server.ClientesInfoFiTecVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="EjecutivosVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.server.EjecutivosVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="FichasTecnicasVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.server.FichasTecnicasVO" >
+   </ViewUsage>
+</AppModule>

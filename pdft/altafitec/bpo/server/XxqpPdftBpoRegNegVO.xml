@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftBpoRegNegVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoRegNegVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoRegNegVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT XxqpPdftBpoRegNegEO.ID, 
+       XxqpPdftBpoRegNegEO.BPO_HEADER_ID, 
+       XxqpPdftBpoRegNegEO.ESTADO_CODE, 
+       XxqpPdftBpoRegNegEO.CONCEPTO_CODE, 
+       XxqpPdftBpoRegNegEO.PRECIO, 
+       XxqpPdftBpoRegNegEO.CREATED_BY, 
+       XxqpPdftBpoRegNegEO.CREATION_DATE, 
+       XxqpPdftBpoRegNegEO.LAST_UPDATED_BY, 
+       XxqpPdftBpoRegNegEO.LAST_UPDATE_DATE, 
+       XxqpPdftBpoRegNegEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftBpoRegNegEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftBpoRegNegEO.ATTRIBUTE1, 
+       XxqpPdftBpoRegNegEO.ATTRIBUTE2, 
+       XxqpPdftBpoRegNegEO.ATTRIBUTE3, 
+       XxqpPdftBpoRegNegEO.ATTRIBUTE4, 
+       XxqpPdftBpoRegNegEO.ATTRIBUTE5,
+ (select  description
+  from fnd_lookup_values
+where lookup_type='XXFT_CONCEPTO_1'
+  and language='ESA'
+  and lookup_code = XxqpPdftBpoRegNegEO.ESTADO_CODE
+      ) ESTADO_MEANING,
+        (select  description
+  from fnd_lookup_values
+where lookup_type='XXFT_CONCEPTO_2'
+  and language='ESA'
+  and lookup_code = XxqpPdftBpoRegNegEO.CONCEPTO_CODE
+      ) CONCEPTO_MEANING
+FROM XXQP_PDFT_BPO_REG_NEG XxqpPdftBpoRegNegEO
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftBpoRegNegEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoRegNegEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      IsNotNull="true"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BpoHeaderId"
+      IsNotNull="true"
+      EntityAttrName="BpoHeaderId"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="BPO_HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EstadoCode"
+      EntityAttrName="EstadoCode"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="ESTADO_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConceptoCode"
+      EntityAttrName="ConceptoCode"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="CONCEPTO_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Precio"
+      EntityAttrName="Precio"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="PRECIO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftBpoRegNegEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EstadoMeaning"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ESTADO_MEANING"
+      Expression="ESTADO_MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConceptoMeaning"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CONCEPTO_MEANING"
+      Expression="CONCEPTO_MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="QpLabsAM"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.server.QpLabsAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="XxqpPdftQplabsHeaderVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.server.XxqpPdftQplabsHeaderVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PreciosClientesTmpVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.server.PreciosClientesTmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftQplabsInfoOperVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.server.XxqpPdftQplabsInfoOperVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftQplabsPrecClieVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.server.XxqpPdftQplabsPrecClieVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="QplabsHeaderTmpVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.server.QplabsHeaderTmpVO" >
+   </ViewUsage>
+</AppModule>

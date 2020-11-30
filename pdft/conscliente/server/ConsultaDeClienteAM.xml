@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="ConsultaDeClienteAM"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.conscliente.server.ConsultaDeClienteAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="ClientesInfoVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.conscliente.server.ClientesInfoVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="NombreDelClienteVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.conscliente.server.NombreDelClienteVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RfcVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.conscliente.server.RfcVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RazonSocialVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.conscliente.server.RazonSocialVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="EstadoVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.conscliente.server.EstadoVO" >
+   </ViewUsage>
+</AppModule>

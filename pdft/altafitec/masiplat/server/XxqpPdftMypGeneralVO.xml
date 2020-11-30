@@ -1,0 +1,315 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftMypGeneralVO"
+   SelectList="XxqpPdftMypGeneralEO.ID, 
+       XxqpPdftMypGeneralEO.MYP_HEADER_ID, 
+       XxqpPdftMypGeneralEO.IMPRESOR, 
+       XxqpPdftMypGeneralEO.NOMBRE_PRODUCTO, 
+       XxqpPdftMypGeneralEO.PUNTO_DE_RECOLECCION, 
+       XxqpPdftMypGeneralEO.CONTACTO_PARA_CIERRE, 
+       XxqpPdftMypGeneralEO.PERIODICIDAD_C, 
+       XxqpPdftMypGeneralEO.TIPO_PRODUCTO_C, 
+       XxqpPdftMypGeneralEO.PESO_PRODUCTO_C, 
+       XxqpPdftMypGeneralEO.DIMENSIONES_C, 
+       XxqpPdftMypGeneralEO.TIPO_COMISION_C, 
+       XxqpPdftMypGeneralEO.SE_FACTURA_C, 
+       XxqpPdftMypGeneralEO.FORMATO_PARA_CIERRE_C, 
+       XxqpPdftMypGeneralEO.DIAS_HABILES_PAGO, 
+       XxqpPdftMypGeneralEO.DIAS_RECEPCION_FATURACION, 
+       XxqpPdftMypGeneralEO.REQUIERE_VOBO_C, 
+       XxqpPdftMypGeneralEO.TIPO_VOBO, 
+       XxqpPdftMypGeneralEO.TIPO_DE_ENTREGA_C, 
+       XxqpPdftMypGeneralEO.POLITICA_DE_ENTREGA_C, 
+       XxqpPdftMypGeneralEO.CREATED_BY, 
+       XxqpPdftMypGeneralEO.CREATION_DATE, 
+       XxqpPdftMypGeneralEO.LAST_UPDATED_BY, 
+       XxqpPdftMypGeneralEO.LAST_UPDATE_DATE, 
+       XxqpPdftMypGeneralEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftMypGeneralEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftMypGeneralEO.ATTRIBUTE1, 
+       XxqpPdftMypGeneralEO.ATTRIBUTE2, 
+       XxqpPdftMypGeneralEO.ATTRIBUTE3, 
+       XxqpPdftMypGeneralEO.ATTRIBUTE4, 
+       XxqpPdftMypGeneralEO.ATTRIBUTE5, 
+       XxqpPdftMypGeneralEO.VOLUMEN_APROX, 
+       XxqpPdftMypGeneralEO.DOMINGO, 
+       XxqpPdftMypGeneralEO.JUEVES, 
+       XxqpPdftMypGeneralEO.LUNES, 
+       XxqpPdftMypGeneralEO.MARTES, 
+       XxqpPdftMypGeneralEO.MIERCOLES, 
+       XxqpPdftMypGeneralEO.SABADO, 
+       XxqpPdftMypGeneralEO.VIERNES, 
+       XxqpPdftMypGeneralEO.ACUSE_C, 
+       XxqpPdftMypGeneralEO.ORDINARIO_C, 
+       XxqpPdftMypGeneralEO.SEMI_ACUSE_C"
+   FromList="XXQP_PDFT_MYP_GENERAL XxqpPdftMypGeneralEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypGeneralVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypGeneralVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftMypGeneralEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypGeneralEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MypHeaderId"
+      EntityAttrName="MypHeaderId"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="MYP_HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Impresor"
+      EntityAttrName="Impresor"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="IMPRESOR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NombreProducto"
+      EntityAttrName="NombreProducto"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="NOMBRE_PRODUCTO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PuntoDeRecoleccion"
+      EntityAttrName="PuntoDeRecoleccion"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="PUNTO_DE_RECOLECCION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ContactoParaCierre"
+      EntityAttrName="ContactoParaCierre"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="CONTACTO_PARA_CIERRE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PeriodicidadC"
+      EntityAttrName="PeriodicidadC"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="PERIODICIDAD_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TipoProductoC"
+      EntityAttrName="TipoProductoC"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="TIPO_PRODUCTO_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PesoProductoC"
+      EntityAttrName="PesoProductoC"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="PESO_PRODUCTO_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DimensionesC"
+      EntityAttrName="DimensionesC"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="DIMENSIONES_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TipoComisionC"
+      EntityAttrName="TipoComisionC"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="TIPO_COMISION_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SeFacturaC"
+      EntityAttrName="SeFacturaC"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="SE_FACTURA_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FormatoParaCierreC"
+      EntityAttrName="FormatoParaCierreC"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="FORMATO_PARA_CIERRE_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DiasHabilesPago"
+      EntityAttrName="DiasHabilesPago"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="DIAS_HABILES_PAGO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DiasRecepcionFaturacion"
+      EntityAttrName="DiasRecepcionFaturacion"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="DIAS_RECEPCION_FATURACION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RequiereVoboC"
+      EntityAttrName="RequiereVoboC"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="REQUIERE_VOBO_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TipoVobo"
+      EntityAttrName="TipoVobo"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="TIPO_VOBO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TipoDeEntregaC"
+      EntityAttrName="TipoDeEntregaC"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="TIPO_DE_ENTREGA_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoliticaDeEntregaC"
+      EntityAttrName="PoliticaDeEntregaC"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="POLITICA_DE_ENTREGA_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VolumenAprox"
+      EntityAttrName="VolumenAprox"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="VOLUMEN_APROX" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Domingo"
+      EntityAttrName="Domingo"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="DOMINGO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Jueves"
+      EntityAttrName="Jueves"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="JUEVES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Lunes"
+      EntityAttrName="Lunes"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="LUNES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Martes"
+      EntityAttrName="Martes"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="MARTES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Miercoles"
+      EntityAttrName="Miercoles"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="MIERCOLES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Sabado"
+      EntityAttrName="Sabado"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="SABADO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Viernes"
+      EntityAttrName="Viernes"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="VIERNES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AcuseC"
+      EntityAttrName="AcuseC"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="ACUSE_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrdinarioC"
+      EntityAttrName="OrdinarioC"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="ORDINARIO_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SemiAcuseC"
+      EntityAttrName="SemiAcuseC"
+      EntityUsage="XxqpPdftMypGeneralEO"
+      AliasName="SEMI_ACUSE_C" >
+   </ViewAttribute>
+</ViewObject>

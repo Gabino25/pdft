@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftQplabsInfoOperVO"
+   SelectList="XxqpPdftQplabsInfoOperEO.ID, 
+       XxqpPdftQplabsInfoOperEO.QPLABS_HEADER_ID, 
+       XxqpPdftQplabsInfoOperEO.TIPO_SERVICO, 
+       XxqpPdftQplabsInfoOperEO.NOMBRE_SERVICIO, 
+       XxqpPdftQplabsInfoOperEO.VOLUMEN_APROXIMADO, 
+       XxqpPdftQplabsInfoOperEO.COMENTARIOS_ADICIONALES, 
+       XxqpPdftQplabsInfoOperEO.CREATED_BY, 
+       XxqpPdftQplabsInfoOperEO.CREATION_DATE, 
+       XxqpPdftQplabsInfoOperEO.LAST_UPDATED_BY, 
+       XxqpPdftQplabsInfoOperEO.LAST_UPDATE_DATE, 
+       XxqpPdftQplabsInfoOperEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftQplabsInfoOperEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftQplabsInfoOperEO.ATTRIBUTE1, 
+       XxqpPdftQplabsInfoOperEO.ATTRIBUTE2, 
+       XxqpPdftQplabsInfoOperEO.ATTRIBUTE3, 
+       XxqpPdftQplabsInfoOperEO.ATTRIBUTE4, 
+       XxqpPdftQplabsInfoOperEO.ATTRIBUTE5"
+   FromList="XXQP_PDFT_QPLABS_INFO_OPER XxqpPdftQplabsInfoOperEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.server.XxqpPdftQplabsInfoOperVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.server.XxqpPdftQplabsInfoOperVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftQplabsInfoOperEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsInfoOperEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      IsNotNull="true"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QplabsHeaderId"
+      EntityAttrName="QplabsHeaderId"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="QPLABS_HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TipoServico"
+      EntityAttrName="TipoServico"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="TIPO_SERVICO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NombreServicio"
+      EntityAttrName="NombreServicio"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="NOMBRE_SERVICIO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VolumenAproximado"
+      EntityAttrName="VolumenAproximado"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="VOLUMEN_APROXIMADO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ComentariosAdicionales"
+      EntityAttrName="ComentariosAdicionales"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="COMENTARIOS_ADICIONALES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftQplabsInfoOperEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+</ViewObject>

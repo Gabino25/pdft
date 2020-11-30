@@ -1,0 +1,400 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+
+<Entity
+   Name="XxqpPdftQplabsHeaderEO"
+   DBObjectType="table"
+   DBObjectName="XXQP_PDFT_QPLABS_HEADER"
+   AliasName="XxqpPdftQplabsHeaderEO"
+   BindingStyle="OracleName"
+   UseGlueCode="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsHeaderEOImpl"
+   DefClass="oracle.apps.fnd.framework.server.OAEntityDefImpl"
+   CollClass="oracle.apps.fnd.framework.server.OAEntityCache" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <AttrArray Name="_publishEvents">
+      </AttrArray>
+      <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|Val" />
+   </DesignTime>
+   <Attribute
+      Name="Id"
+      IsNotNull="true"
+      ColumnName="ID"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_QPLABS_HEADER"
+      PrimaryKey="true" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NumeroFt"
+      ColumnName="NUMERO_FT"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Rev"
+      ColumnName="REV"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Status"
+      Precision="30"
+      ColumnName="STATUS"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NumeroFtReferencia"
+      ColumnName="NUMERO_FT_REFERENCIA"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PartyId"
+      ColumnName="PARTY_ID"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PdftClienteHeaderId"
+      ColumnName="PDFT_CLIENTE_HEADER_ID"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="EmpresaQueFacturaC"
+      Precision="30"
+      ColumnName="EMPRESA_QUE_FACTURA_C"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="UnidadDeNegocioC"
+      Precision="30"
+      ColumnName="UNIDAD_DE_NEGOCIO_C"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="FrecuenciaFacturacionC"
+      Precision="30"
+      ColumnName="FRECUENCIA_FACTURACION_C"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ContratoFlag"
+      Precision="10"
+      ColumnName="CONTRATO_FLAG"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ContratoFileName"
+      Precision="256"
+      ColumnName="CONTRATO_FILE_NAME"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="256" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ContratoContentType"
+      Precision="256"
+      ColumnName="CONTRATO_CONTENT_TYPE"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="256" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ContratoFile"
+      IsQueriable="false"
+      ColumnName="CONTRATO_FILE"
+      Type="oracle.jbo.domain.BlobDomain"
+      ColumnType="BLOB"
+      SQLType="BLOB"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+   </Attribute>
+   <Attribute
+      Name="FechaInicialOperacion"
+      ColumnName="FECHA_INICIAL_OPERACION"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      SQLType="DATE"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      ColumnName="CREATED_BY"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreationDate"
+      IsNotNull="true"
+      ColumnName="CREATION_DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      SQLType="DATE"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      ColumnName="LAST_UPDATED_BY"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      ColumnName="LAST_UPDATE_DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      SQLType="DATE"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LastUpdateLogin"
+      Precision="15"
+      Scale="0"
+      ColumnName="LAST_UPDATE_LOGIN"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="AttributeCategory"
+      Precision="250"
+      ColumnName="ATTRIBUTE_CATEGORY"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute1"
+      Precision="2000"
+      ColumnName="ATTRIBUTE1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute2"
+      Precision="2000"
+      ColumnName="ATTRIBUTE2"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute3"
+      Precision="2000"
+      ColumnName="ATTRIBUTE3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute4"
+      Precision="2000"
+      ColumnName="ATTRIBUTE4"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute5"
+      Precision="2000"
+      ColumnName="ATTRIBUTE5"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_QPLABS_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <AccessorAttribute
+      Name="XxqpPdftQplabsInfoOperEO"
+      Association="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsInfoOperFkAssoc"
+      AssociationEnd="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsInfoOperFkAssoc.XxqpPdftQplabsInfoOperEO"
+      AssociationOtherEnd="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsInfoOperFkAssoc.XxqpPdftQplabsHeaderEO"
+      Type="oracle.jbo.RowIterator"
+      IsUpdateable="false" >
+   </AccessorAttribute>
+   <AccessorAttribute
+      Name="XxqpPdftQplabsPrecClieEO"
+      Association="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsPrecClieFkAssoc"
+      AssociationEnd="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsPrecClieFkAssoc.XxqpPdftQplabsPrecClieEO"
+      AssociationOtherEnd="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsPrecClieFkAssoc.XxqpPdftQplabsHeaderEO"
+      Type="oracle.jbo.RowIterator"
+      IsUpdateable="false" >
+   </AccessorAttribute>
+   <Key
+      Name="SysC001448521" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsHeaderEO.CreatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001448521" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001448522" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsHeaderEO.CreationDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATION_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001448522" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001448523" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsHeaderEO.LastUpdatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001448523" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001448524" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsHeaderEO.LastUpdateDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001448524" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="XxqpPdftQplabsHeaderIdPk" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.schema.server.XxqpPdftQplabsHeaderEO.Id" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_isPrimary" Value="true" />
+         <Attr Name="_DBObjectName" Value="XXQP_PDFT_QPLABS_HEADER_ID_PK" />
+      </DesignTime>
+   </Key>
+</Entity>

@@ -1,0 +1,141 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="xxqp.oracle.apps.ar.pdft.altafitec.mgr.server.MgrAM" windowTitle="Asignacion Formularios" title="Asignacion Formularios" controllerClass="xxqp.oracle.apps.ar.pdft.altafitec.mgr.webui.AsignacionFormulariosCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:advancedTable id="AdvancedTableRN" viewName="XxqpPdftMgrCatalogosVO1" blockSize="50">
+               <ui:contents>
+                  <oa:column id="IdCol" rendered="false">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="IdSort" prompt="ID"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="Id" viewAttr="Id"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="LookupTypeCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="LookupTypeSort" prompt="Catalogo"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageChoice id="LookupType" viewAttr="LookupType" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.MgrCatalogosVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" readOnly="true"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="IdInternoCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="IdInternoSort" prompt="ID Interno"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="IdInterno" viewAttr="NumeroLinea"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="LookupCodeCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="LookupCodeSort" prompt="Nombre"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="LookupCode" viewAttr="LookupCode" required="yes" styleClass="OraFieldText" readOnly="true" serverUnvalidated="true" selectiveSearchCriteria="false">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="LookupCodeEvt" unvalidated="true" id="fireAction2"/>
+                           </ui:primaryClientAction>
+                        </oa:messageTextInput>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="DescriptionCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="DescriptionSort" prompt="Descripcion"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="Description" viewAttr="Description" required="yes" styleClass="OraFieldText" readOnly="true"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="StatusCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="StatusSort" prompt="Estatus"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageChoice id="StatusCatalogo" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.MgrStatusCatalogosVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" styleClass="OraFieldText" prompt="" allowBlankValue="false" required="yes" viewAttr="Status" readOnly="true"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="Attribute1Col">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="FormularioUnidadDeNegocioSort" prompt="Formulario Unidad De Negocio"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageChoice id="FormularioUnidadDeNegocio" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.PlantillasUnidadesDeNegocioVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" styleClass="OraFieldText" prompt="" allowBlankValue="true" required="yes" viewAttr="Attribute1" readOnly="false"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="Attribute2Col">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="PrefijoUnidadDeNegocioSort1" prompt="Prefijo Unidad De Negocio"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="PrefijoUnidadDeNegocio" styleClass="OraFieldText" prompt="" required="yes" viewAttr="Attribute2" readOnly="false" maximumLength="10"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="Attribute3Col">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="CamposRequeridosSort" prompt="Campos Requeridos"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageChoice id="CamposRequeridos" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" styleClass="OraFieldText" prompt="" allowBlankValue="true" required="yes" viewAttr="Attribute3" readOnly="false"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="DeleteActionCol" rendered="false">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="DeleteActionSort" prompt="Borrar"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:image id="DeleteAction" source="deleteicon_enabled.gif" serverUnvalidated="true">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="DeleteEvt" id="fireAction1" unvalidated="true" formSubmitted="true">
+                                 <ui:parameters>
+                                    <ui:parameter key="pCatalogoId" value="${oa.XxqpPdftMgrCatalogosVO1.Id}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                  </oa:column>
+               </ui:contents>
+               <ui:footer>
+                  <oa:tableFooter id="tableFooter1">
+                     <ui:contents>
+                        <oa:button id="AgregaRegistro" text="Agrega Registro" prompt="Agrega Registro" serverUnvalidated="true" rendered="false">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="AgregaRegistroEvt" id="fireAction3"/>
+                           </ui:primaryClientAction>
+                        </oa:button>
+                     </ui:contents>
+                  </oa:tableFooter>
+               </ui:footer>
+            </oa:advancedTable>
+            <oa:pageButtonBar id="PageButtonBarRN">
+               <ui:contents>
+                  <oa:button id="GrabarBtn" text="Grabar" prompt="Grabar">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="GrabarEvt" id="fireAction4"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+                  <oa:button id="CancelarBtn" text="Cancelar" prompt="Cancelar" serverUnvalidated="true">
+                     <ui:primaryClientAction>
+                        <ui:fireAction formSubmitted="true" event="CancelarEvt" unvalidated="true" id="fireAction5"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+                  <oa:button id="SalirPantallaBtn" text="Salir" prompt="Salir" serverUnvalidated="true" rendered="false">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="SalirEvt" unvalidated="true" id="fireAction6"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+         <ui:userInfo>
+            <oa:messageStyledText id="NombreUsuarioEBS" prompt="Nombre Usuario:" styleClass="OraFieldText"/>
+         </ui:userInfo>
+      </oa:pageLayout>
+   </content>
+</page>

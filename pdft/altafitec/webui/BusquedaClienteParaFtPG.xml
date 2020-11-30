@@ -1,0 +1,95 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="xxqp.oracle.apps.ar.pdft.altafitec.server.AltaFichaTecnicaAM" windowTitle="Busqueda de Cliente para Alta de Ficha Tecnica" title="Busqueda de Cliente para Alta de Ficha Tecnica" controllerClass="xxqp.oracle.apps.ar.pdft.altafitec.webui.BusquedaClienteParaFtCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:tableLayout id="TableLayoutRN" hAlign="center">
+               <ui:contents>
+                  <oa:rowLayout id="RowLayNombreCliente">
+                     <ui:contents>
+                        <oa:cellFormat id="CellInputNombreCliente">
+                           <ui:contents>
+                              <oa:messageLovInput id="NombreDeCliente" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/NombreDelClienteRN" prompt="Nombre del Cliente" styleClass="OraFieldText" readOnly="false">
+                                 <lovMappings>
+                                    <lovMap id="lovMap1" lovItem="PartyName" resultTo="NombreDeCliente" criteriaFrom="NombreDeCliente"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellInputRFC">
+                           <ui:contents>
+                              <oa:messageLovInput id="RFC" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/RfcRN" prompt="RFC">
+                                 <lovMappings>
+                                    <lovMap id="lovMap2" lovItem="TaxpayerId" resultTo="RFC" criteriaFrom="RFC"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+                  <oa:rowLayout id="RowLayHeight1">
+                     <ui:contents>
+                        <oa:cellFormat id="CellHeight1" height="10"/>
+                     </ui:contents>
+                  </oa:rowLayout>
+                  <oa:rowLayout id="RowLayBuscar">
+                     <ui:contents>
+                        <oa:cellFormat id="CellBuscar">
+                           <ui:contents>
+                              <oa:button id="Buscar" text="Buscar" prompt="Buscar">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="BuscarEvt"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellLimpiar">
+                           <ui:contents>
+                              <oa:button id="Limpiar" text="Limpiar" prompt="Limpiar">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="LimpiarEvt"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+               </ui:contents>
+            </oa:tableLayout>
+            <oa:table id="ClientesInfoFiTec" width="100%">
+               <ui:contents>
+                  <oa:messageStyledText id="KnownAs" dataType="VARCHAR2" prompt="Nombre" viewName="ClientesInfoFiTecVO1" viewAttr="KnownAs" maximumLength="240"/>
+                  <oa:messageStyledText id="RazonSocial" dataType="VARCHAR2" prompt="Razon Social" viewName="ClientesInfoFiTecVO1" viewAttr="RazonSocial" maximumLength="360"/>
+                  <oa:messageStyledText id="JgzzFiscalCode" dataType="VARCHAR2" prompt="RFC Primario" viewName="ClientesInfoFiTecVO1" viewAttr="JgzzFiscalCode" maximumLength="20"/>
+               </ui:contents>
+               <ui:tableSelection>
+                  <oa:singleSelection id="singleSelection1" viewName="ClientesInfoFiTecVO1" viewAttr="Seleccione"/>
+               </ui:tableSelection>
+            </oa:table>
+            <oa:pageButtonBar id="PageButtonBarRN">
+               <ui:contents>
+                  <oa:button id="Continuar" text="Continuar" prompt="Continuar">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="ContinuarEvt"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+                  <oa:link id="NuevoLink" text="Nuevo Cliente">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="NuevoEvt"/>
+                     </ui:primaryClientAction>
+                  </oa:link>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+         <ui:userInfo>
+            <oa:messageStyledText id="NombreUsuarioEBS" prompt="Nombre Usuario:" styleClass="OraFieldText"/>
+         </ui:userInfo>
+         <ui:returnNavigation>
+            <oa:link id="RegresarPantallaPrincipal" text="Regresar a Pantalla Principal" destination="OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/PortalDeFichaTecnicaPG"/>
+         </ui:returnNavigation>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftMypCoberturaVO"
+   SelectList="XxqpPdftMypCoberturaEO.ID, 
+       XxqpPdftMypCoberturaEO.MYP_HEADER_ID, 
+       XxqpPdftMypCoberturaEO.PLAZA_PROPIETARIA_C, 
+       XxqpPdftMypCoberturaEO.MENCIONAR_ESTADOS, 
+       XxqpPdftMypCoberturaEO.ENTREGA_LOCAL, 
+       XxqpPdftMypCoberturaEO.DR_LOCAL, 
+       XxqpPdftMypCoberturaEO.DI_LOCAL, 
+       XxqpPdftMypCoberturaEO.ENTREGA_FORANEO, 
+       XxqpPdftMypCoberturaEO.DR_FORANEO, 
+       XxqpPdftMypCoberturaEO.DI_FORANEO, 
+       XxqpPdftMypCoberturaEO.CREATED_BY, 
+       XxqpPdftMypCoberturaEO.CREATION_DATE, 
+       XxqpPdftMypCoberturaEO.LAST_UPDATED_BY, 
+       XxqpPdftMypCoberturaEO.LAST_UPDATE_DATE, 
+       XxqpPdftMypCoberturaEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftMypCoberturaEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftMypCoberturaEO.ATTRIBUTE1, 
+       XxqpPdftMypCoberturaEO.ATTRIBUTE2, 
+       XxqpPdftMypCoberturaEO.ATTRIBUTE3, 
+       XxqpPdftMypCoberturaEO.ATTRIBUTE4, 
+       XxqpPdftMypCoberturaEO.ATTRIBUTE5, 
+       XxqpPdftMypCoberturaEO.TC_LOCAL, 
+       XxqpPdftMypCoberturaEO.TC_NACIONAL, 
+       XxqpPdftMypCoberturaEO.TC_REGIONAL, 
+       XxqpPdftMypCoberturaEO.COMENTARIOS"
+   FromList="XXQP_PDFT_MYP_COBERTURA XxqpPdftMypCoberturaEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypCoberturaVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypCoberturaVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftMypCoberturaEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypCoberturaEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MypHeaderId"
+      EntityAttrName="MypHeaderId"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="MYP_HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PlazaPropietariaC"
+      EntityAttrName="PlazaPropietariaC"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="PLAZA_PROPIETARIA_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MencionarEstados"
+      EntityAttrName="MencionarEstados"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="MENCIONAR_ESTADOS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EntregaLocal"
+      EntityAttrName="EntregaLocal"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="ENTREGA_LOCAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DrLocal"
+      EntityAttrName="DrLocal"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="DR_LOCAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DiLocal"
+      EntityAttrName="DiLocal"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="DI_LOCAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EntregaForaneo"
+      EntityAttrName="EntregaForaneo"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="ENTREGA_FORANEO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DrForaneo"
+      EntityAttrName="DrForaneo"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="DR_FORANEO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DiForaneo"
+      EntityAttrName="DiForaneo"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="DI_FORANEO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TcLocal"
+      EntityAttrName="TcLocal"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="TC_LOCAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TcNacional"
+      EntityAttrName="TcNacional"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="TC_NACIONAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TcRegional"
+      EntityAttrName="TcRegional"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="TC_REGIONAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Comentarios"
+      EntityAttrName="Comentarios"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="COMENTARIOS" >
+   </ViewAttribute>
+</ViewObject>

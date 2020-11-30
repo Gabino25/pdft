@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="xxqp.oracle.apps.ar.pdft.altacliente.schema.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="XxqpPdftClientesContacFkAssoc"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesContacFkAssoc"
+      ObjectType="Association" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftClientesContactosEO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesContactosEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftClientesDirFiscalEO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesDirFiscalEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftClientesDirFisFkAssoc"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesDirFisFkAssoc"
+      ObjectType="Association" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftClientesFactPagEO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftClientesFactPagFkAssoc"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagFkAssoc"
+      ObjectType="Association" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftClientesHeaderEO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftClientesPuntoRecoEO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesPuntoRecoEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftClientPuntoRecoFkAssoc"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientPuntoRecoFkAssoc"
+      ObjectType="Association" >
+   </Containee>
+</JboPackage>

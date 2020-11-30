@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="xxqp.oracle.apps.ar.pdft.altafitec.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="AltaFichaTecnicaAM"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.server.AltaFichaTecnicaAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="ClientesInfoFiTecVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.server.ClientesInfoFiTecVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="EjecutivosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.server.EjecutivosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="FichasTecnicasVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.server.FichasTecnicasVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

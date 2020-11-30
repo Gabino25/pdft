@@ -1,0 +1,294 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftClientesFactPagVO"
+   SelectList="XxqpPdftClientesFactPagEO.ID, 
+       XxqpPdftClientesFactPagEO.HEADER_ID, 
+       XxqpPdftClientesFactPagEO.CONDICIONES_DE_PAGO_C, 
+       XxqpPdftClientesFactPagEO.OBSERVACIONES, 
+       XxqpPdftClientesFactPagEO.TIPO_DE_PAGO_C, 
+       XxqpPdftClientesFactPagEO.REQUIERE_ADENDAS_C, 
+       XxqpPdftClientesFactPagEO.REQUIERE_FACTURA_C, 
+       XxqpPdftClientesFactPagEO.MOTIVO, 
+       XxqpPdftClientesFactPagEO.CICLO_DE_FACTURACION_C, 
+       XxqpPdftClientesFactPagEO.USO_DEL_CFDI_C, 
+       XxqpPdftClientesFactPagEO.METODO_DE_PAGO_C, 
+       XxqpPdftClientesFactPagEO.NUMERO_DE_CUENTA, 
+       XxqpPdftClientesFactPagEO.NOMBRE_DEL_BANCO, 
+       XxqpPdftClientesFactPagEO.DIAS_NAT_DE_CREDITO, 
+       XxqpPdftClientesFactPagEO.DIAS_RECEPCION_FACTUR, 
+       XxqpPdftClientesFactPagEO.UTILIZA_PORTAL_C, 
+       XxqpPdftClientesFactPagEO.PORTAL_LINK, 
+       XxqpPdftClientesFactPagEO.ORDEN_DE_COMPRA_C, 
+       XxqpPdftClientesFactPagEO.CONTRATO_C, 
+       XxqpPdftClientesFactPagEO.VIGENCIA_CONTRATO, 
+       XxqpPdftClientesFactPagEO.CREATED_BY, 
+       XxqpPdftClientesFactPagEO.CREATION_DATE, 
+       XxqpPdftClientesFactPagEO.LAST_UPDATED_BY, 
+       XxqpPdftClientesFactPagEO.LAST_UPDATE_DATE, 
+       XxqpPdftClientesFactPagEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftClientesFactPagEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftClientesFactPagEO.ATTRIBUTE1, 
+       XxqpPdftClientesFactPagEO.ATTRIBUTE2, 
+       XxqpPdftClientesFactPagEO.ATTRIBUTE3, 
+       XxqpPdftClientesFactPagEO.ATTRIBUTE4, 
+       XxqpPdftClientesFactPagEO.ATTRIBUTE5, 
+       XxqpPdftClientesFactPagEO.DOMINGO, 
+       XxqpPdftClientesFactPagEO.JUEVES, 
+       XxqpPdftClientesFactPagEO.LUNES, 
+       XxqpPdftClientesFactPagEO.MARTES, 
+       XxqpPdftClientesFactPagEO.MIERCOLES, 
+       XxqpPdftClientesFactPagEO.SABADO, 
+       XxqpPdftClientesFactPagEO.VIERNES"
+   FromList="XXQP_PDFT_CLIENTES_FACT_PAG XxqpPdftClientesFactPagEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesFactPagVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesFactPagVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftClientesFactPagEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HeaderId"
+      EntityAttrName="HeaderId"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CondicionesDePagoC"
+      EntityAttrName="CondicionesDePagoC"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="CONDICIONES_DE_PAGO_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Observaciones"
+      EntityAttrName="Observaciones"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="OBSERVACIONES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TipoDePagoC"
+      EntityAttrName="TipoDePagoC"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="TIPO_DE_PAGO_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RequiereAdendasC"
+      EntityAttrName="RequiereAdendasC"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="REQUIERE_ADENDAS_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RequiereFacturaC"
+      EntityAttrName="RequiereFacturaC"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="REQUIERE_FACTURA_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Motivo"
+      EntityAttrName="Motivo"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="MOTIVO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CicloDeFacturacionC"
+      EntityAttrName="CicloDeFacturacionC"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="CICLO_DE_FACTURACION_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UsoDelCfdiC"
+      EntityAttrName="UsoDelCfdiC"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="USO_DEL_CFDI_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MetodoDePagoC"
+      EntityAttrName="MetodoDePagoC"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="METODO_DE_PAGO_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumeroDeCuenta"
+      EntityAttrName="NumeroDeCuenta"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="NUMERO_DE_CUENTA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NombreDelBanco"
+      EntityAttrName="NombreDelBanco"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="NOMBRE_DEL_BANCO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DiasNatDeCredito"
+      EntityAttrName="DiasNatDeCredito"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="DIAS_NAT_DE_CREDITO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DiasRecepcionFactur"
+      EntityAttrName="DiasRecepcionFactur"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="DIAS_RECEPCION_FACTUR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UtilizaPortalC"
+      EntityAttrName="UtilizaPortalC"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="UTILIZA_PORTAL_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PortalLink"
+      EntityAttrName="PortalLink"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="PORTAL_LINK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrdenDeCompraC"
+      EntityAttrName="OrdenDeCompraC"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="ORDEN_DE_COMPRA_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ContratoC"
+      EntityAttrName="ContratoC"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="CONTRATO_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VigenciaContrato"
+      EntityAttrName="VigenciaContrato"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="VIGENCIA_CONTRATO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Domingo"
+      EntityAttrName="Domingo"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="DOMINGO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Jueves"
+      EntityAttrName="Jueves"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="JUEVES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Lunes"
+      EntityAttrName="Lunes"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="LUNES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Martes"
+      EntityAttrName="Martes"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="MARTES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Miercoles"
+      EntityAttrName="Miercoles"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="MIERCOLES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Sabado"
+      EntityAttrName="Sabado"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="SABADO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Viernes"
+      EntityAttrName="Viernes"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="VIERNES" >
+   </ViewAttribute>
+</ViewObject>

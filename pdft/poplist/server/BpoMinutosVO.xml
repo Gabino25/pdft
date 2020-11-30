@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="BpoMinutosVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.poplist.server.BpoMinutosVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+select 0 lookup_code, '00' meaning from dual  union
+select 1 lookup_code, '01' meaning from dual  union
+select 2, '02'  from dual union
+select 3, '03'  from dual union
+select 4, '04'  from dual union
+select 5, '05'  from dual union
+select 6, '06'  from dual union
+select 7, '07'  from dual union
+select 8, '08'  from dual union
+select 9, '09'  from dual union
+select 10, '10' from dual union
+select 11, '11' from dual union
+select 12, '12' from dual union
+select 13, '13' from dual union
+select 14, '14' from dual union
+select 15, '15' from dual union
+select 16, '16' from dual union
+select 17, '17' from dual union
+select 18, '18' from dual union
+select 19, '19' from dual union
+select 20, '20' from dual union
+select 21, '21' from dual union
+select 22, '22' from dual union
+select 23, '23' from dual union
+select 24, '24' from dual union
+select 25 ,'25' from dual union 
+select 26 ,'26' from dual union 
+select 27 ,'27' from dual union 
+select 28 ,'28' from dual union 
+select 29 ,'29' from dual union 
+select 30 ,'30' from dual union 
+select 31 ,'31' from dual union 
+select 32 ,'32' from dual union 
+select 33 ,'33' from dual union 
+select 34 ,'34' from dual union 
+select 35 ,'35' from dual union 
+select 36 ,'36' from dual union 
+select 37 ,'37' from dual union 
+select 38 ,'38' from dual union 
+select 39 ,'39' from dual union 
+select 40 ,'40' from dual union 
+select 41 ,'41' from dual union 
+select 42 ,'42' from dual union 
+select 43 ,'43' from dual union 
+select 44 ,'44' from dual union 
+select 45 ,'45' from dual union 
+select 46 ,'46' from dual union 
+select 47 ,'47' from dual union 
+select 48 ,'48' from dual union 
+select 49 ,'49' from dual union 
+select 50 ,'50' from dual union 
+select 51 ,'51' from dual union 
+select 52 ,'52' from dual union 
+select 53 ,'53' from dual union 
+select 54 ,'54' from dual union 
+select 55 ,'55' from dual union 
+select 56 ,'56' from dual union 
+select 57 ,'57' from dual union 
+select 58 ,'58' from dual union 
+select 59 ,'59' from dual union 
+select 60 ,'60' from dual
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="LookupCode"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LOOKUP_CODE"
+      Expression="LOOKUP_CODE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Meaning"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="2"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="MEANING"
+      Expression="MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

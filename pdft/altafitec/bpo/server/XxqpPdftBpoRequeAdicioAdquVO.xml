@@ -1,0 +1,236 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftBpoRequeAdicioAdquVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoRequeAdicioAdquVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoRequeAdicioAdquVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT XxqpPdftBpoRequeAdicioEO.ID, 
+       XxqpPdftBpoRequeAdicioEO.BPO_HEADER_ID, 
+       XxqpPdftBpoRequeAdicioEO.CATEGORIA, 
+       XxqpPdftBpoRequeAdicioEO.MOTO_125, 
+       XxqpPdftBpoRequeAdicioEO.CASCO, 
+       XxqpPdftBpoRequeAdicioEO.CAJA_GRANDE, 
+       XxqpPdftBpoRequeAdicioEO.CAJA_CHICA_ROJA, 
+       XxqpPdftBpoRequeAdicioEO.CAMISAS, 
+       XxqpPdftBpoRequeAdicioEO.IMPERMEABLE, 
+       XxqpPdftBpoRequeAdicioEO.TARJETA_GASOLINA, 
+       XxqpPdftBpoRequeAdicioEO.PANTALON_VESTIR, 
+       XxqpPdftBpoRequeAdicioEO.CAJA_NEGRA, 
+       XxqpPdftBpoRequeAdicioEO.HIELERA, 
+       XxqpPdftBpoRequeAdicioEO.MOVIL, 
+       XxqpPdftBpoRequeAdicioEO.AUTOMOVIL, 
+       XxqpPdftBpoRequeAdicioEO.GUIA_ROJI, 
+       XxqpPdftBpoRequeAdicioEO.OTROS, 
+       XxqpPdftBpoRequeAdicioEO.COMENTARIOS, 
+       XxqpPdftBpoRequeAdicioEO.CREATED_BY, 
+       XxqpPdftBpoRequeAdicioEO.CREATION_DATE, 
+       XxqpPdftBpoRequeAdicioEO.LAST_UPDATED_BY, 
+       XxqpPdftBpoRequeAdicioEO.LAST_UPDATE_DATE, 
+       XxqpPdftBpoRequeAdicioEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftBpoRequeAdicioEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftBpoRequeAdicioEO.ATTRIBUTE1, 
+       XxqpPdftBpoRequeAdicioEO.ATTRIBUTE2, 
+       XxqpPdftBpoRequeAdicioEO.ATTRIBUTE3, 
+       XxqpPdftBpoRequeAdicioEO.ATTRIBUTE4, 
+       XxqpPdftBpoRequeAdicioEO.ATTRIBUTE5
+FROM XXQP_PDFT_BPO_REQUE_ADICIO XxqpPdftBpoRequeAdicioEO
+WHERE XxqpPdftBpoRequeAdicioEO.CATEGORIA='ADQU'
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftBpoRequeAdicioEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoRequeAdicioEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      IsNotNull="true"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BpoHeaderId"
+      EntityAttrName="BpoHeaderId"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="BPO_HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Categoria"
+      EntityAttrName="Categoria"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="CATEGORIA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Moto125"
+      EntityAttrName="Moto125"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="MOTO_125" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Casco"
+      EntityAttrName="Casco"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="CASCO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CajaGrande"
+      EntityAttrName="CajaGrande"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="CAJA_GRANDE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CajaChicaRoja"
+      EntityAttrName="CajaChicaRoja"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="CAJA_CHICA_ROJA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Camisas"
+      EntityAttrName="Camisas"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="CAMISAS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Impermeable"
+      EntityAttrName="Impermeable"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="IMPERMEABLE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TarjetaGasolina"
+      EntityAttrName="TarjetaGasolina"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="TARJETA_GASOLINA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PantalonVestir"
+      EntityAttrName="PantalonVestir"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="PANTALON_VESTIR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CajaNegra"
+      EntityAttrName="CajaNegra"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="CAJA_NEGRA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Hielera"
+      EntityAttrName="Hielera"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="HIELERA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Movil"
+      EntityAttrName="Movil"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="MOVIL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Automovil"
+      EntityAttrName="Automovil"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="AUTOMOVIL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GuiaRoji"
+      EntityAttrName="GuiaRoji"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="GUIA_ROJI" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Otros"
+      EntityAttrName="Otros"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="OTROS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Comentarios"
+      EntityAttrName="Comentarios"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="COMENTARIOS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+</ViewObject>

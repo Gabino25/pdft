@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftBpoPrecioVO"
+   SelectList="XxqpPdftBpoPrecioEO.ID, 
+       XxqpPdftBpoPrecioEO.BPO_HEADER_ID, 
+       XxqpPdftBpoPrecioEO.CONCEPTO, 
+       XxqpPdftBpoPrecioEO.CANTIDAD, 
+       XxqpPdftBpoPrecioEO.PRECIO_UNITARIO, 
+       XxqpPdftBpoPrecioEO.TOTAL_CONCEPTO, 
+       XxqpPdftBpoPrecioEO.CREATED_BY, 
+       XxqpPdftBpoPrecioEO.CREATION_DATE, 
+       XxqpPdftBpoPrecioEO.LAST_UPDATED_BY, 
+       XxqpPdftBpoPrecioEO.LAST_UPDATE_DATE, 
+       XxqpPdftBpoPrecioEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftBpoPrecioEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftBpoPrecioEO.ATTRIBUTE1, 
+       XxqpPdftBpoPrecioEO.ATTRIBUTE2, 
+       XxqpPdftBpoPrecioEO.ATTRIBUTE3, 
+       XxqpPdftBpoPrecioEO.ATTRIBUTE4, 
+       XxqpPdftBpoPrecioEO.ATTRIBUTE5"
+   FromList="XXQP_PDFT_BPO_PRECIO XxqpPdftBpoPrecioEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoPrecioVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoPrecioVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftBpoPrecioEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoPrecioEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BpoHeaderId"
+      EntityAttrName="BpoHeaderId"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="BPO_HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Concepto"
+      EntityAttrName="Concepto"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="CONCEPTO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cantidad"
+      EntityAttrName="Cantidad"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="CANTIDAD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrecioUnitario"
+      EntityAttrName="PrecioUnitario"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="PRECIO_UNITARIO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalConcepto"
+      EntityAttrName="TotalConcepto"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="TOTAL_CONCEPTO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftBpoPrecioEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+</ViewObject>

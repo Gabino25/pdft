@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="TipoOperativoVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.poplist.server.TipoOperativoVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+select  lookup_code
+         ,description meaning
+   from xxqp_pdft_mgr_catalogos
+where lookup_type = 'TIPO_OPERATIVO'
+   and nvl(status,'X') = 'Y'
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="LookupCode"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="24"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="LOOKUP_CODE"
+      Expression="LOOKUP_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="24" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Meaning"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="21"
+      Type="java.lang.String"
+      ColumnType="CHAR"
+      AliasName="MEANING"
+      Expression="MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="21" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

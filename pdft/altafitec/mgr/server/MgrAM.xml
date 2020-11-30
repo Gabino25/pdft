@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="MgrAM"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.mgr.server.MgrAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="XxqpPdftMgrCatalogosVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.mgr.server.XxqpPdftMgrCatalogosVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="MgrCatalogosTmpVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.mgr.server.MgrCatalogosTmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="MgrCatalogosVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.mgr.server.MgrCatalogosVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftDistribucionVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.mgr.server.XxqpPdftDistribucionVO" >
+   </ViewUsage>
+</AppModule>

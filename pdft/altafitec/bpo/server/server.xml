@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="BpoAM"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.BpoAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="BpoHeaderTmpVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.BpoHeaderTmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MtlSystemItemsBLOV"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.MtlSystemItemsBLOV"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PrecioTmpVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.PrecioTmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ReglasDeNegocioTmpVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.ReglasDeNegocioTmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoConceptosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoConceptosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoEstadosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoEstadosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoHeaderVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoHeaderVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoPagoVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoPagoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoPrecioVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoPrecioVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoRegNegVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoRegNegVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoRequeAdicioAdquVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoRequeAdicioAdquVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoRequeAdicioGyCVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoRequeAdicioGyCVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoRequeAdicioOperVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoRequeAdicioOperVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoRequeAdicioVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoRequeAdicioVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftBpoServicioVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoServicioVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftClientesHeaderVO"
+   SelectList="XxqpPdftClientesHeaderEO.ID, 
+       XxqpPdftClientesHeaderEO.NOMBRE_CLIENTE, 
+       XxqpPdftClientesHeaderEO.GIRO_EMPRESARIAL_C, 
+       XxqpPdftClientesHeaderEO.EMPRESA_QUE_FACTURA_C, 
+       XxqpPdftClientesHeaderEO.TIPO_OPERATIVO_C, 
+       XxqpPdftClientesHeaderEO.TIPO_ADMINISTRATIVO_C, 
+       XxqpPdftClientesHeaderEO.TIPO_COMERCIAL_C, 
+       XxqpPdftClientesHeaderEO.COMENTARIOS, 
+       XxqpPdftClientesHeaderEO.CREATED_BY, 
+       XxqpPdftClientesHeaderEO.CREATION_DATE, 
+       XxqpPdftClientesHeaderEO.LAST_UPDATED_BY, 
+       XxqpPdftClientesHeaderEO.LAST_UPDATE_DATE, 
+       XxqpPdftClientesHeaderEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftClientesHeaderEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftClientesHeaderEO.ATTRIBUTE1, 
+       XxqpPdftClientesHeaderEO.ATTRIBUTE2, 
+       XxqpPdftClientesHeaderEO.ATTRIBUTE3, 
+       XxqpPdftClientesHeaderEO.ATTRIBUTE4, 
+       XxqpPdftClientesHeaderEO.ATTRIBUTE5"
+   FromList="XXQP_PDFT_CLIENTES_HEADER XxqpPdftClientesHeaderEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesHeaderVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesHeaderVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftClientesHeaderEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      IsNotNull="true"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NombreCliente"
+      EntityAttrName="NombreCliente"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="NOMBRE_CLIENTE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GiroEmpresarialC"
+      EntityAttrName="GiroEmpresarialC"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="GIRO_EMPRESARIAL_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EmpresaQueFacturaC"
+      EntityAttrName="EmpresaQueFacturaC"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="EMPRESA_QUE_FACTURA_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TipoOperativoC"
+      EntityAttrName="TipoOperativoC"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="TIPO_OPERATIVO_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TipoAdministrativoC"
+      EntityAttrName="TipoAdministrativoC"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="TIPO_ADMINISTRATIVO_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TipoComercialC"
+      EntityAttrName="TipoComercialC"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="TIPO_COMERCIAL_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Comentarios"
+      EntityAttrName="Comentarios"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="COMENTARIOS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+</ViewObject>

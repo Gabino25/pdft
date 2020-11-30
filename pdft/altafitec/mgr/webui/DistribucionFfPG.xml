@@ -1,0 +1,94 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="xxqp.oracle.apps.ar.pdft.altafitec.mgr.server.MgrAM" windowTitle="Distribucion Ficha Tecnica" title="Distribucion Ficha Tecnica" controllerClass="xxqp.oracle.apps.ar.pdft.altafitec.mgr.webui.DistribucionFtCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:advancedTable id="AdvTableRN" viewName="XxqpPdftDistribucionVO1" blockSize="50">
+               <ui:contents>
+                  <oa:column id="IdCol" rendered="false">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="IdSortHead" prompt="Id"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="Id" viewAttr="Id"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="UsuarioCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="UsuarioSortHead" prompt="Usuario"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="Usuario" viewAttr="Usuario" columns="35" required="yes"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="CorreoCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="CorreoSortHead" prompt="Correo"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageTextInput id="Correo" viewAttr="Correo" columns="40" required="yes"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="IsEnabledCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="IsEnabledSortHead" prompt="Habilitado"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageCheckBox id="IsEnabled" viewAttr="IsEnabled"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="IsCreateCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="IsCreateSortHead" prompt="Creacion"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageCheckBox id="IsCreate" viewAttr="Attribute1"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="IsUpdateCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="IsUpdateSortHead" prompt="Actualizacion"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageCheckBox id="IsUpdate" viewAttr="Attribute2"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="DeleteActionCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="DeleteActionSortHead" prompt="Borrar"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:image id="DeleteAction" viewAttr="IsEnabled" source="deleteicon_enabled.gif" use="/oracle/apps/fnd/attributesets/Buttons/Delete" serverUnvalidated="true">
+                           <ui:primaryClientAction>
+                              <ui:fireAction event="DeleteEvt" unvalidated="true">
+                                 <ui:parameters>
+                                    <ui:parameter key="pId" value="${oa.XxqpPdftDistribucionVO1.Id}"/>
+                                 </ui:parameters>
+                              </ui:fireAction>
+                           </ui:primaryClientAction>
+                        </oa:image>
+                     </ui:contents>
+                  </oa:column>
+               </ui:contents>
+            </oa:advancedTable>
+            <oa:pageButtonBar id="PageButtonBarRN">
+               <ui:contents>
+                  <oa:button id="GrabarBtn" text="Grabar" prompt="Grabar">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="GrabarEvt"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+                  <oa:button id="CreateBtn" text="Crear Registro" prompt="Crear Registro">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="CreateEvt"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="MasivoYPlatinumAM"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.MasivoYPlatinumAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="MasivoYPlatinumAM"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.MasivoYPlatinumAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="MtlSystemItemsBLOV"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.MtlSystemItemsBLOV"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypHeaderTmpVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.MypHeaderTmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypHeaderTmpVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.MypHeaderTmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="OtrosProcesosTmpVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.OtrosProcesosTmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="OtrosProcesosTmpVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.OtrosProcesosTmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProcesosTmpVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.ProcesosTmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ProcesosTmpVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.ProcesosTmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ReglasDeNegocioTmpVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.ReglasDeNegocioTmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypCoberturaVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypCoberturaVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypCoberturaVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypCoberturaVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypComentsProcesosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypComentsProcesosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypComentsProcesosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypComentsProcesosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypConceptosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypConceptosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypDistribucionVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypDistribucionVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypDistribucionVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypDistribucionVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypEstadosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypEstadosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypGeneralVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypGeneralVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypGeneralVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypGeneralVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypHeaderVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypHeaderVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypHeaderVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypHeaderVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypOtrosProcesosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypOtrosProcesosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypOtrosProcesosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypOtrosProcesosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypProcesosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypProcesosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypProcesosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypProcesosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="XxqpPdftMypRegNegVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypRegNegVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

@@ -1,0 +1,208 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.server.QpLabsAM" windowTitle="Detalle de Ficha Tecnica > QP Labs" title="Detalle de Ficha Tecnica > QP Labs" controllerClass="xxqp.oracle.apps.ar.pdft.altafitec.qplabs.webui.QpLabsCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:tableLayout id="TabLayHead" hAlign="center" width="100%">
+               <ui:contents>
+                  <oa:rowLayout id="RowLayHead1" width="100%">
+                     <ui:contents>
+                        <oa:cellFormat id="CellNumeroFt">
+                           <ui:contents>
+                              <oa:tableLayout id="TabLayNumeroFt" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageTextInput id="NumeroFt" prompt="Numero FT" styleClass="OraFieldText" readOnly="true"/>
+                                    <oa:messageTextInput id="FtReferencia" styleClass="OraFieldText" prompt="FT Referencia" readOnly="true"/>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellRev">
+                           <ui:contents>
+                              <oa:tableLayout id="TabLayRev" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageTextInput id="Rev" prompt="Rev" styleClass="OraFieldText" readOnly="true"/>
+                                    <oa:messageCheckBox id="Contrato" text="Contrato" prompt="Contrato" styleClass="OraFieldText" readOnly="true" viewName="QplabsHeaderTmpVO1" viewAttr="Contrato"/>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellEstatus">
+                           <ui:contents>
+                              <oa:tableLayout id="TabLayEstatus" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageChoice id="Estatus" prompt="Estatus" styleClass="OraFieldText" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.StatusFichaTecnicaVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" readOnly="true" required="yes"/>
+                                    <oa:messageFileUpload id="ContratoExamine" viewName="QplabsHeaderTmpVO1" viewAttr="ContratoFile" dataType="BLOB"/>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellFecha">
+                           <ui:contents>
+                              <oa:tableLayout id="TabLayFecha" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageTextInput id="Fecha" prompt="Fecha" styleClass="OraFieldText" readOnly="true" required="yes"/>
+                                    <oa:messageTextInput id="Ejecutivo" prompt="Ejecutivo" styleClass="OraFieldText" readOnly="true" required="yes"/>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+               </ui:contents>
+            </oa:tableLayout>
+            <oa:tableLayout id="TabLayHead2" hAlign="center">
+               <ui:contents>
+                  <oa:rowLayout id="RowLayHead2" hAlign="center" width="100%">
+                     <ui:contents>
+                        <oa:cellFormat id="CellNombreCliente" width="50%" hAlign="center">
+                           <ui:contents>
+                              <oa:tableLayout id="TabLayNombreCliente" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageTextInput id="NombreDelCliente" prompt="Nombre del Cliente" styleClass="OraFieldText" readOnly="false" required="yes"/>
+                                    <oa:messageChoice id="UnidadDeNegocio" prompt="Unidad de Negocio" styleClass="OraFieldText" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.UnidadDeNegocioVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" readOnly="true" required="yes"/>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellEmpresaQueFactura" width="50%" hAlign="center">
+                           <ui:contents>
+                              <oa:tableLayout id="TabLayEmpresaQueFactura" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageChoice id="EmpresaQueFactura" prompt="Empresa que Factura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EmpresaQueFacturaVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" styleClass="OraFieldText" readOnly="false" required="yes"/>
+                                    <oa:messageChoice id="CicloFacturacion" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CicloDeFacturacionVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Frecuencia de Facturacion" styleClass="OraFieldText" readOnly="false" required="yes"/>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+               </ui:contents>
+            </oa:tableLayout>
+            <oa:tableLayout id="TabLayHead3" hAlign="left">
+               <ui:contents>
+                  <oa:rowLayout id="RowLay3" hAlign="left">
+                     <ui:contents>
+                        <oa:cellFormat id="CellFechaOperacion" hAlign="left">
+                           <ui:contents>
+                              <oa:messageTextInput id="FechaInicioOperacion" dataType="DATE" prompt="Fecha Inicio Operacion"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+               </ui:contents>
+            </oa:tableLayout>
+            <oa:subTabLayout id="SubTabLayoutRN">
+               <ui:contents>
+                  <oa:contentContainer id="InformacionOperativaCont" text="Informacion Operativa" width="100%">
+                     <ui:contents>
+                        <oa:tableLayout id="TabLayInfoOper1" hAlign="center">
+                           <ui:contents>
+                              <oa:rowLayout id="RowLayTipoDeServicio">
+                                 <ui:contents>
+                                    <oa:cellFormat id="CellTipoDeServicio">
+                                       <ui:contents>
+                                          <oa:tableLayout id="TabLayTipoDeServicio" hAlign="center">
+                                             <ui:contents>
+                                                <oa:messageTextInput id="TipoDeServicio" maximumLength="40" prompt="Tipo de Servicio" styleClass="OraFieldText" required="yes"/>
+                                                <oa:messageTextInput id="NombreDeServicio" prompt="Nombre de Servicio" styleClass="OraFieldText" maximumLength="40" required="yes"/>
+                                                <oa:messageTextInput id="VolumenAproximado" maximumLength="40" prompt="Volumen Aproximado" styleClass="OraFieldText" required="yes"/>
+                                             </ui:contents>
+                                          </oa:tableLayout>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="CellPreciosClientes">
+                                       <ui:contents>
+                                          <oa:advancedTable id="PreciosClientesAdvTab" viewName="PreciosClientesTmpVO1" text="Precios Clientes">
+                                             <ui:contents>
+                                                <oa:column id="LineIdCol" rendered="false">
+                                                   <ui:columnHeader>
+                                                      <oa:sortableHeader id="LineIdSort" prompt="Numero de Linea"/>
+                                                   </ui:columnHeader>
+                                                   <ui:contents>
+                                                      <oa:messageTextInput id="LineId" viewAttr="LineId" styleClass="OraFieldNumber" dataType="NUMBER"/>
+                                                   </ui:contents>
+                                                </oa:column>
+                                                <oa:column id="ConceptoCol">
+                                                   <ui:columnHeader>
+                                                      <oa:sortableHeader id="ConceptoSort" prompt="Concepto"/>
+                                                   </ui:columnHeader>
+                                                   <ui:contents>
+                                                      <oa:messageTextInput id="Concepto" viewAttr="Concepto" styleClass="OraFieldText" maximumLength="150" required="yes" prompt="Concepto"/>
+                                                   </ui:contents>
+                                                </oa:column>
+                                                <oa:column id="PrecioCol">
+                                                   <ui:columnHeader>
+                                                      <oa:sortableHeader id="PrecioSort" prompt="Precio"/>
+                                                   </ui:columnHeader>
+                                                   <ui:contents>
+                                                      <oa:messageTextInput id="Precio" viewAttr="Precio" styleClass="OraFieldNumber" dataType="NUMBER" maximumLength="30" required="yes" prompt="Precio"/>
+                                                   </ui:contents>
+                                                </oa:column>
+                                             </ui:contents>
+                                             <ui:tableActions>
+                                                <oa:flowLayout id="region7">
+                                                   <ui:contents>
+                                                      <oa:button id="AgregarOtraFila" text="Agregar Otra Fila" prompt="Agregar Otra Fila">
+                                                         <ui:primaryClientAction>
+                                                            <ui:fireAction event="AgregarOtraFilaEvt"/>
+                                                         </ui:primaryClientAction>
+                                                      </oa:button>
+                                                   </ui:contents>
+                                                </oa:flowLayout>
+                                             </ui:tableActions>
+                                             <ui:footer>
+                                                <oa:tableFooter id="tableFooter1">
+                                                   <ui:contents>
+                                                      <oa:tip id="item2" text="* Precios Sin IVA"/>
+                                                   </ui:contents>
+                                                </oa:tableFooter>
+                                             </ui:footer>
+                                          </oa:advancedTable>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                 </ui:contents>
+                              </oa:rowLayout>
+                           </ui:contents>
+                        </oa:tableLayout>
+                        <oa:tableLayout id="TabLayInfoOper2" hAlign="center">
+                           <ui:contents>
+                              <oa:rowLayout id="RawLayComentariosAdicionales">
+                                 <ui:contents>
+                                    <oa:cellFormat id="CellComentariosAdicionales">
+                                       <ui:contents>
+                                          <oa:messageTextInput id="ComentariosAdicionales" prompt="Comentarios Adicionales" maximumLength="400" styleClass="OraFieldText" columns="90" rows="3" required="yes"/>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                 </ui:contents>
+                              </oa:rowLayout>
+                           </ui:contents>
+                        </oa:tableLayout>
+                     </ui:contents>
+                  </oa:contentContainer>
+               </ui:contents>
+            </oa:subTabLayout>
+            <oa:pageButtonBar id="PageButtonBarRN">
+               <ui:contents>
+                  <oa:button id="Grabar" text="Grabar" prompt="Grabar">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="GrabarEvt" id="fireAction1"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+                  <oa:submitButton id="Validar" text="Validar Informacion" prompt="Validar Informacion"/>
+               </ui:contents>
+            </oa:pageButtonBar>
+            <oa:formValue id="PartyId"/>
+         </ui:contents>
+         <ui:userInfo>
+            <oa:messageStyledText id="NombreUsuarioEBS" prompt="Nombre Usuario:" styleClass="OraFieldText"/>
+         </ui:userInfo>
+         <ui:returnNavigation>
+            <oa:link id="RegresarBusquedaDeFichaTecnica" text="Regresar a Pantalla Busqueda de Ficha Tecnica" destination="OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/webui/BusquedaDeFichaTecnicaPG"/>
+         </ui:returnNavigation>
+      </oa:pageLayout>
+   </content>
+</page>

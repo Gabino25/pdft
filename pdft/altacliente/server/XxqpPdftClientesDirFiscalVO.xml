@@ -1,0 +1,332 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftClientesDirFiscalVO"
+   SelectList="XxqpPdftClientesDirFiscalEO.ID, 
+       XxqpPdftClientesDirFiscalEO.HEADER_ID, 
+       XxqpPdftClientesDirFiscalEO.PRIM_RFC, 
+       XxqpPdftClientesDirFiscalEO.PRIM_RAZON_SOCIAL, 
+       XxqpPdftClientesDirFiscalEO.PRIM_DIRECCION, 
+       XxqpPdftClientesDirFiscalEO.PRIM_ENTRE_CALLES, 
+       XxqpPdftClientesDirFiscalEO.PRIM_COLONIA, 
+       XxqpPdftClientesDirFiscalEO.PRIM_CIUDAD_O_MPO, 
+       XxqpPdftClientesDirFiscalEO.PRIM_ESTADO_C, 
+       XxqpPdftClientesDirFiscalEO.PRIM_CODIGO_POSTAL_C, 
+       XxqpPdftClientesDirFiscalEO.PRIM_CEDULA, 
+       XxqpPdftClientesDirFiscalEO.PRIM_CEDULA_FILE, 
+       XxqpPdftClientesDirFiscalEO.SEC_RFC, 
+       XxqpPdftClientesDirFiscalEO.SEC_RAZON_SOCIAL, 
+       XxqpPdftClientesDirFiscalEO.SEC_DIRECCION, 
+       XxqpPdftClientesDirFiscalEO.SEC_ENTRE_CALLES, 
+       XxqpPdftClientesDirFiscalEO.SEC_COLONIA, 
+       XxqpPdftClientesDirFiscalEO.SEC_CIUDAD_O_MPO, 
+       XxqpPdftClientesDirFiscalEO.SEC_ESTADO_C, 
+       XxqpPdftClientesDirFiscalEO.SEC_CODIGO_POSTAL_C, 
+       XxqpPdftClientesDirFiscalEO.SEC_CEDULA, 
+       XxqpPdftClientesDirFiscalEO.SEC_CEDULA_FILE, 
+       XxqpPdftClientesDirFiscalEO.CREATED_BY, 
+       XxqpPdftClientesDirFiscalEO.CREATION_DATE, 
+       XxqpPdftClientesDirFiscalEO.LAST_UPDATED_BY, 
+       XxqpPdftClientesDirFiscalEO.LAST_UPDATE_DATE, 
+       XxqpPdftClientesDirFiscalEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftClientesDirFiscalEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftClientesDirFiscalEO.ATTRIBUTE1, 
+       XxqpPdftClientesDirFiscalEO.ATTRIBUTE2, 
+       XxqpPdftClientesDirFiscalEO.ATTRIBUTE3, 
+       XxqpPdftClientesDirFiscalEO.ATTRIBUTE4, 
+       XxqpPdftClientesDirFiscalEO.ATTRIBUTE5, 
+       XxqpPdftClientesDirFiscalEO.PRIM_CEDULA_CONTENT_TYPE,
+
+       XxqpPdftClientesDirFiscalEO.PRIM_CEDULA_FILE_NAME, 
+       XxqpPdftClientesDirFiscalEO.SEC_CEDULA_CONTENT_TYPE, 
+       XxqpPdftClientesDirFiscalEO.SEC_CEDULA_FILE_NAME, 
+       XxqpPdftClientesDirFiscalEO.PRIM_OPERATING_UNIT, 
+       XxqpPdftClientesDirFiscalEO.SEC_OPERATING_UNIT, 
+       XxqpPdftClientesDirFiscalEO.PRIM_NUMERO_EXT, 
+       XxqpPdftClientesDirFiscalEO.PRIM_NUMERO_INT, 
+       XxqpPdftClientesDirFiscalEO.SEC_NUMERO_EXT, 
+       XxqpPdftClientesDirFiscalEO.SEC_NUMERO_INT"
+   FromList="XXQP_PDFT_CLIENTES_DIR_FISCAL XxqpPdftClientesDirFiscalEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesDirFiscalVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesDirFiscalVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftClientesDirFiscalEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesDirFiscalEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HeaderId"
+      EntityAttrName="HeaderId"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimRfc"
+      EntityAttrName="PrimRfc"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_RFC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimRazonSocial"
+      EntityAttrName="PrimRazonSocial"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_RAZON_SOCIAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimDireccion"
+      EntityAttrName="PrimDireccion"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_DIRECCION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimEntreCalles"
+      EntityAttrName="PrimEntreCalles"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_ENTRE_CALLES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimColonia"
+      EntityAttrName="PrimColonia"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_COLONIA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimCiudadOMpo"
+      EntityAttrName="PrimCiudadOMpo"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_CIUDAD_O_MPO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimEstadoC"
+      EntityAttrName="PrimEstadoC"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_ESTADO_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimCodigoPostalC"
+      EntityAttrName="PrimCodigoPostalC"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_CODIGO_POSTAL_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimCedula"
+      EntityAttrName="PrimCedula"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_CEDULA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimCedulaFile"
+      IsQueriable="false"
+      EntityAttrName="PrimCedulaFile"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_CEDULA_FILE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecRfc"
+      EntityAttrName="SecRfc"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_RFC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecRazonSocial"
+      EntityAttrName="SecRazonSocial"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_RAZON_SOCIAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecDireccion"
+      EntityAttrName="SecDireccion"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_DIRECCION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecEntreCalles"
+      EntityAttrName="SecEntreCalles"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_ENTRE_CALLES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecColonia"
+      EntityAttrName="SecColonia"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_COLONIA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecCiudadOMpo"
+      EntityAttrName="SecCiudadOMpo"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_CIUDAD_O_MPO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecEstadoC"
+      EntityAttrName="SecEstadoC"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_ESTADO_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecCodigoPostalC"
+      EntityAttrName="SecCodigoPostalC"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_CODIGO_POSTAL_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecCedula"
+      EntityAttrName="SecCedula"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_CEDULA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecCedulaFile"
+      IsQueriable="false"
+      EntityAttrName="SecCedulaFile"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_CEDULA_FILE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimCedulaContentType"
+      EntityAttrName="PrimCedulaContentType"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_CEDULA_CONTENT_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimCedulaFileName"
+      EntityAttrName="PrimCedulaFileName"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_CEDULA_FILE_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecCedulaContentType"
+      EntityAttrName="SecCedulaContentType"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_CEDULA_CONTENT_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecCedulaFileName"
+      EntityAttrName="SecCedulaFileName"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_CEDULA_FILE_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimOperatingUnit"
+      EntityAttrName="PrimOperatingUnit"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_OPERATING_UNIT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecOperatingUnit"
+      EntityAttrName="SecOperatingUnit"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_OPERATING_UNIT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimNumeroExt"
+      EntityAttrName="PrimNumeroExt"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_NUMERO_EXT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimNumeroInt"
+      EntityAttrName="PrimNumeroInt"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_NUMERO_INT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecNumeroExt"
+      EntityAttrName="SecNumeroExt"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_NUMERO_EXT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecNumeroInt"
+      EntityAttrName="SecNumeroInt"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_NUMERO_INT" >
+   </ViewAttribute>
+</ViewObject>

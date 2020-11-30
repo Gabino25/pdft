@@ -1,0 +1,53 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <!--*[Enter Javadoc like developer documentation, delete this line once you fill the included template.] [Put a one line description of the region here.] [Put a brief description of the usage of the region here.] @param [Parameter_name] [Put parameter use here.] @param [Parameter_name] [Put parameter use here.] @see [Put any additional links apart from controller class and BC4J objects directly referenced by this region]-->
+      <oa:pageLayout id="PageLayoutRN" scope="/" windowTitle="Portal" title="Portal" securityMode="selfSecured" amDefName="xxqp.oracle.apps.ar.pdft.ss.server.SsAM" rendered="${oa.FunctionSecurity.XXQP_PDFT_SS_PORTAL_F}" controllerClass="xxqp.oracle.apps.ar.pdft.ss.webui.PortalCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:tableLayout id="TabLayFichaTecnica" hAlign="center">
+               <ui:contents>
+                  <oa:rowLayout id="RowLay2">
+                     <ui:contents>
+                        <oa:cellFormat id="CellSeparator" height="10">
+                           <ui:contents>
+                              <oa:separator id="Separator1"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+                  <oa:rowLayout id="RowLay3">
+                     <ui:contents>
+                        <oa:cellFormat id="CellConsultaFichaTecnica">
+                           <ui:contents>
+                              <oa:button id="ConsultaFichaTecnica" text="Consulta Ficha Tecnica" prompt="Consulta Ficha Tecnica">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="ConsultaFichaTecnicaEvt" id="fireAction3"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellSpacer2">
+                           <ui:contents>
+                              <oa:spacer id="Spacer2" width="40"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="CellConsultaDeCliente">
+                           <ui:contents>
+                              <oa:button id="ConsultaDeCliente" text="Consulta Cliente" prompt="Consulta Cliente">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="ConsultaDeClienteEvt" id="fireAction4"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+               </ui:contents>
+            </oa:tableLayout>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

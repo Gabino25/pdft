@@ -1,0 +1,69 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="xxqp.oracle.apps.ar.pdft.altafitec.server.AltaFichaTecnicaAM" windowTitle="Reportes" title="Reportes" controllerClass="xxqp.oracle.apps.ar.pdft.altafitec.webui.ReportesCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:tableLayout id="TableLayout" hAlign="center">
+               <ui:contents>
+                  <oa:messageChoice id="ReportePor" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.TiposReportesVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Reporte Por:" styleClass="OraFieldText" required="yes"/>
+                  <oa:messageLovInput id="ClienteDesde" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/NombreDelClienteRN" prompt="Cliente Desde:" styleClass="OraFieldText">
+                     <lovMappings>
+                        <lovMap id="lovMap1" lovItem="PartyName" resultTo="ClienteDesde" criteriaFrom="ClienteDesde"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageLovInput id="ClienteHasta" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/NombreDelClienteRN" prompt="Cliente Hasta:" styleClass="OraFieldText">
+                     <lovMappings>
+                        <lovMap id="lovMap11" lovItem="PartyName" resultTo="ClienteHasta" criteriaFrom="ClienteHasta"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageTextInput id="FechaDesde" dataType="DATE" prompt="Fecha Desde:"/>
+                  <oa:messageTextInput id="FechaHasta" prompt="Fecha Hasta:" dataType="DATE"/>
+                  <oa:messageTextInput id="FichaTecnicaDesde" dataType="NUMBER" prompt="Ficha Tecnica Desde:" styleClass="OraFieldNumber"/>
+                  <oa:messageTextInput id="FichaTecnicaHasta" dataType="NUMBER" prompt="Ficha Tecnica Hasta:" styleClass="OraFieldNumber"/>
+                  <oa:messageTextInput id="ProductoDesde" prompt="Producto Desde:"/>
+                  <oa:messageTextInput id="ProductoHasta" prompt="Producto Hasta:"/>
+                  <oa:messageChoice id="CicloFacturacionDesde" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CicloDeFacturacionVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Frecuencia de Facturacion Desde:" styleClass="OraFieldText" readOnly="false" required="no"/>
+                  <oa:messageChoice id="CicloFacturacionHasta" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CicloDeFacturacionVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Frecuencia de Facturacion Hasta:" styleClass="OraFieldText" readOnly="false" required="no"/>
+                  <oa:messageChoice id="EstatusDesde" prompt="Estatus Desde:" styleClass="OraFieldText" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.StatusFichaTecnicaVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" readOnly="false" required="no"/>
+                  <oa:messageChoice id="EstatusHasta" prompt="Estatus Hasta:" styleClass="OraFieldText" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.StatusFichaTecnicaVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" readOnly="false" required="no"/>
+                  <oa:messageLovInput id="RazonSocialDesde" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/RazonSocialRN" maximumLength="200" prompt="Razon Social Desde:">
+                     <lovMappings>
+                        <lovMap id="lovMap31" lovItem="RazonSocial" resultTo="RazonSocialDesde" criteriaFrom="RazonSocialDesde"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+                  <oa:messageLovInput id="RazonSocialHasta" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/RazonSocialRN" maximumLength="200" prompt="Razon Social Hasta:">
+                     <lovMappings>
+                        <lovMap id="lovMap311" lovItem="RazonSocial" resultTo="RazonSocialHasta" criteriaFrom="RazonSocialHasta"/>
+                     </lovMappings>
+                  </oa:messageLovInput>
+               </ui:contents>
+            </oa:tableLayout>
+            <oa:formValue id="FvClienteDesde"/>
+            <oa:formValue id="FvClienteHasta"/>
+            <oa:pageButtonBar id="PageButtonBarRN">
+               <ui:contents>
+                  <oa:button id="LimpiarBtn" text="Limpiar" prompt="Limpiar" serverUnvalidated="true">
+                     <ui:primaryClientAction>
+                        <ui:fireAction unvalidated="true" event="LimpiarEvt"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+                  <oa:button id="EjecutarBtn" text="Ejecutar" prompt="Ejecutar">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="EjecutarEvt"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
+               </ui:contents>
+            </oa:pageButtonBar>
+         </ui:contents>
+         <ui:userInfo>
+            <oa:messageStyledText id="NombreUsuarioEBS" prompt="Nombre Usuario:" styleClass="OraFieldText"/>
+         </ui:userInfo>
+         <ui:returnNavigation>
+            <oa:link id="RegresarPantallaPrincipal" text="Regresar a Pantalla Principal" destination="OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/PortalDeFichaTecnicaPG"/>
+         </ui:returnNavigation>
+      </oa:pageLayout>
+   </content>
+</page>

@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="xxqp.oracle.apps.ar.pdft.poplist.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="BpoElMensajeroManejeVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.BpoElMensajeroManejeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="BpoFormaDePago"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.BpoFormaDePago"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="BpoHorarioDeTrabajoVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.BpoHorarioDeTrabajoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="BpoHorasVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.BpoHorasVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="BpoMinutosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.BpoMinutosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CicloDeFacturacionVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.CicloDeFacturacionVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CondicionesDePagoVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.CondicionesDePagoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="CPPVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.CPPVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="EmpresaQueFacturaVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.EmpresaQueFacturaVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="EstadoVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.EstadoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="GiroEmpresarialVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.GiroEmpresarialVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="LegalEntityVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.LegalEntityVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MetodoDePagoVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MetodoDePagoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MgrCatalogosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MgrCatalogosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MgrPdftUsuariosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MgrPdftUsuariosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MgrStatusCatalogosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MgrStatusCatalogosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypAcuseVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MypAcuseVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypDimensionesVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MypDimensionesVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypFormatoCierreVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MypFormatoCierreVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypOrdinarioVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MypOrdinarioVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypPeriodicidadVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MypPeriodicidadVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypPesoProductoVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MypPesoProductoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypPlazaPropietariaVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MypPlazaPropietariaVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypPoliticaDeEntregaVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MypPoliticaDeEntregaVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypSemiAcuseVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MypSemiAcuseVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypTipoCoberturaVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MypTipoCoberturaVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypTipoComisionVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MypTipoComisionVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypTipoEntregaVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MypTipoEntregaVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="MypTipoProductoVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MypTipoProductoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PlantillasUnidadesDeNegocioVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.PlantillasUnidadesDeNegocioVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="SiNoVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="StatusFichaTecnicaVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.StatusFichaTecnicaVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TerminosPagosVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.TerminosPagosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TipoAdministrativoVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.TipoAdministrativoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TipoComercialVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.TipoComercialVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TipoDePagoVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.TipoDePagoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TipoOperativoVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.TipoOperativoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="TiposReportesVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.TiposReportesVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="UnidadDeNegocioVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.UnidadDeNegocioVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="UsoDelCFDIVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.UsoDelCFDIVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

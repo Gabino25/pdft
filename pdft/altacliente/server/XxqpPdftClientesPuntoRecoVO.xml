@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftClientesPuntoRecoVO"
+   SelectList="XxqpPdftClientesPuntoRecoEO.ID, 
+       XxqpPdftClientesPuntoRecoEO.HEADER_ID, 
+       XxqpPdftClientesPuntoRecoEO.PRIM_ENTREGA_EN_QP, 
+       XxqpPdftClientesPuntoRecoEO.PRIM_NOMBRE, 
+       XxqpPdftClientesPuntoRecoEO.PRIM_CONTACTO, 
+       XxqpPdftClientesPuntoRecoEO.PRIM_DIRECCION, 
+       XxqpPdftClientesPuntoRecoEO.PRIM_DIA, 
+       XxqpPdftClientesPuntoRecoEO.PRIM_HORARIO, 
+       XxqpPdftClientesPuntoRecoEO.SEC_ENTREGA_EN_QP, 
+       XxqpPdftClientesPuntoRecoEO.SEC_NOMBRE, 
+       XxqpPdftClientesPuntoRecoEO.SEC_CONTACTO, 
+       XxqpPdftClientesPuntoRecoEO.SEC_DIRECCION, 
+       XxqpPdftClientesPuntoRecoEO.SEC_DIA, 
+       XxqpPdftClientesPuntoRecoEO.SEC_HORARIO, 
+       XxqpPdftClientesPuntoRecoEO.CREATED_BY, 
+       XxqpPdftClientesPuntoRecoEO.CREATION_DATE, 
+       XxqpPdftClientesPuntoRecoEO.LAST_UPDATED_BY, 
+       XxqpPdftClientesPuntoRecoEO.LAST_UPDATE_DATE, 
+       XxqpPdftClientesPuntoRecoEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftClientesPuntoRecoEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftClientesPuntoRecoEO.ATTRIBUTE1, 
+       XxqpPdftClientesPuntoRecoEO.ATTRIBUTE2, 
+       XxqpPdftClientesPuntoRecoEO.ATTRIBUTE3, 
+       XxqpPdftClientesPuntoRecoEO.ATTRIBUTE4, 
+       XxqpPdftClientesPuntoRecoEO.ATTRIBUTE5"
+   FromList="XXQP_PDFT_CLIENTES_PUNTO_RECO XxqpPdftClientesPuntoRecoEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesPuntoRecoVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesPuntoRecoVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftClientesPuntoRecoEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesPuntoRecoEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HeaderId"
+      EntityAttrName="HeaderId"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimEntregaEnQp"
+      EntityAttrName="PrimEntregaEnQp"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="PRIM_ENTREGA_EN_QP" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimNombre"
+      EntityAttrName="PrimNombre"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="PRIM_NOMBRE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimContacto"
+      EntityAttrName="PrimContacto"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="PRIM_CONTACTO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimDireccion"
+      EntityAttrName="PrimDireccion"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="PRIM_DIRECCION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimDia"
+      EntityAttrName="PrimDia"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="PRIM_DIA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimHorario"
+      EntityAttrName="PrimHorario"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="PRIM_HORARIO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecEntregaEnQp"
+      EntityAttrName="SecEntregaEnQp"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="SEC_ENTREGA_EN_QP" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecNombre"
+      EntityAttrName="SecNombre"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="SEC_NOMBRE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecContacto"
+      EntityAttrName="SecContacto"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="SEC_CONTACTO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecDireccion"
+      EntityAttrName="SecDireccion"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="SEC_DIRECCION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecDia"
+      EntityAttrName="SecDia"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="SEC_DIA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecHorario"
+      EntityAttrName="SecHorario"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="SEC_HORARIO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftClientesPuntoRecoEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+</ViewObject>

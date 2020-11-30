@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftUsuariosRoVO"
+   SelectList="XxqpPdftUsuariosRoEO.ID, 
+       XxqpPdftUsuariosRoEO.USUARIO, 
+       XxqpPdftUsuariosRoEO.PASSWORD, 
+       XxqpPdftUsuariosRoEO.REV, 
+       XxqpPdftUsuariosRoEO.STATUS, 
+       XxqpPdftUsuariosRoEO.CREATED_BY, 
+       XxqpPdftUsuariosRoEO.CREATION_DATE, 
+       XxqpPdftUsuariosRoEO.LAST_UPDATED_BY, 
+       XxqpPdftUsuariosRoEO.LAST_UPDATE_DATE, 
+       XxqpPdftUsuariosRoEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftUsuariosRoEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftUsuariosRoEO.ATTRIBUTE1, 
+       XxqpPdftUsuariosRoEO.ATTRIBUTE2, 
+       XxqpPdftUsuariosRoEO.ATTRIBUTE3, 
+       XxqpPdftUsuariosRoEO.ATTRIBUTE4, 
+       XxqpPdftUsuariosRoEO.ATTRIBUTE5, 
+       XxqpPdftUsuariosRoEO.ROWID"
+   FromList="XXQP_PDFT_USUARIOS_RO XxqpPdftUsuariosRoEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.server.XxqpPdftUsuariosRoVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.server.XxqpPdftUsuariosRoVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftUsuariosRoEO"
+      Entity="xxqp.oracle.apps.ar.pdft.schema.server.XxqpPdftUsuariosRoEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Usuario"
+      EntityAttrName="Usuario"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="USUARIO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Password"
+      EntityAttrName="Password"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="PASSWORD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rev"
+      EntityAttrName="Rev"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="REV" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RowID"
+      IsUpdateable="false"
+      EntityAttrName="RowID"
+      EntityUsage="XxqpPdftUsuariosRoEO"
+      AliasName="ROWID" >
+   </ViewAttribute>
+</ViewObject>

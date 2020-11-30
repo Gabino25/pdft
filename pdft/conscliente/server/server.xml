@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="xxqp.oracle.apps.ar.pdft.conscliente.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="ClientesInfoVO"
+      FullName="xxqp.oracle.apps.ar.pdft.conscliente.server.ClientesInfoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="ConsultaDeClienteAM"
+      FullName="xxqp.oracle.apps.ar.pdft.conscliente.server.ConsultaDeClienteAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="EstadoVO"
+      FullName="xxqp.oracle.apps.ar.pdft.conscliente.server.EstadoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="NombreDelClienteVO"
+      FullName="xxqp.oracle.apps.ar.pdft.conscliente.server.NombreDelClienteVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RazonSocialVO"
+      FullName="xxqp.oracle.apps.ar.pdft.conscliente.server.RazonSocialVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RfcVO"
+      FullName="xxqp.oracle.apps.ar.pdft.conscliente.server.RfcVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

@@ -1,0 +1,597 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+
+<Entity
+   Name="XxqpPdftClientesFactPagEO"
+   DBObjectType="table"
+   DBObjectName="XXQP_PDFT_CLIENTES_FACT_PAG"
+   AliasName="XxqpPdftClientesFactPagEO"
+   BindingStyle="OracleName"
+   UseGlueCode="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEOImpl"
+   DefClass="oracle.apps.fnd.framework.server.OAEntityDefImpl"
+   CollClass="oracle.apps.fnd.framework.server.OAEntityCache" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <AttrArray Name="_publishEvents">
+      </AttrArray>
+      <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|Val" />
+   </DesignTime>
+   <Attribute
+      Name="Id"
+      ColumnName="ID"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG"
+      PrimaryKey="true" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="HeaderId"
+      ColumnName="HEADER_ID"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CondicionesDePagoC"
+      Precision="50"
+      ColumnName="CONDICIONES_DE_PAGO_C"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="50" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Observaciones"
+      Precision="200"
+      ColumnName="OBSERVACIONES"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="200" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="TipoDePagoC"
+      Precision="50"
+      ColumnName="TIPO_DE_PAGO_C"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="50" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="RequiereAdendasC"
+      Precision="20"
+      ColumnName="REQUIERE_ADENDAS_C"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="RequiereFacturaC"
+      Precision="20"
+      ColumnName="REQUIERE_FACTURA_C"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Motivo"
+      Precision="150"
+      ColumnName="MOTIVO"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CicloDeFacturacionC"
+      Precision="250"
+      ColumnName="CICLO_DE_FACTURACION_C"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="UsoDelCfdiC"
+      Precision="250"
+      ColumnName="USO_DEL_CFDI_C"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="MetodoDePagoC"
+      Precision="50"
+      ColumnName="METODO_DE_PAGO_C"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="50" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NumeroDeCuenta"
+      Precision="11"
+      ColumnName="NUMERO_DE_CUENTA"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NombreDelBanco"
+      Precision="35"
+      ColumnName="NOMBRE_DEL_BANCO"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="35" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="DiasNatDeCredito"
+      Precision="35"
+      ColumnName="DIAS_NAT_DE_CREDITO"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="35" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="DiasRecepcionFactur"
+      Precision="35"
+      ColumnName="DIAS_RECEPCION_FACTUR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="35" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="UtilizaPortalC"
+      Precision="20"
+      ColumnName="UTILIZA_PORTAL_C"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PortalLink"
+      Precision="200"
+      ColumnName="PORTAL_LINK"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="200" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="OrdenDeCompraC"
+      Precision="20"
+      ColumnName="ORDEN_DE_COMPRA_C"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ContratoC"
+      Precision="20"
+      ColumnName="CONTRATO_C"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="VigenciaContrato"
+      Precision="30"
+      ColumnName="VIGENCIA_CONTRATO"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      ColumnName="CREATED_BY"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreationDate"
+      IsNotNull="true"
+      ColumnName="CREATION_DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      SQLType="DATE"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      ColumnName="LAST_UPDATED_BY"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      ColumnName="LAST_UPDATE_DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      SQLType="DATE"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LastUpdateLogin"
+      Precision="15"
+      Scale="0"
+      ColumnName="LAST_UPDATE_LOGIN"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="AttributeCategory"
+      Precision="250"
+      ColumnName="ATTRIBUTE_CATEGORY"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute1"
+      Precision="2000"
+      ColumnName="ATTRIBUTE1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute2"
+      Precision="2000"
+      ColumnName="ATTRIBUTE2"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute3"
+      Precision="2000"
+      ColumnName="ATTRIBUTE3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute4"
+      Precision="2000"
+      ColumnName="ATTRIBUTE4"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute5"
+      Precision="2000"
+      ColumnName="ATTRIBUTE5"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Domingo"
+      Precision="20"
+      ColumnName="DOMINGO"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Jueves"
+      Precision="20"
+      ColumnName="JUEVES"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Lunes"
+      Precision="20"
+      ColumnName="LUNES"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Martes"
+      Precision="20"
+      ColumnName="MARTES"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Miercoles"
+      Precision="20"
+      ColumnName="MIERCOLES"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Sabado"
+      Precision="20"
+      ColumnName="SABADO"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Viernes"
+      Precision="20"
+      ColumnName="VIERNES"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <AccessorAttribute
+      Name="XxqpPdftClientesHeaderEO"
+      Association="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagFkAssoc"
+      AssociationEnd="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagFkAssoc.XxqpPdftClientesHeaderEO"
+      AssociationOtherEnd="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagFkAssoc.XxqpPdftClientesFactPagEO"
+      Type="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEOImpl" >
+   </AccessorAttribute>
+   <Key
+      Name="SysC001446579" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO.CreatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001446579" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001446580" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO.CreationDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATION_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001446580" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001446581" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO.LastUpdatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001446581" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001446582" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO.LastUpdateDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001446582" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001455763" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO.CreatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001455763" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001455764" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO.CreationDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATION_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001455764" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001455765" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO.LastUpdatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001455765" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001455766" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO.LastUpdateDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001455766" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="XxqppdftclientesfactpageoPrimaryKey" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO.Id" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_isPrimary" Value="true" />
+         <Attr Name="_DBObjectName" Value="XXQPPDFTCLIENTESFACTPAGEO_PRIM" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="XxqpPdftClientesFactPagFk" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO.HeaderId" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="PDFT_CLIENTES_HEADER_ID_PK" />
+         <Attr Name="_isForeign" Value="true" />
+         <Attr Name="_DBObjectName" Value="XXQP_PDFT_CLIENTES_FACT_PAG_FK" />
+      </DesignTime>
+   </Key>
+</Entity>

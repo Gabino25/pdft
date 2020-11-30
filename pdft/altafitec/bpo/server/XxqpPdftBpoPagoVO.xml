@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftBpoPagoVO"
+   SelectList="XxqpPdftBpoPagoEO.ID, 
+       XxqpPdftBpoPagoEO.BPO_HEADER_ID, 
+       XxqpPdftBpoPagoEO.EJECUTIVO_DE_VENTAS, 
+       XxqpPdftBpoPagoEO.PLAZA, 
+       XxqpPdftBpoPagoEO.SUBTOTAL, 
+       XxqpPdftBpoPagoEO.IVA, 
+       XxqpPdftBpoPagoEO.TOTAL, 
+       XxqpPdftBpoPagoEO.FORMA_DE_PAGO_C, 
+       XxqpPdftBpoPagoEO.DIA_DE_PAGO, 
+       XxqpPdftBpoPagoEO.CREATED_BY, 
+       XxqpPdftBpoPagoEO.CREATION_DATE, 
+       XxqpPdftBpoPagoEO.LAST_UPDATED_BY, 
+       XxqpPdftBpoPagoEO.LAST_UPDATE_DATE, 
+       XxqpPdftBpoPagoEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftBpoPagoEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftBpoPagoEO.ATTRIBUTE1, 
+       XxqpPdftBpoPagoEO.ATTRIBUTE2, 
+       XxqpPdftBpoPagoEO.ATTRIBUTE3, 
+       XxqpPdftBpoPagoEO.ATTRIBUTE4, 
+       XxqpPdftBpoPagoEO.ATTRIBUTE5"
+   FromList="XXQP_PDFT_BPO_PAGO XxqpPdftBpoPagoEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoPagoVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoPagoVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftBpoPagoEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoPagoEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      IsNotNull="true"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BpoHeaderId"
+      EntityAttrName="BpoHeaderId"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="BPO_HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EjecutivoDeVentas"
+      EntityAttrName="EjecutivoDeVentas"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="EJECUTIVO_DE_VENTAS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Plaza"
+      EntityAttrName="Plaza"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="PLAZA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Subtotal"
+      EntityAttrName="Subtotal"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="SUBTOTAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Iva"
+      EntityAttrName="Iva"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="IVA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Total"
+      EntityAttrName="Total"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="TOTAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FormaDePagoC"
+      EntityAttrName="FormaDePagoC"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="FORMA_DE_PAGO_C" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DiaDePago"
+      EntityAttrName="DiaDePago"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="DIA_DE_PAGO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftBpoPagoEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+</ViewObject>

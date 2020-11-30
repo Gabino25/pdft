@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="XxqpPdftDistribucionVO"
+   SelectList="XxqpPdftDistribucionEO.ID, 
+       XxqpPdftDistribucionEO.RESPONSABILIDAD, 
+       XxqpPdftDistribucionEO.USUARIO, 
+       XxqpPdftDistribucionEO.AREA, 
+       XxqpPdftDistribucionEO.CORREO, 
+       XxqpPdftDistribucionEO.IS_ENABLED, 
+       XxqpPdftDistribucionEO.CREATED_BY, 
+       XxqpPdftDistribucionEO.CREATION_DATE, 
+       XxqpPdftDistribucionEO.LAST_UPDATED_BY, 
+       XxqpPdftDistribucionEO.LAST_UPDATE_DATE, 
+       XxqpPdftDistribucionEO.LAST_UPDATE_LOGIN, 
+       XxqpPdftDistribucionEO.ATTRIBUTE_CATEGORY, 
+       XxqpPdftDistribucionEO.ATTRIBUTE1, 
+       XxqpPdftDistribucionEO.ATTRIBUTE2, 
+       XxqpPdftDistribucionEO.ATTRIBUTE3, 
+       XxqpPdftDistribucionEO.ATTRIBUTE4, 
+       XxqpPdftDistribucionEO.ATTRIBUTE5, 
+       XxqpPdftDistribucionEO.ROWID"
+   FromList="XXQP_PDFT_DISTRIBUCION XxqpPdftDistribucionEO"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   RowClass="xxqp.oracle.apps.ar.pdft.altafitec.mgr.server.XxqpPdftDistribucionVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.mgr.server.XxqpPdftDistribucionVOImpl"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="XxqpPdftDistribucionEO"
+      Entity="xxqp.oracle.apps.ar.pdft.altafitec.mgr.schema.server.XxqpPdftDistribucionEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Id"
+      EntityAttrName="Id"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Responsabilidad"
+      EntityAttrName="Responsabilidad"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="RESPONSABILIDAD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Usuario"
+      EntityAttrName="Usuario"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="USUARIO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Area"
+      EntityAttrName="Area"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="AREA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Correo"
+      EntityAttrName="Correo"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="CORREO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsEnabled"
+      EntityAttrName="IsEnabled"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="IS_ENABLED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      IsNotNull="true"
+      EntityAttrName="CreationDate"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      IsNotNull="true"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      IsNotNull="true"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AttributeCategory"
+      EntityAttrName="AttributeCategory"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="ATTRIBUTE_CATEGORY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RowID"
+      IsUpdateable="false"
+      EntityAttrName="RowID"
+      EntityUsage="XxqpPdftDistribucionEO"
+      AliasName="ROWID" >
+   </ViewAttribute>
+</ViewObject>

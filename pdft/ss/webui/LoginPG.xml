@@ -1,0 +1,53 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="xxqp.oracle.apps.ar.pdft.ss.server.SsAM" scope="/" windowTitle="Conexion" title="Conexion" controllerClass="xxqp.oracle.apps.ar.pdft.ss.webui.LoginCO" rendered="${oa.FunctionSecurity.XXQP_PDFT_SS_LOGIN_F}" securityMode="selfSecured">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:tableLayout id="TableLayout" hAlign="center">
+               <ui:contents>
+                  <oa:rowLayout id="region7">
+                     <ui:contents>
+                        <oa:cellFormat id="region9">
+                           <ui:contents>
+                              <oa:tableLayout id="region11" hAlign="center">
+                                 <ui:contents>
+                                    <oa:messageTextInput id="Usuario" required="yes" prompt="Usuario"/>
+                                    <oa:rowLayout id="region1">
+                                       <ui:contents>
+                                          <oa:cellFormat id="region4" height="10"/>
+                                       </ui:contents>
+                                    </oa:rowLayout>
+                                    <oa:messageTextInput id="Contrasenia" required="yes" secret="true" prompt="Contrasenia"/>
+                                 </ui:contents>
+                              </oa:tableLayout>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+                  <oa:rowLayout id="region2">
+                     <ui:contents>
+                        <oa:cellFormat id="region5" height="10"/>
+                     </ui:contents>
+                  </oa:rowLayout>
+                  <oa:rowLayout id="region3">
+                     <ui:contents>
+                        <oa:cellFormat id="region6" hAlign="center">
+                           <ui:contents>
+                              <oa:button id="IniciarSesion" text="Iniciar Sesion" prompt="Iniciar Sesion" hAlign="center">
+                                 <ui:primaryClientAction>
+                                    <ui:fireAction event="IniciarSesionEvt" id="fireAction1"/>
+                                 </ui:primaryClientAction>
+                              </oa:button>
+                           </ui:contents>
+                        </oa:cellFormat>
+                     </ui:contents>
+                  </oa:rowLayout>
+               </ui:contents>
+            </oa:tableLayout>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>

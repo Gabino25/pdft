@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="BpoAM"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.BpoAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="XxqpPdftBpoHeaderVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoHeaderVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PrecioTmpVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.PrecioTmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftBpoPrecioVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoPrecioVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftBpoServicioVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoServicioVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftBpoRequeAdicioAdquVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoRequeAdicioAdquVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftBpoRequeAdicioGyCVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoRequeAdicioGyCVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftBpoRequeAdicioOperVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoRequeAdicioOperVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftBpoRequeAdicioVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoRequeAdicioVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftBpoPagoVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoPagoVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="BpoHeaderTmpVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.BpoHeaderTmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="MtlSystemItemsBLOV1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.MtlSystemItemsBLOV" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ReglasDeNegocioTmpVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.ReglasDeNegocioTmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftBpoRegNegVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoRegNegVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftBpoEstadosVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoEstadosVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="XxqpPdftBpoConceptosVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.XxqpPdftBpoConceptosVO" >
+   </ViewUsage>
+</AppModule>
