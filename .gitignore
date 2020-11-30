@@ -26,6 +26,6 @@ hs_err_pid*
 #/pdft/altafitec/bpo/server/BpoAMImpl.java
 #/pdft/altafitec/masiplat/server/MasivoYPlatinumAMImpl.java
 #/pdft/altafitec/masiplat/webui/TestDeliveryManager.java
-/pdft/altafitec/masiplat/webui/TestSendMail.java
+#/pdft/altafitec/masiplat/webui/TestSendMail.java
 /pdft/altafitec/qplabs/server/QpLabsAMImpl.java
 /pdft/altafitec/server/AltaFichaTecnicaAMImpl.java
