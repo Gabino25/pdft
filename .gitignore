@@ -23,7 +23,7 @@
 hs_err_pid*
 
 #/pdft/altacliente/CreationClientsAlert.java
-/pdft/altafitec/bpo/server/BpoAMImpl.java
+#/pdft/altafitec/bpo/server/BpoAMImpl.java
 /pdft/altafitec/masiplat/server/MasivoYPlatinumAMImpl.java
 /pdft/altafitec/masiplat/webui/TestDeliveryManager.java
 /pdft/altafitec/masiplat/webui/TestSendMail.java
