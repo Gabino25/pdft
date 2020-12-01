@@ -203,7 +203,8 @@ public class BpoReOnCO extends OAControllerImpl
           if(null!=EnviarPorCorreoBtnBean)
           EnviarPorCorreoBtnBean.setRendered(false);
           if(null!=RevisarPDFBtnBean)
-          RevisarPDFBtnBean.setRendered(false);
+          /** RevisarPDFBtnBean.setRendered(false);  011220201018**/
+           RevisarPDFBtnBean.setRendered(true);
           if(null!=returnNavigation)
               returnNavigation.setDestination("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/ss/webui/ConsultaFichaTecnicaPG");
       } 
