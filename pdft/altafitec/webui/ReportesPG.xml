@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
    <content>
-      <oa:pageLayout id="PageLayoutRN" amDefName="xxqp.oracle.apps.ar.pdft.altafitec.server.AltaFichaTecnicaAM" windowTitle="Reportes" title="Reportes" controllerClass="xxqp.oracle.apps.ar.pdft.altafitec.webui.ReportesCO">
+      <oa:pageLayout id="PageLayoutRN" amDefName="xxqp.oracle.apps.ar.pdft.altafitec.server.AltaFichaTecnicaAM" windowTitle="Reportes" title="Reportes" controllerClass="xxqp.oracle.apps.ar.pdft.altafitec.webui.ReportesCO" rendered="${oa.FunctionSecurity.XXQP_PDFT_SS_REPORTES_F}">
          <ui:corporateBranding>
             <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
          </ui:corporateBranding>

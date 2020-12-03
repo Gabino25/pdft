@@ -67,6 +67,9 @@ public class ReportesCO extends OAControllerImpl
        if(null!=oALinkBean){
            oALinkBean.setDestination("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/ss/webui/PortalPG");
        }
+       if(null!=NombreUsuarioEBSBean){
+           NombreUsuarioEBSBean.setRendered(false);
+       }
       }
   }
 
