@@ -85,14 +85,15 @@ public class AltaDeClienteUpdCO extends OAControllerImpl
           altaDeClienteAMImpl.initClientesPuntoRecolecReOnVO(strClientesHeaderId);
           altaDeClienteAMImpl.initClientesContactosReOnVO(strClientesHeaderId);
           altaDeClienteAMImpl.initClientesFactPagoReOnVO(strClientesHeaderId);
+          String strEmpresaQueFacturaValue = null; 
+          strEmpresaQueFacturaValue = ""+xxqpPdftClientesHeaderVORowImpl.getEmpresaQueFacturaC();  
+          System.out.println("strEmpresaQueFacturaValue:"+strEmpresaQueFacturaValue);
+          altaDeClienteAMImpl.initLegalEntityVO(strEmpresaQueFacturaValue);
       }else{
       
       }
       
-      String strEmpresaQueFacturaValue = null; 
-      strEmpresaQueFacturaValue = ""+xxqpPdftClientesHeaderVORowImpl.getEmpresaQueFacturaC();  
-      System.out.println("strEmpresaQueFacturaValue:"+strEmpresaQueFacturaValue);
-      altaDeClienteAMImpl.initLegalEntityVO(strEmpresaQueFacturaValue);
+      
       
       
   }

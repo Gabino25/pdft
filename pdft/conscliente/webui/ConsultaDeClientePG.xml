@@ -24,6 +24,7 @@
                                           <lovMap id="lovMap31" lovItem="RazonSocial" resultTo="RazonSocial" criteriaFrom="RazonSocial"/>
                                        </lovMappings>
                                     </oa:messageLovInput>
+                                    <oa:messageChoice id="OperatingUnit" pickListViewDef="xxqp.oracle.apps.ar.pdft.altacliente.server.OperatingUnitVO" pickListValAttr="OrgId" pickListDispAttr="OuName" prompt="Unidad Operativa" readOnly="false" pickListViewName="" required="yes"/>
                                  </ui:contents>
                               </oa:tableLayout>
                            </ui:contents>

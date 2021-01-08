@@ -64,6 +64,7 @@ public class AltaDeClienteReadOnlyCO extends OAControllerImpl
     
     String strClientesHeaderId =  pageContext.getParameter("pClientesHeaderId"); 
     String strClienteExtern =  pageContext.getParameter("pClienteExtern");  
+    String strOperatingUnit =  pageContext.getParameter("pOperatingUnit");  
       
     if(null==strClientesHeaderId||"".equals(strClientesHeaderId)){
       if(null!=HeaderTabLayBean)

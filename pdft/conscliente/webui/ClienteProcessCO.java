@@ -21,22 +21,30 @@ public class ClienteProcessCO extends OAControllerImpl {
       super.processFormRequest(pageContext, webBean);
       
        String strPdftClientesHeaderID = pageContext.getParameter("pPdftClientesHeaderId");
+       String strOperatingUnit = pageContext.getParameter("pOperatingUnit");
        System.out.println("strPdftClientesHeaderID:"+strPdftClientesHeaderID);
-        String strPartyId = null;
-        String strClienteExtern = null; 
+       System.out.println("strOperatingUnit:"+strOperatingUnit);
+        
+       String strPartyId = null;
+       String strClienteExtern = null; 
        if(null!=pageContext.getSessionValue("sPartyId")){
         strPartyId = (String)pageContext.getSessionValue("sPartyId");
        }
         if(null!=pageContext.getSessionValue("sClienteExtern")){
          strClienteExtern = (String)pageContext.getSessionValue("sClienteExtern");
         }
-       System.out.println("strPartyId:"+strPartyId);
+        if(null!=pageContext.getSessionValue("sOperatingUnit")){
+            strOperatingUnit = (String)pageContext.getSessionValue("sOperatingUnit");
+        }
+        System.out.println("strPartyId:"+strPartyId);
         System.out.println("strClienteExtern:"+strClienteExtern);
+        System.out.println("strOperatingUnit:"+strOperatingUnit);
         pageContext.writeDiagnostics(this,"strPartyId:"+strPartyId,OAFwkConstants.STATEMENT);
         pageContext.writeDiagnostics(this,"strClienteExtern:"+strClienteExtern,OAFwkConstants.STATEMENT);
+        pageContext.writeDiagnostics(this,"strOperatingUnit:"+strOperatingUnit,OAFwkConstants.STATEMENT);
         
         ConsultaDeClienteAMImpl  consultaDeClienteAMImpl = (ConsultaDeClienteAMImpl)pageContext.getApplicationModule(webBean);
-        strPdftClientesHeaderID = consultaDeClienteAMImpl.callFromOracleToPdft(strPartyId);
+        strPdftClientesHeaderID = consultaDeClienteAMImpl.callFromOracleToPdft(strPartyId,strOperatingUnit);
         System.out.println("strPdftClientesHeaderID:"+strPdftClientesHeaderID);
         com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
         parameters.put("pClientesHeaderId",strPdftClientesHeaderID);

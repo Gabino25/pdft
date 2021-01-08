@@ -122,14 +122,31 @@ public class ConsultaDeClienteCO extends OAControllerImpl
     
     String strEventParam = pageContext.getParameter(this.EVENT_PARAM);
     System.out.println("strEventParam:"+strEventParam);
-    
+    String strOperatingUnit = pageContext.getParameter("OperatingUnit");
+    System.out.println("strOperatingUnit:"+strOperatingUnit);
+      
     if("BuscarEvt".equals(strEventParam)){
     if(null!=consultaDeClienteAM){
-      consultaDeClienteAM.filterClientesInfoVO(strNombreDelCliente
-                                              ,strRFC
-                                              ,strRazonSocial
-                                              ,strEstado
-                                              ); 
+        
+      String getval[] = consultaDeClienteAM.validaClientesInfo(strNombreDelCliente
+                                            ,strRFC
+                                            ,strRazonSocial
+                                            ,strEstado
+                                            ,strOperatingUnit
+                                              );
+      if("2".equals(getval[1])){
+          consultaDeClienteAM.cleanClientesInfoVO();
+        throw new OAException(getval[0],OAException.ERROR);
+      }else{
+          consultaDeClienteAM.filterClientesInfoVO(strNombreDelCliente
+                                                  ,strRFC
+                                                  ,strRazonSocial
+                                                  ,strEstado
+                                                  ); 
+          throw new OAException(getval[0],OAException.INFORMATION);
+      }
+        
+      
     }
     } /** END if("BuscarEvt".equals(strEventParam)){ **/
     
@@ -169,16 +186,32 @@ public class ConsultaDeClienteCO extends OAControllerImpl
     if("KnownAsLinkEvt".equals(strEventParam)){
         String strPdftClientesHeaderID = pageContext.getParameter("pPdftClientesHeaderId");
         String strPartyId = pageContext.getParameter("pPartyId");
+       
         System.out.println("strPdftClientesHeaderID:"+strPdftClientesHeaderID);
         System.out.println("strPartyId:"+strPartyId);
+       
         pageContext.putSessionValue("sPartyId",strPartyId);
+        pageContext.putSessionValue("sOperatingUnit",strOperatingUnit);
+        
         if(null!=strFvClienteExtern){
         pageContext.putSessionValue("sClienteExtern",strFvClienteExtern);
         }
+        
+        OAProcessingPage oAProcessingPage =  new  OAProcessingPage("xxqp.oracle.apps.ar.pdft.conscliente.webui.ClienteProcessCO"); 
+        oAProcessingPage.setConciseMessage("Se recupera informacion del cliente"); 
+        oAProcessingPage.setDetailedMessage("Si ya existe el cliente en el portal se recupera la informacion, de no ser asi crea informacion en el portal"); 
+        oAProcessingPage.setProcessName("Interfaz Portal hacia Oracle AR"); 
+        pageContext.putParameter("pPdftClientesHeaderId",strPdftClientesHeaderID);
+        pageContext.putParameter("pOperatingUnit",strOperatingUnit);
+        oAProcessingPage.setRetainAMValue(true);
+        pageContext.forwardToProcessingPage(oAProcessingPage);  
+        
+        if("080120211110".equals("080120211111")){
         if(null!=strPdftClientesHeaderID&&!"".equals(strPdftClientesHeaderID)){
             com.sun.java.util.collections.HashMap parameters = new  com.sun.java.util.collections.HashMap();
             parameters.put("pClientesHeaderId",strPdftClientesHeaderID);
             parameters.put("pClienteExtern",strFvClienteExtern);
+            parameters.put("pOperatingUnit",strOperatingUnit);
             
             pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altacliente/webui/AltaDeClienteReadOnlyPG&"+OASubTabLayoutBean.OA_SELECTED_SUBTAB_IDX+"=0" /*url*/
                                       ,null /*functionName*/
@@ -191,13 +224,15 @@ public class ConsultaDeClienteCO extends OAControllerImpl
                                       );
         }else{
         
-        OAProcessingPage oAProcessingPage =  new  OAProcessingPage("xxqp.oracle.apps.ar.pdft.conscliente.webui.ClienteProcessCO"); 
+        oAProcessingPage =  new  OAProcessingPage("xxqp.oracle.apps.ar.pdft.conscliente.webui.ClienteProcessCO"); 
         oAProcessingPage.setConciseMessage("This is the concise processing page message."); 
         oAProcessingPage.setDetailedMessage("This is the detailed message which should explain what's happening."); 
         oAProcessingPage.setProcessName("<Process Name>"); 
         pageContext.putParameter("pPdftClientesHeaderId",strPdftClientesHeaderID);
+        pageContext.putParameter("pOperatingUnit",strOperatingUnit);
         oAProcessingPage.setRetainAMValue(true);
         pageContext.forwardToProcessingPage(oAProcessingPage);  
+        } /** END if(08010211106==08010211107){ **/
         
         } /** END if(null!=strPdftClientesHeaderID&&!"".equals(strPdftClientesHeaderID)){ **/ 
          
