@@ -1,0 +1,152 @@
+/* Formatted on 07/01/2021 11:49:01 a.m. (QP5 v5.149.1003.31008) */
+CREATE OR REPLACE VIEW  XXQP_ArBusPurAllVO AS
+SELECT *
+  FROM (SELECT ArBusPurAllEO.ROW_ID,
+               ArBusPurAllEO.SITE_USE_ID,
+               ArBusPurAllEO.LAST_UPDATE_DATE,
+               ArBusPurAllEO.OBJECT_VERSION,
+               ArBusPurAllEO.LAST_UPDATED_BY,
+               ArBusPurAllEO.CREATION_DATE,
+               ArBusPurAllEO.CREATED_BY,
+               ArBusPurAllEO.SITE_USE_CODE,
+               ArBusPurAllEO.ADDRESS_ID,
+               ArBusPurAllEO.PRIMARY_FLAG,
+               ArBusPurAllEO.STATUS,
+               ArBusPurAllEO.LOCATION,
+               ArBusPurAllEO.LAST_UPDATE_LOGIN,
+               ArBusPurAllEO.CONTACT_ID,
+               ArBusPurAllEO.CONTACT_NAME,
+               ArBusPurAllEO.BILL_TO_SITE_USE_ID,
+               ArBusPurAllEO.BILL_TO_LOCATION,
+               ArBusPurAllEO.ORIG_SYSTEM_REFERENCE,
+               ArBusPurAllEO.SIC_CODE,
+               ArBusPurAllEO.PAYMENT_TERM_ID,
+               ArBusPurAllEO.PAYMENT_TERM_NAME,
+               ArBusPurAllEO.GSA_INDICATOR,
+               ArBusPurAllEO.SHIP_PARTIAL,
+               ArBusPurAllEO.SHIP_VIA,
+               ArBusPurAllEO.FOB_POINT,
+               ArBusPurAllEO.ORDER_TYPE_ID,
+               ArBusPurAllEO.ORDER_TYPE_NAME,
+               ArBusPurAllEO.PRICE_LIST_ID,
+               ArBusPurAllEO.PRICE_LIST_NAME,
+               ArBusPurAllEO.FREIGHT_TERM,
+               ArBusPurAllEO.WAREHOUSE_ID,
+               ArBusPurAllEO.WAREHOUSE_NAME,
+               ArBusPurAllEO.TERRITORY_ID,
+               ArBusPurAllEO.ATTRIBUTE_CATEGORY,
+               ArBusPurAllEO.ATTRIBUTE1,
+               ArBusPurAllEO.ATTRIBUTE2,
+               ArBusPurAllEO.ATTRIBUTE3,
+               ArBusPurAllEO.ATTRIBUTE4,
+               ArBusPurAllEO.ATTRIBUTE5,
+               ArBusPurAllEO.ATTRIBUTE6,
+               ArBusPurAllEO.ATTRIBUTE7,
+               ArBusPurAllEO.ATTRIBUTE8,
+               ArBusPurAllEO.ATTRIBUTE9,
+               ArBusPurAllEO.ATTRIBUTE10,
+               ArBusPurAllEO.ATTRIBUTE11,
+               ArBusPurAllEO.ATTRIBUTE12,
+               ArBusPurAllEO.ATTRIBUTE13,
+               ArBusPurAllEO.ATTRIBUTE14,
+               ArBusPurAllEO.ATTRIBUTE15,
+               ArBusPurAllEO.ATTRIBUTE16,
+               ArBusPurAllEO.ATTRIBUTE17,
+               ArBusPurAllEO.ATTRIBUTE18,
+               ArBusPurAllEO.ATTRIBUTE19,
+               ArBusPurAllEO.ATTRIBUTE20,
+               ArBusPurAllEO.ATTRIBUTE21,
+               ArBusPurAllEO.ATTRIBUTE22,
+               ArBusPurAllEO.ATTRIBUTE23,
+               ArBusPurAllEO.ATTRIBUTE24,
+               ArBusPurAllEO.ATTRIBUTE25,
+               ArBusPurAllEO.TAX_REFERENCE,
+               ArBusPurAllEO.TAX_CODE,
+               ArBusPurAllEO.DEMAND_CLASS_CODE,
+               ArBusPurAllEO.INVENTORY_LOCATION_ID,
+               ArBusPurAllEO.INVENTORY_LOCATION_CODE,
+               ArBusPurAllEO.INVENTORY_ORGANIZATION_ID,
+               ArBusPurAllEO.INVENTORY_ORGANIZATION_NAME,
+               ArBusPurAllEO.TAX_CLASSIFICATION,
+               ArBusPurAllEO.TAX_HEADER_LEVEL_FLAG,
+               ArBusPurAllEO.TAX_ROUNDING_RULE,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE_CATEGORY,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE1,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE2,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE3,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE4,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE5,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE6,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE7,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE8,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE9,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE10,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE11,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE12,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE13,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE14,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE15,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE16,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE17,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE18,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE19,
+               ArBusPurAllEO.GLOBAL_ATTRIBUTE20,
+               ArBusPurAllEO.PRIMARY_SALESREP_ID,
+               ArBusPurAllEO.PRIMARY_SALESREP_NAME,
+               ArBusPurAllEO.FINCHRG_RECEIVABLES_TRX_ID,
+               ArBusPurAllEO.FINCHRG_RECEIVABLES_TRX_NAME,
+               ArBusPurAllEO.GL_ID_REV,
+               ArBusPurAllEO.GL_ID_FREIGHT,
+               ArBusPurAllEO.GL_ID_REC,
+               ArBusPurAllEO.GL_ID_CLEARING,
+               ArBusPurAllEO.GL_ID_TAX,
+               ArBusPurAllEO.GL_ID_UNBILLED,
+               ArBusPurAllEO.GL_ID_UNEARNED,
+               ArBusPurAllEO.GL_ID_UNPAID_REC,
+               ArBusPurAllEO.GL_ID_REMITTANCE,
+               ArBusPurAllEO.GL_ID_FACTOR,
+               ArBusPurAllEO.DATES_NEGATIVE_TOLERANCE,
+               ArBusPurAllEO.DATES_POSITIVE_TOLERANCE,
+               ArBusPurAllEO.DATE_TYPE_PREFERENCE,
+               ArBusPurAllEO.OVER_SHIPMENT_TOLERANCE,
+               ArBusPurAllEO.UNDER_SHIPMENT_TOLERANCE,
+               ArBusPurAllEO.ITEM_CROSS_REF_PREF,
+               ArBusPurAllEO.OVER_RETURN_TOLERANCE,
+               ArBusPurAllEO.UNDER_RETURN_TOLERANCE,
+               ArBusPurAllEO.SHIP_SETS_INCLUDE_LINES_FLAG,
+               ArBusPurAllEO.ARRIVALSETS_INCLUDE_LINES_FLAG,
+               ArBusPurAllEO.SCHED_DATE_PUSH_FLAG,
+               ArBusPurAllEO.INVOICE_QUANTITY_RULE,
+               ArBusPurAllEO.PRICING_EVENT,
+               ArBusPurAllEO.ORG_ID,
+               AcctSites.CUST_ACCOUNT_ID,
+               (SELECT meaning
+                  FROM oe_ship_methods_v
+                 WHERE lookup_type = 'SHIP_METHOD'
+                       AND lookup_code = NVL (ArBusPurAllEO.SHIP_VIA, ''))
+                  SHIP_VIA_MEANING,
+               (SELECT meaning
+                  FROM oe_lookups
+                 WHERE lookup_type = 'REQUEST_DATE_TYPE'
+                       AND lookup_code =
+                              NVL (ArBusPurAllEO.DATE_TYPE_PREFERENCE, ''))
+                  DATE_TYPE_PREFERENCE_MEANING,
+               (SELECT meaning
+                  FROM ar_lookups
+                 WHERE lookup_type = 'FOB'
+                       AND lookup_code = NVL (ArBusPurAllEO.FOB_POINT, ''))
+                  FOB_POINT_MEANING,
+               (SELECT meaning
+                  FROM so_lookups
+                 WHERE lookup_type = 'FREIGHT_TERMS'
+                       AND lookup_code = NVL (ArBusPurAllEO.FREIGHT_TERM, ''))
+                  FREIGHT_TERM_MEANING,
+               (SELECT meaning
+                  FROM fnd_common_lookups
+                 WHERE lookup_type = 'DEMAND_CLASS'
+                       AND lookup_code =
+                              NVL (ArBusPurAllEO.DEMAND_CLASS_CODE, ''))
+                  DEMAND_CLASS_MEANING
+          FROM HZ_SITE_USES_V ArBusPurAllEO, HZ_CUST_ACCT_SITES_ALL AcctSites
+         WHERE ArBusPurAllEO.Address_id = AcctSites.cust_acct_site_id) QRSLT
+ 
