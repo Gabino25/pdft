@@ -142,6 +142,7 @@ public class ConsultaDeClienteCO extends OAControllerImpl
                                                   ,strRFC
                                                   ,strRazonSocial
                                                   ,strEstado
+                                                  ,strOperatingUnit
                                                   ); 
           throw new OAException(getval[0],OAException.INFORMATION);
       }

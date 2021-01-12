@@ -35,6 +35,7 @@
    </Attribute>
    <Attribute
       Name="NombreCliente"
+      IsUnique="true"
       Precision="250"
       ColumnName="NOMBRE_CLIENTE"
       Type="java.lang.String"
@@ -254,6 +255,19 @@
          <Attr Name="_DisplaySize" Value="2000" />
       </DesignTime>
    </Attribute>
+   <Attribute
+      Name="PartyId"
+      IsUnique="true"
+      IsNotNull="true"
+      ColumnName="PARTY_ID"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_CLIENTES_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
    <AccessorAttribute
       Name="XxqpPdftClientesDirFiscalEO"
       Association="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesDirFisFkAssoc"
@@ -338,6 +352,92 @@
          <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
          <Attr Name="_isCheck" Value="true" />
          <Attr Name="_DBObjectName" Value="SYS_C001446553" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669533" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEO.CreatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669533" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669534" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEO.CreationDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATION_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669534" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669535" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEO.LastUpdatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669535" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669536" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEO.LastUpdateDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669536" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001824779" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEO.PartyId" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;PARTY_ID&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001824779" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001824780" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEO.NombreCliente" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;NOMBRE_CLIENTE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001824780" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="XxqpPdftClientesHeaderU2" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEO.NombreCliente" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_isUnique" Value="true" />
+         <Attr Name="_DBObjectName" Value="XXQP_PDFT_CLIENTES_HEADER_U2" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="XxqpPdftClientesHeaderU3" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEO.PartyId" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_isUnique" Value="true" />
+         <Attr Name="_DBObjectName" Value="XXQP_PDFT_CLIENTES_HEADER_U3" />
       </DesignTime>
    </Key>
 </Entity>

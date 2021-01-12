@@ -21,7 +21,8 @@
        XxqpPdftClientesHeaderEO.ATTRIBUTE2, 
        XxqpPdftClientesHeaderEO.ATTRIBUTE3, 
        XxqpPdftClientesHeaderEO.ATTRIBUTE4, 
-       XxqpPdftClientesHeaderEO.ATTRIBUTE5"
+       XxqpPdftClientesHeaderEO.ATTRIBUTE5, 
+       XxqpPdftClientesHeaderEO.PARTY_ID"
    FromList="XXQP_PDFT_CLIENTES_HEADER XxqpPdftClientesHeaderEO"
    BindingStyle="OracleName"
    CustomQuery="false"
@@ -158,5 +159,13 @@
       EntityAttrName="Attribute5"
       EntityUsage="XxqpPdftClientesHeaderEO"
       AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PartyId"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="PartyId"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="PARTY_ID" >
    </ViewAttribute>
 </ViewObject>

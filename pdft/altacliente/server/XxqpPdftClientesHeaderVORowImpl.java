@@ -32,6 +32,7 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
     public static final int ATTRIBUTE3 = 16;
     public static final int ATTRIBUTE4 = 17;
     public static final int ATTRIBUTE5 = 18;
+    public static final int PARTYID = 19;
 
     /**This is the default constructor (do not remove)
      */
@@ -361,6 +362,8 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
             return getAttribute4();
         case ATTRIBUTE5:
             return getAttribute5();
+        case PARTYID:
+            return getPartyId();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -429,9 +432,24 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
         case ATTRIBUTE5:
             setAttribute5((String)value);
             return;
+        case PARTYID:
+            setPartyId((Number)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
         }
+    }
+
+    /**Gets the attribute value for PARTY_ID using the alias name PartyId
+     */
+    public Number getPartyId() {
+        return (Number) getAttributeInternal(PARTYID);
+    }
+
+    /**Sets <code>value</code> as attribute value for PARTY_ID using the alias name PartyId
+     */
+    public void setPartyId(Number value) {
+        setAttributeInternal(PARTYID, value);
     }
 }

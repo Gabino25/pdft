@@ -77,18 +77,22 @@ public class AltaDeClienteUpdCO extends OAControllerImpl
       
       
       String strClientesHeaderId =  pageContext.getParameter("pClientesHeaderId");  
-        
+      String strOperatingUnit =  pageContext.getParameter("pOperatingUnit"); 
+      System.out.println("strOperatingUnit:"+strOperatingUnit);
+      
       XxqpPdftClientesHeaderVORowImpl xxqpPdftClientesHeaderVORowImpl = null; 
       if(!pageContext.isFormSubmission()){
           xxqpPdftClientesHeaderVORowImpl = altaDeClienteAMImpl.initClientesHeaderReOnVO(strClientesHeaderId);
-          altaDeClienteAMImpl.initClientesDirFiscalReOnVO(strClientesHeaderId);
+          altaDeClienteAMImpl.initClientesDirFiscalReOnVO(strClientesHeaderId,strOperatingUnit);
           altaDeClienteAMImpl.initClientesPuntoRecolecReOnVO(strClientesHeaderId);
           altaDeClienteAMImpl.initClientesContactosReOnVO(strClientesHeaderId);
           altaDeClienteAMImpl.initClientesFactPagoReOnVO(strClientesHeaderId);
           String strEmpresaQueFacturaValue = null; 
           strEmpresaQueFacturaValue = ""+xxqpPdftClientesHeaderVORowImpl.getEmpresaQueFacturaC();  
           System.out.println("strEmpresaQueFacturaValue:"+strEmpresaQueFacturaValue);
+          /** 120120211243 se comenta porque no respeta la unidad operativa de las direcciones fiscales
           altaDeClienteAMImpl.initLegalEntityVO(strEmpresaQueFacturaValue);
+          **/
       }else{
       
       }
@@ -312,12 +316,9 @@ public class AltaDeClienteUpdCO extends OAControllerImpl
             altaDeClienteAMImpl.getOADBTransaction().commit();
             
             oracle.jbo.domain.Number numClienteHeaderId = (oracle.jbo.domain.Number)altaDeClienteAMImpl.getXxqpPdftClientesHeaderVO1().getCurrentRow().getAttribute("Id");
-            oracle.jbo.domain.Number numPartyId = null;
-            try {
-                numPartyId = new oracle.jbo.domain.Number(altaDeClienteAMImpl.getXxqpPdftClientesHeaderVO1().getCurrentRow().getAttribute("Attribute2"));
-            } catch (SQLException sqle) {
-                throw new OAException("SQLException  al obtener PartyId desde xxqp_pdft_clientes_header:"+sqle.getMessage(),OAException.ERROR); 
-            }
+            oracle.jbo.domain.Number numPartyId = (oracle.jbo.domain.Number)altaDeClienteAMImpl.getXxqpPdftClientesHeaderVO1().getCurrentRow().getAttribute("PartyId");
+            System.out.println("numClienteHeaderId:"+numClienteHeaderId);
+            System.out.println("numPartyId:"+numPartyId);
             altaDeClienteAMImpl.callUpdFromPdftToOracle(numPartyId,numClienteHeaderId); 
             
             com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();

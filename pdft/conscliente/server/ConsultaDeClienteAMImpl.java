@@ -67,7 +67,8 @@ public class ConsultaDeClienteAMImpl extends OAApplicationModuleImpl
   public void filterClientesInfoVO(String pStrNombreDelCliente
                                  , String pStrRFC
                                  , String pStrRazonSocial
-                                 , String pStrEstado)
+                                 , String pStrEstado
+                                 , String pOperatingUnit)
   {
     ClientesInfoVOImpl  clientesInfoVO =getClientesInfoVO1();
     if(null!=clientesInfoVO){
@@ -75,6 +76,7 @@ public class ConsultaDeClienteAMImpl extends OAApplicationModuleImpl
                                           ,pStrRFC
                                           ,pStrRazonSocial
                                           ,pStrEstado
+                                          ,pOperatingUnit
                                           );
     }
   }

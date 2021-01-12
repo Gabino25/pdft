@@ -9,46 +9,81 @@
    ComponentClass="xxqp.oracle.apps.ar.pdft.conscliente.server.ClientesInfoVOImpl"
    UseGlueCode="false" >
    <SQLQuery><![CDATA[
-SELECT xpciv.party_id,
-               xpciv.party_name,
-               xpciv.person_first_name,
-               xpciv.person_last_name,
-               xpciv.party_type,
-               xpciv.type_lookup,
-               xpciv.party_number,
-               xpciv.tax_reference,
-               xpciv.taxpayer_id,
-               xpciv.duns_number,
-               xpciv.known_as,
-               xpciv.known_as2,
-               xpciv.known_as3,
-               xpciv.known_as4,
-               xpciv.known_as5,
-               xpciv.organization_name_phonetic,
-               xpciv.person_first_name_phonetic,
-               xpciv.person_last_name_phonetic,
-               xpciv.location_id,
-               xpciv.country,
-               xpciv.primary_phone_contact_pt_id,
-               xpciv.primary_phone_country_code,
-               xpciv.primary_phone_area_code,
-               xpciv.primary_phone_number,
-               xpciv.primary_phone_line_type,
-               xpciv.primary_phone_extension,
-               xpciv.email,
-               xpciv.primary_url,
-               xpciv.certification_level_meaning,
-               xpciv.registry_meaning,
-               xpciv.party_status,
-               xpciv.CITY,
-               xpciv.JGZZ_FISCAL_CODE,
-               xpciv.RAZON_SOCIAL,
-               xpciv.STATE,
-               xpciv.attribute_category,
-               xpciv.attribute1,
-               xpciv.attribute2             
-         FROM XXQP_PDFT_CLIENTES_INFO_V xpciv
-         where xpciv.party_status = 'A'
+SELECT p.party_id,
+          p.party_name,
+          p.person_first_name,
+          p.person_last_name,
+          p.party_type,
+          partytype.meaning type_lookup,
+          p.party_number,
+          p.tax_reference,
+          NVL (p.attribute1, p.jgzz_fiscal_code) taxpayer_id,
+          p.duns_number_c duns_number,
+          NVL (p.party_name, p.known_as) known_as,
+          /** 24042020 buscar por razon social **/
+          p.known_as2,
+          p.known_as3,
+          p.known_as4,
+          p.known_as5,
+          p.organization_name_phonetic,
+          p.person_first_name_phonetic,
+          p.person_last_name_phonetic,
+          ps.location_id,
+          terr.territory_short_name country,
+          p.primary_phone_contact_pt_id,
+          p.primary_phone_country_code,
+          p.primary_phone_area_code,
+          p.primary_phone_number,
+          p.primary_phone_line_type,
+          p.primary_phone_extension,
+          p.email_address email,
+          p.url primary_url,
+          certification.meaning certification_level_meaning,
+          registrystatus.meaning registry_meaning,
+          p.status party_status,
+          hl.city,
+          NVL (cust.attribute1, p.jgzz_fiscal_code) jgzz_fiscal_code,
+          p.party_name razon_social,
+          hl.state,
+          p.attribute_category,
+          p.attribute1,
+          p.attribute2,
+          hcsua.org_id hcsua_org_id,
+          hcasa.org_id hcasa_org_id 
+     FROM hz_parties p,
+          hz_party_sites ps,
+          hz_locations hl,
+          fnd_territories_vl terr,
+          fnd_lookup_values partytype,
+          fnd_lookup_values certification,
+          fnd_lookup_values registrystatus,
+          hz_cust_accounts cust,
+          hz_cust_site_uses_all hcsua,
+          hz_cust_acct_sites_all hcasa
+    WHERE     1 = 1
+          /** and p.party_type IN ('PERSON', 'ORGANIZATION') **/
+          AND cust.party_id = p.party_id
+          AND registrystatus.lookup_code = p.status
+          AND ps.location_id = hl.location_id
+          AND ps.party_id(+) = p.party_id
+          AND ps.identifying_address_flag(+) = 'Y'
+          AND terr.territory_code(+) = p.country
+          AND partytype.view_application_id = 222                   /** AR **/
+          AND partytype.lookup_type = 'PARTY_TYPE'
+          AND partytype.LANGUAGE = USERENV ('LANG')
+          AND partytype.lookup_code = p.party_type
+          AND certification.view_application_id(+) = 222            /** AR **/
+          AND certification.lookup_type(+) = 'HZ_PARTY_CERT_LEVEL'
+          AND certification.LANGUAGE(+) = USERENV ('LANG')
+          AND certification.lookup_code(+) = p.certification_level
+          AND registrystatus.lookup_type = 'HZ_CPUI_REGISTRY_STATUS'
+          AND registrystatus.LANGUAGE = USERENV ('LANG')
+          AND cust.status = 'A'
+          AND p.status = 'A'          /** 15042020 Valida Clientes Activos **/
+          AND hcsua.site_use_code IN ('BILL_TO', 'SHIP_TO')
+           AND hcsua.cust_acct_site_id =  hcasa.cust_acct_site_id
+           AND hcasa.cust_account_id = cust.cust_account_id
+           and hcsua.primary_flag = 'Y'
    ]]></SQLQuery>
    <DesignTime>
       <Attr Name="_isCodegen" Value="true" />
@@ -592,6 +627,34 @@ SELECT xpciv.party_id,
       SQLType="VARCHAR" >
       <DesignTime>
          <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HcsuaOrgId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="HCSUA_ORG_ID"
+      Expression="HCSUA_ORG_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HcasaOrgId"
+      IsPersistent="false"
+      Precision="15"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="HCASA_ORG_ID"
+      Expression="HCASA_ORG_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
       </DesignTime>
    </ViewAttribute>
 </ViewObject>

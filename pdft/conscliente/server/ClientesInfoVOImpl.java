@@ -1,5 +1,7 @@
 package xxqp.oracle.apps.ar.pdft.conscliente.server;
 
+import java.sql.SQLException;
+
 import oracle.apps.fnd.framework.server.OAViewObjectImpl;
 
 import oracle.jbo.ViewCriteria;
@@ -19,7 +21,8 @@ public class ClientesInfoVOImpl extends OAViewObjectImpl {
   void filterConsultaCliente(String pStrNombreDelCliente
                            , String pStrRFC
                            , String pStrRazonSocial
-                           , String pStrEstado)
+                           , String pStrEstado
+                           , String pOperatingUnit)
   {
     if((null==pStrNombreDelCliente||"".equals(pStrNombreDelCliente))
     &&(null==pStrRFC||"".equals(pStrRFC))
@@ -45,6 +48,16 @@ public class ClientesInfoVOImpl extends OAViewObjectImpl {
     if(null!=pStrEstado&&!"".equals(pStrEstado)){
     vcr1.setAttribute("State",pStrEstado); 
     }
+    if(null!=pOperatingUnit&&!"".equals(pOperatingUnit)){
+       oracle.jbo.domain.Number numOperatingUnit = null;
+        try {
+            numOperatingUnit = new oracle.jbo.domain.Number(pOperatingUnit);
+        } catch (SQLException e) {
+          System.out.println("filterConsultaCliente:"+e);
+        }
+         vcr1.setAttribute("HcsuaOrgId",numOperatingUnit); 
+         vcr1.setAttribute("HcasaOrgId",numOperatingUnit); 
+     }
     /* 5. Add the view criteria rows to the view critera row set */
     vc.add(vcr1); 
     /* 6. Apply the view criteria to the view object */ 

@@ -83,7 +83,7 @@ public class AltaDeClienteReadOnlyCO extends OAControllerImpl
       XxqpPdftClientesFactPagVORowImpl xxqpPdftClientesFactPagVORowImpl = null; 
     if(!pageContext.isFormSubmission()){
         xxqpPdftClientesHeaderVORowImpl = altaDeClienteAMImpl.initClientesHeaderReOnVO(strClientesHeaderId);
-        xxqpPdftClientesDirFiscalVORowImpl = altaDeClienteAMImpl.initClientesDirFiscalReOnVO(strClientesHeaderId);
+        xxqpPdftClientesDirFiscalVORowImpl = altaDeClienteAMImpl.initClientesDirFiscalReOnVO(strClientesHeaderId,strOperatingUnit);
         xxqpPdftClientesPuntoRecoVORowImpl = altaDeClienteAMImpl.initClientesPuntoRecolecReOnVO(strClientesHeaderId);
         xxqpPdftClientesContactosVORowImpl = altaDeClienteAMImpl.initClientesContactosReOnVO(strClientesHeaderId);
         xxqpPdftClientesFactPagVORowImpl = altaDeClienteAMImpl.initClientesFactPagoReOnVO(strClientesHeaderId);
@@ -182,9 +182,12 @@ public class AltaDeClienteReadOnlyCO extends OAControllerImpl
     AltaDeClienteAMImpl altaDeClienteAMImpl = (AltaDeClienteAMImpl)pageContext.getApplicationModule(webBean);
       
     if("ModificarEvt".equals(strEventParam)){
-    oracle.jbo.domain.Number numClienteHeaderId = (oracle.jbo.domain.Number)altaDeClienteAMImpl.getXxqpPdftClientesHeaderVO1().getCurrentRow().getAttribute("Id");
+        oracle.jbo.domain.Number numClienteHeaderId = (oracle.jbo.domain.Number)altaDeClienteAMImpl.getXxqpPdftClientesHeaderVO1().getCurrentRow().getAttribute("Id");
+        String strPrimOperatingUnit  = (String)altaDeClienteAMImpl.getXxqpPdftClientesDirFiscalVO1().getCurrentRow().getAttribute("PrimOperatingUnit");
         com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
-        parameters.put("pClientesHeaderId",numClienteHeaderId.toString() );
+        parameters.put("pClientesHeaderId",numClienteHeaderId.toString());
+        parameters.put("pOperatingUnit",strPrimOperatingUnit);
+        System.out.println("strPrimOperatingUnit:"+strPrimOperatingUnit);
         pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altacliente/webui/AltaDeClienteUpdPG&"+OASubTabLayoutBean.OA_SELECTED_SUBTAB_IDX+"=0" /*url*/
                                   ,null /*functionName*/
                                   ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/

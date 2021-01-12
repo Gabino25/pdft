@@ -24,6 +24,13 @@ CREATE OR REPLACE package XXQP_PDFT_CLIENTES_FOTP_PKG is
  ,pno_clientes_header_id out number
  ); 
  
+ procedure upd_header(pso_errmsg out varchar2
+ ,pso_errcode out varchar2
+ ,pni_party_id in number
+ ,pni_operating_unit in number
+ ,pni_clientes_header_id in number
+ ); 
+ 
  procedure populate_sites( pso_errmsg out varchar2
  ,pso_errcode out varchar2
  ,pni_party_id in number
@@ -31,6 +38,29 @@ CREATE OR REPLACE package XXQP_PDFT_CLIENTES_FOTP_PKG is
  ,pni_clientes_header_id in number
  ,pno_dir_fiscal_id out number
  ); 
+ 
+ procedure populate_punto_rec( pso_errmsg out varchar2
+ ,pso_errcode out varchar2
+ ,pni_party_id in number
+ ,pni_operating_unit in number
+ ,pni_clientes_header_id in number
+ ,pno_punto_rec_id out number
+ ); 
+ 
+ procedure populate_contacts( pso_errmsg out varchar2
+ ,pso_errcode out varchar2
+ ,pni_party_id in number
+ ,pni_operating_unit in number
+ ,pni_clientes_header_id in number
+ );
+ 
+ procedure populate_fact_pag( pso_errmsg out varchar2
+ ,pso_errcode out varchar2
+ ,pni_party_id in number
+ ,pni_operating_unit in number
+ ,pni_clientes_header_id in number
+ ,pno_fact_pag_id out number
+ );
  
  procedure val_insert_mgr_catalogos( psi_lookup_type in varchar2
  ,psi_lookup_code in varchar2 ); 

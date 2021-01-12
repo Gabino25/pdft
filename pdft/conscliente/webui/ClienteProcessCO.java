@@ -49,6 +49,7 @@ public class ClienteProcessCO extends OAControllerImpl {
         com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
         parameters.put("pClientesHeaderId",strPdftClientesHeaderID);
         parameters.put("pClienteExtern",strClienteExtern);
+        parameters.put("pOperatingUnit",strOperatingUnit);
         pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altacliente/webui/AltaDeClienteReadOnlyPG&"+OASubTabLayoutBean.OA_SELECTED_SUBTAB_IDX+"=0" /*url*/
                                   ,null /*functionName*/
                                   ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/

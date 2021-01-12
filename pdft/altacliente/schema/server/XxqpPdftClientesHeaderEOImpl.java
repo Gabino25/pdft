@@ -35,10 +35,11 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
     public static final int ATTRIBUTE3 = 16;
     public static final int ATTRIBUTE4 = 17;
     public static final int ATTRIBUTE5 = 18;
-    public static final int XXQPPDFTCLIENTESDIRFISCALEO = 19;
-    public static final int XXQPPDFTCLIENTESPUNTORECOEO = 20;
-    public static final int XXQPPDFTCLIENTESCONTACTOSEO = 21;
-    public static final int XXQPPDFTCLIENTESFACTPAGEO = 22;
+    public static final int PARTYID = 19;
+    public static final int XXQPPDFTCLIENTESDIRFISCALEO = 20;
+    public static final int XXQPPDFTCLIENTESPUNTORECOEO = 21;
+    public static final int XXQPPDFTCLIENTESCONTACTOSEO = 22;
+    public static final int XXQPPDFTCLIENTESFACTPAGEO = 23;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -396,6 +397,8 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
             return getAttribute4();
         case ATTRIBUTE5:
             return getAttribute5();
+        case PARTYID:
+            return getPartyId();
         case XXQPPDFTCLIENTESCONTACTOSEO:
             return getXxqpPdftClientesContactosEO();
         case XXQPPDFTCLIENTESDIRFISCALEO:
@@ -472,6 +475,9 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
         case ATTRIBUTE5:
             setAttribute5((String)value);
             return;
+        case PARTYID:
+            setPartyId((Number)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -500,6 +506,18 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
      */
     public RowIterator getXxqpPdftClientesFactPagEO() {
         return (RowIterator)getAttributeInternal(XXQPPDFTCLIENTESFACTPAGEO);
+    }
+
+    /**Gets the attribute value for PartyId, using the alias name PartyId
+     */
+    public Number getPartyId() {
+        return (Number)getAttributeInternal(PARTYID);
+    }
+
+    /**Sets <code>value</code> as the attribute value for PartyId
+     */
+    public void setPartyId(Number value) {
+        setAttributeInternal(PARTYID, value);
     }
 
     /**Creates a Key object based on given key constituents

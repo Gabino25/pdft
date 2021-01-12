@@ -280,7 +280,8 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
         
     }
 
-    public XxqpPdftClientesDirFiscalVORowImpl initClientesDirFiscalReOnVO(String pStrClientesHeaderId) {
+    public XxqpPdftClientesDirFiscalVORowImpl initClientesDirFiscalReOnVO(String pStrClientesHeaderId
+                                                                         ,String pOperatingUnit) {
         XxqpPdftClientesDirFiscalVORowImpl  retval = null;
         oracle.jbo.domain.Number numClientesHeaderId=null;
         try {
@@ -290,7 +291,9 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
         }
         XxqpPdftClientesDirFiscalVOImpl xxqpPdftClientesDirFiscalVOImpl = getXxqpPdftClientesDirFiscalVO1(); 
         if(null!=xxqpPdftClientesDirFiscalVOImpl){
-            xxqpPdftClientesDirFiscalVOImpl.initByClienteHeaderId(numClientesHeaderId);
+            xxqpPdftClientesDirFiscalVOImpl.initByClienteHeaderId(numClientesHeaderId
+                                                                 ,pOperatingUnit
+                                                                 );
         }
        RowSetIterator ClientesDirFiscalIterator = xxqpPdftClientesDirFiscalVOImpl.createRowSetIterator(null);
        if(ClientesDirFiscalIterator.hasNext()){

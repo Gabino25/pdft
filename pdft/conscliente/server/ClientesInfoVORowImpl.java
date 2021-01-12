@@ -48,6 +48,8 @@ public class ClientesInfoVORowImpl extends OAViewRowImpl {
     public static final int ATTRIBUTECATEGORY = 35;
     public static final int ATTRIBUTE1 = 36;
     public static final int ATTRIBUTE2 = 37;
+    public static final int HCSUAORGID = 38;
+    public static final int HCASAORGID = 39;
 
     /**This is the default constructor (do not remove)
      */
@@ -613,6 +615,10 @@ public class ClientesInfoVORowImpl extends OAViewRowImpl {
             return getAttribute1();
         case ATTRIBUTE2:
             return getAttribute2();
+        case HCSUAORGID:
+            return getHcsuaOrgId();
+        case HCASAORGID:
+            return getHcasaOrgId();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -632,6 +638,12 @@ public class ClientesInfoVORowImpl extends OAViewRowImpl {
             return;
         case ATTRIBUTE2:
             setAttribute2((String)value);
+            return;
+        case HCSUAORGID:
+            setHcsuaOrgId((Number)value);
+            return;
+        case HCASAORGID:
+            setHcasaOrgId((Number)value);
             return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
@@ -687,5 +699,29 @@ public class ClientesInfoVORowImpl extends OAViewRowImpl {
      */
     public void setAttribute2(String value) {
         setAttributeInternal(ATTRIBUTE2, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute HcsuaOrgId
+     */
+    public Number getHcsuaOrgId() {
+        return (Number) getAttributeInternal(HCSUAORGID);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute HcsuaOrgId
+     */
+    public void setHcsuaOrgId(Number value) {
+        setAttributeInternal(HCSUAORGID, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute HcasaOrgId
+     */
+    public Number getHcasaOrgId() {
+        return (Number) getAttributeInternal(HCASAORGID);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute HcasaOrgId
+     */
+    public void setHcasaOrgId(Number value) {
+        setAttributeInternal(HCASAORGID, value);
     }
 }

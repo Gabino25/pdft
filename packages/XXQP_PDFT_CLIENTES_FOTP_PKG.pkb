@@ -6,6 +6,33 @@ TYPE PartySeacrhTyp IS REF CURSOR;
 TYPE AccountSeacrhTyp IS REF CURSOR;
 TYPE SiteSeacrhTyp IS REF CURSOR;
  
+
+ CURSOR get_contactos_tmp_info IS
+ select 1 record_id
+ , 'Cierre y Seguimiento' tipo_de_contacto 
+ from dual
+ union 
+ select 2 record_id
+ ,'Cobranza' tipo_de_contacto
+ from dual
+ union
+ select 3 record_id
+ ,'Gerencial' tipo_de_contacto
+ from dual
+ union
+ select 4 record_id
+ ,'Directriz' tipo_de_contacto
+ from dual
+ union
+ select 5 record_id
+ ,'Auditoria' tipo_de_contacto
+ from dual
+ union
+ select 6 record_id
+ ,'Devoluciones' tipo_de_contacto
+ from dual;
+ 
+
  procedure valida_clientes(pso_errmsg out varchar2
  ,pso_errcode out varchar2
  ,psi_nombre_cliente in varchar2
@@ -249,30 +276,6 @@ CURSOR get_cust_account_info (cur_party_id number) IS
  where party_id = cur_party_id; 
  
  
- CURSOR get_contactos_tmp_info IS
- select 1 record_id
- , 'Cierre y Seguimiento' tipo_de_contacto 
- from dual
- union 
- select 2 record_id
- ,'Cobranza' tipo_de_contacto
- from dual
- union
- select 3 record_id
- ,'Gerencial' tipo_de_contacto
- from dual
- union
- select 4 record_id
- ,'Directriz' tipo_de_contacto
- from dual
- union
- select 5 record_id
- ,'Auditoria' tipo_de_contacto
- from dual
- union
- select 6 record_id
- ,'Devoluciones' tipo_de_contacto
- from dual;
  
  
  
@@ -319,9 +322,18 @@ CURSOR get_cust_account_info (cur_party_id number) IS
  commit;
  
  
+ APPS.XXQP_PDFT_CLIENTES_FOTP_PKG.upd_header(pso_errmsg => ls_errmsg
+ ,pso_errcode => ls_errcod
+ ,pni_party_id => pni_party_id
+ ,pni_operating_unit => pni_operating_unit
+ ,pni_clientes_header_id => ln_xxclient_id
+ ); 
+ 
+ pno_clientes_header_id := ln_xxclient_id;
+ 
  exception when no_data_found then 
  
- APPS.XXQP_PDFT_CLIENTES_FOTP_PKG. populate_header(pso_errmsg => ls_errmsg
+ XXQP_PDFT_CLIENTES_FOTP_PKG. populate_header(pso_errmsg => ls_errmsg
  ,pso_errcode => ls_errcod
  ,pni_party_id => pni_party_id
  ,pni_operating_unit => pni_operating_unit
@@ -331,6 +343,7 @@ CURSOR get_cust_account_info (cur_party_id number) IS
  insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(1.2) -> ln_clientes_header_id:'||ln_clientes_header_id); 
  commit;
  
+ pno_clientes_header_id := ln_clientes_header_id;
  
  
  end; 
@@ -340,155 +353,44 @@ CURSOR get_cust_account_info (cur_party_id number) IS
  
  
  
- insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(2):'); 
  
- ln_punto_reco_id := XXQP_PDFT_CLIENTES_PUNT_RECO_S.nextval;
+
  
-insert into XXQP_PDFT_CLIENTES_PUNTO_RECO values( ln_punto_reco_id /** ID **/
- ,ln_clientes_header_id /** HEADER_ID **/
- ,null /** PRIM_ENTREGA_EN_QP **/
- ,null /** PRIM_NOMBRE **/
- ,null /** PRIM_CONTACTO **/
- ,null /** PRIM_DIRECCION **/
- ,null /** PRIM_DIA **/
- ,null /** PRIM_HORARIO **/
- ,null /** SEC_ENTREGA_EN_QP **/
- ,null /** SEC_NOMBRE **/
- ,null /** SEC_CONTACTO **/
- ,null /** SEC_DIRECCION **/
- ,null /** SEC_DIA **/
- ,null /** SEC_HORARIO **/
- ,nvl(fnd_profile.value('USER_ID'),0) /** CREATED_BY **/ 
- ,sysdate /** CREATION_DATE **/ 
- ,nvl(fnd_profile.value('USER_ID'),0) /** LAST_UPDATED_BY **/ 
- ,sysdate /** LAST_UPDATE_DATE **/ 
- ,nvl(fnd_profile.value('LOGIN_ID'),0) /** LAST_UPDATE_LOGIN **/ 
- ,null /** ATTRIBUTE_CATEGORY **/
- ,null /** ATTRIBUTE1 **/
- ,null /** ATTRIBUTE2 **/
- ,null /** ATTRIBUTE3 **/
- ,null /** ATTRIBUTE4 **/
- ,null /** ATTRIBUTE5 **/
- );
+ insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6):'); 
  
- commit; 
- insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(3):'); 
- OPEN get_contactos_tmp_info;
+ /*********************************************************
+ Finaliza Inicializacion 
+ *********************************************************/
+ 
+ insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6)pni_party_id:'||pni_party_id); 
+ insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6)ln_clientes_header_id:'||ln_clientes_header_id); 
+
+ OPEN get_organization_info(pni_party_id);
  LOOP
- FETCH get_contactos_tmp_info INTO contactos_tmp_info_rec;
- EXIT WHEN get_contactos_tmp_info%NOTFOUND;
+ FETCH get_organization_info INTO organization_info_rec;
+ EXIT WHEN get_organization_info%NOTFOUND;
  
- ln_clientes_contactos_id := XXQP_PDFT_CLIENTES_CONTACTOS_S.nextval; 
+ insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6.1)'); 
  
- insert into XXQP_PDFT_CLIENTES_CONTACTOS 
- values (ln_clientes_contactos_id /** ID **/
- ,ln_clientes_header_id /** HEADER_ID **/
- ,contactos_tmp_info_rec.tipo_de_contacto /** TIPO_CONTACTO **/
- ,null /** NOMBRE **/
- ,null /** DIRECCION **/
- ,null /** TELEFONO **/
- ,null /** CORREO_ELECTRONICO  **/
-                ,null      /** PUESTO              **/
-                ,nvl(fnd_profile.value('USER_ID'),0)      /** CREATED_BY             **/                                                                                                                                                                            
-                ,sysdate                                             /** CREATION_DATE          **/                                                                                                                                                                            
-                ,nvl(fnd_profile.value('USER_ID'),0)      /** LAST_UPDATED_BY        **/                                                                                                                                                                            
-                ,sysdate                                             /** LAST_UPDATE_DATE       **/                                                                                                                                                                            
-                ,nvl(fnd_profile.value('LOGIN_ID'),0)      /** LAST_UPDATE_LOGIN      **/       
-                ,null      /** ATTRIBUTE_CATEGORY  **/
-                ,null      /** ATTRIBUTE1          **/
-                ,null      /** ATTRIBUTE2          **/
-                ,null      /** ATTRIBUTE3          **/
-                ,null      /** ATTRIBUTE4          **/
-                ,null      /** ATTRIBUTE5          **/
-                ,null     /** NUMERO_CELULAR **/
-                );
-          
-      commit;      
-     
-   END LOOP;
-   CLOSE get_contactos_tmp_info;
-
-     insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(4):'); 
-     
-    ln_clientes_fact_pag_id   := XXQP_PDFT_CLIENTES_FACT_PAG_S.nextval; 
-   
-insert into XXQP_PDFT_CLIENTES_FACT_PAG values (
-                                                                                  ln_clientes_fact_pag_id       /** ID                      **/
-                                                                                , ln_clientes_header_id       /** HEADER_ID               **/
-                                                                                , null       /** CONDICIONES_DE_PAGO_C   **/
-                                                                                , null       /** OBSERVACIONES           **/
-                                                                                , null       /** TIPO_DE_PAGO_C          **/
-                                                                                , null       /** REQUIERE_ADENDAS_C      **/
-                                                                                , null       /** REQUIERE_FACTURA_C      **/
-                                                                                , null       /** MOTIVO                  **/
-                                                                                , null       /** CICLO_DE_FACTURACION_C  **/
-                                                                                , null      /** USO_DEL_CFDI_C          **/
-                                                                                , null      /** METODO_DE_PAGO_C        **/
-                                                                                , null       /** NUMERO_DE_CUENTA        **/
-                                                                                , null       /** NOMBRE_DEL_BANCO        **/
-                                                                                , null       /** DIAS_NAT_DE_CREDITO     **/
-                                                                                , null       /** DIAS_RECEPCION_FACTUR   **/
-                                                                                , null       /** UTILIZA_PORTAL_C        **/
-                                                                                , null       /** PORTAL_LINK             **/
-                                                                                , null       /** ORDEN_DE_COMPRA_C       **/
-                                                                                , null       /** CONTRATO_C              **/
-                                                                                , null       /** VIGENCIA_CONTRATO       **/
-                                                                                ,nvl(fnd_profile.value('USER_ID'),0)      /** CREATED_BY             **/                                                                                                                                                                            
-                                                                                ,sysdate                                             /** CREATION_DATE          **/                                                                                                                                                                            
-                                                                                ,nvl(fnd_profile.value('USER_ID'),0)      /** LAST_UPDATED_BY        **/                                                                                                                                                                            
-                                                                                ,sysdate                                             /** LAST_UPDATE_DATE       **/                                                                                                                                                                            
-                                                                                ,nvl(fnd_profile.value('LOGIN_ID'),0)      /** LAST_UPDATE_LOGIN      **/  
-                                                                                , null       /** ATTRIBUTE_CATEGORY      **/
-                                                                                , null       /** ATTRIBUTE1              **/
-                                                                                , null       /** ATTRIBUTE2              **/
-                                                                                , null       /** ATTRIBUTE3              **/
-                                                                                , null       /** ATTRIBUTE4              **/
-                                                                                , null       /** ATTRIBUTE5              **/
-                                                                                , null /** LUNES **/
-                                                                                ,null 
-                                                                                ,null
-                                                                                ,null
-                                                                                ,null
-                                                                                ,null
-                                                                                ,null
-                                                                                ); 
-
-      commit; 
-   insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6):'); 
-   
-   /*********************************************************
-   Finaliza Inicializacion 
-   *********************************************************/
-  
-  insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6)pni_party_id:'||pni_party_id); 
-  insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6)ln_clientes_header_id:'||ln_clientes_header_id); 
-
-  OPEN get_organization_info(pni_party_id);
-   LOOP
-      FETCH get_organization_info INTO organization_info_rec;
-      EXIT WHEN get_organization_info%NOTFOUND;
-      
-      insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6.1)'); 
-      
-     
-        
-          insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6.3)');  
-          commit;
-         
-   END LOOP;
-   CLOSE get_organization_info;
-   
-       insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(7):'); 
-       commit; 
-       
-     OPEN get_cust_account_info(pni_party_id);
-      LOOP
-         FETCH get_cust_account_info INTO cust_account_info_rec;
-         EXIT WHEN get_cust_account_info%NOTFOUND;
-         
-           update XXQP_PDFT_CLIENTES_FACT_PAG 
-          set USO_DEL_CFDI_C = cust_account_info_rec.attribute6
-              ,METODO_DE_PAGO_C = cust_account_info_rec.attribute5 
+ 
+ 
+ insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6.3)'); 
+ commit;
+ 
+ END LOOP;
+ CLOSE get_organization_info;
+ 
+ insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(7):'); 
+ commit; 
+ 
+ OPEN get_cust_account_info(pni_party_id);
+ LOOP
+ FETCH get_cust_account_info INTO cust_account_info_rec;
+ EXIT WHEN get_cust_account_info%NOTFOUND;
+ 
+ update XXQP_PDFT_CLIENTES_FACT_PAG 
+ set USO_DEL_CFDI_C = cust_account_info_rec.attribute6
+ ,METODO_DE_PAGO_C = cust_account_info_rec.attribute5 
        where  HEADER_ID = ln_clientes_header_id
           and id = ln_clientes_fact_pag_id; 
            commit; 
@@ -598,6 +500,9 @@ insert into XXQP_PDFT_CLIENTES_FACT_PAG values (
   ls_errmsg                  varchar2(2000); 
   ls_errcod                   varchar2(2000); 
   ln_dir_fiscal_id           number; 
+  ln_punto_rec_id          number; 
+  ln_val_client_contacts  number; 
+  ln_fact_pag_id            number; 
   
   begin 
   
@@ -671,18 +576,6 @@ insert into XXQP_PDFT_CLIENTES_FACT_PAG values (
          from XXQP_PDFT_CLIENTES_DIR_FISCAL
       where header_id = ln_clientes_header_id
           and prim_operating_unit =  pni_operating_unit;
-     
-      /*
-      select sites.location_id
-        into ln_location_id    
-      from XXQP_HzPuiAccountTableVO acc
-             ,XXQP_HzPuiPartySearchRltsVO parties
-            ,XXQP_HzPuiAcctSitesTableVO sites
-      where parties.party_id = acc.party_id
-          and sites.cust_account_id = acc.cust_account_id 
-           and sites.org_id =pni_operating_unit
-           and  parties.party_id = pni_party_id; 
-           */
            
      exception when no_data_found then 
      
@@ -696,14 +589,135 @@ insert into XXQP_PDFT_CLIENTES_FACT_PAG values (
      
      end; 
      
+     begin 
+     
+      select id 
+         into ln_punto_rec_id
+        from XXQP_PDFT_CLIENTES_PUNTO_RECO
+       where header_id = ln_clientes_header_id; 
+     
+     exception when no_data_found then 
+      XXQP_PDFT_CLIENTES_FOTP_PKG.populate_punto_rec( 
+                                                                               pso_errmsg                   => ls_errmsg
+                                                                               ,pso_errcode                  => ls_errcod
+                                                                               ,pni_party_id                  => pni_party_id
+                                                                               ,pni_operating_unit         => pni_operating_unit
+                                                                               ,pni_clientes_header_id   => ln_clientes_header_id
+                                                                               ,pno_punto_rec_id           => ln_punto_rec_id
+                                                                               );
+     end; 
+     
        
-  
-    
+     select count(1) 
+        into ln_val_client_contacts
+       from XXQP_PDFT_CLIENTES_CONTACTOS
+     where header_id = ln_clientes_header_id; 
+     
+     if 0 = ln_val_client_contacts then 
+          XXQP_PDFT_CLIENTES_FOTP_PKG.populate_contacts( 
+                                                                                       pso_errmsg                   => ls_errmsg
+                                                                                       ,pso_errcode                  => ls_errcod
+                                                                                       ,pni_party_id                  => pni_party_id
+                                                                                       ,pni_operating_unit         => pni_operating_unit
+                                                                                       ,pni_clientes_header_id   => ln_clientes_header_id
+                                                                                       );
+     end if; 
+     
+     begin 
+     
+     select id 
+       into ln_fact_pag_id
+       from XXQP_PDFT_CLIENTES_FACT_PAG
+     where header_id = ln_clientes_header_id; 
+     
+     exception when no_data_found then 
+        XXQP_PDFT_CLIENTES_FOTP_PKG.populate_fact_pag( 
+                                                                                        pso_errmsg                   => ls_errmsg
+                                                                                       ,pso_errcode                  => ls_errcod
+                                                                                       ,pni_party_id                  => pni_party_id
+                                                                                       ,pni_operating_unit         => pni_operating_unit
+                                                                                       ,pni_clientes_header_id   => ln_clientes_header_id
+                                                                                       ,pno_fact_pag_id            => ln_fact_pag_id
+                                                                                       );
+     end; 
+     
+     
+       
    pno_clientes_header_id := ln_clientes_header_id; 
   exception when others then 
      pso_errmsg := 'Exception when others populate_header:'||sqlerrm||', '||sqlcode;
      pso_errcode := '2';
   end populate_header; 
+  
+   procedure upd_header(pso_errmsg                    out varchar2
+                                     ,pso_errcode                    out varchar2
+                                     ,pni_party_id                    in  number
+                                     ,pni_operating_unit           in number
+                                     ,pni_clientes_header_id    in  number
+                                     ) is 
+  
+  ln_legal_entity_id      number; 
+  ln_dir_fiscal_id          number; 
+  ls_errmsg                  varchar2(2000); 
+  ls_errcod                   varchar2(2000); 
+    
+  begin 
+   
+       select distinct  LEP.LEGAL_ENTITY_ID
+                 into ln_legal_entity_id
+                 from XLE_ENTITY_PROFILES LEP,
+                         XLE_REGISTRATIONS REG,
+                         HR_LOCATIONS_ALL HRL,
+                         HZ_PARTIES HZP,
+                         FND_TERRITORIES_VL TER,
+                         HR_OPERATING_UNITS HRO,
+                         HR_ALL_ORGANIZATION_UNITS_TL HROUTL_BG,
+                         HR_ALL_ORGANIZATION_UNITS_TL HROUTL_OU,
+                         HR_ORGANIZATION_UNITS GLOPERATINGUNITSEO,
+                         GL_LEGAL_ENTITIES_BSVS GLEV
+            where LEP.TRANSACTING_ENTITY_FLAG      = 'Y'
+            and LEP.PARTY_ID                       = HZP.PARTY_ID
+            and LEP.LEGAL_ENTITY_ID                = REG.SOURCE_ID
+            and REG.SOURCE_TABLE                   = 'XLE_ENTITY_PROFILES'
+            and HRL.LOCATION_ID                    = REG.LOCATION_ID
+            and REG.IDENTIFYING_FLAG               = 'Y'
+            and TER.TERRITORY_CODE                 = HRL.COUNTRY
+            and LEP.LEGAL_ENTITY_ID                = HRO.DEFAULT_LEGAL_CONTEXT_ID
+            and GLOPERATINGUNITSEO.ORGANIZATION_ID = HRO.ORGANIZATION_ID
+            and HROUTL_BG.ORGANIZATION_ID          = HRO.BUSINESS_GROUP_ID
+            and HROUTL_OU.ORGANIZATION_ID          = HRO.ORGANIZATION_ID
+            and GLEV.LEGAL_ENTITY_ID               = LEP.LEGAL_ENTITY_ID
+            and HROUTL_OU.ORGANIZATION_ID = pni_operating_unit;
+ 
+    update XXQP_PDFT_CLIENTES_HEADER
+         set EMPRESA_QUE_FACTURA_C = ln_legal_entity_id
+     where id = pni_clientes_header_id; 
+     
+      begin 
+     
+       select id
+          into ln_dir_fiscal_id
+         from XXQP_PDFT_CLIENTES_DIR_FISCAL
+      where header_id = pni_clientes_header_id
+          and prim_operating_unit =  pni_operating_unit;
+           
+     exception when no_data_found then 
+     
+      XXQP_PDFT_CLIENTES_FOTP_PKG.populate_sites( pso_errmsg                   => ls_errmsg
+                                                                               ,pso_errcode                  => ls_errcod
+                                                                               ,pni_party_id                  => pni_party_id
+                                                                               ,pni_operating_unit         => pni_operating_unit
+                                                                               ,pni_clientes_header_id   => pni_clientes_header_id
+                                                                               ,pno_dir_fiscal_id            => ln_dir_fiscal_id
+                                                                               );   
+     
+     end; 
+    
+     
+   exception when others then 
+     pso_errmsg := 'Exception when others populate_header:'||sqlerrm||', '||sqlcode;
+     pso_errcode := '2';
+  end upd_header; 
   
   
    procedure populate_sites( pso_errmsg                    out varchar2
@@ -799,7 +813,7 @@ insert into XXQP_PDFT_CLIENTES_FACT_PAG values (
                                                                                     ,null          /** SEC_CEDULA_FILE_NAME      **/
                                                                                     ,null          /** SEC_CEDULA_CONTENT_TYPE   **/
                                                                                     ,pni_operating_unit          /** PRIM_OPERATING_UNIT   **/
-                                                                                    ,pni_operating_unit          /** SEC_OPERATING_UNIT   **/
+                                                                                    ,null          /** SEC_OPERATING_UNIT   **/
                                                                                     ,null          /** PRIM_NUMERO_EXT   **/
                                                                                     ,null            /** SEC_NUMERO_EXT   **/
                                                                                     ,null            /**  PRIM_NUMERO_INT   **/       
@@ -839,11 +853,178 @@ insert into XXQP_PDFT_CLIENTES_FACT_PAG values (
         pno_dir_fiscal_id := ln_dir_fiscal_id; 
    
    exception when others then 
-     pso_errmsg := 'Exception when others populate_header:'||sqlerrm||', '||sqlcode;
+     pso_errmsg := 'Exception when others populate_sites:'||sqlerrm||', '||sqlcode;
      pso_errcode := '2';
    end populate_sites; 
   
    
+   procedure populate_punto_rec( pso_errmsg                    out varchar2
+                                                 ,pso_errcode                    out varchar2
+                                                 ,pni_party_id                    in  number
+                                                 ,pni_operating_unit           in number
+                                                 ,pni_clientes_header_id    in number
+                                                 ,pno_punto_rec_id            out number
+                                                 )  is
+  ln_punto_reco_id    number;
+   begin 
+   
+       insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(2):'); 
+          
+   ln_punto_reco_id := XXQP_PDFT_CLIENTES_PUNT_RECO_S.nextval;
+   
+insert into XXQP_PDFT_CLIENTES_PUNTO_RECO values(   ln_punto_reco_id     /** ID                  **/
+                                                                                    ,pni_clientes_header_id     /** HEADER_ID           **/
+                                                                                    ,null     /** PRIM_ENTREGA_EN_QP  **/
+                                                                                    ,null     /** PRIM_NOMBRE         **/
+                                                                                    ,null     /** PRIM_CONTACTO       **/
+                                                                                    ,null     /** PRIM_DIRECCION      **/
+                                                                                    ,null     /** PRIM_DIA            **/
+                                                                                    ,null     /** PRIM_HORARIO        **/
+                                                                                    ,null     /** SEC_ENTREGA_EN_QP   **/
+                                                                                    ,null     /** SEC_NOMBRE          **/
+                                                                                    ,null     /** SEC_CONTACTO        **/
+                                                                                    ,null     /** SEC_DIRECCION       **/
+                                                                                    ,null     /** SEC_DIA             **/
+                                                                                    ,null     /** SEC_HORARIO         **/
+                                                                                    ,nvl(fnd_profile.value('USER_ID'),0)      /** CREATED_BY             **/                                                                                                                                                                            
+                                                                                    ,sysdate                                             /** CREATION_DATE          **/                                                                                                                                                                            
+                                                                                    ,nvl(fnd_profile.value('USER_ID'),0)      /** LAST_UPDATED_BY        **/                                                                                                                                                                            
+                                                                                    ,sysdate                                             /** LAST_UPDATE_DATE       **/                                                                                                                                                                            
+                                                                                    ,nvl(fnd_profile.value('LOGIN_ID'),0)      /** LAST_UPDATE_LOGIN      **/        
+                                                                                    ,null     /** ATTRIBUTE_CATEGORY  **/
+                                                                                    ,null     /** ATTRIBUTE1          **/
+                                                                                    ,null     /** ATTRIBUTE2          **/
+                                                                                    ,null     /** ATTRIBUTE3          **/
+                                                                                    ,null     /** ATTRIBUTE4          **/
+                                                                                    ,null     /** ATTRIBUTE5          **/
+                                                                                    );
+   
+   commit; 
+   
+    exception when others then 
+     pso_errmsg := 'Exception when others populate_punto_rec:'||sqlerrm||', '||sqlcode;
+     pso_errcode := '2';
+   end populate_punto_rec; 
+                                                 
+   
+   procedure populate_contacts( pso_errmsg                    out varchar2
+                                                ,pso_errcode                    out varchar2
+                                                ,pni_party_id                    in  number
+                                                ,pni_operating_unit           in number
+                                                ,pni_clientes_header_id    in number
+                                                ) is 
+  
+  contactos_tmp_info_rec      get_contactos_tmp_info%ROWTYPE;
+  ln_clientes_contactos_id      number; 
+ 
+ begin 
+   
+           insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(3):'); 
+     
+     
+    OPEN get_contactos_tmp_info;
+   LOOP
+      FETCH get_contactos_tmp_info INTO contactos_tmp_info_rec;
+      EXIT WHEN get_contactos_tmp_info%NOTFOUND;
+      
+      ln_clientes_contactos_id    := XXQP_PDFT_CLIENTES_CONTACTOS_S.nextval; 
+      
+      insert into XXQP_PDFT_CLIENTES_CONTACTOS 
+      values (ln_clientes_contactos_id         /** ID                  **/
+                ,pni_clientes_header_id            /** HEADER_ID           **/
+                ,contactos_tmp_info_rec.tipo_de_contacto      /** TIPO_CONTACTO       **/
+                ,null      /** NOMBRE              **/
+                ,null      /** DIRECCION           **/
+                ,null      /** TELEFONO            **/
+                ,null      /** CORREO_ELECTRONICO  **/
+                ,null      /** PUESTO              **/
+                ,nvl(fnd_profile.value('USER_ID'),0)      /** CREATED_BY             **/                                                                                                                                                                            
+                ,sysdate                                             /** CREATION_DATE          **/                                                                                                                                                                            
+                ,nvl(fnd_profile.value('USER_ID'),0)      /** LAST_UPDATED_BY        **/                                                                                                                                                                            
+                ,sysdate                                             /** LAST_UPDATE_DATE       **/                                                                                                                                                                            
+                ,nvl(fnd_profile.value('LOGIN_ID'),0)      /** LAST_UPDATE_LOGIN      **/       
+                ,null      /** ATTRIBUTE_CATEGORY  **/
+                ,null      /** ATTRIBUTE1          **/
+                ,null      /** ATTRIBUTE2          **/
+                ,null      /** ATTRIBUTE3          **/
+                ,null      /** ATTRIBUTE4          **/
+                ,null      /** ATTRIBUTE5          **/
+                ,null     /** NUMERO_CELULAR **/
+                );
+          
+      commit;      
+     
+   END LOOP;
+   CLOSE get_contactos_tmp_info;
+  
+   
+   exception when others then 
+     pso_errmsg := 'Exception when others populate_contacts:'||sqlerrm||', '||sqlcode;
+     pso_errcode := '2';
+   end populate_contacts;                                             
+   
+   procedure populate_fact_pag( pso_errmsg                    out varchar2
+                                                ,pso_errcode                    out varchar2
+                                                ,pni_party_id                    in  number
+                                                ,pni_operating_unit           in number
+                                                ,pni_clientes_header_id    in number
+                                                ,pno_fact_pag_id             out number
+                                                ) is 
+   ln_clientes_fact_pag_id  number;  
+   begin 
+    
+         insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(4):'); 
+     
+    ln_clientes_fact_pag_id   := XXQP_PDFT_CLIENTES_FACT_PAG_S.nextval; 
+   
+insert into XXQP_PDFT_CLIENTES_FACT_PAG values (
+                                                                                  ln_clientes_fact_pag_id       /** ID                      **/
+                                                                                , pni_clientes_header_id       /** HEADER_ID               **/
+                                                                                , null       /** CONDICIONES_DE_PAGO_C   **/
+                                                                                , null       /** OBSERVACIONES           **/
+                                                                                , null       /** TIPO_DE_PAGO_C          **/
+                                                                                , null       /** REQUIERE_ADENDAS_C      **/
+                                                                                , null       /** REQUIERE_FACTURA_C      **/
+                                                                                , null       /** MOTIVO                  **/
+                                                                                , null       /** CICLO_DE_FACTURACION_C  **/
+                                                                                , null      /** USO_DEL_CFDI_C          **/
+                                                                                , null      /** METODO_DE_PAGO_C        **/
+                                                                                , null       /** NUMERO_DE_CUENTA        **/
+                                                                                , null       /** NOMBRE_DEL_BANCO        **/
+                                                                                , null       /** DIAS_NAT_DE_CREDITO     **/
+                                                                                , null       /** DIAS_RECEPCION_FACTUR   **/
+                                                                                , null       /** UTILIZA_PORTAL_C        **/
+                                                                                , null       /** PORTAL_LINK             **/
+                                                                                , null       /** ORDEN_DE_COMPRA_C       **/
+                                                                                , null       /** CONTRATO_C              **/
+                                                                                , null       /** VIGENCIA_CONTRATO       **/
+                                                                                ,nvl(fnd_profile.value('USER_ID'),0)      /** CREATED_BY             **/                                                                                                                                                                            
+                                                                                ,sysdate                                             /** CREATION_DATE          **/                                                                                                                                                                            
+                                                                                ,nvl(fnd_profile.value('USER_ID'),0)      /** LAST_UPDATED_BY        **/                                                                                                                                                                            
+                                                                                ,sysdate                                             /** LAST_UPDATE_DATE       **/                                                                                                                                                                            
+                                                                                ,nvl(fnd_profile.value('LOGIN_ID'),0)      /** LAST_UPDATE_LOGIN      **/  
+                                                                                , null       /** ATTRIBUTE_CATEGORY      **/
+                                                                                , null       /** ATTRIBUTE1              **/
+                                                                                , null       /** ATTRIBUTE2              **/
+                                                                                , null       /** ATTRIBUTE3              **/
+                                                                                , null       /** ATTRIBUTE4              **/
+                                                                                , null       /** ATTRIBUTE5              **/
+                                                                                , null /** LUNES **/
+                                                                                ,null 
+                                                                                ,null
+                                                                                ,null
+                                                                                ,null
+                                                                                ,null
+                                                                                ,null
+                                                                                ); 
+
+      commit;  
+    
+    exception when others then 
+      pso_errmsg := 'Exception when others populate_contacts:'||sqlerrm||', '||sqlcode;
+     pso_errcode := '2';
+    end populate_fact_pag; 
+    
    
   procedure val_insert_mgr_catalogos( psi_lookup_type  in varchar2
                                                        ,psi_lookup_code  in varchar2  )
