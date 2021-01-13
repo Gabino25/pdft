@@ -373,6 +373,11 @@
                         <ui:fireAction event="ModificarEvt"/>
                      </ui:primaryClientAction>
                   </oa:button>
+                  <oa:button id="RevisarPDFBtn" text="Revisar PDF" prompt="Revisar PDF">
+                     <ui:primaryClientAction>
+                        <ui:fireAction event="RevisarPDFEvt" id="fireAction1112"/>
+                     </ui:primaryClientAction>
+                  </oa:button>
                </ui:contents>
             </oa:pageButtonBar>
          </ui:contents>

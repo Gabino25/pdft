@@ -36,10 +36,11 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
     public static final int ATTRIBUTE4 = 17;
     public static final int ATTRIBUTE5 = 18;
     public static final int PARTYID = 19;
-    public static final int XXQPPDFTCLIENTESDIRFISCALEO = 20;
-    public static final int XXQPPDFTCLIENTESPUNTORECOEO = 21;
-    public static final int XXQPPDFTCLIENTESCONTACTOSEO = 22;
-    public static final int XXQPPDFTCLIENTESFACTPAGEO = 23;
+    public static final int RFC = 20;
+    public static final int XXQPPDFTCLIENTESDIRFISCALEO = 21;
+    public static final int XXQPPDFTCLIENTESPUNTORECOEO = 22;
+    public static final int XXQPPDFTCLIENTESCONTACTOSEO = 23;
+    public static final int XXQPPDFTCLIENTESFACTPAGEO = 24;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -399,6 +400,8 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
             return getAttribute5();
         case PARTYID:
             return getPartyId();
+        case RFC:
+            return getRfc();
         case XXQPPDFTCLIENTESCONTACTOSEO:
             return getXxqpPdftClientesContactosEO();
         case XXQPPDFTCLIENTESDIRFISCALEO:
@@ -478,6 +481,9 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
         case PARTYID:
             setPartyId((Number)value);
             return;
+        case RFC:
+            setRfc((String)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -518,6 +524,18 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
      */
     public void setPartyId(Number value) {
         setAttributeInternal(PARTYID, value);
+    }
+
+    /**Gets the attribute value for Rfc, using the alias name Rfc
+     */
+    public String getRfc() {
+        return (String)getAttributeInternal(RFC);
+    }
+
+    /**Sets <code>value</code> as the attribute value for Rfc
+     */
+    public void setRfc(String value) {
+        setAttributeInternal(RFC, value);
     }
 
     /**Creates a Key object based on given key constituents

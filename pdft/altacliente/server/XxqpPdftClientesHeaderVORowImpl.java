@@ -33,6 +33,7 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
     public static final int ATTRIBUTE4 = 17;
     public static final int ATTRIBUTE5 = 18;
     public static final int PARTYID = 19;
+    public static final int RFC = 20;
 
     /**This is the default constructor (do not remove)
      */
@@ -364,6 +365,8 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
             return getAttribute5();
         case PARTYID:
             return getPartyId();
+        case RFC:
+            return getRfc();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -435,6 +438,9 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
         case PARTYID:
             setPartyId((Number)value);
             return;
+        case RFC:
+            setRfc((String)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -451,5 +457,17 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
      */
     public void setPartyId(Number value) {
         setAttributeInternal(PARTYID, value);
+    }
+
+    /**Gets the attribute value for RFC using the alias name Rfc
+     */
+    public String getRfc() {
+        return (String) getAttributeInternal(RFC);
+    }
+
+    /**Sets <code>value</code> as attribute value for RFC using the alias name Rfc
+     */
+    public void setRfc(String value) {
+        setAttributeInternal(RFC, value);
     }
 }

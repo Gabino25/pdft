@@ -105,7 +105,7 @@
                <ui:contents>
                   <oa:button id="NuevoBtn" text="Nuevo" prompt="Nuevo">
                      <ui:primaryClientAction>
-                        <ui:fireAction event="NuevoEvt"/>
+                        <ui:fireAction event="NuevoEvt" unvalidated="true"/>
                      </ui:primaryClientAction>
                   </oa:button>
                </ui:contents>

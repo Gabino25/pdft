@@ -258,7 +258,6 @@
    <Attribute
       Name="PartyId"
       IsUnique="true"
-      IsNotNull="true"
       ColumnName="PARTY_ID"
       Type="oracle.jbo.domain.Number"
       ColumnType="NUMBER"
@@ -266,6 +265,20 @@
       TableName="XXQP_PDFT_CLIENTES_HEADER" >
       <DesignTime>
          <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Rfc"
+      IsUnique="true"
+      IsNotNull="true"
+      Precision="50"
+      ColumnName="RFC"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="50" />
       </DesignTime>
    </Attribute>
    <AccessorAttribute
@@ -399,17 +412,6 @@
       </DesignTime>
    </Key>
    <Key
-      Name="SysC001824779" >
-      <AttrArray Name="Attributes">
-         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEO.PartyId" />
-      </AttrArray>
-      <DesignTime>
-         <Attr Name="_checkCondition" Value="&#34;PARTY_ID&#34; IS NOT NULL" />
-         <Attr Name="_isCheck" Value="true" />
-         <Attr Name="_DBObjectName" Value="SYS_C001824779" />
-      </DesignTime>
-   </Key>
-   <Key
       Name="SysC001824780" >
       <AttrArray Name="Attributes">
          <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEO.NombreCliente" />
@@ -418,6 +420,17 @@
          <Attr Name="_checkCondition" Value="&#34;NOMBRE_CLIENTE&#34; IS NOT NULL" />
          <Attr Name="_isCheck" Value="true" />
          <Attr Name="_DBObjectName" Value="SYS_C001824780" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001825380" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEO.Rfc" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;RFC&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001825380" />
       </DesignTime>
    </Key>
    <Key
@@ -438,6 +451,16 @@
       <DesignTime>
          <Attr Name="_isUnique" Value="true" />
          <Attr Name="_DBObjectName" Value="XXQP_PDFT_CLIENTES_HEADER_U3" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="XxqpPdftClientesHeaderU4" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesHeaderEO.Rfc" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_isUnique" Value="true" />
+         <Attr Name="_DBObjectName" Value="XXQP_PDFT_CLIENTES_HEADER_U4" />
       </DesignTime>
    </Key>
 </Entity>

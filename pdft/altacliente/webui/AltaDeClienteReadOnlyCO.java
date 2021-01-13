@@ -21,6 +21,7 @@ import oracle.apps.fnd.framework.webui.beans.nav.OAButtonBean;
 import oracle.apps.fnd.framework.webui.beans.nav.OALinkBean;
 import oracle.apps.fnd.framework.webui.beans.nav.OAPageButtonBarBean;
 
+import xxqp.oracle.apps.ar.pdft.altacliente.Utils;
 import xxqp.oracle.apps.ar.pdft.altacliente.server.AltaDeClienteAMImpl;
 import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesContactosVORowImpl;
 import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesDirFiscalVORowImpl;
@@ -197,6 +198,10 @@ public class AltaDeClienteReadOnlyCO extends OAControllerImpl
                                   ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
                                   ,OAException.ERROR /*messagingLevel*/
                                   ); 
+        return;                           
+    }
+    if("RevisarPDFEvt".equals(strEventParam)){
+        Utils.revisarPDF(altaDeClienteAMImpl,pageContext);
     }
     
   }

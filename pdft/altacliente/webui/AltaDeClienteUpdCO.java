@@ -321,6 +321,8 @@ public class AltaDeClienteUpdCO extends OAControllerImpl
             System.out.println("numPartyId:"+numPartyId);
             altaDeClienteAMImpl.callUpdFromPdftToOracle(numPartyId,numClienteHeaderId); 
             
+            xxqp.oracle.apps.ar.pdft.altacliente.Utils.enviarPDFConCedula(altaDeClienteAMImpl,pageContext,"UPDATE");
+            
             com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
             parameters.put("pClientesHeaderId",numClienteHeaderId.toString() );
             pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altacliente/webui/AltaDeClienteReadOnlyPG&"+OASubTabLayoutBean.OA_SELECTED_SUBTAB_IDX+"=0" /*url*/

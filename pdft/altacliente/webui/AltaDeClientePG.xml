@@ -22,6 +22,7 @@
                                        </ui:primaryClientAction>
                                     </oa:messageChoice>
                                     <oa:messageTextInput id="Comentarios" prompt="Comentarios" columns="90" rows="2" maximumLength="1000"/>
+                                    <oa:messageTextInput id="RFC" required="yes" prompt="RFC"/>
                                  </ui:contents>
                               </oa:tableLayout>
                            </ui:contents>

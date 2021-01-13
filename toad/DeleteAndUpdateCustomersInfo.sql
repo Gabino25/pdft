@@ -25,6 +25,6 @@ select * from hz_parties
 where attribute2 is not null
 
 update hz_parties
-   set ATTRIBUTE1 = null /** RFC NO ACTUALIZAR **/
-      ,attribute2 = null
+   set  --ATTRIBUTE1 = null /** RFC NO ACTUALIZAR **/
+       attribute2 = null
    where attribute2 is not null

@@ -218,6 +218,7 @@ public class AltaDeClienteCO extends OAControllerImpl
     String strEmpresaQueFacturaText = null; 
     
     String strComentarios = null; 
+    String strRFC = null; 
     
     String strTipoOperativoValue = null; 
     String strTipoOperativoText = null;
@@ -260,6 +261,13 @@ public class AltaDeClienteCO extends OAControllerImpl
      }
     }
     
+      OAMessageTextInputBean RFCBean = (OAMessageTextInputBean)webBean.findChildRecursive("RFC"); 
+      if(null!=RFCBean){
+       if(null!=RFCBean.getValue(pageContext)){
+       strRFC = RFCBean.getValue(pageContext).toString(); 
+       }
+      }
+    
     OAMessageChoiceBean TipoOperativoBean = (OAMessageChoiceBean)webBean.findChildRecursive("TipoOperativo");
     if(null!=TipoOperativoBean){
      if(null!=TipoOperativoBean.getValue(pageContext)){
@@ -296,7 +304,8 @@ public class AltaDeClienteCO extends OAControllerImpl
     System.out.println("strEmpresaQueFacturaText:"+strEmpresaQueFacturaText);
     
     System.out.println("strComentarios:"+strComentarios);
-    
+    System.out.println("strRFC:"+strRFC);
+      
     System.out.println("strTipoOperativoValue:"+strTipoOperativoValue);
     System.out.println("strTipoOperativoText:"+strTipoOperativoText);
      
@@ -1165,6 +1174,7 @@ public class AltaDeClienteCO extends OAControllerImpl
                                         ,strTipoAdministrativoText 
                                         ,strTipoComercialValue  
                                         ,strTipoComercialText 
+                                        ,strRFC
                                        );
        
          DataObject CedulaExaminePUploadData =  pageContext.getNamedDataObject("CedulaExamineP"); 
@@ -1293,6 +1303,8 @@ public class AltaDeClienteCO extends OAControllerImpl
                                             );
          
          altaDeClienteAM.callFromPdftToOracle();
+         
+         xxqp.oracle.apps.ar.pdft.altacliente.Utils.enviarPDFConCedula(altaDeClienteAM,pageContext,"CREATE");
          
          com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
          parameters.put("pClientesHeaderId",sbHeaderId.toString() );

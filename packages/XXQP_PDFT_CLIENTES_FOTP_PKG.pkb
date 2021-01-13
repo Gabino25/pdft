@@ -489,6 +489,7 @@ CURSOR get_cust_account_info (cur_party_id number) IS
   
    CURSOR get_parties_info(cur_party_id  number) IS
       select party_name
+               ,rfc
         from XXQP_HzPuiPartySearchRltsVO
        where party_id = cur_party_id;
     
@@ -541,7 +542,28 @@ CURSOR get_cust_account_info (cur_party_id number) IS
 
          
     
-    insert into XXQP_PDFT_CLIENTES_HEADER values (
+    insert into XXQP_PDFT_CLIENTES_HEADER (ID                     /** NUMBER,                             **/
+                                                                  ,NOMBRE_CLIENTE         /** VARCHAR2(250 BYTE)     NOT NULL,    **/ 
+                                                                  ,GIRO_EMPRESARIAL_C     /** VARCHAR2(250 BYTE),                 **/
+                                                                  ,EMPRESA_QUE_FACTURA_C  /** VARCHAR2(250 BYTE),**/
+                                                                  ,TIPO_OPERATIVO_C       /** VARCHAR2(250 BYTE),**/
+                                                                  ,TIPO_ADMINISTRATIVO_C  /** VARCHAR2(250 BYTE),**/
+                                                                  ,TIPO_COMERCIAL_C       /** VARCHAR2(250 BYTE),**/
+                                                                  ,COMENTARIOS            /** VARCHAR2(1000 BYTE),**/
+                                                                  ,CREATED_BY             /** NUMBER(15)             NOT NULL,**/
+                                                                  ,CREATION_DATE          /** DATE                   NOT NULL,**/
+                                                                  ,LAST_UPDATED_BY        /** NUMBER(15)             NOT NULL,**/
+                                                                  ,LAST_UPDATE_DATE       /** DATE                   NOT NULL,**/
+                                                                  ,LAST_UPDATE_LOGIN      /** NUMBER(15),**/
+                                                                  ,ATTRIBUTE_CATEGORY     /** VARCHAR2(250 BYTE),**/
+                                                                  ,ATTRIBUTE1             /** VARCHAR2(2000 BYTE),**/
+                                                                  ,ATTRIBUTE2             /** VARCHAR2(2000 BYTE),**/
+                                                                  ,ATTRIBUTE3             /** VARCHAR2(2000 BYTE),**/
+                                                                  ,ATTRIBUTE4             /** VARCHAR2(2000 BYTE),**/
+                                                                  ,ATTRIBUTE5             /** VARCHAR2(2000 BYTE),**/
+                                                                  ,PARTY_ID               /** NUMBER,**/
+                                                                  ,RFC                    /** VARCHAR2(50 BYTE)      NOT NULL**/
+                                                                  ) values (
                                                                                  ln_clientes_header_id                  /** ID                     **/                                                                                                                                                                            
                                                                                 ,parties_info_rec.party_name    /** NOMBRE_CLIENTE         **/                                                                                                                                                                            
                                                                                 ,null     /** GIRO_EMPRESARIAL_C     **/                                                                                                                                                                            
@@ -562,6 +584,7 @@ CURSOR get_cust_account_info (cur_party_id number) IS
                                                                                 ,null     /** ATTRIBUTE4             **/                                                                                                                                                                            
                                                                                 ,null     /** ATTRIBUTE5             **/
                                                                                 ,pni_party_id   /*** PARTY_ID **/
+                                                                                ,parties_info_rec.rfc /** RFC NOT NULL **/
                                                                                 );       
                                                                     commit;       
    
