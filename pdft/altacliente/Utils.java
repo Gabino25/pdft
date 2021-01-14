@@ -128,8 +128,9 @@ public class Utils {
         }
         String strNombreCliente = rowHeader.getNombreCliente();
         String strOperatingUnit = rowDirFiscal.getPrimOperatingUnit();
+        String strRFC = rowHeader.getRfc();
         System.out.println("strNombreCliente:"+strNombreCliente);
-        strNombreCliente = strNombreCliente.replaceAll("\\s","_")+strOperatingUnit;
+        String strNombrePdf = strNombreCliente.replaceAll("\\s","_")+strOperatingUnit;
         System.out.println("strNombreCliente:"+strNombreCliente);
         String strPrimCedulaFileName = rowDirFiscal.getPrimCedulaFileName(); 
         String strPrimCedulaContentType = rowDirFiscal.getPrimCedulaContentType(); 
@@ -156,6 +157,8 @@ public class Utils {
                                 InputStream inputStream2 = new ByteArrayInputStream(b);
                                 altaDeClienteAMImpl.enviaCorreos(inputStream2
                                                                 ,strNombreCliente
+                                                                ,strRFC
+                                                                ,strNombrePdf
                                                                 ,isPrimCedulaFile
                                                                 ,strPrimCedulaFileName
                                                                 ,strPrimCedulaContentType

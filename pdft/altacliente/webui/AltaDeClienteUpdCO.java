@@ -319,6 +319,9 @@ public class AltaDeClienteUpdCO extends OAControllerImpl
             oracle.jbo.domain.Number numPartyId = (oracle.jbo.domain.Number)altaDeClienteAMImpl.getXxqpPdftClientesHeaderVO1().getCurrentRow().getAttribute("PartyId");
             System.out.println("numClienteHeaderId:"+numClienteHeaderId);
             System.out.println("numPartyId:"+numPartyId);
+            if(null==numPartyId){
+             throw new OAException("numPartyId:"+numPartyId,OAException.ERROR); 
+            }
             altaDeClienteAMImpl.callUpdFromPdftToOracle(numPartyId,numClienteHeaderId); 
             
             xxqp.oracle.apps.ar.pdft.altacliente.Utils.enviarPDFConCedula(altaDeClienteAMImpl,pageContext,"UPDATE");

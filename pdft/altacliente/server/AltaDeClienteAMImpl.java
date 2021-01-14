@@ -940,6 +940,8 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
 
     public void enviaCorreos(InputStream pInputStream
                             ,String pNombreCliente
+                            ,String pRFC
+                            ,String pNombrePdf
                             ,InputStream pIsPrimCedulaFile
                             ,String pPrimCedulaFileName
                             ,String pPrimCedulaContentType
@@ -989,8 +991,8 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             map.put("Subject","Modificacion de cliente");
         }
         
-        map.put("Body","Alta Cliente Body");
-        map.put("NombreCliente",pNombreCliente);
+        map.put("Body","Nombre del cliente:"+pNombreCliente+"\nRFC:"+pRFC);
+        map.put("NombrePDF",pNombrePdf);
         map.put("PrimCedulaFileName",pPrimCedulaFileName);
         map.put("PrimCedulaContentType",pPrimCedulaContentType);
         if(count>0){
@@ -1007,7 +1009,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
         String strCorreos = map.get("Correos");
         String strSubject = map.get("Subject"); 
         String strBody = map.get("Body"); 
-        String strNombreCliente = map.get("NombreCliente");
+        String strNombrePDF = map.get("NombrePDF");
         String strPrimCedulaFileName = map.get("PrimCedulaFileName");
         String strPrimCedulaContentType = map.get("PrimCedulaContentType");
         
@@ -1044,7 +1046,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
           multipart.addBodyPart(messageBodyPart);
           addAttachment(multipart
                        ,pInputStream
-                       ,strNombreCliente+".pdf"
+                       ,strNombrePDF+".pdf"
                        ,"application/pdf"
                        );
           addAttachment(multipart

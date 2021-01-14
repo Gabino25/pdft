@@ -57,7 +57,7 @@
                                                 <oa:tableLayout id="TabLayRFCP">
                                                    <ui:contents>
                                                       <oa:messageChoice id="OperatingUnitP" pickListViewDef="" pickListValAttr="OrgId" pickListDispAttr="OuName" prompt="Unidad Operativa" readOnly="false" pickListViewName="AltaDeClienteAM.OperatingUnitVO1" required="yes"/>
-                                                      <oa:messageTextInput id="RFCP" cellNoWrapFormat="true" columns="45" maximumLength="13" prompt="RFC" required="yes" styleClass="OraFieldText" serverUnvalidated="true">
+                                                      <oa:messageTextInput id="RFCP" cellNoWrapFormat="true" columns="45" maximumLength="13" prompt="RFC" required="yes" styleClass="OraFieldText" serverUnvalidated="true" rendered="false">
                                                          <ui:primaryClientAction>
                                                             <ui:firePartialAction event="RFCPEvt" unvalidated="true"/>
                                                          </ui:primaryClientAction>
@@ -128,7 +128,7 @@
                                                 <oa:tableLayout id="TabLayRFCS" hAlign="center">
                                                    <ui:contents>
                                                       <oa:messageChoice id="OperatingUnitS" pickListViewDef="" pickListValAttr="OrgId" pickListDispAttr="OuName" prompt="Unidad Operativa" readOnly="false" pickListViewName="AltaDeClienteAM.OperatingUnitVO1" required="no"/>
-                                                      <oa:messageTextInput id="RFCS" cellNoWrapFormat="true" columns="45" maximumLength="13" prompt="RFC" styleClass="OraFieldText" serverUnvalidated="true">
+                                                      <oa:messageTextInput id="RFCS" cellNoWrapFormat="true" columns="45" maximumLength="13" prompt="RFC" styleClass="OraFieldText" serverUnvalidated="true" rendered="false">
                                                          <ui:primaryClientAction>
                                                             <ui:firePartialAction event="RFCSEvt" unvalidated="true"/>
                                                          </ui:primaryClientAction>

@@ -1304,7 +1304,9 @@ public class AltaDeClienteCO extends OAControllerImpl
          
          altaDeClienteAM.callFromPdftToOracle();
          
+         
          xxqp.oracle.apps.ar.pdft.altacliente.Utils.enviarPDFConCedula(altaDeClienteAM,pageContext,"CREATE");
+         
          
          com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
          parameters.put("pClientesHeaderId",sbHeaderId.toString() );

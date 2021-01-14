@@ -68,20 +68,20 @@ ln_cust_acct_site_id_sec number;
  raise le_from_pdft_to_oracle; 
  end if; 
  
- xxqp_pdft_clientes_pkg.call_create_location_sec(pso_errmsg => ls_errmsg
+ APPS.xxqp_pdft_clientes_pkg.call_create_location_sec(pso_errmsg => ls_errmsg
  ,pso_errcode => ls_errcode
  ,pni_cliente_header_id => pni_cliente_header_id
  ,pno_location_id => ln_location_id_sec
  ); 
  if ls_errmsg is not null then 
  pso_errmsg := 'Ocurrio una excepcion al llamar a call_create_location_sec.'||ls_errmsg;
- pso_errcode := ls_errcode; 
- raise le_from_pdft_to_oracle; 
- end if; 
+    pso_errcode := ls_errcode; 
+    raise le_from_pdft_to_oracle; 
+   end if;                    
+   
+   if ln_location_id_prim is not null then 
  
- if ln_location_id_prim is not null then 
- 
- APPS.xxqp_pdft_clientes_pkg.call_create_cust_account(pso_errmsg                   => ls_errmsg
+     xxqp_pdft_clientes_pkg.call_create_cust_account(pso_errmsg                   => ls_errmsg
                                                                          ,pso_errcode                   => ls_errcode
                                                                          ,pni_cliente_header_id     => pni_cliente_header_id
                                                                          ,pno_party_id                  => ln_party_id 
@@ -271,7 +271,8 @@ ln_cust_acct_site_id_sec number;
                   ,xpch.ATTRIBUTE2            
                   ,xpch.ATTRIBUTE3            
                   ,xpch.ATTRIBUTE4            
-                  ,xpch.ATTRIBUTE5            
+                  ,xpch.ATTRIBUTE5        
+                  ,xpch.RFC    
                   ,xpcdf.PRIM_RFC                
                   ,xpcdf.PRIM_RAZON_SOCIAL        
                   ,xpcdf.PRIM_DIRECCION            
@@ -347,10 +348,26 @@ ln_cust_acct_site_id_sec number;
 ln_resp_id            number;
 
 ls_statement varchar2(2000) := 'alter session set nls_language=''AMERICAN''';         
-                                                   
+lb_fnd_profile_save   boolean;                             
+                      
  begin 
   pso_errmsg := null; 
  pso_errcode := '0';
+ 
+ /**
+  for idx in (SELECT DISTINCT PROFILE_OPTION_NAME
+     FROM fnd_profile_options_tl
+    WHERE user_profile_option_name in ('HZ: Generate Party Number','HZ: Generate Party Site Number')
+    ) LOOP
+    
+    lb_fnd_profile_save := FND_PROFILE.SAVE( X_NAME            => idx.PROFILE_OPTION_NAME
+                                                                  , X_VALUE           => 'Y'    -- Change here
+                                                                  , X_LEVEL_NAME  => 'USER'
+                                                                  , X_LEVEL_VALUE => nvl(fnd_global.user_id,fnd_profile.value('USER_ID'))
+                                                                  ); 
+                  
+   END LOOP;            
+   **/
  
    if 1 =1 then 
   
@@ -762,12 +779,12 @@ ls_statement varchar2(2000) := 'alter session set nls_language=''AMERICAN''';
           
            execute immediate ls_statement;
           lt_cust_account_rec_type.account_name := client_head_info_rec.prim_razon_social;
-          lt_cust_account_rec_type.account_number :=  client_head_info_rec.prim_rfc; /** Column account_number must have a value. must have unique **/
+          lt_cust_account_rec_type.account_number :=  TO_CHAR( HZ_ACCOUNT_NUM_S.NEXTVAL ); /** client_head_info_rec.prim_rfc;  Column account_number must have a value. must have unique **/
           lt_cust_account_rec_type.attribute_category := 'QPN';
-          lt_cust_account_rec_type.attribute1 := client_head_info_rec.prim_rfc;
+          lt_cust_account_rec_type.attribute1 := nvl(client_head_info_rec.prim_rfc,client_head_info_rec.rfc);
           lt_cust_account_rec_type.attribute5 := client_head_info_rec.METODO_DE_PAGO_C;
           lt_cust_account_rec_type.attribute6 := client_head_info_rec.USO_DEL_CFDI_C;
-          lt_cust_account_rec_type.orig_system_reference := client_head_info_rec.prim_rfc;
+          lt_cust_account_rec_type.orig_system_reference := nvl(client_head_info_rec.prim_rfc,client_head_info_rec.rfc);
           lt_cust_account_rec_type.created_by_module := 'TCA_V2_API';
            
           lt_organization_rec_type.organization_name := client_head_info_rec.prim_razon_social;
@@ -775,7 +792,8 @@ ls_statement varchar2(2000) := 'alter session set nls_language=''AMERICAN''';
           lt_organization_rec_type.created_by_module := 'TCA_V2_API';
             
           lt_party_rec_type.attribute_category := 'QPN'; 
-          lt_party_rec_type.attribute1 := client_head_info_rec.prim_rfc; 
+          /* lt_party_rec_type.attribute1 := client_head_info_rec.prim_rfc;  140120211233 **/
+          lt_party_rec_type.attribute1 := client_head_info_rec.rfc;
           lt_party_rec_type.attribute2 := pni_cliente_header_id;
             
           lt_organization_rec_type.party_rec := lt_party_rec_type;
@@ -816,6 +834,7 @@ ls_statement varchar2(2000) := 'alter session set nls_language=''AMERICAN''';
               set  attribute1 = 'Creation of Cust Account is Successful '
                    ,attribute2 = ln_party_id
                    ,attribute3 = ln_cust_acccount_id
+                   ,party_id = ln_party_id
              where id = pni_cliente_header_id;
            commit; 
                                                         
