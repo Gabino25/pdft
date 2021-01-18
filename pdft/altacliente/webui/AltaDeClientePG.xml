@@ -23,6 +23,7 @@
                                     </oa:messageChoice>
                                     <oa:messageTextInput id="Comentarios" prompt="Comentarios" columns="90" rows="2" maximumLength="1000"/>
                                     <oa:messageTextInput id="RFC" required="yes" prompt="RFC"/>
+                                    <oa:messageTextInput id="RazonSocial" required="yes" prompt="Razon Social"/>
                                  </ui:contents>
                               </oa:tableLayout>
                            </ui:contents>
@@ -62,7 +63,7 @@
                                                             <ui:firePartialAction event="RFCPEvt" unvalidated="true"/>
                                                          </ui:primaryClientAction>
                                                       </oa:messageTextInput>
-                                                      <oa:messageTextInput id="RazonSocialP" columns="90" maximumLength="200" prompt="Razon Social" required="yes" styleClass="OraFieldText"/>
+                                                      <oa:messageTextInput id="RazonSocialP" columns="90" maximumLength="200" prompt="Razon Social" required="yes" styleClass="OraFieldText" rendered="false"/>
                                                       <oa:messageTextInput id="DireccionP" columns="90" maximumLength="300" required="yes" prompt="Calle" styleClass="OraFieldText"/>
                                                       <oa:messageTextInput id="NumeroExtP" columns="90" maximumLength="240" required="yes" prompt="Numero Exterior" styleClass="OraFieldText"/>
                                                       <oa:messageTextInput id="NumeroIntP" columns="90" maximumLength="240" required="yes" prompt="Numero Interior" styleClass="OraFieldText"/>
@@ -133,7 +134,7 @@
                                                             <ui:firePartialAction event="RFCSEvt" unvalidated="true"/>
                                                          </ui:primaryClientAction>
                                                       </oa:messageTextInput>
-                                                      <oa:messageTextInput id="RazonSocialS" columns="90" maximumLength="200" prompt="Razon Social" styleClass="OraFieldText"/>
+                                                      <oa:messageTextInput id="RazonSocialS" columns="90" maximumLength="200" prompt="Razon Social" styleClass="OraFieldText" rendered="false"/>
                                                       <oa:messageTextInput id="DireccionS" columns="90" maximumLength="300" prompt="Calle" styleClass="OraFieldText"/>
                                                       <oa:messageTextInput id="NumeroExtS" columns="90" maximumLength="240" prompt="Numero Exterior" styleClass="OraFieldText"/>
                                                       <oa:messageTextInput id="NumeroIntS" columns="90" maximumLength="240" prompt="Numero Interior" styleClass="OraFieldText"/>

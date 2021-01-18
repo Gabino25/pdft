@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE BODY      XXQP_PDFT_CUSTOMER_PKG AS 
+CREATE OR REPLACE PACKAGE BODY APPS.XXQP_PDFT_CUSTOMER_PKG AS 
 
 
    CURSOR getHeaderInfo(CUR_CUSTOMER_ID  NUMBER) IS
@@ -23,6 +23,7 @@ CREATE OR REPLACE PACKAGE BODY      XXQP_PDFT_CUSTOMER_PKG AS
   ,XPCH.ATTRIBUTE5             
   ,XPCH.PARTY_ID     
   ,XPCH.RFC     
+  ,XPCH.RAZON_SOCIAL
   ,(select  description meaning
    from xxqp_pdft_mgr_catalogos
 where lookup_type = 'GIRO_EMPRESARIAL'
@@ -196,6 +197,15 @@ WHERE XPCC.HEADER_ID = CUR_HEADER_ID;
                                                     )
            and T.FLEX_VALUE_MEANING = XPCFP.METODO_DE_PAGO_C
          ) METODO_DE_PAGO_D
+         ,(select  t.name  
+            from ra_terms t
+          where t.term_id = XPCFP.DIAS_NAT_DE_CREDITO
+          )  TERMINOS_DE_PAGOS
+         ,DECODE(XPCFP.UTILIZA_PORTAL_C,'Y','Si','N','No')  UTILIZA_PORTAL_D
+         ,DECODE(XPCFP.ORDEN_DE_COMPRA_C,'Y','Si','N','No')  ORDEN_DE_COMPRA_D
+         ,DECODE(XPCFP.CONTRATO_C,'Y','Si','N','No')  CONTRATO_D
+         ,DECODE(XPCFP.REQUIERE_ADENDAS_C,'Y','Si','N','No')  REQUIERE_ADENDAS_D
+         ,DECODE(XPCFP.REQUIERE_FACTURA_C,'Y','Si','N','No')  REQUIERE_FACTURA_D
   FROM XXQP_PDFT_CLIENTES_FACT_PAG XPCFP
 WHERE XPCFP.HEADER_ID = CUR_HEADER_ID;
 
@@ -284,7 +294,8 @@ PROCEDURE MAIN(PSO_ERRMSG               OUT VARCHAR2
   ContactosInforec    getContactosInfo%ROWTYPE;
   FacPagInforec        getFacPagInfo%ROWTYPE;
     
-  ls_ou_name   varchar2(2000); 
+  ls_ou_name             varchar2(2000); 
+  ls_dias_recepcion     varchar2(2000); 
     
   begin 
      pso_errmsg := null; 
@@ -329,10 +340,11 @@ PROCEDURE MAIN(PSO_ERRMSG               OUT VARCHAR2
          lc_info := lc_info||'<GIRO_EMPRESARIAL>'||replace_char_esp(HeaderInforec.giro_empresarial_m)||'</GIRO_EMPRESARIAL>';
          lc_info := lc_info||'<EMPRESA_QUE_FACTURA>'||replace_char_esp(HeaderInforec.empresa_que_factura_m)||'</EMPRESA_QUE_FACTURA>';
          lc_info := lc_info||'<TIPO_OPERATIVO>'||replace_char_esp(HeaderInforec.TIPO_OPERATIVO_C)||'</TIPO_OPERATIVO>';
-        lc_info := lc_info||'<TIPO_ADMINISTRATIVO>'||replace_char_esp(HeaderInforec.TIPO_ADMINISTRATIVO_C)||'</TIPO_ADMINISTRATIVO>';
-        lc_info := lc_info||'<TIPO_COMERCIAL>'||replace_char_esp(HeaderInforec.TIPO_COMERCIAL_C)||'</TIPO_COMERCIAL>';
+         lc_info := lc_info||'<TIPO_ADMINISTRATIVO>'||replace_char_esp(HeaderInforec.TIPO_ADMINISTRATIVO_C)||'</TIPO_ADMINISTRATIVO>';
+         lc_info := lc_info||'<TIPO_COMERCIAL>'||replace_char_esp(HeaderInforec.TIPO_COMERCIAL_C)||'</TIPO_COMERCIAL>';
          lc_info := lc_info||'<COMENTARIOS>'||replace_char_esp(HeaderInforec.COMENTARIOS)||'</COMENTARIOS>';
-          
+         lc_info := lc_info||'<RAZON_SOCIAL>'||replace_char_esp(HeaderInforec.RAZON_SOCIAL)||'</RAZON_SOCIAL>';
+            
           OPEN getDirFiscalInfo(HeaderInforec.id,PSI_OPERATING_UNIT);
            LOOP
               FETCH getDirFiscalInfo INTO DirFiscalInforec;
@@ -394,11 +406,50 @@ PROCEDURE MAIN(PSO_ERRMSG               OUT VARCHAR2
               FETCH getFacPagInfo INTO FacPagInforec;
               EXIT WHEN getFacPagInfo%NOTFOUND;
               
+               if FacPagInforec.LUNES = 'Y' then 
+                ls_dias_recepcion := ls_dias_recepcion||'Lunes, ';
+              end if; 
+              
+              if FacPagInforec.MARTES = 'Y' then 
+                ls_dias_recepcion := ls_dias_recepcion||'Martes, ';
+              end if; 
+                
+               if FacPagInforec.MIERCOLES = 'Y' then 
+                ls_dias_recepcion := ls_dias_recepcion||'Miercoles, ';
+              end if; 
+               
+               if FacPagInforec.JUEVES = 'Y' then 
+                ls_dias_recepcion := ls_dias_recepcion||'Jueves, ';
+              end if; 
+                 
+               if FacPagInforec.VIERNES = 'Y' then 
+                ls_dias_recepcion := ls_dias_recepcion||'Viernes, ';
+              end if; 
+                   
+               if FacPagInforec.SABADO = 'Y' then 
+                ls_dias_recepcion := ls_dias_recepcion||'Sabado, ';
+              end if; 
+          
+               if FacPagInforec.DOMINGO = 'Y' then 
+                ls_dias_recepcion := ls_dias_recepcion||'Domingo';
+              end if; 
+              
               lc_info := lc_info||'<CONDICIONES_DE_PAGO_D>'||replace_char_esp(FacPagInforec.CONDICIONES_DE_PAGO_D)||'</CONDICIONES_DE_PAGO_D>';
               lc_info := lc_info||'<TIPO_DE_PAGO_D>'||replace_char_esp(FacPagInforec.TIPO_DE_PAGO_D)||'</TIPO_DE_PAGO_D>';
               lc_info := lc_info||'<CICLO_DE_FACTURACION_D>'||replace_char_esp(FacPagInforec.CICLO_DE_FACTURACION_D)||'</CICLO_DE_FACTURACION_D>';
               lc_info := lc_info||'<METODO_DE_PAGO_D>'||replace_char_esp(FacPagInforec.METODO_DE_PAGO_D)||'</METODO_DE_PAGO_D>';
-              
+              lc_info := lc_info||'<TERMINOS_DE_PAGOS>'||replace_char_esp(FacPagInforec.TERMINOS_DE_PAGOS)||'</TERMINOS_DE_PAGOS>';
+              lc_info := lc_info||'<NUMERO_DE_CUENTA>'||replace_char_esp(FacPagInforec.NUMERO_DE_CUENTA)||'</NUMERO_DE_CUENTA>';
+              lc_info := lc_info||'<NOMBRE_DEL_BANCO>'||replace_char_esp(FacPagInforec.NOMBRE_DEL_BANCO)||'</NOMBRE_DEL_BANCO>';
+              lc_info := lc_info||'<DIAS_DE_RECEPCION>'||replace_char_esp(ls_dias_recepcion)||'</DIAS_DE_RECEPCION>';
+              lc_info := lc_info||'<UTILIZA_PORTAL_D>'||replace_char_esp(FacPagInforec.utiliza_portal_d)||'</UTILIZA_PORTAL_D>';
+              lc_info := lc_info||'<PORTAL_LINK>'||replace_char_esp(FacPagInforec.portal_link)||'</PORTAL_LINK>';
+              lc_info := lc_info||'<ORDEN_DE_COMPRA_D>'||replace_char_esp(FacPagInforec.ORDEN_DE_COMPRA_D)||'</ORDEN_DE_COMPRA_D>';
+              lc_info := lc_info||'<CONTRATO_D>'||replace_char_esp(FacPagInforec.CONTRATO_D)||'</CONTRATO_D>';
+              lc_info := lc_info||'<VIGENCIA_CONTRATO>'||replace_char_esp(FacPagInforec.VIGENCIA_CONTRATO)||'</VIGENCIA_CONTRATO>';
+              lc_info := lc_info||'<REQUIERE_ADENDAS_D>'||replace_char_esp(FacPagInforec.REQUIERE_ADENDAS_D)||'</REQUIERE_ADENDAS_D>';
+              lc_info := lc_info||'<REQUIERE_FACTURA_D>'||replace_char_esp(FacPagInforec.REQUIERE_FACTURA_D)||'</REQUIERE_FACTURA_D>';
+               
            END LOOP;
            CLOSE getFacPagInfo;
            

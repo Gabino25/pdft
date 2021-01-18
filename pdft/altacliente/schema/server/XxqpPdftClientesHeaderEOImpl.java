@@ -37,10 +37,11 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
     public static final int ATTRIBUTE5 = 18;
     public static final int PARTYID = 19;
     public static final int RFC = 20;
-    public static final int XXQPPDFTCLIENTESDIRFISCALEO = 21;
-    public static final int XXQPPDFTCLIENTESPUNTORECOEO = 22;
-    public static final int XXQPPDFTCLIENTESCONTACTOSEO = 23;
-    public static final int XXQPPDFTCLIENTESFACTPAGEO = 24;
+    public static final int RAZONSOCIAL = 21;
+    public static final int XXQPPDFTCLIENTESDIRFISCALEO = 22;
+    public static final int XXQPPDFTCLIENTESPUNTORECOEO = 23;
+    public static final int XXQPPDFTCLIENTESCONTACTOSEO = 24;
+    public static final int XXQPPDFTCLIENTESFACTPAGEO = 25;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -402,6 +403,8 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
             return getPartyId();
         case RFC:
             return getRfc();
+        case RAZONSOCIAL:
+            return getRazonSocial();
         case XXQPPDFTCLIENTESCONTACTOSEO:
             return getXxqpPdftClientesContactosEO();
         case XXQPPDFTCLIENTESDIRFISCALEO:
@@ -484,6 +487,9 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
         case RFC:
             setRfc((String)value);
             return;
+        case RAZONSOCIAL:
+            setRazonSocial((String)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -536,6 +542,19 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
      */
     public void setRfc(String value) {
         setAttributeInternal(RFC, value);
+    }
+
+
+    /**Gets the attribute value for RazonSocial, using the alias name RazonSocial
+     */
+    public String getRazonSocial() {
+        return (String)getAttributeInternal(RAZONSOCIAL);
+    }
+
+    /**Sets <code>value</code> as the attribute value for RazonSocial
+     */
+    public void setRazonSocial(String value) {
+        setAttributeInternal(RAZONSOCIAL, value);
     }
 
     /**Creates a Key object based on given key constituents

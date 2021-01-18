@@ -25,6 +25,8 @@
                                        </ui:primaryClientAction>
                                     </oa:messageChoice>
                                     <oa:messageTextInput id="Comentarios" prompt="Comentarios" columns="90" rows="2" maximumLength="1000" viewName="XxqpPdftClientesHeaderVO1" viewAttr="Comentarios" disabled="false" styleClass="OraFieldText" readOnly="false"/>
+                                    <oa:messageTextInput id="RFC" prompt="RFC" columns="90" maximumLength="50" viewName="XxqpPdftClientesHeaderVO1" viewAttr="Rfc" readOnly="true" styleClass="OraFieldText" disabled="false" required="yes"/>
+                                    <oa:messageTextInput id="RazonSocial" prompt="Razon Social" columns="90" maximumLength="500" viewName="XxqpPdftClientesHeaderVO1" viewAttr="RazonSocial" readOnly="true" styleClass="OraFieldText" disabled="false" required="yes"/>
                                  </ui:contents>
                               </oa:tableLayout>
                            </ui:contents>
@@ -60,7 +62,7 @@
                                                    <ui:contents>
                                                       <oa:messageChoice id="OperatingUnitP" pickListViewDef="" pickListValAttr="OrgId" pickListDispAttr="OuName" prompt="Unidad Operativa" readOnly="false" pickListViewName="AltaDeClienteAM.OperatingUnitVO1" required="yes" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimOperatingUnit"/>
                                                       <oa:messageTextInput id="RFCP" cellNoWrapFormat="true" columns="45" maximumLength="13" prompt="RFC" required="yes" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimRfc" rendered="false"/>
-                                                      <oa:messageTextInput id="RazonSocialP" columns="90" maximumLength="200" prompt="Razon Social" required="yes" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimRazonSocial"/>
+                                                      <oa:messageTextInput id="RazonSocialP" columns="90" maximumLength="200" prompt="Razon Social" required="yes" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimRazonSocial" rendered="false"/>
                                                       <oa:messageTextInput id="DireccionP" columns="90" maximumLength="300" required="yes" prompt="Calle" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimDireccion"/>
                                                       <oa:messageTextInput id="NumeroExtP" columns="90" maximumLength="240" required="yes" prompt="Numero Exterior" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimNumeroExt"/>
                                                       <oa:messageTextInput id="NumeroIntP" columns="90" maximumLength="240" required="yes" prompt="Numero Interior" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimNumeroInt"/>
@@ -127,7 +129,7 @@
                                                    <ui:contents>
                                                       <oa:messageChoice id="OperatingUnitS" pickListViewDef="" pickListValAttr="OrgId" pickListDispAttr="OuName" prompt="Unidad Operativa" readOnly="false" pickListViewName="AltaDeClienteAM.OperatingUnitVO1" required="no" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecOperatingUnit"/>
                                                       <oa:messageTextInput id="RFCS" cellNoWrapFormat="true" columns="45" maximumLength="13" prompt="RFC" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecRfc" rendered="false"/>
-                                                      <oa:messageTextInput id="RazonSocialS" columns="90" maximumLength="200" prompt="Razon Social" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecRazonSocial"/>
+                                                      <oa:messageTextInput id="RazonSocialS" columns="90" maximumLength="200" prompt="Razon Social" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecRazonSocial" rendered="false"/>
                                                       <oa:messageTextInput id="DireccionS" columns="90" maximumLength="300" prompt="Calle" styleClass="OraFieldText" required="no" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecDireccion"/>
                                                       <oa:messageTextInput id="NumeroExtS" columns="90" maximumLength="240" prompt="Numero Exterior" styleClass="OraFieldText" required="no" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecNumeroExt"/>
                                                       <oa:messageTextInput id="NumeroIntS" columns="90" maximumLength="240" prompt="Numero Interior" styleClass="OraFieldText" required="no" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecNumeroInt"/>

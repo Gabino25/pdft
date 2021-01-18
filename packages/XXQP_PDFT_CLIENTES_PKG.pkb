@@ -68,20 +68,20 @@ ln_cust_acct_site_id_sec number;
  raise le_from_pdft_to_oracle; 
  end if; 
  
- APPS.xxqp_pdft_clientes_pkg.call_create_location_sec(pso_errmsg => ls_errmsg
+ xxqp_pdft_clientes_pkg.call_create_location_sec(pso_errmsg => ls_errmsg
  ,pso_errcode => ls_errcode
  ,pni_cliente_header_id => pni_cliente_header_id
  ,pno_location_id => ln_location_id_sec
  ); 
  if ls_errmsg is not null then 
  pso_errmsg := 'Ocurrio una excepcion al llamar a call_create_location_sec.'||ls_errmsg;
-    pso_errcode := ls_errcode; 
-    raise le_from_pdft_to_oracle; 
-   end if;                    
-   
-   if ln_location_id_prim is not null then 
+ pso_errcode := ls_errcode; 
+ raise le_from_pdft_to_oracle; 
+ end if; 
  
-     xxqp_pdft_clientes_pkg.call_create_cust_account(pso_errmsg                   => ls_errmsg
+ if ln_location_id_prim is not null then 
+ 
+ APPS.xxqp_pdft_clientes_pkg.call_create_cust_account(pso_errmsg                   => ls_errmsg
                                                                          ,pso_errcode                   => ls_errcode
                                                                          ,pni_cliente_header_id     => pni_cliente_header_id
                                                                          ,pno_party_id                  => ln_party_id 
@@ -273,6 +273,7 @@ ln_cust_acct_site_id_sec number;
                   ,xpch.ATTRIBUTE4            
                   ,xpch.ATTRIBUTE5        
                   ,xpch.RFC    
+                  ,xpch.RAZON_SOCIAL
                   ,xpcdf.PRIM_RFC                
                   ,xpcdf.PRIM_RAZON_SOCIAL        
                   ,xpcdf.PRIM_DIRECCION            
@@ -778,7 +779,7 @@ lb_fnd_profile_save   boolean;
           fnd_msg_pub.initialize;   
           
            execute immediate ls_statement;
-          lt_cust_account_rec_type.account_name := client_head_info_rec.prim_razon_social;
+          lt_cust_account_rec_type.account_name := 'Cuenta'||upper(replace(client_head_info_rec.nombre_cliente,' ','_')); -- client_head_info_rec.prim_razon_social;
           lt_cust_account_rec_type.account_number :=  TO_CHAR( HZ_ACCOUNT_NUM_S.NEXTVAL ); /** client_head_info_rec.prim_rfc;  Column account_number must have a value. must have unique **/
           lt_cust_account_rec_type.attribute_category := 'QPN';
           lt_cust_account_rec_type.attribute1 := nvl(client_head_info_rec.prim_rfc,client_head_info_rec.rfc);
@@ -787,8 +788,10 @@ lb_fnd_profile_save   boolean;
           lt_cust_account_rec_type.orig_system_reference := nvl(client_head_info_rec.prim_rfc,client_head_info_rec.rfc);
           lt_cust_account_rec_type.created_by_module := 'TCA_V2_API';
            
-          lt_organization_rec_type.organization_name := client_head_info_rec.prim_razon_social;
-          lt_organization_rec_type.known_as  := client_head_info_rec.nombre_cliente;
+        -- 180120211234  lt_organization_rec_type.organization_name := client_head_info_rec.prim_razon_social;
+        -- 180120211234  lt_organization_rec_type.known_as  := client_head_info_rec.nombre_cliente;
+          lt_organization_rec_type.organization_name := client_head_info_rec.nombre_cliente;  /** Column organization_name must have a value**/
+           lt_organization_rec_type.known_as := client_head_info_rec.razon_social;
           lt_organization_rec_type.created_by_module := 'TCA_V2_API';
             
           lt_party_rec_type.attribute_category := 'QPN'; 

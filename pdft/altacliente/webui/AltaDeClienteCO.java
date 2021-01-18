@@ -219,6 +219,7 @@ public class AltaDeClienteCO extends OAControllerImpl
     
     String strComentarios = null; 
     String strRFC = null; 
+    String strRazonSocial = null; 
     
     String strTipoOperativoValue = null; 
     String strTipoOperativoText = null;
@@ -267,6 +268,13 @@ public class AltaDeClienteCO extends OAControllerImpl
        strRFC = RFCBean.getValue(pageContext).toString(); 
        }
       }
+      
+      OAMessageTextInputBean RazonSocialBean = (OAMessageTextInputBean)webBean.findChildRecursive("RazonSocial"); 
+      if(null!=RazonSocialBean){
+       if(null!=RazonSocialBean.getValue(pageContext)){
+       strRazonSocial = RazonSocialBean.getValue(pageContext).toString();
+       }
+      }  
     
     OAMessageChoiceBean TipoOperativoBean = (OAMessageChoiceBean)webBean.findChildRecursive("TipoOperativo");
     if(null!=TipoOperativoBean){
@@ -305,6 +313,7 @@ public class AltaDeClienteCO extends OAControllerImpl
     
     System.out.println("strComentarios:"+strComentarios);
     System.out.println("strRFC:"+strRFC);
+    System.out.println("strRazonSocial:"+strRazonSocial);
       
     System.out.println("strTipoOperativoValue:"+strTipoOperativoValue);
     System.out.println("strTipoOperativoText:"+strTipoOperativoText);
@@ -1175,6 +1184,7 @@ public class AltaDeClienteCO extends OAControllerImpl
                                         ,strTipoComercialValue  
                                         ,strTipoComercialText 
                                         ,strRFC
+                                        ,strRazonSocial
                                        );
        
          DataObject CedulaExaminePUploadData =  pageContext.getNamedDataObject("CedulaExamineP"); 
@@ -1302,11 +1312,12 @@ public class AltaDeClienteCO extends OAControllerImpl
                                             ,strDomingo
                                             );
          
-         altaDeClienteAM.callFromPdftToOracle();
-         
-         
-         xxqp.oracle.apps.ar.pdft.altacliente.Utils.enviarPDFConCedula(altaDeClienteAM,pageContext,"CREATE");
-         
+         String[] fromPdftToOracle = altaDeClienteAM.callFromPdftToOracle();
+         if(null!=fromPdftToOracle[1]){
+          if(!"2".equals(fromPdftToOracle[1])){
+              xxqp.oracle.apps.ar.pdft.altacliente.Utils.enviarPDFConCedula(altaDeClienteAM,pageContext,"CREATE");
+          }
+         }
          
          com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
          parameters.put("pClientesHeaderId",sbHeaderId.toString() );

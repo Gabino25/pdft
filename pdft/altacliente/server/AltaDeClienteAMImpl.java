@@ -161,7 +161,9 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                                    String pStrTipoAdministrativoText, 
                                    String pStrTipoComercialValue, 
                                    String pStrTipoComercialText,
-                                   String pStrRFC) {
+                                   String pStrRFC,
+                                   String pRazonSocial
+                                   ) {
         XxqpPdftClientesHeaderVOImpl xxqpPdftClientesHeaderVOImpl =getXxqpPdftClientesHeaderVO1();
         XxqpPdftClientesHeaderVORowImpl xxqpPdftClientesHeaderVORowImpl =null; 
         
@@ -184,7 +186,8 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             xxqpPdftClientesHeaderVORowImpl.setRfc(pStrRFC);
             xxqpPdftClientesHeaderVORowImpl.setTipoOperativoC(pStrTipoOperativoValue);
             xxqpPdftClientesHeaderVORowImpl.setTipoAdministrativoC(pStrTipoAdministrativoValue);     
-            xxqpPdftClientesHeaderVORowImpl.setTipoComercialC(pStrTipoComercialValue);                  
+            xxqpPdftClientesHeaderVORowImpl.setTipoComercialC(pStrTipoComercialValue);       
+            xxqpPdftClientesHeaderVORowImpl.setRazonSocial(pRazonSocial);
             
             xxqpPdftClientesHeaderVOImpl.insertRow(xxqpPdftClientesHeaderVORowImpl);
           
@@ -700,11 +703,11 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
         }
     } /** END  private void closePreparedStatement **/
     
-     public void callFromPdftToOracle() {
+     public String[] callFromPdftToOracle() {
+         String[] retval = new String[2];
          XxqpPdftClientesHeaderVORowImpl xxqpPdftClientesHeaderVORowImpl = (XxqpPdftClientesHeaderVORowImpl)this.getXxqpPdftClientesHeaderVO1().getCurrentRow();
          oracle.jbo.domain.Number numClienteHeaderId = xxqpPdftClientesHeaderVORowImpl.getId();
          System.out.println("numClienteHeaderId:"+numClienteHeaderId);
-         String retval = null; 
          String strErrmsg = null; 
          String strErrcode = null;
          String strCallableStmt = " BEGIN " +
@@ -724,9 +727,13 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
              strErrcode = oraclecallablestatement.getString(2); 
              System.out.println("strErrmsg:"+strErrmsg);
              System.out.println("strErrcode:"+strErrcode);
+             retval[0]=strErrmsg; 
+             retval[1]=strErrcode; 
          } catch (SQLException sqle) {
              throw new OAException("SQLException en el metodo callFromPdftToOracle:"+sqle.getMessage()+", "+sqle.getErrorCode(),OAException.ERROR); 
          }
+         
+         return retval; 
          
      }
 
@@ -1090,5 +1097,21 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
         messageBodyPart.setFileName(pFilename);
         pMultipart.addBodyPart(messageBodyPart);
     }
-    
+
+    public void rollbackTrx(Number pHeaderId) {
+        String strCallableStmt = " BEGIN \n" + 
+                                 "  APPS.XXQP_PDFT_CLIENTES_FOTP_PKG.rollback_trx ( pni_header_id          => :1\n" + 
+                                 "                                                 );\n" + 
+                                 " END; \n";
+        OADBTransaction oadbtransaction = (OADBTransaction)getTransaction();
+        OracleCallableStatement oraclecallablestatement =  (OracleCallableStatement)oadbtransaction.createCallableStatement(strCallableStmt, 1);
+        try {
+            oraclecallablestatement.setDouble(1,pHeaderId.doubleValue());
+            oraclecallablestatement.execute();
+      } catch (SQLException e) {
+            System.out.println("SQLException en el metodo rollbackTrx:"+e.getErrorCode());
+            throw new OAException("SQLException en el metodo rollbackTrx:"+e.getErrorCode(),OAException.ERROR); 
+        }
+        
+    }
 }

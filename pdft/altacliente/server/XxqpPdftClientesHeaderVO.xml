@@ -23,7 +23,8 @@
        XxqpPdftClientesHeaderEO.ATTRIBUTE4, 
        XxqpPdftClientesHeaderEO.ATTRIBUTE5, 
        XxqpPdftClientesHeaderEO.PARTY_ID, 
-       XxqpPdftClientesHeaderEO.RFC"
+       XxqpPdftClientesHeaderEO.RFC, 
+       XxqpPdftClientesHeaderEO.RAZON_SOCIAL"
    FromList="XXQP_PDFT_CLIENTES_HEADER XxqpPdftClientesHeaderEO"
    BindingStyle="OracleName"
    CustomQuery="false"
@@ -176,5 +177,12 @@
       EntityAttrName="Rfc"
       EntityUsage="XxqpPdftClientesHeaderEO"
       AliasName="RFC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RazonSocial"
+      IsUnique="true"
+      EntityAttrName="RazonSocial"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="RAZON_SOCIAL" >
    </ViewAttribute>
 </ViewObject>

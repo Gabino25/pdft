@@ -37,18 +37,22 @@ public class Utils {
                                   OAPageContext pageContext) {
         System.out.println("Comienza altacliente.Utils:");
         XxqpPdftClientesHeaderVOImpl voHeader = altaDeClienteAMImpl.getXxqpPdftClientesHeaderVO1();
+        System.out.println("voHeader:"+voHeader);
         if(null==voHeader){
           return; 
         }
-        XxqpPdftClientesHeaderVORowImpl rowHeader = (XxqpPdftClientesHeaderVORowImpl)voHeader.getCurrentRow();                     
+        XxqpPdftClientesHeaderVORowImpl rowHeader = (XxqpPdftClientesHeaderVORowImpl)voHeader.getCurrentRow();    
+        System.out.println("rowHeader:"+rowHeader);
         if(null==rowHeader){
         return;
         }
         XxqpPdftClientesDirFiscalVOImpl voDirFiscal = altaDeClienteAMImpl.getXxqpPdftClientesDirFiscalVO1();
+        System.out.println("voDirFiscal:"+voDirFiscal);
         if(null==voDirFiscal){
          return; 
         }
         XxqpPdftClientesDirFiscalVORowImpl rowDirFiscal = (XxqpPdftClientesDirFiscalVORowImpl)voDirFiscal.getCurrentRow();
+        System.out.println("rowDirFiscal:"+rowDirFiscal);
         if(null==rowDirFiscal){
          return; 
         }

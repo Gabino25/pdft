@@ -109,7 +109,8 @@ public class AltaDeClienteReadOnlyCO extends OAControllerImpl
                 SubTabLayoutRNBean.setRendered(false);
             if(null!=PageButtonBarRNBean)
                 PageButtonBarRNBean.setRendered(false);
-              throw new OAException(strAttribute1,OAException.ERROR);
+           altaDeClienteAMImpl.rollbackTrx(xxqpPdftClientesHeaderVORowImpl.getId()); 
+           throw new OAException(strAttribute1,OAException.ERROR);
 
         }
        }
