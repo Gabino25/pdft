@@ -617,6 +617,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
     public com.sun.java.util.collections.List validaClienteRFCRazonSocial(String pStrNombreCliente 
                                                                          ,String pStrRFCPrimaria
                                                                          ,String pStrRazonSocialPrimaria
+                                                                         ,String pStrRFC
                                                                          ) {
         com.sun.java.util.collections.List listRetval = new com.sun.java.util.collections.ArrayList(); 
       String strOraclePreparedStatement =" select 'Razon Social:'||PTY.PARTY_NAME||' ya existe en Oracle.' message " + 
@@ -629,7 +630,11 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                                          "   UNION " + 
                                          "   select 'Nombre del Cliente:'||PTY.KNOWN_AS||' ya existe en Oracle.' message " + 
                                          "   from HZ_PARTIES PTY " + 
-                                         "    where PTY.KNOWN_AS = ?" ; 
+                                         "    where PTY.KNOWN_AS = ? "+
+                                         " UNION "+
+                                         " select 'RFC:'||ORIG_SYSTEM_REFERENCE||' ya existe en Oracle.' " + 
+                                         "    from XXQP_HzPuiAccountTableVO " + 
+                                         "  where ORIG_SYSTEM_REFERENCE = ?"; 
                                          
       String strPortalPreparedStatement = "  select 'Nombre del Cliente:'|| pch.nombre_cliente||' ya existe en el portal.' message " + 
                                           "      from XXQP_PDFT_CLIENTES_HEADER pch " + 
@@ -652,6 +657,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             sqlPreparedStatement.setString(1,pStrRazonSocialPrimaria);
             sqlPreparedStatement.setString(2,pStrRFCPrimaria);
             sqlPreparedStatement.setString(3,pStrNombreCliente);
+            sqlPreparedStatement.setString(4,pStrRFC);
             sqlResultSet = sqlPreparedStatement.executeQuery();
             while(sqlResultSet.next()){
                 listRetval.add(new OAException(sqlResultSet.getString("message"),OAException.ERROR)); 

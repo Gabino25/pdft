@@ -22,7 +22,11 @@
                                        </ui:primaryClientAction>
                                     </oa:messageChoice>
                                     <oa:messageTextInput id="Comentarios" prompt="Comentarios" columns="90" rows="2" maximumLength="1000"/>
-                                    <oa:messageTextInput id="RFC" required="yes" prompt="RFC"/>
+                                    <oa:messageTextInput id="RFC" required="yes" prompt="RFC" serverUnvalidated="true" maximumLength="13">
+                                       <ui:primaryClientAction>
+                                          <ui:firePartialAction unvalidated="true" event="RFCEvt"/>
+                                       </ui:primaryClientAction>
+                                    </oa:messageTextInput>
                                     <oa:messageTextInput id="RazonSocial" required="yes" prompt="Razon Social"/>
                                  </ui:contents>
                               </oa:tableLayout>

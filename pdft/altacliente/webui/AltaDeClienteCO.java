@@ -547,6 +547,34 @@ public class AltaDeClienteCO extends OAControllerImpl
           }
       }
     
+      if("RFCEvt".equals(pageContext.getParameter(this.EVENT_PARAM))
+         ||0==gIntSelectedIndex){
+          System.out.println("Evento RFCEvt");
+          String REG_EXP = "\\¿+|\\?+|\\°+|\\¬+|\\|+|\\!+|\\#+|\\$+|\\.+|\\,+|\\-+|" +
+          "\\%+|\\&+|\\+|\\=+|\\’+|\\¡+|\\++|\\*+|\\~+|\\[+|\\]" +
+          "+|\\{+|\\}+|\\^+|\\<+|\\>+|\\\"+";
+           Pattern pattern = Pattern.compile(REG_EXP);
+           if(null!=strRFCP&&!"".equals(strRFCP)){
+           Matcher matcher = pattern.matcher(strRFC);
+           if(matcher.find()){
+            throw new OAException("El RFC contiene caractares especiales",OAException.ERROR); 
+            }
+            if(strRFCP.contains(" ")){
+                throw new OAException("El RFC contiene espacios",OAException.ERROR); 
+            }
+           }
+           
+          com.sun.java.util.collections.List listValidaClienteRFCRazonSocial = new com.sun.java.util.collections.ArrayList(); 
+          listValidaClienteRFCRazonSocial = altaDeClienteAM.validaClienteRFCRazonSocial(strNombreCLiente
+                                                                                       ,strRFCP
+                                                                                       ,strRazonSocialP
+                                                                                       ,strRFC
+                                                                                       );
+          if(listValidaClienteRFCRazonSocial.size()>0){
+          OAException.raiseBundledOAException(listValidaClienteRFCRazonSocial);
+          }
+      } /**    if("RFCPEvt".equals(pageContext.getParameter(this.EVENT_PARAM)) ||0==gIntSelectedIndex){  **/
+    
       System.out.println("strRFCP:"+strRFCP);
       if("RFCPEvt".equals(pageContext.getParameter(this.EVENT_PARAM))
          ||0==gIntSelectedIndex){
@@ -569,6 +597,7 @@ public class AltaDeClienteCO extends OAControllerImpl
           listValidaClienteRFCRazonSocial = altaDeClienteAM.validaClienteRFCRazonSocial(strNombreCLiente
                                                                                        ,strRFCP
                                                                                        ,strRazonSocialP
+                                                                                       ,strRFC
                                                                                        );
           if(listValidaClienteRFCRazonSocial.size()>0){
           OAException.raiseBundledOAException(listValidaClienteRFCRazonSocial);
@@ -597,6 +626,7 @@ public class AltaDeClienteCO extends OAControllerImpl
            listValidaClienteRFCRazonSocial = altaDeClienteAM.validaClienteRFCRazonSocial(strNombreCLiente
                                                                                         ,strRFCS
                                                                                         ,strRazonSocialS
+                                                                                        ,strRFC
                                                                                         );
            if(listValidaClienteRFCRazonSocial.size()>0){
            OAException.raiseBundledOAException(listValidaClienteRFCRazonSocial);
@@ -1149,6 +1179,7 @@ public class AltaDeClienteCO extends OAControllerImpl
           listValidaClienteRFCRazonSocial = altaDeClienteAM.validaClienteRFCRazonSocial(strNombreCLiente
                                                                                        ,strRFCP
                                                                                        ,strRazonSocialP
+                                                                                       ,strRFC
                                                                                        );
           if(listValidaClienteRFCRazonSocial.size()>0){
           OAException.raiseBundledOAException(listValidaClienteRFCRazonSocial);
