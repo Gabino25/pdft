@@ -9,7 +9,7 @@
    ComponentClass="xxqp.oracle.apps.ar.pdft.conscliente.server.ClientesInfoVOImpl"
    UseGlueCode="false" >
    <SQLQuery><![CDATA[
-SELECT p.party_id,
+SELECT DISTINCT p.party_id,
           p.party_name,
           p.person_first_name,
           p.person_last_name,

@@ -898,7 +898,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
         return (DiasDeSemanaVOImpl)findViewObject("DiasDeSemanaVO1");
     }
 
-    public String getXxPdftCustomerInfo() {
+    public String getXxPdftCustomerInfo(String pOperacion) {
         String retval = null; 
         String strCallableStmt = " BEGIN \n" + 
                                  "  APPS.XXQP_PDFT_CUSTOMER_PKG.GET_INFO ( PSO_ERRMSG          => :1\n" + 
@@ -906,6 +906,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                                  "                                       , PCO_INFO            => :3\n" + 
                                  "                                       , PNI_CUSTOMER_ID     => :4\n"+
                                  "                                       , PSI_OPERATING_UNIT  => :5\n"+
+                                 "                                       , PSI_MOVIMIENTO      => :6\n"+
                                  "                                        );\n" + 
                                  " END; \n";
         OADBTransaction oadbtransaction = (OADBTransaction)getTransaction();
@@ -919,6 +920,13 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             oraclecallablestatement.registerOutParameter(3,Types.CLOB);
             oraclecallablestatement.setDouble(4,numHeaderId.doubleValue());
             oraclecallablestatement.setString(5,strOperatingUnit);
+            if("CREATE".equals(pOperacion)){
+                oraclecallablestatement.setString(6,"ALTA");
+            }else if("UPDATE".equals(pOperacion)){
+                oraclecallablestatement.setString(6,"MODIFICACION");
+            }else{
+                oraclecallablestatement.setString(6,null);
+            }
             oraclecallablestatement.execute();
             java.sql.Clob retvalClob = oraclecallablestatement.getClob(3);
             java.io.Reader reader =retvalClob.getCharacterStream();

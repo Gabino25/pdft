@@ -68,7 +68,7 @@ public class Utils {
         response.setContentType("application/pdf");
         ServletOutputStream os=null;               
         String strXML = null;
-        strXML = altaDeClienteAMImpl.getXxPdftCustomerInfo();
+        strXML = altaDeClienteAMImpl.getXxPdftCustomerInfo("READ_ONLY");
         if(null==strXML){
          return;
         }
@@ -126,7 +126,7 @@ public class Utils {
          return; 
         }
         String strXML = null;
-        strXML = altaDeClienteAMImpl.getXxPdftCustomerInfo();
+        strXML = altaDeClienteAMImpl.getXxPdftCustomerInfo(pOperacion);
         if(null==strXML){
          return;
         }
