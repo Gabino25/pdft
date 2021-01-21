@@ -24,7 +24,8 @@
        XxqpPdftClientesHeaderEO.ATTRIBUTE5, 
        XxqpPdftClientesHeaderEO.PARTY_ID, 
        XxqpPdftClientesHeaderEO.RFC, 
-       XxqpPdftClientesHeaderEO.RAZON_SOCIAL"
+       XxqpPdftClientesHeaderEO.RAZON_SOCIAL, 
+       XxqpPdftClientesHeaderEO.EJECUTIVO"
    FromList="XXQP_PDFT_CLIENTES_HEADER XxqpPdftClientesHeaderEO"
    BindingStyle="OracleName"
    CustomQuery="false"
@@ -184,5 +185,11 @@
       EntityAttrName="RazonSocial"
       EntityUsage="XxqpPdftClientesHeaderEO"
       AliasName="RAZON_SOCIAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ejecutivo"
+      EntityAttrName="Ejecutivo"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="EJECUTIVO" >
    </ViewAttribute>
 </ViewObject>

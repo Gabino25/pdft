@@ -38,10 +38,11 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
     public static final int PARTYID = 19;
     public static final int RFC = 20;
     public static final int RAZONSOCIAL = 21;
-    public static final int XXQPPDFTCLIENTESDIRFISCALEO = 22;
-    public static final int XXQPPDFTCLIENTESPUNTORECOEO = 23;
-    public static final int XXQPPDFTCLIENTESCONTACTOSEO = 24;
-    public static final int XXQPPDFTCLIENTESFACTPAGEO = 25;
+    public static final int EJECUTIVO = 22;
+    public static final int XXQPPDFTCLIENTESDIRFISCALEO = 23;
+    public static final int XXQPPDFTCLIENTESPUNTORECOEO = 24;
+    public static final int XXQPPDFTCLIENTESCONTACTOSEO = 25;
+    public static final int XXQPPDFTCLIENTESFACTPAGEO = 26;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -405,6 +406,8 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
             return getRfc();
         case RAZONSOCIAL:
             return getRazonSocial();
+        case EJECUTIVO:
+            return getEjecutivo();
         case XXQPPDFTCLIENTESCONTACTOSEO:
             return getXxqpPdftClientesContactosEO();
         case XXQPPDFTCLIENTESDIRFISCALEO:
@@ -490,6 +493,9 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
         case RAZONSOCIAL:
             setRazonSocial((String)value);
             return;
+        case EJECUTIVO:
+            setEjecutivo((String)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -555,6 +561,18 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
      */
     public void setRazonSocial(String value) {
         setAttributeInternal(RAZONSOCIAL, value);
+    }
+
+    /**Gets the attribute value for Ejecutivo, using the alias name Ejecutivo
+     */
+    public String getEjecutivo() {
+        return (String)getAttributeInternal(EJECUTIVO);
+    }
+
+    /**Sets <code>value</code> as the attribute value for Ejecutivo
+     */
+    public void setEjecutivo(String value) {
+        setAttributeInternal(EJECUTIVO, value);
     }
 
     /**Creates a Key object based on given key constituents

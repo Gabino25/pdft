@@ -35,6 +35,7 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
     public static final int PARTYID = 19;
     public static final int RFC = 20;
     public static final int RAZONSOCIAL = 21;
+    public static final int EJECUTIVO = 22;
 
     /**This is the default constructor (do not remove)
      */
@@ -370,6 +371,8 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
             return getRfc();
         case RAZONSOCIAL:
             return getRazonSocial();
+        case EJECUTIVO:
+            return getEjecutivo();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -447,6 +450,9 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
         case RAZONSOCIAL:
             setRazonSocial((String)value);
             return;
+        case EJECUTIVO:
+            setEjecutivo((String)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -487,5 +493,17 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
      */
     public void setRazonSocial(String value) {
         setAttributeInternal(RAZONSOCIAL, value);
+    }
+
+    /**Gets the attribute value for EJECUTIVO using the alias name Ejecutivo
+     */
+    public String getEjecutivo() {
+        return (String) getAttributeInternal(EJECUTIVO);
+    }
+
+    /**Sets <code>value</code> as attribute value for EJECUTIVO using the alias name Ejecutivo
+     */
+    public void setEjecutivo(String value) {
+        setAttributeInternal(EJECUTIVO, value);
     }
 }

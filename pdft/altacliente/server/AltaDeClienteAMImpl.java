@@ -162,7 +162,8 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                                    String pStrTipoComercialValue, 
                                    String pStrTipoComercialText,
                                    String pStrRFC,
-                                   String pRazonSocial
+                                   String pRazonSocial,
+                                   String pEjecutivo
                                    ) {
         XxqpPdftClientesHeaderVOImpl xxqpPdftClientesHeaderVOImpl =getXxqpPdftClientesHeaderVO1();
         XxqpPdftClientesHeaderVORowImpl xxqpPdftClientesHeaderVORowImpl =null; 
@@ -188,6 +189,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             xxqpPdftClientesHeaderVORowImpl.setTipoAdministrativoC(pStrTipoAdministrativoValue);     
             xxqpPdftClientesHeaderVORowImpl.setTipoComercialC(pStrTipoComercialValue);       
             xxqpPdftClientesHeaderVORowImpl.setRazonSocial(pRazonSocial);
+            xxqpPdftClientesHeaderVORowImpl.setEjecutivo(pEjecutivo);
             
             xxqpPdftClientesHeaderVOImpl.insertRow(xxqpPdftClientesHeaderVORowImpl);
           

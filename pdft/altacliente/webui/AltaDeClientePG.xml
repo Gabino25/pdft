@@ -39,6 +39,7 @@
                                     <oa:messageChoice id="TipoOperativo" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.TipoOperativoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Tipo Operativo" required="no"/>
                                     <oa:messageChoice id="TipoAdministrativo" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.TipoAdministrativoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Tipo Administrativo" required="no"/>
                                     <oa:messageChoice id="TipoComercial" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.TipoComercialVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" defaultValue="" allowBlankValue="true" prompt="Tipo Comercial" required="no"/>
+                                    <oa:messageChoice id="Ejecutivo" prompt="Ejecutivo" styleClass="OraFieldText" readOnly="true" required="yes" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.MgrPdftUsuariosVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode"/>
                                  </ui:contents>
                               </oa:tableLayout>
                            </ui:contents>

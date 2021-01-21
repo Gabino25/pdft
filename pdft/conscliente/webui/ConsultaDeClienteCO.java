@@ -198,6 +198,12 @@ public class ConsultaDeClienteCO extends OAControllerImpl
         pageContext.putSessionValue("sClienteExtern",strFvClienteExtern);
         }
         
+        String strPuserPdftId = null; 
+        if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+            strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+            pageContext.putSessionValue("sUserPdftId",strPuserPdftId);
+        }
+        
         OAProcessingPage oAProcessingPage =  new  OAProcessingPage("xxqp.oracle.apps.ar.pdft.conscliente.webui.ClienteProcessCO"); 
         oAProcessingPage.setConciseMessage("Se recupera informacion del cliente"); 
         oAProcessingPage.setDetailedMessage("Si ya existe el cliente en el portal se recupera la informacion, de no ser asi crea informacion en el portal"); 

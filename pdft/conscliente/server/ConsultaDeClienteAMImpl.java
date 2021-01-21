@@ -91,6 +91,7 @@ public class ConsultaDeClienteAMImpl extends OAApplicationModuleImpl
 
     public String callFromOracleToPdft(String pStrPartyId
                                       ,String pOperatingUnit
+                                      ,String pUserPdftId
                                       ) {
         String strErrmsg = null; 
         String strErrcode = null;
@@ -100,7 +101,8 @@ public class ConsultaDeClienteAMImpl extends OAApplicationModuleImpl
                                  "                                                      , PSO_ERRCODE                      => :2\n" + 
                                  "                                                      , pni_party_id                     => :3\n" + 
                                  "                                                      , pni_operating_unit               => :4\n" + 
-                                 "                                                      , pno_clientes_header_id           => :5 ); " +
+                                 "                                                      , pni_operating_unit               => :5\n" + 
+                                 "                                                      , pno_clientes_header_id           => :6 ); " +
                                  " END;";
         OADBTransaction oadbtransaction = (OADBTransaction)getTransaction();
         OracleCallableStatement oraclecallablestatement =  (OracleCallableStatement)oadbtransaction.createCallableStatement(strCallableStmt, 1);
@@ -110,7 +112,8 @@ public class ConsultaDeClienteAMImpl extends OAApplicationModuleImpl
             oraclecallablestatement.registerOutParameter(2,Types.VARCHAR);
             oraclecallablestatement.setDouble(3,new Double(pStrPartyId));
             oraclecallablestatement.setDouble(4,new Double(pOperatingUnit));
-            oraclecallablestatement.registerOutParameter(5,Types.DOUBLE);
+            oraclecallablestatement.setString(5,pUserPdftId);
+            oraclecallablestatement.registerOutParameter(6,Types.DOUBLE);
             oraclecallablestatement.execute();
             strErrmsg = oraclecallablestatement.getString(1); 
             strErrcode = oraclecallablestatement.getString(2); 

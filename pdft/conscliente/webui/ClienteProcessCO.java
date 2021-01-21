@@ -27,6 +27,7 @@ public class ClienteProcessCO extends OAControllerImpl {
         
        String strPartyId = null;
        String strClienteExtern = null; 
+       String strUserPdftId = null; 
        if(null!=pageContext.getSessionValue("sPartyId")){
         strPartyId = (String)pageContext.getSessionValue("sPartyId");
        }
@@ -36,15 +37,21 @@ public class ClienteProcessCO extends OAControllerImpl {
         if(null!=pageContext.getSessionValue("sOperatingUnit")){
             strOperatingUnit = (String)pageContext.getSessionValue("sOperatingUnit");
         }
+        if(null!=pageContext.getSessionValue("sUserPdftId")){
+            strUserPdftId = (String)pageContext.getSessionValue("sUserPdftId");
+        }
         System.out.println("strPartyId:"+strPartyId);
         System.out.println("strClienteExtern:"+strClienteExtern);
         System.out.println("strOperatingUnit:"+strOperatingUnit);
+        System.out.println("strUserPdftId:"+strUserPdftId);
+        
         pageContext.writeDiagnostics(this,"strPartyId:"+strPartyId,OAFwkConstants.STATEMENT);
         pageContext.writeDiagnostics(this,"strClienteExtern:"+strClienteExtern,OAFwkConstants.STATEMENT);
         pageContext.writeDiagnostics(this,"strOperatingUnit:"+strOperatingUnit,OAFwkConstants.STATEMENT);
+        pageContext.writeDiagnostics(this,"strUserPdftId:"+strUserPdftId,OAFwkConstants.STATEMENT);
         
         ConsultaDeClienteAMImpl  consultaDeClienteAMImpl = (ConsultaDeClienteAMImpl)pageContext.getApplicationModule(webBean);
-        strPdftClientesHeaderID = consultaDeClienteAMImpl.callFromOracleToPdft(strPartyId,strOperatingUnit);
+        strPdftClientesHeaderID = consultaDeClienteAMImpl.callFromOracleToPdft(strPartyId,strOperatingUnit,strUserPdftId);
         System.out.println("strPdftClientesHeaderID:"+strPdftClientesHeaderID);
         com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
         parameters.put("pClientesHeaderId",strPdftClientesHeaderID);

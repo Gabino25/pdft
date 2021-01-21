@@ -31,6 +31,9 @@ where lookup_type = 'GIRO_EMPRESARIAL'
  ,(select LEGAL_ENTITY_IDENTIFIER||' - '||NAME /*LEGAL_ENTITY_NAME*/meaning
  from xle_entity_profiles
  where LEGAL_ENTITY_ID = XPCH.EMPRESA_QUE_FACTURA_C ) EMPRESA_QUE_FACTURA_M
+ ,nvl((select usuario
+ from XXQP_PDFT_USUARIOS_RO
+ where id = XPCH.ejecutivo),'NA') ejecutivo_m
  FROM XXQP_PDFT_CLIENTES_HEADER XPCH
  WHERE XPCH.ID = CUR_CUSTOMER_ID;
  
@@ -357,6 +360,7 @@ PROCEDURE MAIN(PSO_ERRMSG OUT VARCHAR2
  lc_info := lc_info||'<RAZON_SOCIAL>'||replace_char_esp(HeaderInforec.RAZON_SOCIAL)||'</RAZON_SOCIAL>';
  lc_info := lc_info||'<CREATION_DATE>'||to_char(HeaderInforec.creation_date,'DD/MM/YYYY')||'</CREATION_DATE>';
  lc_info := lc_info||'<MOVIMIENTO>'||PSI_MOVIMIENTO||'</MOVIMIENTO>';
+ lc_info := lc_info||'<EJECUTIVA_COMERCIAL>'||replace_char_esp(HeaderInforec.EJECUTIVO_M)||'</EJECUTIVA_COMERCIAL>';
  
  OPEN getDirFiscalInfo(HeaderInforec.id,PSI_OPERATING_UNIT);
  LOOP

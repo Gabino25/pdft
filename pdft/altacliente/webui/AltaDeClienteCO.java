@@ -69,6 +69,7 @@ public class AltaDeClienteCO extends OAControllerImpl
         }
         
       OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
+      OAMessageChoiceBean  EjecutivoBean = (OAMessageChoiceBean)webBean.findChildRecursive("Ejecutivo");
       OAMessageFileUploadBean CedulaExaminePBean = (OAMessageFileUploadBean)webBean.findChildRecursive("CedulaExamineP");
       OAMessageFileUploadBean CedulaExamineSBean = (OAMessageFileUploadBean)webBean.findChildRecursive("CedulaExamineS");
       OAButtonBean GrabarButtonBean = (OAButtonBean)webBean.findChildRecursive("GrabarButton"); 
@@ -93,9 +94,33 @@ public class AltaDeClienteCO extends OAControllerImpl
       
       String strpEnabledGrabar = pageContext.getParameter("pEnabledGrabar");
       
+      /*** 210120211558
       if(null!=NombreUsuarioEBSBean){
           NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
       }
+      **/
+      
+       String strPuserPdft = null; 
+       System.out.println("AltaFichaTecnicaCO strPuserPdft:"+strPuserPdft);
+       if(null!=pageContext.getTransientSessionValue("tsUserPdft")){
+           strPuserPdft = pageContext.getTransientSessionValue("tsUserPdft").toString();
+           System.out.println("AltaFichaTecnicaCO strPuserPdft:"+strPuserPdft);
+           if(null!=NombreUsuarioEBSBean){
+                NombreUsuarioEBSBean.setValue(pageContext,strPuserPdft);
+            }
+           
+       }
+       
+       String strPuserPdftId = null; 
+       if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+           strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+           System.out.println("AltaFichaTecnicaCO strPuserPdftId:"+strPuserPdftId);
+           if(null!=EjecutivoBean){
+                 EjecutivoBean.setValue(pageContext,strPuserPdftId);
+                 EjecutivoBean.setReadOnly(true);
+           }
+       }
+      
       if(null!=CedulaExaminePBean){
           OADataBoundValueViewObject displayNameBoundValue =    new OADataBoundValueViewObject(CedulaExaminePBean, "PcedulaFileName"); 
           CedulaExaminePBean.setAttributeValue(DOWNLOAD_FILE_NAME,displayNameBoundValue); 
@@ -229,7 +254,8 @@ public class AltaDeClienteCO extends OAControllerImpl
     
     String strTipoComercialValue = null; 
     String strTipoComercialText = null; 
-      
+    String strEjecutivoValue = null; 
+    String strEjecutivoText = null; 
     
     OAMessageTextInputBean NombreClienteBean = (OAMessageTextInputBean)webBean.findChildRecursive("NombreCliente"); 
     if(null!=NombreClienteBean){
@@ -301,7 +327,15 @@ public class AltaDeClienteCO extends OAControllerImpl
      strTipoComercialValue = TipoComercialBean.getValue(pageContext).toString(); 
      strTipoComercialText = TipoComercialBean.getSelectionText(pageContext).toString();
      }
-    }      
+    } 
+    
+      OAMessageChoiceBean  EjecutivoBean = (OAMessageChoiceBean)webBean.findChildRecursive("Ejecutivo");
+      if(null!=EjecutivoBean){
+       if(null!=EjecutivoBean.getValue(pageContext)){
+        strEjecutivoValue = EjecutivoBean.getValue(pageContext).toString();
+        strEjecutivoText = EjecutivoBean.getSelectionText(pageContext).toString();
+       }
+      } 
       
     System.out.println("strNombreCLiente:"+strNombreCLiente);
     
@@ -1216,6 +1250,7 @@ public class AltaDeClienteCO extends OAControllerImpl
                                         ,strTipoComercialText 
                                         ,strRFC
                                         ,strRazonSocial
+                                        ,strEjecutivoValue
                                        );
        
          DataObject CedulaExaminePUploadData =  pageContext.getNamedDataObject("CedulaExamineP"); 

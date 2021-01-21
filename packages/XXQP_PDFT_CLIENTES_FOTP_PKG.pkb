@@ -238,6 +238,7 @@ delete from XXQP_PDFT_CLIENTES_HEADER
  ,pso_errcode out varchar2
  ,pni_party_id in number
  ,pni_operating_unit in number
+ ,psi_UserPdftId in varchar2
  ,pno_clientes_header_id out number
  ) is 
  
@@ -326,6 +327,7 @@ CURSOR get_cust_account_info (cur_party_id number) IS
  ,pso_errcode => ls_errcod
  ,pni_party_id => pni_party_id
  ,pni_operating_unit => pni_operating_unit
+ ,psi_UserPdftId => psi_UserPdftId
  ,pni_clientes_header_id => ln_xxclient_id
  ); 
  
@@ -337,6 +339,7 @@ CURSOR get_cust_account_info (cur_party_id number) IS
  ,pso_errcode => ls_errcod
  ,pni_party_id => pni_party_id
  ,pni_operating_unit => pni_operating_unit
+ ,psi_UserPdftId => psi_UserPdftId 
  ,pno_clientes_header_id => ln_clientes_header_id
  ); 
  
@@ -484,6 +487,7 @@ CURSOR get_cust_account_info (cur_party_id number) IS
                                           ,pso_errcode                    out varchar2
                                           ,pni_party_id                    in  number
                                           ,pni_operating_unit           in number
+                                          ,psi_UserPdftId                 in varchar2
                                           ,pno_clientes_header_id    out number
                                             ) is 
   
@@ -565,6 +569,7 @@ CURSOR get_cust_account_info (cur_party_id number) IS
                                                                   ,PARTY_ID               /** NUMBER,**/
                                                                   ,RFC                    /** VARCHAR2(50 BYTE)      NOT NULL**/
                                                                   ,RAZON_SOCIAL  /** VARCHAR2(500 BYTE) NOT NULL **/
+                                                                  ,EJECUTIVO /** VARCHAR2(50) **/
                                                                   ) values (
                                                                                  ln_clientes_header_id                  /** ID                     **/                                                                                                                                                                            
                                                                                 ,parties_info_rec.party_name    /** NOMBRE_CLIENTE         **/                                                                                                                                                                            
@@ -588,6 +593,7 @@ CURSOR get_cust_account_info (cur_party_id number) IS
                                                                                 ,pni_party_id   /*** PARTY_ID **/
                                                                                 ,parties_info_rec.rfc /** RFC NOT NULL **/
                                                                                 ,parties_info_rec.known_as /** RAZON_SOCIAL **/
+                                                                                ,psi_UserPdftId
                                                                                 );       
                                                                     commit;       
    
@@ -679,6 +685,7 @@ CURSOR get_cust_account_info (cur_party_id number) IS
                                      ,pso_errcode                    out varchar2
                                      ,pni_party_id                    in  number
                                      ,pni_operating_unit           in number
+                                     ,psi_UserPdftId                 in varchar2
                                      ,pni_clientes_header_id    in  number
                                      ) is 
   

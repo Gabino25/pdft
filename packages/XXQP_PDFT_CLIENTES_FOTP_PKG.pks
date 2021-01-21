@@ -14,6 +14,7 @@ CREATE OR REPLACE package APPS.XXQP_PDFT_CLIENTES_FOTP_PKG is
                                               ,pso_errcode                    out varchar2
                                               ,pni_party_id                    in  number
                                               ,pni_operating_unit           in number
+                                              ,psi_UserPdftId                 in varchar2
                                               ,pno_clientes_header_id    out number
                                               );
                                                
@@ -21,6 +22,7 @@ CREATE OR REPLACE package APPS.XXQP_PDFT_CLIENTES_FOTP_PKG is
                                           ,pso_errcode                    out varchar2
                                           ,pni_party_id                    in  number
                                           ,pni_operating_unit           in number
+                                           ,psi_UserPdftId                 in varchar2
                                           ,pno_clientes_header_id    out number
                                             );           
    
@@ -28,6 +30,7 @@ CREATE OR REPLACE package APPS.XXQP_PDFT_CLIENTES_FOTP_PKG is
                                      ,pso_errcode                    out varchar2
                                      ,pni_party_id                    in  number
                                      ,pni_operating_unit           in number
+                                      ,psi_UserPdftId                 in varchar2
                                      ,pni_clientes_header_id    in  number
                                      );                                                                              
   

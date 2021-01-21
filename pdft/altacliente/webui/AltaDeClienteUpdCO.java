@@ -52,6 +52,7 @@ public class AltaDeClienteUpdCO extends OAControllerImpl
   {
     super.processRequest(pageContext, webBean);
       OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
+      OAMessageChoiceBean  EjecutivoBean = (OAMessageChoiceBean)webBean.findChildRecursive("Ejecutivo");
       OAMessageFileUploadBean CedulaUploadPBean = (OAMessageFileUploadBean)webBean.findChildRecursive("CedulaUploadP");
       OAMessageFileUploadBean CedulaUploadSBean = (OAMessageFileUploadBean)webBean.findChildRecursive("CedulaUploadS");
       OASubTabLayoutBean SubTabLayoutRNBean = (OASubTabLayoutBean)webBean.findChildRecursive("SubTabLayoutRN");
@@ -93,6 +94,29 @@ public class AltaDeClienteUpdCO extends OAControllerImpl
           /** 120120211243 se comenta porque no respeta la unidad operativa de las direcciones fiscales
           altaDeClienteAMImpl.initLegalEntityVO(strEmpresaQueFacturaValue);
           **/
+          if(null==xxqpPdftClientesHeaderVORowImpl.getEjecutivo()||"".equals(xxqpPdftClientesHeaderVORowImpl.getEjecutivo())){
+              String strPuserPdft = null; 
+              System.out.println("AltaFichaTecnicaCO strPuserPdft:"+strPuserPdft);
+              if(null!=pageContext.getTransientSessionValue("tsUserPdft")){
+                  strPuserPdft = pageContext.getTransientSessionValue("tsUserPdft").toString();
+                  System.out.println("AltaFichaTecnicaCO strPuserPdft:"+strPuserPdft);
+                  if(null!=NombreUsuarioEBSBean){
+                       NombreUsuarioEBSBean.setValue(pageContext,strPuserPdft);
+                   }
+                  
+              }
+              
+              String strPuserPdftId = null; 
+              if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+                  strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+                  System.out.println("AltaFichaTecnicaCO strPuserPdftId:"+strPuserPdftId);
+                  if(null!=EjecutivoBean){
+                        EjecutivoBean.setValue(pageContext,strPuserPdftId);
+                        EjecutivoBean.setReadOnly(true);
+                  }
+              }
+          }/** END if(null==xxqpPdftClientesHeaderVORowImpl.getEjecutivo()||"".equals(xxqpPdftClientesHeaderVORowImpl.getEjecutivo())){ **/
+           
       }else{
       
       }
@@ -312,7 +336,7 @@ public class AltaDeClienteUpdCO extends OAControllerImpl
                 xqpPdftClientesDirFiscalVORowImpl.setSecCedulaContentType(StrFileMimeTypeS);
             }
             }
-        
+            
             altaDeClienteAMImpl.getOADBTransaction().commit();
             
             oracle.jbo.domain.Number numClienteHeaderId = (oracle.jbo.domain.Number)altaDeClienteAMImpl.getXxqpPdftClientesHeaderVO1().getCurrentRow().getAttribute("Id");
