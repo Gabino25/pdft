@@ -25,7 +25,8 @@
        XxqpPdftClientesHeaderEO.PARTY_ID, 
        XxqpPdftClientesHeaderEO.RFC, 
        XxqpPdftClientesHeaderEO.RAZON_SOCIAL, 
-       XxqpPdftClientesHeaderEO.EJECUTIVO"
+       XxqpPdftClientesHeaderEO.EJECUTIVO, 
+       XxqpPdftClientesHeaderEO.STATUS"
    FromList="XXQP_PDFT_CLIENTES_HEADER XxqpPdftClientesHeaderEO"
    BindingStyle="OracleName"
    CustomQuery="false"
@@ -191,5 +192,11 @@
       EntityAttrName="Ejecutivo"
       EntityUsage="XxqpPdftClientesHeaderEO"
       AliasName="EJECUTIVO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="XxqpPdftClientesHeaderEO"
+      AliasName="STATUS" >
    </ViewAttribute>
 </ViewObject>

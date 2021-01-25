@@ -190,6 +190,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             xxqpPdftClientesHeaderVORowImpl.setTipoComercialC(pStrTipoComercialValue);       
             xxqpPdftClientesHeaderVORowImpl.setRazonSocial(pRazonSocial);
             xxqpPdftClientesHeaderVORowImpl.setEjecutivo(pEjecutivo);
+            xxqpPdftClientesHeaderVORowImpl.setStatus("CREATE");
             
             xxqpPdftClientesHeaderVOImpl.insertRow(xxqpPdftClientesHeaderVORowImpl);
           

@@ -39,10 +39,11 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
     public static final int RFC = 20;
     public static final int RAZONSOCIAL = 21;
     public static final int EJECUTIVO = 22;
-    public static final int XXQPPDFTCLIENTESDIRFISCALEO = 23;
-    public static final int XXQPPDFTCLIENTESPUNTORECOEO = 24;
-    public static final int XXQPPDFTCLIENTESCONTACTOSEO = 25;
-    public static final int XXQPPDFTCLIENTESFACTPAGEO = 26;
+    public static final int STATUS = 23;
+    public static final int XXQPPDFTCLIENTESDIRFISCALEO = 24;
+    public static final int XXQPPDFTCLIENTESPUNTORECOEO = 25;
+    public static final int XXQPPDFTCLIENTESCONTACTOSEO = 26;
+    public static final int XXQPPDFTCLIENTESFACTPAGEO = 27;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -408,6 +409,8 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
             return getRazonSocial();
         case EJECUTIVO:
             return getEjecutivo();
+        case STATUS:
+            return getStatus();
         case XXQPPDFTCLIENTESCONTACTOSEO:
             return getXxqpPdftClientesContactosEO();
         case XXQPPDFTCLIENTESDIRFISCALEO:
@@ -496,6 +499,9 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
         case EJECUTIVO:
             setEjecutivo((String)value);
             return;
+        case STATUS:
+            setStatus((String)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -573,6 +579,18 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
      */
     public void setEjecutivo(String value) {
         setAttributeInternal(EJECUTIVO, value);
+    }
+
+    /**Gets the attribute value for Status, using the alias name Status
+     */
+    public String getStatus() {
+        return (String)getAttributeInternal(STATUS);
+    }
+
+    /**Sets <code>value</code> as the attribute value for Status
+     */
+    public void setStatus(String value) {
+        setAttributeInternal(STATUS, value);
     }
 
     /**Creates a Key object based on given key constituents

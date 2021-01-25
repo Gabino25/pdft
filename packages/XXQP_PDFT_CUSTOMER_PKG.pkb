@@ -34,6 +34,7 @@ where lookup_type = 'GIRO_EMPRESARIAL'
  ,nvl((select usuario
  from XXQP_PDFT_USUARIOS_RO
  where id = XPCH.ejecutivo),'NA') ejecutivo_m
+ ,XPCH.STATUS
  FROM XXQP_PDFT_CLIENTES_HEADER XPCH
  WHERE XPCH.ID = CUR_CUSTOMER_ID;
  
@@ -115,6 +116,7 @@ where lookup_type = 'GIRO_EMPRESARIAL'
  ,XPCPR.ATTRIBUTE4 
  ,XPCPR.ATTRIBUTE5 
  ,decode(XPCPR.PRIM_ENTREGA_EN_QP,'Y','Si','N','No') PRIM_ENTREGA_EN_QPD
+ ,decode(XPCPR.SEC_ENTREGA_EN_QP,'Y','Si','N','No') SEC_ENTREGA_EN_QPD
  FROM XXQP_PDFT_CLIENTES_PUNTO_RECO XPCPR
  WHERE XPCPR.HEADER_ID = CUR_HEADER_ID;
  
@@ -311,6 +313,8 @@ PROCEDURE MAIN(PSO_ERRMSG OUT VARCHAR2
  ls_ou_name varchar2(2000); 
  ls_dias_recepcion varchar2(2000); 
  
+ ls_movimiento varchar2(200);
+ 
  begin 
  pso_errmsg := null; 
  pso_errcod := '0';
@@ -359,7 +363,18 @@ PROCEDURE MAIN(PSO_ERRMSG OUT VARCHAR2
  lc_info := lc_info||'<COMENTARIOS>'||replace_char_esp(HeaderInforec.COMENTARIOS)||'</COMENTARIOS>';
  lc_info := lc_info||'<RAZON_SOCIAL>'||replace_char_esp(HeaderInforec.RAZON_SOCIAL)||'</RAZON_SOCIAL>';
  lc_info := lc_info||'<CREATION_DATE>'||to_char(HeaderInforec.creation_date,'DD/MM/YYYY')||'</CREATION_DATE>';
- lc_info := lc_info||'<MOVIMIENTO>'||PSI_MOVIMIENTO||'</MOVIMIENTO>';
+ 
+ if PSI_MOVIMIENTO IS NOT NULL THEN 
+ LS_MOVIMIENTO := PSI_MOVIMIENTO; 
+ ELSE
+ IF HeaderInforec.STATUS = 'CREATE' THEN 
+ LS_MOVIMIENTO := 'ALTA';
+ ELSIF HeaderInforec.STATUS = 'UPDATE' THEN
+ LS_MOVIMIENTO := 'MODIFICACION';
+ END IF; 
+ 
+ END IF; 
+ lc_info := lc_info||'<MOVIMIENTO>'||LS_MOVIMIENTO||'</MOVIMIENTO>';
  lc_info := lc_info||'<EJECUTIVA_COMERCIAL>'||replace_char_esp(HeaderInforec.EJECUTIVO_M)||'</EJECUTIVA_COMERCIAL>';
  
  OPEN getDirFiscalInfo(HeaderInforec.id,PSI_OPERATING_UNIT);
@@ -404,11 +419,11 @@ PROCEDURE MAIN(PSO_ERRMSG OUT VARCHAR2
  lc_info := lc_info||'<PRIM_PR_DIA>'||replace_char_esp(PuntoRecoInforec.PRIM_DIA)||'</PRIM_PR_DIA>';
  lc_info := lc_info||'<PRIM_PR_HORARIO>'||replace_char_esp(PuntoRecoInforec.PRIM_HORARIO)||'</PRIM_PR_HORARIO>';
  
- lc_info := lc_info||'<SEC_PR_ENTREGA_EN_QPD>'||replace_char_esp(PuntoRecoInforec.PRIM_ENTREGA_EN_QPD)||'</SEC_PR_ENTREGA_EN_QPD>';
- lc_info := lc_info||'<SEC_PR_NOMBRE>'||replace_char_esp(PuntoRecoInforec.PRIM_NOMBRE)||'</SEC_PR_NOMBRE>';
- lc_info := lc_info||'<SEC_PR_DIRECCION>'||replace_char_esp(PuntoRecoInforec.PRIM_DIRECCION)||'</SEC_PR_DIRECCION>';
- lc_info := lc_info||'<SEC_PR_DIA>'||replace_char_esp(PuntoRecoInforec.PRIM_DIA)||'</SEC_PR_DIA>';
- lc_info := lc_info||'<SEC_PR_HORARIO>'||replace_char_esp(PuntoRecoInforec.PRIM_HORARIO)||'</SEC_PR_HORARIO>';
+ lc_info := lc_info||'<SEC_PR_ENTREGA_EN_QPD>'||replace_char_esp(PuntoRecoInforec.SEC_ENTREGA_EN_QPD)||'</SEC_PR_ENTREGA_EN_QPD>';
+ lc_info := lc_info||'<SEC_PR_NOMBRE>'||replace_char_esp(PuntoRecoInforec.SEC_NOMBRE)||'</SEC_PR_NOMBRE>';
+ lc_info := lc_info||'<SEC_PR_DIRECCION>'||replace_char_esp(PuntoRecoInforec.SEC_DIRECCION)||'</SEC_PR_DIRECCION>';
+ lc_info := lc_info||'<SEC_PR_DIA>'||replace_char_esp(PuntoRecoInforec.SEC_DIA)||'</SEC_PR_DIA>';
+ lc_info := lc_info||'<SEC_PR_HORARIO>'||replace_char_esp(PuntoRecoInforec.SEC_HORARIO)||'</SEC_PR_HORARIO>';
  
  END LOOP;
  CLOSE getPuntoRecoInfo;

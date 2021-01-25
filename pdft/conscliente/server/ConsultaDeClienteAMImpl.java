@@ -101,7 +101,7 @@ public class ConsultaDeClienteAMImpl extends OAApplicationModuleImpl
                                  "                                                      , PSO_ERRCODE                      => :2\n" + 
                                  "                                                      , pni_party_id                     => :3\n" + 
                                  "                                                      , pni_operating_unit               => :4\n" + 
-                                 "                                                      , pni_operating_unit               => :5\n" + 
+                                 "                                                      , psi_UserPdftId                   => :5\n" + 
                                  "                                                      , pno_clientes_header_id           => :6 ); " +
                                  " END;";
         OADBTransaction oadbtransaction = (OADBTransaction)getTransaction();
@@ -117,7 +117,7 @@ public class ConsultaDeClienteAMImpl extends OAApplicationModuleImpl
             oraclecallablestatement.execute();
             strErrmsg = oraclecallablestatement.getString(1); 
             strErrcode = oraclecallablestatement.getString(2); 
-            strClientesHeaderId = ""+oraclecallablestatement.getDouble(5);
+            strClientesHeaderId = ""+oraclecallablestatement.getDouble(6);
             System.out.println("strErrmsg:"+strErrmsg);
             System.out.println("strErrcode:"+strErrcode);
             System.out.println("strClientesHeaderId:"+strClientesHeaderId);

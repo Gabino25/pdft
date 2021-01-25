@@ -30,6 +30,7 @@ import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesDirFiscalVOIm
 import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesDirFiscalVORowImpl;
 import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesFactPagVOImpl;
 import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesFactPagVORowImpl;
+import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesHeaderVOImpl;
 import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesHeaderVORowImpl;
 import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesPuntoRecoVOImpl;
 import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesPuntoRecoVORowImpl;
@@ -309,6 +310,18 @@ public class AltaDeClienteUpdCO extends OAControllerImpl
          }
          
     if("GrabarEvt".equals(strEventParam)){
+     
+            XxqpPdftClientesHeaderVOImpl xxqpPdftClientesHeaderVOImpl =  altaDeClienteAMImpl.getXxqpPdftClientesHeaderVO1(); 
+            if(null==xxqpPdftClientesHeaderVOImpl){
+             return;
+            }
+            XxqpPdftClientesHeaderVORowImpl xxqpPdftClientesHeaderVORowImpl = (XxqpPdftClientesHeaderVORowImpl)xxqpPdftClientesHeaderVOImpl.getCurrentRow();
+            if(null==xxqpPdftClientesHeaderVORowImpl){
+             return; 
+            }
+            
+            xxqpPdftClientesHeaderVORowImpl.setStatus("UPDATE");
+            
             XxqpPdftClientesDirFiscalVOImpl xqpPdftClientesDirFiscalVOImpl =  altaDeClienteAMImpl.getXxqpPdftClientesDirFiscalVO1(); 
             XxqpPdftClientesDirFiscalVORowImpl xqpPdftClientesDirFiscalVORowImpl = null; 
             
@@ -339,8 +352,8 @@ public class AltaDeClienteUpdCO extends OAControllerImpl
             
             altaDeClienteAMImpl.getOADBTransaction().commit();
             
-            oracle.jbo.domain.Number numClienteHeaderId = (oracle.jbo.domain.Number)altaDeClienteAMImpl.getXxqpPdftClientesHeaderVO1().getCurrentRow().getAttribute("Id");
-            oracle.jbo.domain.Number numPartyId = (oracle.jbo.domain.Number)altaDeClienteAMImpl.getXxqpPdftClientesHeaderVO1().getCurrentRow().getAttribute("PartyId");
+            oracle.jbo.domain.Number numClienteHeaderId = xxqpPdftClientesHeaderVORowImpl.getId();
+            oracle.jbo.domain.Number numPartyId = xxqpPdftClientesHeaderVORowImpl.getPartyId();
             System.out.println("numClienteHeaderId:"+numClienteHeaderId);
             System.out.println("numPartyId:"+numPartyId);
             if(null==numPartyId){
