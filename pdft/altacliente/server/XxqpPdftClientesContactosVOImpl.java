@@ -41,6 +41,11 @@ public class XxqpPdftClientesContactosVOImpl extends OAViewObjectImpl {
                 System.out.println("Se comenta esta linea ya que los mensajes de requerido no son claros.");
                 /** xxqpPdftClientesContactosVORowImpl.setIsRequired("yes"); **/
             }
+            /** 280120211533 se hace esto por la ida y vuelta de los formatos tipo cumpleanios 
+            if(null!=xxqpPdftClientesContactosVORowImpl.getCumpleaniosD()&&!"".equals(xxqpPdftClientesContactosVORowImpl.getCumpleaniosD())){
+                xxqpPdftClientesContactosVORowImpl.setCumpleanios(xxqpPdftClientesContactosVORowImpl.getCumpleaniosD());
+            }
+             **/
         } /** END while(this.hasNext()){ **/
     }
 }

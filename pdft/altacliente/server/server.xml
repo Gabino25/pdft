@@ -30,6 +30,11 @@
       ObjectType="ViewObject" >
    </Containee>
    <Containee
+      Name="HzCountryLOV"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.server.HzCountryLOV"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
       Name="OperatingUnitVO"
       FullName="xxqp.oracle.apps.ar.pdft.altacliente.server.OperatingUnitVO"
       ObjectType="ViewObject" >

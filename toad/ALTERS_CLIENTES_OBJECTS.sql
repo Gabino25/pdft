@@ -22,3 +22,24 @@ ALTER TABLE APPS.XXQP_PDFT_CLIENTES_HEADER ADD EJECUTIVO VARCHAR2(50);
 
 ALTER TABLE APPS.XXQP_PDFT_CLIENTES_HEADER ADD STATUS VARCHAR2(30);
 
+/*************************************************************************
+**************************************************************************
+*************************************************************************/
+
+ALTER TABLE APPS.XXQP_PDFT_CLIENTES_CONTACTOS ADD CUMPLEANIOS VARCHAR2(200);
+
+/*************************************************************************
+**************************************************************************
+*************************************************************************/
+
+ALTER TABLE APPS.XXQP_PDFT_CLIENTES_DIR_FISCAL ADD PRIM_COUNTRY VARCHAR2(200);
+
+ALTER TABLE APPS.XXQP_PDFT_CLIENTES_DIR_FISCAL ADD SEC_COUNTRY VARCHAR2(200);
+
+ALTER TABLE APPS.XXQP_PDFT_CLIENTES_DIR_FISCAL ADD PRIM_ID_INTERNACIONAL VARCHAR2(200);
+
+ALTER TABLE APPS.XXQP_PDFT_CLIENTES_DIR_FISCAL ADD SEC_ID_INTERNACIONAL VARCHAR2(200);
+
+
+
+

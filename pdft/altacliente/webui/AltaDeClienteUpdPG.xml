@@ -17,7 +17,7 @@
                            <ui:contents>
                               <oa:tableLayout id="InnerTabLayou1" hAlign="center">
                                  <ui:contents>
-                                    <oa:messageTextInput id="NombreCliente" prompt="Nombre Cliente" columns="90" maximumLength="250" viewName="XxqpPdftClientesHeaderVO1" viewAttr="NombreCliente" readOnly="true" styleClass="OraFieldText" disabled="false" required="yes"/>
+                                    <oa:messageTextInput id="NombreCliente" prompt="Nombre Cliente" columns="90" maximumLength="250" viewName="XxqpPdftClientesHeaderVO1" viewAttr="NombreCliente" readOnly="false" styleClass="OraFieldText" disabled="false" required="yes"/>
                                     <oa:messageChoice id="GiroEmpresarial" prompt="Giro Empresarial" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.GiroEmpresarialVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" disabled="false" viewName="XxqpPdftClientesHeaderVO1" viewAttr="GiroEmpresarialC" styleClass="OraFieldText" readOnly="false" required="yes"/>
                                     <oa:messageChoice id="EmpresaQueFactura" prompt="Empresa Que Factura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.LegalEntityVO" pickListDispAttr="LegalEntityName" pickListValAttr="LegalEntityId" viewName="XxqpPdftClientesHeaderVO1" viewAttr="EmpresaQueFacturaC" disabled="false" styleClass="OraFieldText" readOnly="false" required="yes" serverUnvalidated="true">
                                        <ui:primaryClientAction>
@@ -25,8 +25,8 @@
                                        </ui:primaryClientAction>
                                     </oa:messageChoice>
                                     <oa:messageTextInput id="Comentarios" prompt="Comentarios" columns="90" rows="2" maximumLength="1000" viewName="XxqpPdftClientesHeaderVO1" viewAttr="Comentarios" disabled="false" styleClass="OraFieldText" readOnly="false"/>
-                                    <oa:messageTextInput id="RFC" prompt="RFC" columns="90" maximumLength="50" viewName="XxqpPdftClientesHeaderVO1" viewAttr="Rfc" readOnly="true" styleClass="OraFieldText" disabled="false" required="yes"/>
-                                    <oa:messageTextInput id="RazonSocial" prompt="Razon Social" columns="90" maximumLength="500" viewName="XxqpPdftClientesHeaderVO1" viewAttr="RazonSocial" readOnly="true" styleClass="OraFieldText" disabled="false" required="yes"/>
+                                    <oa:messageTextInput id="RFC" prompt="RFC" columns="90" maximumLength="50" viewName="XxqpPdftClientesHeaderVO1" viewAttr="Rfc" readOnly="false" styleClass="OraFieldText" disabled="false" required="yes"/>
+                                    <oa:messageTextInput id="RazonSocial" prompt="Razon Social" columns="90" maximumLength="500" viewName="XxqpPdftClientesHeaderVO1" viewAttr="RazonSocial" readOnly="false" styleClass="OraFieldText" disabled="false" required="yes"/>
                                  </ui:contents>
                               </oa:tableLayout>
                            </ui:contents>
@@ -292,6 +292,14 @@
                                  </ui:columnHeader>
                                  <ui:contents>
                                     <oa:messageTextInput id="NumeroCelular" dataType="VARCHAR2" prompt="Numero Celular" viewAttr="NumeroCelular" maximumLength="100" required="${oa.XxqpPdftClientesContactosVO1.IsRequired}"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="CumpleaniosCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="CumpleaniosSH" prompt="Cumpleaños"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageTextInput id="Cumpleanios" dataType="VARCHAR2" prompt="Numero Celular" viewAttr="Cumpleanios" required="${oa.XxqpPdftClientesContactosVO1.IsRequired}"/>
                                  </ui:contents>
                               </oa:column>
                            </ui:contents>

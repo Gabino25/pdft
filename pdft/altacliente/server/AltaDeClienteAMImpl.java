@@ -452,6 +452,8 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             xxqpPdftClientesContactosVORowImpl.setCorreoElectronico(contactosTmpVORowImpl.getCorreoElectronico()); 
             xxqpPdftClientesContactosVORowImpl.setPuesto(contactosTmpVORowImpl.getPuesto());
             xxqpPdftClientesContactosVORowImpl.setNumeroCelular(contactosTmpVORowImpl.getNumeroCelular());
+            System.out.println("contactosTmpVORowImpl.getCumpleAnios():"+contactosTmpVORowImpl.getCumpleAnios());
+            xxqpPdftClientesContactosVORowImpl.setCumpleanios(contactosTmpVORowImpl.getCumpleAnios());
             xxqpPdftClientesContactosVOImpl.insertRow(xxqpPdftClientesContactosVORowImpl);
             
             oADBTransaction.commit();
@@ -794,6 +796,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                       ||(null==contactosTmpVORowImpl.getCorreoElectronico()||"".equals(contactosTmpVORowImpl.getCorreoElectronico()))
                       ||(null==contactosTmpVORowImpl.getPuesto()||"".equals(contactosTmpVORowImpl.getPuesto()))
                       ||(null==contactosTmpVORowImpl.getNumeroCelular()||"".equals(contactosTmpVORowImpl.getNumeroCelular()))
+                      ||(null==contactosTmpVORowImpl.getCumpleAnios()||"".equals(contactosTmpVORowImpl.getCumpleAnios()))
                       ){
                           retval.add(new OAException("Tipo de Contacto Cierre y Seguimiento es requerido.",OAException.ERROR));
                       }
@@ -804,6 +807,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                         ||(null==contactosTmpVORowImpl.getCorreoElectronico()||"".equals(contactosTmpVORowImpl.getCorreoElectronico()))
                         ||(null==contactosTmpVORowImpl.getPuesto()||"".equals(contactosTmpVORowImpl.getPuesto()))
                         ||(null==contactosTmpVORowImpl.getNumeroCelular()||"".equals(contactosTmpVORowImpl.getNumeroCelular()))
+                         ||(null==contactosTmpVORowImpl.getCumpleAnios()||"".equals(contactosTmpVORowImpl.getCumpleAnios()))
                         ){
                             retval.add(new OAException("Tipo de Contacto Cobranza es requerido.",OAException.ERROR));
                         }
@@ -814,6 +818,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                         ||(null==contactosTmpVORowImpl.getCorreoElectronico()||"".equals(contactosTmpVORowImpl.getCorreoElectronico()))
                         ||(null==contactosTmpVORowImpl.getPuesto()||"".equals(contactosTmpVORowImpl.getPuesto()))
                         ||(null==contactosTmpVORowImpl.getNumeroCelular()||"".equals(contactosTmpVORowImpl.getNumeroCelular()))
+                         ||(null==contactosTmpVORowImpl.getCumpleAnios()||"".equals(contactosTmpVORowImpl.getCumpleAnios()))
                         ){
                             retval.add(new OAException("Tipo de Contacto Gerencial es requerido.",OAException.ERROR));
                         }
@@ -1130,5 +1135,11 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             throw new OAException("SQLException en el metodo rollbackTrx:"+e.getErrorCode(),OAException.ERROR); 
         }
         
+    }
+
+    /**Container's getter for HzCountryLOV1
+     */
+    public HzCountryLOVImpl getHzCountryLOV1() {
+        return (HzCountryLOVImpl)findViewObject("HzCountryLOV1");
     }
 }

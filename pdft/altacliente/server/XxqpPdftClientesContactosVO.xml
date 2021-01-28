@@ -36,7 +36,7 @@ SELECT XxqpPdftClientesContactosEO.ID,
                        ,'Auditoria' ,'AUDITORIA' 
                        ,'Devoluciones','DEVOLUCIONES'
                        ) TIPO_CONTACTO_CODE,
-      XxqpPdftClientesContactosEO.NUMERO_CELULAR
+      XxqpPdftClientesContactosEO.NUMERO_CELULAR,  XxqpPdftClientesContactosEO.CUMPLEANIOS
 FROM XXQP_PDFT_CLIENTES_CONTACTOS XxqpPdftClientesContactosEO
    ]]></SQLQuery>
    <DesignTime>
@@ -189,6 +189,12 @@ FROM XXQP_PDFT_CLIENTES_CONTACTOS XxqpPdftClientesContactosEO
       EntityAttrName="NumeroCelular"
       EntityUsage="XxqpPdftClientesContactosEO"
       AliasName="NUMERO_CELULAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cumpleanios"
+      EntityAttrName="Cumpleanios"
+      EntityUsage="XxqpPdftClientesContactosEO"
+      AliasName="CUMPLEANIOS" >
    </ViewAttribute>
    <ViewAttribute
       Name="IsRequired"

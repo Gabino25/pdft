@@ -24,6 +24,7 @@ import oracle.apps.fnd.framework.webui.beans.nav.OAPageButtonBarBean;
 import xxqp.oracle.apps.ar.pdft.altacliente.Utils;
 import xxqp.oracle.apps.ar.pdft.altacliente.server.AltaDeClienteAMImpl;
 import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesContactosVORowImpl;
+import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesDirFiscalVOImpl;
 import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesDirFiscalVORowImpl;
 import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesFactPagVORowImpl;
 import xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesHeaderVORowImpl;
@@ -182,10 +183,16 @@ public class AltaDeClienteReadOnlyCO extends OAControllerImpl
     super.processFormRequest(pageContext, webBean);
     String strEventParam = pageContext.getParameter(this.EVENT_PARAM);
     AltaDeClienteAMImpl altaDeClienteAMImpl = (AltaDeClienteAMImpl)pageContext.getApplicationModule(webBean);
+    XxqpPdftClientesDirFiscalVOImpl xxqpPdftClientesDirFiscalVOImpl = null; 
+    XxqpPdftClientesDirFiscalVORowImpl xxqpPdftClientesDirFiscalVORowImpl = null; 
       
     if("ModificarEvt".equals(strEventParam)){
         oracle.jbo.domain.Number numClienteHeaderId = (oracle.jbo.domain.Number)altaDeClienteAMImpl.getXxqpPdftClientesHeaderVO1().getCurrentRow().getAttribute("Id");
-        String strPrimOperatingUnit  = (String)altaDeClienteAMImpl.getXxqpPdftClientesDirFiscalVO1().getCurrentRow().getAttribute("PrimOperatingUnit");
+        xxqpPdftClientesDirFiscalVOImpl = (XxqpPdftClientesDirFiscalVOImpl)altaDeClienteAMImpl.getXxqpPdftClientesDirFiscalVO1();
+        System.out.println("xxqpPdftClientesDirFiscalVOImpl:"+xxqpPdftClientesDirFiscalVOImpl);
+        xxqpPdftClientesDirFiscalVORowImpl = (XxqpPdftClientesDirFiscalVORowImpl)xxqpPdftClientesDirFiscalVOImpl.first();
+        System.out.println("xxqpPdftClientesDirFiscalVORowImpl:"+xxqpPdftClientesDirFiscalVORowImpl);
+        String strPrimOperatingUnit  = xxqpPdftClientesDirFiscalVORowImpl.getPrimOperatingUnit();
         com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
         parameters.put("pClientesHeaderId",numClienteHeaderId.toString());
         parameters.put("pOperatingUnit",strPrimOperatingUnit);

@@ -1,4 +1,4 @@
-CREATE OR REPLACE package APPS.xxqp_pdft_clientes_pkg is 
+CREATE OR REPLACE package      xxqp_pdft_clientes_pkg is 
 
  procedure from_pdft_to_oracle(pso_errmsg out varchar2
  ,pso_errcode out varchar2

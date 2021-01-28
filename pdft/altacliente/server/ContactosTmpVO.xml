@@ -18,6 +18,7 @@ select 1 record_id
          ,null correo_electronico
          ,null puesto
          ,null numero_celular
+         ,null cumple_anios
   from dual
   union 
   select 2 record_id
@@ -29,6 +30,7 @@ select 1 record_id
           ,null correo_electronico
           ,null puesto
           ,null numero_celular
+          ,null cumple_anios
    from dual
    union
    select 3 record_id
@@ -40,6 +42,7 @@ select 1 record_id
             ,null correo_electronico
             ,null puesto
             ,null numero_celular
+            ,null cumple_anios
    from dual
    union
    select 4 record_id
@@ -51,6 +54,7 @@ select 1 record_id
            ,null correo_electronico
            ,null puesto
            ,null numero_celular
+           ,null cumple_anios
    from dual
    union
    select 5 record_id
@@ -62,6 +66,7 @@ select 1 record_id
            ,null correo_electronico
            ,null puesto
            ,null numero_celular
+           ,null cumple_anios
    from dual
    union
      select 6 record_id
@@ -73,6 +78,7 @@ select 1 record_id
              ,null correo_electronico
             ,null puesto
             ,null numero_celular
+            ,null cumple_anios
      from dual
    ]]></SQLQuery>
    <DesignTime>
@@ -172,6 +178,25 @@ select 1 record_id
       SQLType="VARCHAR" >
    </ViewAttribute>
    <ViewAttribute
+      Name="NumeroCelular"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NUMERO_CELULAR"
+      Expression="NUMERO_CELULAR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CumpleAnios"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CUMPLE_ANIOS"
+      Expression="CUMPLE_ANIOS"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
       Name="IsRequired"
       IsSelected="false"
       IsPersistent="false"
@@ -180,16 +205,6 @@ select 1 record_id
       Type="java.lang.String"
       ColumnType="VARCHAR2"
       AliasName="VIEW_ATTR"
-      SQLType="VARCHAR" >
-   </ViewAttribute>
-   <ViewAttribute
-      Name="NumeroCelular"
-      IsPersistent="false"
-      Precision="255"
-      Type="java.lang.String"
-      ColumnType="VARCHAR2"
-      AliasName="NUMERO_CELULAR"
-      Expression="NUMERO_CELULAR"
       SQLType="VARCHAR" >
    </ViewAttribute>
 </ViewObject>

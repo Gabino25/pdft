@@ -38,7 +38,8 @@
                   get_lookupmeaning ('FND_LOOKUP_VALUES',
                                      'HZ_CPUI_REGISTRY_STATUS',
                                      a.status)
-                    AS ACCOUNT_MEANING
+                    AS ACCOUNT_MEANING,
+                    a.object_version_number
             FROM hz_cust_accounts a, hz_customer_profiles p
            WHERE p.cust_account_id = a.cust_account_id AND site_use_id IS NULL) QRSLT
    WHERE (STATUS = 'A')

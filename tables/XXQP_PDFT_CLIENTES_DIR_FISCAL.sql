@@ -1,0 +1,122 @@
+DROP TABLE APPS.XXQP_PDFT_CLIENTES_DIR_FISCAL CASCADE CONSTRAINTS;
+
+CREATE TABLE APPS.XXQP_PDFT_CLIENTES_DIR_FISCAL
+(
+  ID                        NUMBER,
+  HEADER_ID                 NUMBER,
+  PRIM_RFC                  VARCHAR2(50 BYTE),
+  PRIM_RAZON_SOCIAL         VARCHAR2(200 BYTE),
+  PRIM_DIRECCION            VARCHAR2(300 BYTE),
+  PRIM_ENTRE_CALLES         VARCHAR2(300 BYTE),
+  PRIM_COLONIA              VARCHAR2(150 BYTE),
+  PRIM_CIUDAD_O_MPO         VARCHAR2(150 BYTE),
+  PRIM_ESTADO_C             VARCHAR2(250 BYTE),
+  PRIM_CODIGO_POSTAL_C      VARCHAR2(250 BYTE),
+  PRIM_CEDULA               VARCHAR2(10 BYTE),
+  PRIM_CEDULA_FILE          BLOB,
+  SEC_RFC                   VARCHAR2(50 BYTE),
+  SEC_RAZON_SOCIAL          VARCHAR2(200 BYTE),
+  SEC_DIRECCION             VARCHAR2(300 BYTE),
+  SEC_ENTRE_CALLES          VARCHAR2(300 BYTE),
+  SEC_COLONIA               VARCHAR2(150 BYTE),
+  SEC_CIUDAD_O_MPO          VARCHAR2(150 BYTE),
+  SEC_ESTADO_C              VARCHAR2(250 BYTE),
+  SEC_CODIGO_POSTAL_C       VARCHAR2(250 BYTE),
+  SEC_CEDULA                VARCHAR2(10 BYTE),
+  SEC_CEDULA_FILE           BLOB,
+  CREATED_BY                NUMBER(15)          NOT NULL,
+  CREATION_DATE             DATE                NOT NULL,
+  LAST_UPDATED_BY           NUMBER(15)          NOT NULL,
+  LAST_UPDATE_DATE          DATE                NOT NULL,
+  LAST_UPDATE_LOGIN         NUMBER(15),
+  ATTRIBUTE_CATEGORY        VARCHAR2(250 BYTE),
+  ATTRIBUTE1                VARCHAR2(2000 BYTE),
+  ATTRIBUTE2                VARCHAR2(2000 BYTE),
+  ATTRIBUTE3                VARCHAR2(2000 BYTE),
+  ATTRIBUTE4                VARCHAR2(2000 BYTE),
+  ATTRIBUTE5                VARCHAR2(2000 BYTE),
+  PRIM_CEDULA_FILE_NAME     VARCHAR2(256 BYTE),
+  PRIM_CEDULA_CONTENT_TYPE  VARCHAR2(256 BYTE),
+  SEC_CEDULA_FILE_NAME      VARCHAR2(256 BYTE),
+  SEC_CEDULA_CONTENT_TYPE   VARCHAR2(256 BYTE),
+  PRIM_OPERATING_UNIT       VARCHAR2(200 BYTE),
+  SEC_OPERATING_UNIT        VARCHAR2(200 BYTE),
+  PRIM_NUMERO_EXT           VARCHAR2(240 BYTE),
+  SEC_NUMERO_EXT            VARCHAR2(240 BYTE),
+  PRIM_NUMERO_INT           VARCHAR2(240 BYTE),
+  SEC_NUMERO_INT            VARCHAR2(240 BYTE)
+)
+LOB (PRIM_CEDULA_FILE) STORE AS (
+  TABLESPACE APPS_TS_TX_DATA
+  ENABLE       STORAGE IN ROW
+  CHUNK       8192
+  RETENTION
+  NOCACHE
+  LOGGING
+  INDEX       (
+        TABLESPACE APPS_TS_TX_DATA
+        STORAGE    (
+                    INITIAL          128K
+                    NEXT             128K
+                    MINEXTENTS       1
+                    MAXEXTENTS       UNLIMITED
+                    PCTINCREASE      0
+                    BUFFER_POOL      DEFAULT
+                   ))
+      STORAGE    (
+                  INITIAL          128K
+                  NEXT             128K
+                  MINEXTENTS       1
+                  MAXEXTENTS       UNLIMITED
+                  PCTINCREASE      0
+                  BUFFER_POOL      DEFAULT
+                 ))
+LOB (SEC_CEDULA_FILE) STORE AS (
+  TABLESPACE APPS_TS_TX_DATA
+  ENABLE       STORAGE IN ROW
+  CHUNK       8192
+  RETENTION
+  NOCACHE
+  LOGGING
+  INDEX       (
+        TABLESPACE APPS_TS_TX_DATA
+        STORAGE    (
+                    INITIAL          128K
+                    NEXT             128K
+                    MINEXTENTS       1
+                    MAXEXTENTS       UNLIMITED
+                    PCTINCREASE      0
+                    BUFFER_POOL      DEFAULT
+                   ))
+      STORAGE    (
+                  INITIAL          128K
+                  NEXT             128K
+                  MINEXTENTS       1
+                  MAXEXTENTS       UNLIMITED
+                  PCTINCREASE      0
+                  BUFFER_POOL      DEFAULT
+                 ))
+TABLESPACE APPS_TS_TX_DATA
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             128K
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING;
+
+
+ALTER TABLE APPS.XXQP_PDFT_CLIENTES_DIR_FISCAL ADD (
+  CONSTRAINT XXQP_PDFT_CLIENTES_DIR_FIS_FK 
+  FOREIGN KEY (HEADER_ID) 
+  REFERENCES APPS.XXQP_PDFT_CLIENTES_HEADER (ID));

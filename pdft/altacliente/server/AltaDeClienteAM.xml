@@ -45,4 +45,8 @@
       Name="DiasDeSemanaVO1"
       ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.DiasDeSemanaVO" >
    </ViewUsage>
+   <ViewUsage
+      Name="HzCountryLOV1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.HzCountryLOV" >
+   </ViewUsage>
 </AppModule>

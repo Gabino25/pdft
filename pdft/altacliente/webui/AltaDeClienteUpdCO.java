@@ -10,17 +10,24 @@ import java.sql.SQLException;
 
 import oracle.apps.fnd.common.VersionInfo;
 import oracle.apps.fnd.framework.OAException;
+import oracle.apps.fnd.framework.OANLSServices;
 import oracle.apps.fnd.framework.webui.OAControllerImpl;
 import oracle.apps.fnd.framework.webui.OADataBoundValueViewObject;
+import oracle.apps.fnd.framework.webui.OADateValidater;
 import oracle.apps.fnd.framework.webui.OADialogPage;
 import oracle.apps.fnd.framework.webui.OAPageContext;
 import oracle.apps.fnd.framework.webui.OAWebBeanConstants;
 import oracle.apps.fnd.framework.webui.beans.OAWebBean;
 import oracle.apps.fnd.framework.webui.beans.layout.OASubTabLayoutBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageChoiceBean;
+import oracle.apps.fnd.framework.webui.beans.message.OAMessageDateFieldBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageFileUploadBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageStyledTextBean;
 
+import oracle.apps.fnd.framework.webui.beans.message.OAMessageTextInputBean;
+import oracle.apps.fnd.framework.webui.beans.table.OAAdvancedTableBean;
+
+import oracle.cabo.style.CSSStyle;
 import oracle.cabo.ui.data.DataObject;
 
 import oracle.jbo.RowSetIterator;
@@ -57,6 +64,21 @@ public class AltaDeClienteUpdCO extends OAControllerImpl
       OAMessageFileUploadBean CedulaUploadPBean = (OAMessageFileUploadBean)webBean.findChildRecursive("CedulaUploadP");
       OAMessageFileUploadBean CedulaUploadSBean = (OAMessageFileUploadBean)webBean.findChildRecursive("CedulaUploadS");
       OASubTabLayoutBean SubTabLayoutRNBean = (OASubTabLayoutBean)webBean.findChildRecursive("SubTabLayoutRN");
+      OAAdvancedTableBean advContactosTmpBean =  (OAAdvancedTableBean)webBean.findChildRecursive("AdvContactosTmp");
+      if(null!=advContactosTmpBean){
+         OAMessageTextInputBean CumpleaniosBean =   (OAMessageTextInputBean)advContactosTmpBean.findChildRecursive("Cumpleanios");
+         System.out.println(CumpleaniosBean);
+          CSSStyle cssDDMM = new CSSStyle();
+          //cssDDMM.setProperty("background-color","blue");
+          CumpleaniosBean.setInlineStyle(cssDDMM);
+          OANLSServices nls = pageContext.getOANLSServices();
+          /*oracle.cabo.ui.validate.Formatter formatter = new OADateValidater(nls.getUserJavaDateFormat() + " HH:mm",
+                                  nls.getUserRRRRJavaDateFormat() + " HH:mm");*/
+           oracle.cabo.ui.validate.Formatter formatter = new OADateValidater("dd-MMMMM","dd-MMMMM");                       
+           System.out.println(nls.getUserJavaDateFormat() + " HH:mm");  
+          System.out.println(nls.getUserJavaDateFormat() + " HH:mm");  
+          CumpleaniosBean.setAttributeValue(ON_SUBMIT_VALIDATER_ATTR, formatter);
+      }
     
       AltaDeClienteAMImpl altaDeClienteAMImpl = (AltaDeClienteAMImpl)pageContext.getApplicationModule(webBean);
      

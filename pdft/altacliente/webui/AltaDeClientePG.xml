@@ -76,6 +76,12 @@
                                                       <oa:messageTextInput id="ColoniaP" columns="90" maximumLength="150" prompt="Colonia" styleClass="OraFieldText" required="yes"/>
                                                       <oa:messageTextInput id="CiudadOMunicipioP" columns="90" maximumLength="150" required="yes" prompt="Ciudad o Municipio" styleClass="OraFieldText"/>
                                                       <oa:messageChoice id="EstadoP" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EstadoVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" required="yes" prompt="Estado" styleClass="OraFieldText"/>
+                                                      <oa:messageLovInput id="PaisP" externalListOfValues="/xxqp/oracle/apps/ar/pdft/altacliente/webui/HzCountryRN" prompt="Pais" required="yes" translatableDefaultValue="">
+                                                         <lovMappings>
+                                                            <lovMap id="lovMap1" lovItem="TerritoryShortName" resultTo="PaisP" criteriaFrom="PaisP"/>
+                                                            <lovMap id="lovMap12" lovItem="TerritoryCode" resultTo="PaisPFV"/>
+                                                         </lovMappings>
+                                                      </oa:messageLovInput>
                                                    </ui:contents>
                                                 </oa:tableLayout>
                                              </ui:contents>
@@ -147,6 +153,12 @@
                                                       <oa:messageTextInput id="ColoniaS" columns="90" maximumLength="150" prompt="Colonia" styleClass="OraFieldText"/>
                                                       <oa:messageTextInput id="CiudadOMunicipioS" columns="90" maximumLength="150" prompt="Ciudad o Municipio" styleClass="OraFieldText"/>
                                                       <oa:messageChoice id="EstadoS" pickListDispAttr="Meaning" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EstadoVO" pickListValAttr="LookupCode" prompt="Estado" styleClass="OraFieldText"/>
+                                                      <oa:messageLovInput id="PaisS" externalListOfValues="/xxqp/oracle/apps/ar/pdft/altacliente/webui/HzCountryRN" prompt="Pais">
+                                                         <lovMappings>
+                                                            <lovMap id="lovMap11" lovItem="TerritoryShortName" resultTo="PaisS" criteriaFrom="PaisS"/>
+                                                            <lovMap id="lovMap13" lovItem="TerritoryCode" resultTo="PaisSFV"/>
+                                                         </lovMappings>
+                                                      </oa:messageLovInput>
                                                    </ui:contents>
                                                 </oa:tableLayout>
                                              </ui:contents>
@@ -301,6 +313,14 @@
                                  </ui:columnHeader>
                                  <ui:contents>
                                     <oa:messageTextInput id="NumeroCelular" dataType="VARCHAR2" prompt="Numero Celular" viewAttr="NumeroCelular" maximumLength="150" required="${oa.ContactosTmpVO1.IsRequired}"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="CumpleaniosCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="CumpleaniosSH" prompt="Cumpleaños"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageTextInput id="Cumpleanios" dataType="VARCHAR2" required="${oa.ContactosTmpVO1.IsRequired}" viewAttr="CumpleAnios"/>
                                  </ui:contents>
                               </oa:column>
                            </ui:contents>
@@ -467,6 +487,8 @@
             <oa:formValue id="FvOaSelectedSubtabIdx1"/>
             <oa:formValue id="FvOaSelectedSubtabIdx2"/>
             <oa:formValue id="FvOaSelectedSubtabIdx3"/>
+            <oa:formValue id="PaisPFV"/>
+            <oa:formValue id="PaisSFV"/>
          </ui:contents>
          <ui:userInfo>
             <oa:messageStyledText id="NombreUsuarioEBS" prompt="Nombre Usuario:" styleClass="OraFieldText"/>

@@ -224,6 +224,7 @@
                               <oa:messageTextInput id="CorreoElectronico" dataType="VARCHAR2" prompt="Correo Electronico" viewName="XxqpPdftClientesContactosVO1" viewAttr="CorreoElectronico" maximumLength="200" styleClass="OraFieldText" disabled="false" readOnly="true"/>
                               <oa:messageTextInput id="Puesto" dataType="VARCHAR2" prompt="Puesto" viewName="XxqpPdftClientesContactosVO1" viewAttr="Puesto" maximumLength="150" disabled="false" styleClass="OraFieldText" readOnly="true"/>
                               <oa:messageTextInput id="NumeroCelular" dataType="VARCHAR2" prompt="Numero Celular" viewName="XxqpPdftClientesContactosVO1" viewAttr="NumeroCelular" maximumLength="100" disabled="false" styleClass="OraFieldText" readOnly="true"/>
+                              <oa:messageStyledText id="Cumpleanios" dataType="VARCHAR2" prompt="Cumpleaños" viewName="XxqpPdftClientesContactosVO1" viewAttr="Cumpleanios" maximumLength="200" styleClass="OraFieldText"/>
                            </ui:contents>
                         </oa:table>
                      </ui:contents>

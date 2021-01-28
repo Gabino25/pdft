@@ -34,7 +34,8 @@ public class XxqpPdftClientesContactosEOImpl extends OAEntityImpl {
     public static final int ATTRIBUTE4 = 17;
     public static final int ATTRIBUTE5 = 18;
     public static final int NUMEROCELULAR = 19;
-    public static final int XXQPPDFTCLIENTESHEADEREO = 20;
+    public static final int CUMPLEANIOS = 20;
+    public static final int XXQPPDFTCLIENTESHEADEREO = 21;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -328,6 +329,8 @@ public class XxqpPdftClientesContactosEOImpl extends OAEntityImpl {
             return getAttribute5();
         case NUMEROCELULAR:
             return getNumeroCelular();
+        case CUMPLEANIOS:
+            return getCumpleanios();
         case XXQPPDFTCLIENTESHEADEREO:
             return getXxqpPdftClientesHeaderEO();
         default:
@@ -400,6 +403,9 @@ public class XxqpPdftClientesContactosEOImpl extends OAEntityImpl {
         case NUMEROCELULAR:
             setNumeroCelular((String)value);
             return;
+        case CUMPLEANIOS:
+            setCumpleanios((String)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -428,6 +434,18 @@ public class XxqpPdftClientesContactosEOImpl extends OAEntityImpl {
      */
     public void setNumeroCelular(String value) {
         setAttributeInternal(NUMEROCELULAR, value);
+    }
+
+    /**Gets the attribute value for Cumpleanios, using the alias name Cumpleanios
+     */
+    public String getCumpleanios() {
+        return (String)getAttributeInternal(CUMPLEANIOS);
+    }
+
+    /**Sets <code>value</code> as the attribute value for Cumpleanios
+     */
+    public void setCumpleanios(String value) {
+        setAttributeInternal(CUMPLEANIOS, value);
     }
 
     /**Creates a Key object based on given key constituents

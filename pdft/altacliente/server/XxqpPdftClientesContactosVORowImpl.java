@@ -34,7 +34,8 @@ public class XxqpPdftClientesContactosVORowImpl extends OAViewRowImpl {
     public static final int ATTRIBUTE5 = 18;
     public static final int TIPOCONTACTOCODE = 19;
     public static final int NUMEROCELULAR = 20;
-    public static final int ISREQUIRED = 21;
+    public static final int CUMPLEANIOS = 21;
+    public static final int ISREQUIRED = 22;
 
     /**This is the default constructor (do not remove)
      */
@@ -322,6 +323,8 @@ public class XxqpPdftClientesContactosVORowImpl extends OAViewRowImpl {
             return getTipoContactoCode();
         case NUMEROCELULAR:
             return getNumeroCelular();
+        case CUMPLEANIOS:
+            return getCumpleanios();
         case ISREQUIRED:
             return getIsRequired();
         default:
@@ -397,6 +400,9 @@ public class XxqpPdftClientesContactosVORowImpl extends OAViewRowImpl {
         case NUMEROCELULAR:
             setNumeroCelular((String)value);
             return;
+        case CUMPLEANIOS:
+            setCumpleanios((String)value);
+            return;
         case ISREQUIRED:
             setIsRequired((String)value);
             return;
@@ -440,6 +446,19 @@ public class XxqpPdftClientesContactosVORowImpl extends OAViewRowImpl {
      */
     public void setNumeroCelular(String value) {
         setAttributeInternal(NUMEROCELULAR, value);
+    }
+
+
+    /**Gets the attribute value for the calculated attribute Cumpleanios
+     */
+    public String getCumpleanios() {
+        return (String) getAttributeInternal(CUMPLEANIOS);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute Cumpleanios
+     */
+    public void setCumpleanios(String value) {
+        setAttributeInternal(CUMPLEANIOS, value);
     }
 
 

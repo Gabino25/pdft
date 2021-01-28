@@ -18,8 +18,9 @@ public class ContactosTmpVORowImpl extends OAViewRowImpl {
     public static final int TELEFONO = 5;
     public static final int CORREOELECTRONICO = 6;
     public static final int PUESTO = 7;
-    public static final int ISREQUIRED = 8;
-    public static final int NUMEROCELULAR = 9;
+    public static final int NUMEROCELULAR = 8;
+    public static final int CUMPLEANIOS = 9;
+    public static final int ISREQUIRED = 10;
 
     /**This is the default constructor (do not remove)
      */
@@ -147,10 +148,12 @@ public class ContactosTmpVORowImpl extends OAViewRowImpl {
             return getCorreoElectronico();
         case PUESTO:
             return getPuesto();
-        case ISREQUIRED:
-            return getIsRequired();
         case NUMEROCELULAR:
             return getNumeroCelular();
+        case CUMPLEANIOS:
+            return getCumpleAnios();
+        case ISREQUIRED:
+            return getIsRequired();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -180,11 +183,14 @@ public class ContactosTmpVORowImpl extends OAViewRowImpl {
         case PUESTO:
             setPuesto((String)value);
             return;
-        case ISREQUIRED:
-            setIsRequired((String)value);
-            return;
         case NUMEROCELULAR:
             setNumeroCelular((String)value);
+            return;
+        case CUMPLEANIOS:
+            setCumpleAnios((String)value);
+            return;
+        case ISREQUIRED:
+            setIsRequired((String)value);
             return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
@@ -226,5 +232,17 @@ public class ContactosTmpVORowImpl extends OAViewRowImpl {
      */
     public void setNumeroCelular(String value) {
         setAttributeInternal(NUMEROCELULAR, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute CumpleAnios
+     */
+    public String getCumpleAnios() {
+        return (String) getAttributeInternal(CUMPLEANIOS);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute CumpleAnios
+     */
+    public void setCumpleAnios(String value) {
+        setAttributeInternal(CUMPLEANIOS, value);
     }
 }

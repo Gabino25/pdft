@@ -68,20 +68,20 @@ ln_cust_acct_site_id_sec number;
  raise le_from_pdft_to_oracle; 
  end if; 
  
- xxqp_pdft_clientes_pkg.call_create_location_sec(pso_errmsg => ls_errmsg
+ APPS.xxqp_pdft_clientes_pkg.call_create_location_sec(pso_errmsg => ls_errmsg
  ,pso_errcode => ls_errcode
  ,pni_cliente_header_id => pni_cliente_header_id
  ,pno_location_id => ln_location_id_sec
  ); 
  if ls_errmsg is not null then 
  pso_errmsg := 'Ocurrio una excepcion al llamar a call_create_location_sec.'||ls_errmsg;
- pso_errcode := ls_errcode; 
- raise le_from_pdft_to_oracle; 
- end if; 
+    pso_errcode := ls_errcode; 
+    raise le_from_pdft_to_oracle; 
+   end if;                    
+   
+   if ln_location_id_prim is not null then 
  
- if ln_location_id_prim is not null then 
- 
- APPS.xxqp_pdft_clientes_pkg.call_create_cust_account(pso_errmsg                   => ls_errmsg
+     xxqp_pdft_clientes_pkg.call_create_cust_account(pso_errmsg                   => ls_errmsg
                                                                          ,pso_errcode                   => ls_errcode
                                                                          ,pni_cliente_header_id     => pni_cliente_header_id
                                                                          ,pno_party_id                  => ln_party_id 
@@ -157,25 +157,32 @@ ln_cust_acct_site_id_sec number;
    ***********************************************************/
      if ln_location_id_sec is not null then 
    
+    /** 190120211850 solo se debe crear una cuenta
      xxqp_pdft_clientes_pkg.call_create_cust_account_sec(pso_errmsg                    => ls_errmsg
                                                                                 ,pso_errcode                   => ls_errcode
                                                                                 ,pni_cliente_header_id     => pni_cliente_header_id
                                                                                 ,pno_party_id                  => ln_party_id_sec
                                                                                 ,pno_cust_account_id       => ln_cust_account_id_sec
                                                                                 ); 
-   
+   **/
                                                                              
  
 
-   
-    if ln_party_id_sec is not null  
+   /** 190120211852 La segunda sucursal debe estar ligada al cliente **/
+  /**   if ln_party_id_sec is not null  **/
+    if ln_party_id is not null   
       and ln_location_id_sec is not null then   
-    xxqp_pdft_clientes_pkg.call_create_party_site_sec( pso_errmsg                   => ls_errmsg
-                                                                             ,pso_errcode                  => ls_errcode
-                                                                             ,pni_party_id                  => ln_party_id_sec
-                                                                             ,pni_location_id_sec       => ln_location_id_sec
-                                                                             ,pno_party_site_id           => ln_party_site_id_sec
-                                                                            );
+  /**  xxqp_pdft_clientes_pkg.call_create_party_site_sec( pso_errmsg                   => ls_errmsg  **/
+    xxqp_pdft_clientes_pkg.call_create_party_site( pso_errmsg                   => ls_errmsg 
+                                                                       ,pso_errcode                  => ls_errcode
+                                                                     /**    ,pni_party_id                  => ln_party_id_sec  **/
+                                                                       ,pni_party_id                  => ln_party_id
+                                                                    /**   ,pni_location_id_sec       => ln_location_id_sec **/
+                                                                        ,pni_location_id_prim       => ln_location_id_sec
+                                                                        ,pno_party_site_id           => ln_party_site_id_sec
+                                                                        );
+              
+                                                                        
       if ls_errmsg is not null then 
      pso_errmsg := 'Ocurrio una excepcion al llamar a call_create_party_site_sec.'||ls_errmsg;
      pso_errcode := ls_errcode; 
@@ -186,9 +193,10 @@ ln_cust_acct_site_id_sec number;
                                                          
  
  xxqp_pdft_clientes_pkg.call_attached_documents_sec( pso_errmsg                    => ls_errmsg
-                                                                           ,pso_errcode                   => ls_errcode
-                                                                           ,pni_cliente_header_id      => pni_cliente_header_id
-                                                                           ,pni_cust_account_id        => ln_cust_account_id_sec
+                                                                             ,pso_errcode                   => ls_errcode
+                                                                             ,pni_cliente_header_id      => pni_cliente_header_id
+                                                                           /**  ,pni_cust_account_id        => ln_cust_account_id_sec **/
+                                                                            ,pni_cust_account_id        => ln_cust_account_id
                                                                             );
                                           
      if ls_errmsg is not null then 
@@ -197,14 +205,15 @@ ln_cust_acct_site_id_sec number;
      raise le_from_pdft_to_oracle; 
     end if;                                         
     
-        
+    /**  190120211854  los contactos se comparten entre sucursales
     xxqp_pdft_clientes_pkg.create_account_contact(pso_errmsg                    => ls_errmsg
                                                                      ,pso_errcode                    => ls_errcode
                                                                      ,pni_cliente_header_id      => pni_cliente_header_id
-                                                                     ,pni_cust_party_id           => ln_party_id_sec
+                                                                    ,pni_cust_party_id           => ln_party_id_sec
                                                                      ,pni_cust_account_id       => ln_cust_account_id_sec
                                                                      ,psi_tipo_informacion      => 'SEC'
                                                                       );
+  **/
  
   if ls_errmsg is not null then 
      pso_errmsg := 'Ocurrio una excepcion al llamar a create_account_contact.'||ls_errmsg;
@@ -216,7 +225,8 @@ ln_cust_acct_site_id_sec number;
    if ln_sec_operating_unit is not null and ln_party_site_id_sec is not null then  
     xxqp_pdft_clientes_pkg.call_create_cust_acct_site(pso_errmsg                 => ls_errmsg
                                                                          ,pso_errcode                   => ls_errcode
-                                                                         ,pni_cust_account_id        => ln_cust_account_id_sec
+                                                                      /**   ,pni_cust_account_id        => ln_cust_account_id_sec **/
+                                                                         ,pni_cust_account_id        => ln_cust_account_id
                                                                          ,pni_party_site_id            => ln_party_site_id_sec
                                                                          ,pni_org_id                      => ln_sec_operating_unit
                                                                          ,psi_metodo_de_pago      => ls_metodo_de_pago          
@@ -790,14 +800,14 @@ lb_fnd_profile_save   boolean;
            
         -- 180120211234  lt_organization_rec_type.organization_name := client_head_info_rec.prim_razon_social;
         -- 180120211234  lt_organization_rec_type.known_as  := client_head_info_rec.nombre_cliente;
-          lt_organization_rec_type.organization_name := client_head_info_rec.nombre_cliente;  /** Column organization_name must have a value**/
-           lt_organization_rec_type.known_as := client_head_info_rec.razon_social;
+          lt_organization_rec_type.organization_name := client_head_info_rec.razon_social;  /** Column organization_name must have a value**/
+          /** lt_organization_rec_type.known_as := client_head_info_rec.razon_social; 270120211455 Bruno Solo Maneja Razones Sociales **/
           lt_organization_rec_type.created_by_module := 'TCA_V2_API';
             
           lt_party_rec_type.attribute_category := 'QPN'; 
           /* lt_party_rec_type.attribute1 := client_head_info_rec.prim_rfc;  140120211233 **/
           lt_party_rec_type.attribute1 := client_head_info_rec.rfc;
-          lt_party_rec_type.attribute2 := pni_cliente_header_id;
+         /** lt_party_rec_type.attribute2 := pni_cliente_header_id;  27012021 no hacer esto **/
             
           lt_organization_rec_type.party_rec := lt_party_rec_type;
             
