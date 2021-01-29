@@ -534,6 +534,52 @@
          <Attr Name="_DisplaySize" Value="240" />
       </DesignTime>
    </Attribute>
+   <Attribute
+      Name="PrimCountry"
+      Precision="200"
+      ColumnName="PRIM_COUNTRY"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_DIR_FISCAL" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="200" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PrimIdInternacional"
+      ColumnName="PRIM_ID_INTERNACIONAL"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_CLIENTES_DIR_FISCAL" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="SecCountry"
+      Precision="200"
+      ColumnName="SEC_COUNTRY"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_DIR_FISCAL" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="200" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="SecIdInternacional"
+      ColumnName="SEC_ID_INTERNACIONAL"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_CLIENTES_DIR_FISCAL" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
    <AccessorAttribute
       Name="XxqpPdftClientesHeaderEO"
       Association="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesDirFisFkAssoc"
@@ -715,6 +761,50 @@
          <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
          <Attr Name="_isCheck" Value="true" />
          <Attr Name="_DBObjectName" Value="SYS_C001542345" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669548" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesDirFiscalEO.CreatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669548" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669549" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesDirFiscalEO.CreationDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATION_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669549" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669550" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesDirFiscalEO.LastUpdatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669550" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669551" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesDirFiscalEO.LastUpdateDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669551" />
       </DesignTime>
    </Key>
    <Key

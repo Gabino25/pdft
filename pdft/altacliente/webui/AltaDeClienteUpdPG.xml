@@ -71,6 +71,13 @@
                                                       <oa:messageTextInput id="ColoniaP" columns="90" maximumLength="150" prompt="Colonia" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimColonia"/>
                                                       <oa:messageTextInput id="CiudadOMunicipioP" columns="90" maximumLength="150" required="yes" prompt="Ciudad o Municipio" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCiudadOMpo" styleClass="OraFieldText"/>
                                                       <oa:messageChoice id="EstadoP" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EstadoVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" required="yes" prompt="Estado" viewName="XxqpPdftClientesDirFiscalVO1" readOnly="false" viewAttr="PrimEstadoC" styleClass="OraFieldText"/>
+                                                      <oa:messageLovInput id="PaisP" externalListOfValues="/xxqp/oracle/apps/ar/pdft/altacliente/webui/HzCountryRN" prompt="Pais" required="yes" translatableDefaultValue="" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCountryD">
+                                                         <lovMappings>
+                                                            <lovMap id="lovMap1" lovItem="TerritoryShortName" resultTo="PaisP" criteriaFrom="PaisP"/>
+                                                            <lovMap id="lovMap12" lovItem="TerritoryCode" resultTo="PaisPFV"/>
+                                                         </lovMappings>
+                                                      </oa:messageLovInput>
+                                                      <oa:messageTextInput id="PrimIdInternacional" dataType="NUMBER" prompt="ID Internacional" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimIdInternacional"/>
                                                    </ui:contents>
                                                 </oa:tableLayout>
                                              </ui:contents>
@@ -138,6 +145,13 @@
                                                       <oa:messageTextInput id="ColoniaS" columns="90" maximumLength="150" prompt="Colonia" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecColonia"/>
                                                       <oa:messageTextInput id="CiudadOMunicipioS" columns="90" maximumLength="150" prompt="Ciudad o Municipio" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecCiudadOMpo"/>
                                                       <oa:messageChoice id="EstadoS" pickListDispAttr="Meaning" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EstadoVO" pickListValAttr="LookupCode" prompt="Estado" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecEstadoC"/>
+                                                      <oa:messageLovInput id="PaisS" externalListOfValues="/xxqp/oracle/apps/ar/pdft/altacliente/webui/HzCountryRN" prompt="Pais" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecCountryD">
+                                                         <lovMappings>
+                                                            <lovMap id="lovMap11" lovItem="TerritoryShortName" resultTo="PaisS" criteriaFrom="PaisS"/>
+                                                            <lovMap id="lovMap13" lovItem="TerritoryCode" resultTo="PaisSFV"/>
+                                                         </lovMappings>
+                                                      </oa:messageLovInput>
+                                                      <oa:messageTextInput id="SecIdInternacional" dataType="NUMBER" prompt="ID Internacional" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecIdInternacional"/>
                                                    </ui:contents>
                                                 </oa:tableLayout>
                                              </ui:contents>
@@ -456,6 +470,8 @@
                   </oa:button>
                </ui:contents>
             </oa:pageButtonBar>
+            <oa:formValue id="PaisPFV" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCountry"/>
+            <oa:formValue id="PaisSFV" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecCountry"/>
          </ui:contents>
          <ui:returnNavigation>
             <oa:link id="RegresarPaginaAnterior" text="Regresar a Pagina Anterior" destination="" serverUnvalidated="true" rendered="true">

@@ -82,6 +82,7 @@
                                                             <lovMap id="lovMap12" lovItem="TerritoryCode" resultTo="PaisPFV"/>
                                                          </lovMappings>
                                                       </oa:messageLovInput>
+                                                      <oa:messageTextInput id="PrimIdInternacional" dataType="NUMBER" prompt="ID Internacional"/>
                                                    </ui:contents>
                                                 </oa:tableLayout>
                                              </ui:contents>
@@ -159,6 +160,7 @@
                                                             <lovMap id="lovMap13" lovItem="TerritoryCode" resultTo="PaisSFV"/>
                                                          </lovMappings>
                                                       </oa:messageLovInput>
+                                                      <oa:messageTextInput id="SecIdInternacional" dataType="NUMBER" prompt="ID Internacional"/>
                                                    </ui:contents>
                                                 </oa:tableLayout>
                                              </ui:contents>

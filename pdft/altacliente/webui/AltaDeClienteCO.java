@@ -410,6 +410,9 @@ public class AltaDeClienteCO extends OAControllerImpl
      String strCedulaP = null; 
      String strNumeroExtP = null; 
      String strNumeroIntP = null; 
+     String strOperatingUnitPValue = null; 
+     String strPaisPFV = null; 
+     String strIdInternacionalP = null; 
      
     String strRFCS = null; 
     String strRazonSocialS = null; 
@@ -424,9 +427,11 @@ public class AltaDeClienteCO extends OAControllerImpl
     String strCedulaS = null; 
     String strNumeroExtS = null; 
     String strNumeroIntS = null; 
-      
-    String strOperatingUnitPValue = null; 
     String strOperatingUnitSValue = null; 
+    String strPaisSFV = null; 
+    String strIdInternacionalS = null; 
+      
+   
     
       OAMessageChoiceBean OperatingUnitPBean = (OAMessageChoiceBean)webBean.findChildRecursive("OperatingUnitP");
       if(null!=OperatingUnitPBean){
@@ -602,7 +607,26 @@ public class AltaDeClienteCO extends OAControllerImpl
            strCedulaS = CedulaSBean.getValue(pageContext).toString();
           }
       }
-    
+      
+      strPaisPFV = pageContext.getParameter("PaisPFV");
+     /** strIdInternacionalP = pageContext.getParameter("PrimIdInternacional"); No funciona en los tabs **/
+      OAMessageTextInputBean PrimIdInternacionalBean = (OAMessageTextInputBean)webBean.findChildRecursive("PrimIdInternacional");
+      if(null!=PrimIdInternacionalBean){
+       if(null!=PrimIdInternacionalBean.getValue(pageContext)){
+       strIdInternacionalP = PrimIdInternacionalBean.getValue(pageContext).toString();  
+       }
+      }      
+     
+      strPaisSFV = pageContext.getParameter("PaisSFV");
+      /** strIdInternacionalS = pageContext.getParameter("SecIdInternacional"); No funciona en los tabs **/
+      OAMessageTextInputBean SecIdInternacionalBean = (OAMessageTextInputBean)webBean.findChildRecursive("SecIdInternacional");
+      if(null!=SecIdInternacionalBean){
+       if(null!=SecIdInternacionalBean.getValue(pageContext)){
+       strIdInternacionalS = SecIdInternacionalBean.getValue(pageContext).toString();  
+       }
+      }      
+      
+      
       if("RFCEvt".equals(pageContext.getParameter(this.EVENT_PARAM))
          ||0==gIntSelectedIndex){
           System.out.println("Evento RFCEvt");
@@ -711,9 +735,30 @@ public class AltaDeClienteCO extends OAControllerImpl
       System.out.println("strEstadoSText:"+strEstadoSText);
       System.out.println("strCPSValue:"+strCPSValue);
       System.out.println("strCPSText:"+strCPSText);
-      System.out.println("strCedulaS:"+strCedulaS
-      );
+      System.out.println("strCedulaS:"+strCedulaS);
     
+      System.out.println("strPaisPFV:"+strPaisPFV);
+      System.out.println("strIdInternacionalP:"+strIdInternacionalP);
+      System.out.println("strPaisSFV:"+strPaisSFV);
+      System.out.println("strIdInternacionalS:"+strIdInternacionalS);
+      
+      
+      if(!"MX".equals(strPaisPFV)&&!"".equals(strPaisPFV)&&!pageContext.isLovEvent()){
+       if(null==strIdInternacionalP){
+           throw new OAException("Si el pais no es Mexico se nececita un ID Internacional",OAException.ERROR); 
+       }
+      }
+    
+     
+     if(null!=strPaisSFV){
+         if(!"MX".equals(strPaisSFV)&&!"".equals(strPaisSFV)&&!pageContext.isLovEvent()){
+          if(null==strIdInternacionalS){
+              throw new OAException("Si el pais no es Mexico se nececita un ID Internacional",OAException.ERROR); 
+          }
+         }
+     }
+      
+      
     /****************************************************************************
      ******************** Punto De Recoleccion **************************************
      ****************************************************************************/
@@ -1343,6 +1388,10 @@ public class AltaDeClienteCO extends OAControllerImpl
                                              ,CedulaExamineSByteStream
                                              ,strOperatingUnitPValue
                                              ,strOperatingUnitSValue
+                                             ,strPaisPFV
+                                             ,strPaisSFV
+                                             ,strIdInternacionalP
+                                             ,strIdInternacionalS
                                             );
          
          altaDeClienteAM.fillPuntoDeRecoleccion(  sbHeaderId.toString() 

@@ -64,6 +64,8 @@
                                                       <oa:messageTextInput id="ColoniaP" columns="90" maximumLength="150" prompt="Colonia" styleClass="OraFieldText" required="yes" readOnly="true" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimColonia"/>
                                                       <oa:messageTextInput id="CiudadOMunicipioP" columns="90" maximumLength="150" required="yes" prompt="Ciudad o Municipio" readOnly="true" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCiudadOMpo" styleClass="OraFieldText"/>
                                                       <oa:messageChoice id="EstadoP" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EstadoVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" required="yes" prompt="Estado" viewName="XxqpPdftClientesDirFiscalVO1" readOnly="true" viewAttr="PrimEstadoC" styleClass="OraFieldText"/>
+                                                      <oa:messageTextInput id="PrimCountryD" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCountryD" maximumLength="280"/>
+                                                      <oa:messageTextInput id="PrimIdInternacional" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimIdInternacional" prompt="Id Internacional" readOnly="true" dataType="NUMBER"/>
                                                    </ui:contents>
                                                 </oa:tableLayout>
                                              </ui:contents>
@@ -131,6 +133,8 @@
                                                       <oa:messageTextInput id="ColoniaS" columns="90" maximumLength="150" prompt="Colonia" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecColonia"/>
                                                       <oa:messageTextInput id="CiudadOMunicipioS" columns="90" maximumLength="150" prompt="Ciudad o Municipio" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecCiudadOMpo"/>
                                                       <oa:messageChoice id="EstadoS" pickListDispAttr="Meaning" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EstadoVO" pickListValAttr="LookupCode" prompt="Estado" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecEstadoC"/>
+                                                      <oa:messageTextInput id="SecCountryD" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecCountryD" prompt="Pais" readOnly="true" maximumLength="280"/>
+                                                      <oa:messageTextInput id="SecIdInternacional" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecIdInternacional" prompt="Id Internacional" readOnly="true" dataType="NUMBER"/>
                                                    </ui:contents>
                                                 </oa:tableLayout>
                                              </ui:contents>

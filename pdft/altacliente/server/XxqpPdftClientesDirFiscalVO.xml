@@ -3,7 +3,13 @@
 
 <ViewObject
    Name="XxqpPdftClientesDirFiscalVO"
-   SelectList="XxqpPdftClientesDirFiscalEO.ID, 
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesDirFiscalVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesDirFiscalVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT XxqpPdftClientesDirFiscalEO.ID, 
        XxqpPdftClientesDirFiscalEO.HEADER_ID, 
        XxqpPdftClientesDirFiscalEO.PRIM_RFC, 
        XxqpPdftClientesDirFiscalEO.PRIM_RAZON_SOCIAL, 
@@ -36,8 +42,7 @@
        XxqpPdftClientesDirFiscalEO.ATTRIBUTE3, 
        XxqpPdftClientesDirFiscalEO.ATTRIBUTE4, 
        XxqpPdftClientesDirFiscalEO.ATTRIBUTE5, 
-       XxqpPdftClientesDirFiscalEO.PRIM_CEDULA_CONTENT_TYPE,
-
+       XxqpPdftClientesDirFiscalEO.PRIM_CEDULA_CONTENT_TYPE, 
        XxqpPdftClientesDirFiscalEO.PRIM_CEDULA_FILE_NAME, 
        XxqpPdftClientesDirFiscalEO.SEC_CEDULA_CONTENT_TYPE, 
        XxqpPdftClientesDirFiscalEO.SEC_CEDULA_FILE_NAME, 
@@ -46,15 +51,25 @@
        XxqpPdftClientesDirFiscalEO.PRIM_NUMERO_EXT, 
        XxqpPdftClientesDirFiscalEO.PRIM_NUMERO_INT, 
        XxqpPdftClientesDirFiscalEO.SEC_NUMERO_EXT, 
-       XxqpPdftClientesDirFiscalEO.SEC_NUMERO_INT"
-   FromList="XXQP_PDFT_CLIENTES_DIR_FISCAL XxqpPdftClientesDirFiscalEO"
-   BindingStyle="OracleName"
-   CustomQuery="false"
-   RowClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesDirFiscalVORowImpl"
-   ComponentClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesDirFiscalVOImpl"
-   UseGlueCode="false" >
+       XxqpPdftClientesDirFiscalEO.SEC_NUMERO_INT, 
+       XxqpPdftClientesDirFiscalEO.PRIM_COUNTRY, 
+       XxqpPdftClientesDirFiscalEO.PRIM_ID_INTERNACIONAL, 
+       XxqpPdftClientesDirFiscalEO.SEC_COUNTRY, 
+       XxqpPdftClientesDirFiscalEO.SEC_ID_INTERNACIONAL,  ( SELECT  T.TERRITORY_SHORT_NAME
+     FROM FND_TERRITORIES_TL T, FND_TERRITORIES B
+    WHERE B.TERRITORY_CODE = T.TERRITORY_CODE
+          AND T.LANGUAGE = 'ESA'   
+          AND B.TERRITORY_CODE = XxqpPdftClientesDirFiscalEO.PRIM_COUNTRY ) PRIM_COUNTRY_D,
+( SELECT  T.TERRITORY_SHORT_NAME
+     FROM FND_TERRITORIES_TL T, FND_TERRITORIES B
+    WHERE B.TERRITORY_CODE = T.TERRITORY_CODE
+          AND T.LANGUAGE = 'ESA'   
+          AND B.TERRITORY_CODE = XxqpPdftClientesDirFiscalEO.SEC_COUNTRY ) SEC_COUNTRY_D
+FROM XXQP_PDFT_CLIENTES_DIR_FISCAL XxqpPdftClientesDirFiscalEO
+   ]]></SQLQuery>
    <DesignTime>
       <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
       <Attr Name="_version" Value="10.1.3.41.57" />
       <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
    </DesignTime>
@@ -328,5 +343,52 @@
       EntityAttrName="SecNumeroInt"
       EntityUsage="XxqpPdftClientesDirFiscalEO"
       AliasName="SEC_NUMERO_INT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimCountry"
+      EntityAttrName="PrimCountry"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_COUNTRY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimIdInternacional"
+      EntityAttrName="PrimIdInternacional"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_ID_INTERNACIONAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecCountry"
+      EntityAttrName="SecCountry"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_COUNTRY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecIdInternacional"
+      EntityAttrName="SecIdInternacional"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_ID_INTERNACIONAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimCountryD"
+      IsPersistent="false"
+      Precision="280"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PRIM_COUNTRY_D"
+      Expression="PRIM_COUNTRY_D"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="80" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecCountryD"
+      IsPersistent="false"
+      Precision="280"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SEC_COUNTRY_D"
+      Expression="SEC_COUNTRY_D"
+      SQLType="VARCHAR" >
    </ViewAttribute>
 </ViewObject>

@@ -234,7 +234,11 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                                     String pCedulaExamineSContentType,
                                     oracle.jbo.domain.BlobDomain pCedulaExamineSByteStream,
                                     String pStrOperatingUnitPValue,
-                                    String pStrOperatingUnitSValue) {
+                                    String pStrOperatingUnitSValue,
+                                    String pStrPaisP,
+                                    String pStrPaisS,
+                                    String pStrIdInternacionalP,
+                                    String pStrIdInternacionalS) {
         XxqpPdftClientesDirFiscalVOImpl xxqpPdftClientesDirFiscalVOImpl = getXxqpPdftClientesDirFiscalVO1(); 
         XxqpPdftClientesDirFiscalVORowImpl xxqpPdftClientesDirFiscalVORowImpl = null; 
         OADBTransaction oADBTransaction = this.getOADBTransaction();
@@ -284,6 +288,27 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             xxqpPdftClientesDirFiscalVORowImpl.setSecCedulaFile(pCedulaExamineSByteStream);
             xxqpPdftClientesDirFiscalVORowImpl.setPrimOperatingUnit(pStrOperatingUnitPValue);
             xxqpPdftClientesDirFiscalVORowImpl.setSecOperatingUnit(pStrOperatingUnitSValue);
+            
+            xxqpPdftClientesDirFiscalVORowImpl.setPrimCountry(pStrPaisP);
+            xxqpPdftClientesDirFiscalVORowImpl.setSecCountry(pStrPaisS);
+            oracle.jbo.domain.Number numIdInternacionalP = null; 
+            oracle.jbo.domain.Number numIdInternacionalS = null; 
+            if(null!=pStrIdInternacionalP){
+                try {
+                    numIdInternacionalP =  new oracle.jbo.domain.Number(pStrIdInternacionalP);
+                } catch (SQLException e) {
+                    System.out.println("new oracle.jbo.domain.Number("+pStrIdInternacionalP+"):"+e.toString());
+                }
+            }
+            if(null!=pStrIdInternacionalS){
+                try {
+                    numIdInternacionalS =  new oracle.jbo.domain.Number(pStrIdInternacionalS);
+                } catch (SQLException e) {
+                    System.out.println("new oracle.jbo.domain.Number("+pStrIdInternacionalS+"):"+e.toString());
+                }
+            }
+            xxqpPdftClientesDirFiscalVORowImpl.setPrimIdInternacional(numIdInternacionalP);
+            xxqpPdftClientesDirFiscalVORowImpl.setSecIdInternacional(numIdInternacionalS);
             
             xxqpPdftClientesDirFiscalVOImpl.insertRow(xxqpPdftClientesDirFiscalVORowImpl);
             
