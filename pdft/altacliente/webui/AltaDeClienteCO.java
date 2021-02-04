@@ -745,7 +745,7 @@ public class AltaDeClienteCO extends OAControllerImpl
       
       if(!"MX".equals(strPaisPFV)&&!"".equals(strPaisPFV)&&!pageContext.isLovEvent()){
        if(null==strIdInternacionalP){
-           throw new OAException("Si el pais no es Mexico se nececita un ID Internacional",OAException.ERROR); 
+           throw new OAException("Si el pais no es Mexico se necesita un ID Internacional",OAException.ERROR); 
        }
       }
     
@@ -753,7 +753,7 @@ public class AltaDeClienteCO extends OAControllerImpl
      if(null!=strPaisSFV){
          if(!"MX".equals(strPaisSFV)&&!"".equals(strPaisSFV)&&!pageContext.isLovEvent()){
           if(null==strIdInternacionalS){
-              throw new OAException("Si el pais no es Mexico se nececita un ID Internacional",OAException.ERROR); 
+              throw new OAException("Si el pais no es Mexico se necesita un ID Internacional",OAException.ERROR); 
           }
          }
      }

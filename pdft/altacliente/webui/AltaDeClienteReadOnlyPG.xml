@@ -64,7 +64,7 @@
                                                       <oa:messageTextInput id="ColoniaP" columns="90" maximumLength="150" prompt="Colonia" styleClass="OraFieldText" required="yes" readOnly="true" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimColonia"/>
                                                       <oa:messageTextInput id="CiudadOMunicipioP" columns="90" maximumLength="150" required="yes" prompt="Ciudad o Municipio" readOnly="true" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCiudadOMpo" styleClass="OraFieldText"/>
                                                       <oa:messageChoice id="EstadoP" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EstadoVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" required="yes" prompt="Estado" viewName="XxqpPdftClientesDirFiscalVO1" readOnly="true" viewAttr="PrimEstadoC" styleClass="OraFieldText"/>
-                                                      <oa:messageTextInput id="PrimCountryD" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCountryD" maximumLength="280"/>
+                                                      <oa:messageTextInput id="PrimCountryD" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCountryD" maximumLength="280" readOnly="true" prompt="Pais"/>
                                                       <oa:messageTextInput id="PrimIdInternacional" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimIdInternacional" prompt="Id Internacional" readOnly="true" dataType="NUMBER"/>
                                                    </ui:contents>
                                                 </oa:tableLayout>

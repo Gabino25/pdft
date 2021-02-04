@@ -68,20 +68,20 @@ ln_cust_acct_site_id_sec number;
  raise le_from_pdft_to_oracle; 
  end if; 
  
- APPS.xxqp_pdft_clientes_pkg.call_create_location_sec(pso_errmsg => ls_errmsg
+ xxqp_pdft_clientes_pkg.call_create_location_sec(pso_errmsg => ls_errmsg
  ,pso_errcode => ls_errcode
  ,pni_cliente_header_id => pni_cliente_header_id
  ,pno_location_id => ln_location_id_sec
  ); 
  if ls_errmsg is not null then 
  pso_errmsg := 'Ocurrio una excepcion al llamar a call_create_location_sec.'||ls_errmsg;
-    pso_errcode := ls_errcode; 
-    raise le_from_pdft_to_oracle; 
-   end if;                    
-   
-   if ln_location_id_prim is not null then 
+ pso_errcode := ls_errcode; 
+ raise le_from_pdft_to_oracle; 
+ end if; 
  
-     xxqp_pdft_clientes_pkg.call_create_cust_account(pso_errmsg                   => ls_errmsg
+ if ln_location_id_prim is not null then 
+ 
+ APPS.xxqp_pdft_clientes_pkg.call_create_cust_account(pso_errmsg                   => ls_errmsg
                                                                          ,pso_errcode                   => ls_errcode
                                                                          ,pni_cliente_header_id     => pni_cliente_header_id
                                                                          ,pno_party_id                  => ln_party_id 
@@ -903,16 +903,6 @@ select    xpcdf.ID
             ,xpcdf.PRIM_CODIGO_POSTAL_C      
             ,xpcdf.PRIM_CEDULA               
             ,xpcdf.PRIM_CEDULA_FILE          
-            ,xpcdf.SEC_RFC                   
-            ,xpcdf.SEC_RAZON_SOCIAL          
-            ,xpcdf.SEC_DIRECCION             
-            ,xpcdf.SEC_ENTRE_CALLES          
-            ,xpcdf.SEC_COLONIA               
-            ,xpcdf.SEC_CIUDAD_O_MPO          
-            ,xpcdf.SEC_ESTADO_C              
-            ,xpcdf.SEC_CODIGO_POSTAL_C       
-            ,xpcdf.SEC_CEDULA                
-            ,xpcdf.SEC_CEDULA_FILE           
             ,xpcdf.CREATED_BY                
             ,xpcdf.CREATION_DATE             
             ,xpcdf.LAST_UPDATED_BY           
@@ -926,12 +916,10 @@ select    xpcdf.ID
             ,xpcdf.ATTRIBUTE5                
             ,xpcdf.PRIM_CEDULA_FILE_NAME     
             ,xpcdf.PRIM_CEDULA_CONTENT_TYPE  
-            ,xpcdf.SEC_CEDULA_FILE_NAME      
-            ,xpcdf.SEC_CEDULA_CONTENT_TYPE   
             ,xpcdf.PRIM_NUMERO_EXT 
             ,xpcdf.PRIM_NUMERO_INT 
-             ,xpcdf.SEC_NUMERO_EXT 
-            ,xpcdf.SEC_NUMERO_INT 
+            ,xpcdf.PRIM_COUNTRY
+            ,xpcdf.PRIM_ID_INTERNACIONAL
     from XXQP_PDFT_CLIENTES_DIR_FISCAL xpcdf
   where xpcdf.header_id =  cur_cliente_id; 
   
@@ -1048,17 +1036,38 @@ end if;
      fnd_msg_pub.initialize; 
      
      dbms_output.put_line('Language:'||userenv('LANG')); 
-                                 
-     lt_location_rec_type.country := 'MX';
-     lt_location_rec_type.address1 := dir_fiscal_info_rec.prim_direccion; 
-     lt_location_rec_type.address2 := dir_fiscal_info_rec.prim_numero_ext;
-     lt_location_rec_type.address3 := dir_fiscal_info_rec.prim_numero_int;
-     lt_location_rec_type.address4 := dir_fiscal_info_rec.PRIM_COLONIA;
-     lt_location_rec_type.city := dir_fiscal_info_rec.PRIM_CIUDAD_O_MPO;
-     lt_location_rec_type.province :=  dir_fiscal_info_rec.PRIM_CIUDAD_O_MPO;
-     lt_location_rec_type.postal_code := dir_fiscal_info_rec.PRIM_CODIGO_POSTAL_C;
-     lt_location_rec_type.state := dir_fiscal_info_rec.PRIM_ESTADO_C;
-     lt_location_rec_type.created_by_module := 'BO_API';
+     
+     if 'MX' = dir_fiscal_info_rec.prim_country then                             
+     
+      lt_location_rec_type.country :=dir_fiscal_info_rec.prim_country/* 'MX'*/;
+      lt_location_rec_type.address1 := dir_fiscal_info_rec.prim_direccion; 
+      lt_location_rec_type.address2 := dir_fiscal_info_rec.prim_numero_ext;
+      lt_location_rec_type.address3 := dir_fiscal_info_rec.prim_numero_int;
+      lt_location_rec_type.address4 := dir_fiscal_info_rec.PRIM_COLONIA;
+      lt_location_rec_type.city := dir_fiscal_info_rec.PRIM_CIUDAD_O_MPO;
+      lt_location_rec_type.province :=  dir_fiscal_info_rec.PRIM_CIUDAD_O_MPO;
+      lt_location_rec_type.postal_code := dir_fiscal_info_rec.PRIM_CODIGO_POSTAL_C;
+      lt_location_rec_type.state := dir_fiscal_info_rec.PRIM_ESTADO_C;
+      lt_location_rec_type.created_by_module := 'BO_API';
+     
+     else
+      
+      lt_location_rec_type.country :=dir_fiscal_info_rec.prim_country;
+      lt_location_rec_type.address1 := dir_fiscal_info_rec.prim_direccion||', '||dir_fiscal_info_rec.PRIM_ID_INTERNACIONAL; 
+     /***************************************************
+      lt_location_rec_type.address2 := dir_fiscal_info_rec.prim_numero_ext;
+      lt_location_rec_type.address3 := dir_fiscal_info_rec.prim_numero_int;
+      lt_location_rec_type.address4 := dir_fiscal_info_rec.PRIM_COLONIA;
+      **************************************************/
+       lt_location_rec_type.address2 := dir_fiscal_info_rec.PRIM_ID_INTERNACIONAL;
+      lt_location_rec_type.city := dir_fiscal_info_rec.PRIM_CIUDAD_O_MPO;
+      lt_location_rec_type.province :=  dir_fiscal_info_rec.PRIM_CIUDAD_O_MPO;
+      lt_location_rec_type.postal_code := dir_fiscal_info_rec.PRIM_CODIGO_POSTAL_C;
+      lt_location_rec_type.state := dir_fiscal_info_rec.PRIM_ESTADO_C;
+      lt_location_rec_type.created_by_module := 'BO_API';
+      
+     end if; 
+     
      
      hz_location_v2pub.create_location(  p_init_msg_list            => FND_API.G_TRUE
                                                        ,p_location_rec             =>  lt_location_rec_type
@@ -1125,16 +1134,6 @@ end if;
   CURSOR get_dir_fiscal_info (cur_cliente_id   number) IS
 select    xpcdf.ID                        
             ,xpcdf.HEADER_ID                 
-            ,xpcdf.PRIM_RFC                  
-            ,xpcdf.PRIM_RAZON_SOCIAL         
-            ,xpcdf.PRIM_DIRECCION            
-            ,xpcdf.PRIM_ENTRE_CALLES         
-            ,xpcdf.PRIM_COLONIA              
-            ,xpcdf.PRIM_CIUDAD_O_MPO         
-            ,xpcdf.PRIM_ESTADO_C             
-            ,xpcdf.PRIM_CODIGO_POSTAL_C      
-            ,xpcdf.PRIM_CEDULA               
-            ,xpcdf.PRIM_CEDULA_FILE          
             ,xpcdf.SEC_RFC                   
             ,xpcdf.SEC_RAZON_SOCIAL          
             ,xpcdf.SEC_DIRECCION             
@@ -1156,12 +1155,12 @@ select    xpcdf.ID
             ,xpcdf.ATTRIBUTE3                
             ,xpcdf.ATTRIBUTE4                
             ,xpcdf.ATTRIBUTE5                
-            ,xpcdf.PRIM_CEDULA_FILE_NAME     
-            ,xpcdf.PRIM_CEDULA_CONTENT_TYPE  
             ,xpcdf.SEC_CEDULA_FILE_NAME      
             ,xpcdf.SEC_CEDULA_CONTENT_TYPE   
             ,xpcdf.SEC_NUMERO_EXT
             ,xpcdf.SEC_NUMERO_INT
+            ,xpcdf.SEC_COUNTRY
+            ,xpcdf.SEC_ID_INTERNACIONAL
     from XXQP_PDFT_CLIENTES_DIR_FISCAL xpcdf
   where xpcdf.header_id =  cur_cliente_id; 
   
@@ -1283,18 +1282,37 @@ end if;
     and  dir_fiscal_info_rec.sec_COLONIA is not null
     and  dir_fiscal_info_rec.sec_CIUDAD_O_MPO is not null
     and dir_fiscal_info_rec.sec_CODIGO_POSTAL_C is not null
-    and dir_fiscal_info_rec.sec_ESTADO_C is not null) then
-                                
-     lt_location_rec_type.country := 'MX';
-     lt_location_rec_type.address1 := dir_fiscal_info_rec.sec_direccion; 
-     lt_location_rec_type.address2 := dir_fiscal_info_rec.sec_numero_ext;
-     lt_location_rec_type.address3 := dir_fiscal_info_rec.sec_numero_int;
-     lt_location_rec_type.address4 := dir_fiscal_info_rec.sec_COLONIA;
-     lt_location_rec_type.city := dir_fiscal_info_rec.sec_CIUDAD_O_MPO;
-       lt_location_rec_type.province := dir_fiscal_info_rec.sec_CIUDAD_O_MPO;
-     lt_location_rec_type.postal_code := dir_fiscal_info_rec.sec_CODIGO_POSTAL_C;
-     lt_location_rec_type.state := dir_fiscal_info_rec.sec_ESTADO_C;
-     lt_location_rec_type.created_by_module := 'BO_API';
+    and dir_fiscal_info_rec.sec_ESTADO_C is not null
+    and dir_fiscal_info_rec.sec_country is not null
+    and dir_fiscal_info_rec.sec_id_internacional is not null) then
+     
+     if 'MX' =    dir_fiscal_info_rec.sec_country then                          
+      lt_location_rec_type.country :=  dir_fiscal_info_rec.sec_country;/*'MX'*/
+      lt_location_rec_type.address1 := dir_fiscal_info_rec.sec_direccion; 
+      lt_location_rec_type.address2 := dir_fiscal_info_rec.sec_numero_ext;
+      lt_location_rec_type.address3 := dir_fiscal_info_rec.sec_numero_int;
+      lt_location_rec_type.address4 := dir_fiscal_info_rec.sec_COLONIA;
+      lt_location_rec_type.city := dir_fiscal_info_rec.sec_CIUDAD_O_MPO;
+      lt_location_rec_type.province := dir_fiscal_info_rec.sec_CIUDAD_O_MPO;
+      lt_location_rec_type.postal_code := dir_fiscal_info_rec.sec_CODIGO_POSTAL_C;
+      lt_location_rec_type.state := dir_fiscal_info_rec.sec_ESTADO_C;
+      lt_location_rec_type.created_by_module := 'BO_API';
+     else
+       lt_location_rec_type.country :=  dir_fiscal_info_rec.sec_country;/*'MX'*/
+      lt_location_rec_type.address1 := dir_fiscal_info_rec.sec_direccion||', '||dir_fiscal_info_rec.sec_id_internacional; 
+     /************************************************
+      lt_location_rec_type.address2 := dir_fiscal_info_rec.sec_numero_ext;
+      lt_location_rec_type.address3 := dir_fiscal_info_rec.sec_numero_int;
+      lt_location_rec_type.address4 := dir_fiscal_info_rec.sec_COLONIA;
+      ************************************************/
+       lt_location_rec_type.address2 := dir_fiscal_info_rec.sec_id_internacional;
+      lt_location_rec_type.city := dir_fiscal_info_rec.sec_CIUDAD_O_MPO;
+      lt_location_rec_type.province := dir_fiscal_info_rec.sec_CIUDAD_O_MPO;
+      lt_location_rec_type.postal_code := dir_fiscal_info_rec.sec_CODIGO_POSTAL_C;
+      lt_location_rec_type.state := dir_fiscal_info_rec.sec_ESTADO_C;
+      lt_location_rec_type.created_by_module := 'BO_API';
+     end if; 
+     
      
      hz_location_v2pub.create_location(  p_init_msg_list            => FND_API.G_TRUE
                                                        ,p_location_rec             =>  lt_location_rec_type
