@@ -40,6 +40,12 @@ ALTER TABLE APPS.XXQP_PDFT_CLIENTES_DIR_FISCAL ADD PRIM_ID_INTERNACIONAL NUMBER;
 
 ALTER TABLE APPS.XXQP_PDFT_CLIENTES_DIR_FISCAL ADD SEC_ID_INTERNACIONAL NUMBER;
 
+/**********************************************************************
+**********************************************************************
+**********************************************************************/
+
+ALTER TABLE APPS.XXQP_PDFT_CLIENTES_FACT_PAG ADD CE_ENVIO_FACTURAS VARCHAR2(500);
+
 
 
 

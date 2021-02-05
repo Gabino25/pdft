@@ -356,6 +356,7 @@
                                                 <oa:messageRadioGroup id="OrdenDeCompra" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Orden de Compra" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="OrdenDeCompraC"/>
                                                 <oa:messageRadioGroup id="Contrato" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Contrato" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="ContratoC"/>
                                                 <oa:messageTextInput id="VigenciaDeContrato" maximumLength="30" prompt="Vigencia de Contrato" styleClass="OraFieldText" required="no" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="VigenciaContrato"/>
+                                                <oa:messageTextInput id="CeEnvioFacturas" rows="5" prompt="Correo electronico de envio de facturas" maximumLength="500" columns="40" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="CeEnvioFacturas"/>
                                              </ui:contents>
                                           </oa:tableLayout>
                                        </ui:contents>

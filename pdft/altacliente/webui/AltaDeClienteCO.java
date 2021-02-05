@@ -959,6 +959,7 @@ public class AltaDeClienteCO extends OAControllerImpl
       String strViernes = null; 
       String strSabado = null; 
       String strDomingo = null; 
+      String strCeEnvioFacturas = null; 
       
      
      OAMessageRadioGroupBean CondicionesDePagoBean = (OAMessageRadioGroupBean)webBean.findChildRecursive("CondicionesDePago");
@@ -1114,6 +1115,7 @@ public class AltaDeClienteCO extends OAControllerImpl
          }
       } 
       
+      
     OAMessageCheckBoxBean LunesBean = (OAMessageCheckBoxBean)webBean.findChildRecursive("Lunes"); 
     if(null!=LunesBean&&null!=LunesBean.getValue(pageContext)){
       strLunes = LunesBean.getValue(pageContext).toString(); 
@@ -1142,6 +1144,13 @@ public class AltaDeClienteCO extends OAControllerImpl
      if(null!=DomingoBean&&null!=DomingoBean.getValue(pageContext)){
        strDomingo = DomingoBean.getValue(pageContext).toString(); 
      }
+     
+      OAMessageTextInputBean CeEnvioFacturasBean = (OAMessageTextInputBean)webBean.findChildRecursive("CeEnvioFacturas");
+      if(null!=CeEnvioFacturasBean){
+         if(null!=CeEnvioFacturasBean.getValue(pageContext)){
+             strCeEnvioFacturas = CeEnvioFacturasBean.getValue(pageContext).toString();
+         }
+      } 
      
     System.out.println("strCondicionesDePagoValue:"+strCondicionesDePagoValue);
     System.out.println("strCondicionesDePagoText:"+strCondicionesDePagoText);
@@ -1186,6 +1195,10 @@ public class AltaDeClienteCO extends OAControllerImpl
     System.out.println("strDiasRecepcion:"+strDiasRecepcion);
       
     System.out.println("strVigenciaDeContrato:"+strVigenciaDeContrato);
+    
+    System.out.println("strCeEnvioFacturas:"+strCeEnvioFacturas);
+      
+      
      
      
      if(3==gIntSelectedIndex){
@@ -1447,6 +1460,7 @@ public class AltaDeClienteCO extends OAControllerImpl
                                             ,strViernes
                                             ,strSabado
                                             ,strDomingo
+                                            ,strCeEnvioFacturas
                                             );
          
          String[] fromPdftToOracle = altaDeClienteAM.callFromPdftToOracle();

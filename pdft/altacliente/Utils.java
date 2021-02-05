@@ -52,9 +52,13 @@ public class Utils {
          return; 
         }
         XxqpPdftClientesDirFiscalVORowImpl rowDirFiscal = (XxqpPdftClientesDirFiscalVORowImpl)voDirFiscal.getCurrentRow();
-        System.out.println("rowDirFiscal:"+rowDirFiscal);
+        System.out.println("rowDirFiscal(Current):"+rowDirFiscal);
         if(null==rowDirFiscal){
-         return; 
+            rowDirFiscal = (XxqpPdftClientesDirFiscalVORowImpl)voDirFiscal.first();
+            System.out.println("rowDirFiscal(First):"+rowDirFiscal);
+            if(null==rowDirFiscal){
+                return; 
+            }
         }
         String strNombreCliente = rowHeader.getNombreCliente();
         String strOperatingUnit = rowDirFiscal.getPrimOperatingUnit();

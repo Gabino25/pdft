@@ -40,7 +40,8 @@
        XxqpPdftClientesFactPagEO.MARTES, 
        XxqpPdftClientesFactPagEO.MIERCOLES, 
        XxqpPdftClientesFactPagEO.SABADO, 
-       XxqpPdftClientesFactPagEO.VIERNES"
+       XxqpPdftClientesFactPagEO.VIERNES, 
+       XxqpPdftClientesFactPagEO.CE_ENVIO_FACTURAS"
    FromList="XXQP_PDFT_CLIENTES_FACT_PAG XxqpPdftClientesFactPagEO"
    BindingStyle="OracleName"
    CustomQuery="false"
@@ -290,5 +291,11 @@
       EntityAttrName="Viernes"
       EntityUsage="XxqpPdftClientesFactPagEO"
       AliasName="VIERNES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CeEnvioFacturas"
+      EntityAttrName="CeEnvioFacturas"
+      EntityUsage="XxqpPdftClientesFactPagEO"
+      AliasName="CE_ENVIO_FACTURAS" >
    </ViewAttribute>
 </ViewObject>

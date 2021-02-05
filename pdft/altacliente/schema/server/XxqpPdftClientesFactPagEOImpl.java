@@ -52,7 +52,8 @@ public class XxqpPdftClientesFactPagEOImpl extends OAEntityImpl {
     public static final int MIERCOLES = 35;
     public static final int SABADO = 36;
     public static final int VIERNES = 37;
-    public static final int XXQPPDFTCLIENTESHEADEREO = 38;
+    public static final int CEENVIOFACTURAS = 38;
+    public static final int XXQPPDFTCLIENTESHEADEREO = 39;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -536,6 +537,8 @@ public class XxqpPdftClientesFactPagEOImpl extends OAEntityImpl {
             return getSabado();
         case VIERNES:
             return getViernes();
+        case CEENVIOFACTURAS:
+            return getCeEnvioFacturas();
         case XXQPPDFTCLIENTESHEADEREO:
             return getXxqpPdftClientesHeaderEO();
         default:
@@ -662,6 +665,9 @@ public class XxqpPdftClientesFactPagEOImpl extends OAEntityImpl {
         case VIERNES:
             setViernes((String)value);
             return;
+        case CEENVIOFACTURAS:
+            setCeEnvioFacturas((String)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -762,6 +768,18 @@ public class XxqpPdftClientesFactPagEOImpl extends OAEntityImpl {
      */
     public void setViernes(String value) {
         setAttributeInternal(VIERNES, value);
+    }
+
+    /**Gets the attribute value for CeEnvioFacturas, using the alias name CeEnvioFacturas
+     */
+    public String getCeEnvioFacturas() {
+        return (String)getAttributeInternal(CEENVIOFACTURAS);
+    }
+
+    /**Sets <code>value</code> as the attribute value for CeEnvioFacturas
+     */
+    public void setCeEnvioFacturas(String value) {
+        setAttributeInternal(CEENVIOFACTURAS, value);
     }
 
     /**Creates a Key object based on given key constituents

@@ -478,6 +478,18 @@
          <Attr Name="_DisplaySize" Value="20" />
       </DesignTime>
    </Attribute>
+   <Attribute
+      Name="CeEnvioFacturas"
+      Precision="500"
+      ColumnName="CE_ENVIO_FACTURAS"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_FACT_PAG" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="500" />
+      </DesignTime>
+   </Attribute>
    <AccessorAttribute
       Name="XxqpPdftClientesHeaderEO"
       Association="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagFkAssoc"
@@ -571,6 +583,50 @@
          <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
          <Attr Name="_isCheck" Value="true" />
          <Attr Name="_DBObjectName" Value="SYS_C001455766" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669543" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO.CreatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669543" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669544" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO.CreationDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATION_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669544" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669545" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO.LastUpdatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669545" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669546" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesFactPagEO.LastUpdateDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669546" />
       </DesignTime>
    </Key>
    <Key

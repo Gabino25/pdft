@@ -547,7 +547,8 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                                     String strJueves,
                                     String strViernes,
                                     String strSabado,
-                                    String strDomingo) {
+                                    String strDomingo,
+                                    String strCeEnvioFacturas) {
         oracle.jbo.domain.Number numHeaderId=null;
         try {
             numHeaderId = new oracle.jbo.domain.Number(pStrHeaderId);
@@ -592,6 +593,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             xxqpPdftClientesFactPagVORowImpl.setViernes(strViernes);
             xxqpPdftClientesFactPagVORowImpl.setSabado(strSabado);
             xxqpPdftClientesFactPagVORowImpl.setDomingo(strDomingo);
+            xxqpPdftClientesFactPagVORowImpl.setCeEnvioFacturas(strCeEnvioFacturas);
             
            xxqpPdftClientesFactPagVOImpl.insertRow(xxqpPdftClientesFactPagVORowImpl);
            

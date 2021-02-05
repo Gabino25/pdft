@@ -26,6 +26,14 @@ WHERE B.FLEX_VALUE_ID = T.FLEX_VALUE_ID AND T.LANGUAGE = 'ESA'
                                             )
     and B.ENABLED_FLAG = 'Y'
  and trunc(sysdate) between nvl(B.START_DATE_ACTIVE,to_date ('01/01/0001','DD/MM/YYYY')) and nvl(B.END_DATE_ACTIVE,to_date ('31/12/4712','DD/MM/YYYY'))
+ UNION /** HZ_GEOGRAPHIES Value set **/
+SELECT GEOGRAPHY_NAME  lookup_code
+         , GEOGRAPHY_NAME meaning
+  FROM HZ_GEOGRAPHIES
+  WHERE GEOGRAPHY_TYPE = 'STATE' 
+     AND COUNTRY_CODE = 'US'
+    AND SYSDATE >= START_DATE
+    AND SYSDATE <= NVL(END_DATE, SYSDATE)
    ]]></SQLQuery>
    <DesignTime>
       <Attr Name="_isExpertMode" Value="true" />

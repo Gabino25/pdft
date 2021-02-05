@@ -51,6 +51,7 @@ public class XxqpPdftClientesFactPagVORowImpl extends OAViewRowImpl {
     public static final int MIERCOLES = 35;
     public static final int SABADO = 36;
     public static final int VIERNES = 37;
+    public static final int CEENVIOFACTURAS = 38;
 
     /**This is the default constructor (do not remove)
      */
@@ -526,6 +527,8 @@ public class XxqpPdftClientesFactPagVORowImpl extends OAViewRowImpl {
             return getSabado();
         case VIERNES:
             return getViernes();
+        case CEENVIOFACTURAS:
+            return getCeEnvioFacturas();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -650,6 +653,9 @@ public class XxqpPdftClientesFactPagVORowImpl extends OAViewRowImpl {
         case VIERNES:
             setViernes((String)value);
             return;
+        case CEENVIOFACTURAS:
+            setCeEnvioFacturas((String)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -738,5 +744,17 @@ public class XxqpPdftClientesFactPagVORowImpl extends OAViewRowImpl {
      */
     public void setViernes(String value) {
         setAttributeInternal(VIERNES, value);
+    }
+
+    /**Gets the attribute value for CE_ENVIO_FACTURAS using the alias name CeEnvioFacturas
+     */
+    public String getCeEnvioFacturas() {
+        return (String) getAttributeInternal(CEENVIOFACTURAS);
+    }
+
+    /**Sets <code>value</code> as attribute value for CE_ENVIO_FACTURAS using the alias name CeEnvioFacturas
+     */
+    public void setCeEnvioFacturas(String value) {
+        setAttributeInternal(CEENVIOFACTURAS, value);
     }
 }

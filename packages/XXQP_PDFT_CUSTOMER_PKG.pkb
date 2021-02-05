@@ -83,7 +83,20 @@ where lookup_type = 'GIRO_EMPRESARIAL'
 ,XPCDF.PRIM_NUMERO_EXT 
 ,XPCDF.SEC_NUMERO_EXT 
 ,XPCDF.PRIM_NUMERO_INT 
-,XPCDF.SEC_NUMERO_INT 
+,XPCDF.SEC_NUMERO_INT,
+XPCDF.PRIM_COUNTRY,
+ XPCDF.PRIM_ID_INTERNACIONAL, 
+ XPCDF.SEC_COUNTRY, 
+ XPCDF.SEC_ID_INTERNACIONAL, ( SELECT T.TERRITORY_SHORT_NAME
+ FROM FND_TERRITORIES_TL T, FND_TERRITORIES B
+ WHERE B.TERRITORY_CODE = T.TERRITORY_CODE
+ AND T.LANGUAGE = 'ESA' 
+ AND B.TERRITORY_CODE = XPCDF.PRIM_COUNTRY ) PRIM_COUNTRY_D,
+( SELECT T.TERRITORY_SHORT_NAME
+ FROM FND_TERRITORIES_TL T, FND_TERRITORIES B
+ WHERE B.TERRITORY_CODE = T.TERRITORY_CODE
+ AND T.LANGUAGE = 'ESA' 
+ AND B.TERRITORY_CODE = XPCDF.SEC_COUNTRY ) SEC_COUNTRY_D 
  FROM XXQP_PDFT_CLIENTES_DIR_FISCAL XPCDF 
  WHERE XPCDF.HEADER_ID = CUR_HEADER_ID
  AND XPCDF.PRIM_OPERATING_UNIT = CUR_OPERATING_UNIT;
@@ -141,6 +154,7 @@ where lookup_type = 'GIRO_EMPRESARIAL'
  ,XPCC.ATTRIBUTE4 
  ,XPCC.ATTRIBUTE5 
  ,XPCC.NUMERO_CELULAR 
+ ,XPCC.CUMPLEANIOS
  FROM XXQP_PDFT_CLIENTES_CONTACTOS XPCC
 WHERE XPCC.HEADER_ID = CUR_HEADER_ID
  ORDER BY XPCC.TIPO_CONTACTO ASC; 
@@ -221,6 +235,7 @@ WHERE XPCC.HEADER_ID = CUR_HEADER_ID
  )
  AND T.FLEX_VALUE_MEANING = XPCFP.USO_DEL_CFDI_C
  ) USO_DEL_CFDI_D
+ ,XPCFP.CE_ENVIO_FACTURAS
  FROM XXQP_PDFT_CLIENTES_FACT_PAG XPCFP
 WHERE XPCFP.HEADER_ID = CUR_HEADER_ID;
 
@@ -314,6 +329,7 @@ PROCEDURE MAIN(PSO_ERRMSG OUT VARCHAR2
  ls_dias_recepcion varchar2(2000); 
  
  ls_movimiento varchar2(200);
+ ls_ce_envio_facturas varchar2(500);
  
  begin 
  pso_errmsg := null; 
@@ -391,6 +407,8 @@ PROCEDURE MAIN(PSO_ERRMSG OUT VARCHAR2
  lc_info := lc_info||'<PRIM_CIUDAD_O_MPO>'||replace_char_esp(DirFiscalInforec.PRIM_CIUDAD_O_MPO)||'</PRIM_CIUDAD_O_MPO>';
  lc_info := lc_info||'<PRIM_ESTADO_C>'||replace_char_esp(DirFiscalInforec.PRIM_ESTADO_C)||'</PRIM_ESTADO_C>';
  lc_info := lc_info||'<PRIM_CODIGO_POSTAL_C>'||replace_char_esp(DirFiscalInforec.PRIM_CODIGO_POSTAL_C)||'</PRIM_CODIGO_POSTAL_C>';
+ lc_info := lc_info||'<PRIM_PAIS>'||replace_char_esp(DirFiscalInforec.PRIM_COUNTRY_D)||'</PRIM_PAIS>';
+ lc_info := lc_info||'<PRIM_ID_INTER>'||replace_char_esp(DirFiscalInforec.PRIM_ID_INTERNACIONAL)||'</PRIM_ID_INTER>';
  
  
  lc_info := lc_info||'<SEC_UNIDAD_OPERATIVA>'||replace_char_esp(ls_ou_name)||'</SEC_UNIDAD_OPERATIVA>';
@@ -402,6 +420,8 @@ PROCEDURE MAIN(PSO_ERRMSG OUT VARCHAR2
  lc_info := lc_info||'<SEC_CIUDAD_O_MPO>'||replace_char_esp(DirFiscalInforec.SEC_CIUDAD_O_MPO)||'</SEC_CIUDAD_O_MPO>';
  lc_info := lc_info||'<SEC_ESTADO_C>'||replace_char_esp(DirFiscalInforec.SEC_ESTADO_C)||'</SEC_ESTADO_C>';
  lc_info := lc_info||'<SEC_CODIGO_POSTAL_C>'||replace_char_esp(DirFiscalInforec.SEC_CODIGO_POSTAL_C)||'</SEC_CODIGO_POSTAL_C>';
+ lc_info := lc_info||'<SEC_PAIS>'||replace_char_esp(DirFiscalInforec.SEC_COUNTRY_D)||'</SEC_PAIS>';
+ lc_info := lc_info||'<SEC_ID_INTER>'||replace_char_esp(DirFiscalInforec.SEC_ID_INTERNACIONAL)||'</SEC_ID_INTER>';
  
  exit; 
  END LOOP;
@@ -443,6 +463,7 @@ PROCEDURE MAIN(PSO_ERRMSG OUT VARCHAR2
  lc_info := lc_info||'<CORREO_ELECTRONICO>'||replace_char_esp(ContactosInforec.CORREO_ELECTRONICO)||'</CORREO_ELECTRONICO>';
  lc_info := lc_info||'<PUESTO>'||replace_char_esp(ContactosInforec.PUESTO)||'</PUESTO>';
  lc_info := lc_info||'<NUMERO_CELULAR>'||replace_char_esp(ContactosInforec.NUMERO_CELULAR)||'</NUMERO_CELULAR>';
+ lc_info := lc_info||'<CUMPLEANIOS>'||replace_char_esp(ContactosInforec.CUMPLEANIOS)||'</CUMPLEANIOS>';
  lc_info := lc_info||'</CONTACTO>'; 
  
  END LOOP;
@@ -500,6 +521,14 @@ PROCEDURE MAIN(PSO_ERRMSG OUT VARCHAR2
  lc_info := lc_info||'<REQUIERE_FACTURA_D>'||replace_char_esp(FacPagInforec.REQUIERE_FACTURA_D)||'</REQUIERE_FACTURA_D>';
  lc_info := lc_info||'<USO_DEL_CFDI_D>'||replace_char_esp(FacPagInforec.USO_DEL_CFDI_D)||'</USO_DEL_CFDI_D>';
  
+ ls_ce_envio_facturas := replace_char_esp(FacPagInforec.CE_ENVIO_FACTURAS);
+ for idx in ( SELECT LEVEL AS id, REGEXP_SUBSTR(ls_ce_envio_facturas, '[^'||chr(10)||']+', 1, LEVEL) AS data
+ FROM dual
+ CONNECT BY REGEXP_SUBSTR(ls_ce_envio_facturas, '[^'||chr(10)||']+', 1, LEVEL) IS NOT NULL) loop
+ lc_info := lc_info||'<CE_ENVIO_FACTURAS>';
+ lc_info := lc_info||'<CORREO>'||idx.data||'</CORREO>';
+ lc_info := lc_info||'</CE_ENVIO_FACTURAS>';
+ end loop; 
  
  END LOOP;
  CLOSE getFacPagInfo;
