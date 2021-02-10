@@ -851,6 +851,10 @@ CURSOR get_cust_account_info (cur_party_id number) IS
                                                                                     ,null            /** SEC_NUMERO_EXT   **/
                                                                                     ,null            /**  PRIM_NUMERO_INT   **/       
                                                                                     ,null            /** SEC_NUMERO_INT  **/
+                                                                                    ,null           /**  PRIM_COUNTRY              VARCHAR2(200 BYTE), **/
+                                                                                    ,null         /**  SEC_COUNTRY               VARCHAR2(200 BYTE), **/
+                                                                                    ,null        /** PRIM_ID_INTERNACIONAL     NUMBER, **/
+                                                                                    ,null        /**   SEC_ID_INTERNACIONAL      NUMBER **/
                                                                                     );
        
              commit;
@@ -983,6 +987,7 @@ insert into XXQP_PDFT_CLIENTES_PUNTO_RECO values(   ln_punto_reco_id     /** ID 
                 ,null      /** ATTRIBUTE4          **/
                 ,null      /** ATTRIBUTE5          **/
                 ,null     /** NUMERO_CELULAR **/
+                ,null     /** CUMPLEANIOS         VARCHAR2(200 BYTE) **/
                 );
           
       commit;      
@@ -1049,6 +1054,7 @@ insert into XXQP_PDFT_CLIENTES_FACT_PAG values (
                                                                                 ,null
                                                                                 ,null
                                                                                 ,null
+                                                                                ,null /** CE_ENVIO_FACTURAS       VARCHAR2(500 BYTE) **/
                                                                                 ); 
 
       commit;  

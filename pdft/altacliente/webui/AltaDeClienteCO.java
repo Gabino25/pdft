@@ -143,6 +143,19 @@ public class AltaDeClienteCO extends OAControllerImpl
            }
        }
       
+      if(null==strPuserPdft||null==strPuserPdftId||"".equals(strPuserPdft)||"".equals(strPuserPdftId)){
+          pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
+                                    ,null /*functionName*/
+                                    ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                    ,null /*menuName*/
+                                    ,null /*parameters*/
+                                    ,false /*retainAM*/
+                                    ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                    ,OAException.ERROR /*messagingLevel*/
+                                    );
+       return;
+      }
+      
       if(null!=CedulaExaminePBean){
           OADataBoundValueViewObject displayNameBoundValue =    new OADataBoundValueViewObject(CedulaExaminePBean, "PcedulaFileName"); 
           CedulaExaminePBean.setAttributeValue(DOWNLOAD_FILE_NAME,displayNameBoundValue); 
