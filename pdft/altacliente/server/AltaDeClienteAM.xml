@@ -49,4 +49,8 @@
       Name="HzCountryLOV1"
       ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.HzCountryLOV" >
    </ViewUsage>
+   <ViewUsage
+      Name="ExtBanksLov1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.ExtBanksLov" >
+   </ViewUsage>
 </AppModule>

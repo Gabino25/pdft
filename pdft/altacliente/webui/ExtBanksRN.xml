@@ -1,0 +1,12 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:listOfValues version="10.1.3_1312" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" scope="/">
+   <ui:contents>
+      <oa:table name="ExtBanksRN" id="ExtBanksTable">
+         <ui:contents>
+            <oa:messageStyledText id="BankPartyId" dataType="NUMBER" prompt="ID" viewName="ExtBanksLov1" viewAttr="BankPartyId" maximumLength="15"/>
+            <oa:messageStyledText id="BankName" dataType="VARCHAR2" prompt="Nombre" viewName="ExtBanksLov1" viewAttr="BankName" maximumLength="360" queryable="true"/>
+            <oa:messageStyledText id="BankNumber" dataType="VARCHAR2" prompt="Numero" viewName="ExtBanksLov1" viewAttr="BankNumber" maximumLength="30"/>
+         </ui:contents>
+      </oa:table>
+   </ui:contents>
+</oa:listOfValues>

@@ -1079,12 +1079,15 @@ public class AltaDeClienteCO extends OAControllerImpl
       } 
       
       
+      /**  110220211620
       OAMessageTextInputBean NombreBancoBean = (OAMessageTextInputBean)webBean.findChildRecursive("NombreBanco");
       if(null!=NombreBancoBean){
          if(null!=NombreBancoBean.getValue(pageContext)){
              strNombreBanco = NombreBancoBean.getValue(pageContext).toString();
          }
       } 
+      **/
+       strNombreBanco = pageContext.getParameter("BankIdFV");
       
      
       OAMessageRadioGroupBean OrdenDeCompraBean = (OAMessageRadioGroupBean)webBean.findChildRecursive("OrdenDeCompra");

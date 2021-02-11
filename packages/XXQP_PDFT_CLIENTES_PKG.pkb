@@ -1045,7 +1045,7 @@ end if;
       lt_location_rec_type.address3 := dir_fiscal_info_rec.prim_numero_int;
       lt_location_rec_type.address4 := dir_fiscal_info_rec.PRIM_COLONIA;
       lt_location_rec_type.city := dir_fiscal_info_rec.PRIM_CIUDAD_O_MPO;
-      lt_location_rec_type.province :=  dir_fiscal_info_rec.PRIM_CIUDAD_O_MPO;
+     /* lt_location_rec_type.province :=  dir_fiscal_info_rec.PRIM_CIUDAD_O_MPO; */
       lt_location_rec_type.postal_code := dir_fiscal_info_rec.PRIM_CODIGO_POSTAL_C;
       lt_location_rec_type.state := dir_fiscal_info_rec.PRIM_ESTADO_C;
       lt_location_rec_type.created_by_module := 'BO_API';
@@ -1053,7 +1053,7 @@ end if;
      else
       
       lt_location_rec_type.country :=dir_fiscal_info_rec.prim_country;
-      lt_location_rec_type.address1 := dir_fiscal_info_rec.prim_direccion||', '||dir_fiscal_info_rec.PRIM_ID_INTERNACIONAL; 
+      lt_location_rec_type.address1 := dir_fiscal_info_rec.prim_direccion||', '||dir_fiscal_info_rec.prim_numero_ext||', '||dir_fiscal_info_rec.PRIM_COLONIA||', '||dir_fiscal_info_rec.PRIM_ID_INTERNACIONAL; 
      /***************************************************
       lt_location_rec_type.address2 := dir_fiscal_info_rec.prim_numero_ext;
       lt_location_rec_type.address3 := dir_fiscal_info_rec.prim_numero_int;
@@ -1061,7 +1061,7 @@ end if;
       **************************************************/
        lt_location_rec_type.address2 := dir_fiscal_info_rec.PRIM_ID_INTERNACIONAL;
       lt_location_rec_type.city := dir_fiscal_info_rec.PRIM_CIUDAD_O_MPO;
-      lt_location_rec_type.province :=  dir_fiscal_info_rec.PRIM_CIUDAD_O_MPO;
+      /*lt_location_rec_type.province :=  dir_fiscal_info_rec.PRIM_CIUDAD_O_MPO;*/
       lt_location_rec_type.postal_code := dir_fiscal_info_rec.PRIM_CODIGO_POSTAL_C;
       lt_location_rec_type.state := dir_fiscal_info_rec.PRIM_ESTADO_C;
       lt_location_rec_type.created_by_module := 'BO_API';
@@ -1283,8 +1283,7 @@ end if;
     and  dir_fiscal_info_rec.sec_CIUDAD_O_MPO is not null
     and dir_fiscal_info_rec.sec_CODIGO_POSTAL_C is not null
     and dir_fiscal_info_rec.sec_ESTADO_C is not null
-    and dir_fiscal_info_rec.sec_country is not null
-    and dir_fiscal_info_rec.sec_id_internacional is not null) then
+    and dir_fiscal_info_rec.sec_country is not null) then
      
      if 'MX' =    dir_fiscal_info_rec.sec_country then                          
       lt_location_rec_type.country :=  dir_fiscal_info_rec.sec_country;/*'MX'*/
@@ -1293,13 +1292,13 @@ end if;
       lt_location_rec_type.address3 := dir_fiscal_info_rec.sec_numero_int;
       lt_location_rec_type.address4 := dir_fiscal_info_rec.sec_COLONIA;
       lt_location_rec_type.city := dir_fiscal_info_rec.sec_CIUDAD_O_MPO;
-      lt_location_rec_type.province := dir_fiscal_info_rec.sec_CIUDAD_O_MPO;
+     /* lt_location_rec_type.province := dir_fiscal_info_rec.sec_CIUDAD_O_MPO; */
       lt_location_rec_type.postal_code := dir_fiscal_info_rec.sec_CODIGO_POSTAL_C;
       lt_location_rec_type.state := dir_fiscal_info_rec.sec_ESTADO_C;
       lt_location_rec_type.created_by_module := 'BO_API';
      else
        lt_location_rec_type.country :=  dir_fiscal_info_rec.sec_country;/*'MX'*/
-      lt_location_rec_type.address1 := dir_fiscal_info_rec.sec_direccion||', '||dir_fiscal_info_rec.sec_id_internacional; 
+       lt_location_rec_type.address1 := dir_fiscal_info_rec.sec_direccion||', '||dir_fiscal_info_rec.sec_numero_ext||', '||dir_fiscal_info_rec.SEC_COLONIA||', '||dir_fiscal_info_rec.sec_id_internacional; 
      /************************************************
       lt_location_rec_type.address2 := dir_fiscal_info_rec.sec_numero_ext;
       lt_location_rec_type.address3 := dir_fiscal_info_rec.sec_numero_int;
@@ -1307,7 +1306,7 @@ end if;
       ************************************************/
        lt_location_rec_type.address2 := dir_fiscal_info_rec.sec_id_internacional;
       lt_location_rec_type.city := dir_fiscal_info_rec.sec_CIUDAD_O_MPO;
-      lt_location_rec_type.province := dir_fiscal_info_rec.sec_CIUDAD_O_MPO;
+      /* lt_location_rec_type.province := dir_fiscal_info_rec.sec_CIUDAD_O_MPO; */
       lt_location_rec_type.postal_code := dir_fiscal_info_rec.sec_CODIGO_POSTAL_C;
       lt_location_rec_type.state := dir_fiscal_info_rec.sec_ESTADO_C;
       lt_location_rec_type.created_by_module := 'BO_API';

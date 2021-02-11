@@ -3,7 +3,13 @@
 
 <ViewObject
    Name="XxqpPdftClientesFactPagVO"
-   SelectList="XxqpPdftClientesFactPagEO.ID, 
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesFactPagVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesFactPagVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT XxqpPdftClientesFactPagEO.ID, 
        XxqpPdftClientesFactPagEO.HEADER_ID, 
        XxqpPdftClientesFactPagEO.CONDICIONES_DE_PAGO_C, 
        XxqpPdftClientesFactPagEO.OBSERVACIONES, 
@@ -41,15 +47,16 @@
        XxqpPdftClientesFactPagEO.MIERCOLES, 
        XxqpPdftClientesFactPagEO.SABADO, 
        XxqpPdftClientesFactPagEO.VIERNES, 
-       XxqpPdftClientesFactPagEO.CE_ENVIO_FACTURAS"
-   FromList="XXQP_PDFT_CLIENTES_FACT_PAG XxqpPdftClientesFactPagEO"
-   BindingStyle="OracleName"
-   CustomQuery="false"
-   RowClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesFactPagVORowImpl"
-   ComponentClass="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesFactPagVOImpl"
-   UseGlueCode="false" >
+       XxqpPdftClientesFactPagEO.CE_ENVIO_FACTURAS,
+       (select Bank_Name
+  from XXQP_BanksLovVO
+ where Bank_Party_Id = XxqpPdftClientesFactPagEO.NOMBRE_DEL_BANCO
+ ) NOMBRE_DEL_BANCO_D
+FROM XXQP_PDFT_CLIENTES_FACT_PAG XxqpPdftClientesFactPagEO
+   ]]></SQLQuery>
    <DesignTime>
       <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
       <Attr Name="_version" Value="10.1.3.41.57" />
       <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
    </DesignTime>
@@ -297,5 +304,18 @@
       EntityAttrName="CeEnvioFacturas"
       EntityUsage="XxqpPdftClientesFactPagEO"
       AliasName="CE_ENVIO_FACTURAS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NombreDelBancoD"
+      IsPersistent="false"
+      Precision="360"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NOMBRE_DEL_BANCO_D"
+      Expression="NOMBRE_DEL_BANCO_D"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="360" />
+      </DesignTime>
    </ViewAttribute>
 </ViewObject>

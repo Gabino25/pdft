@@ -1,221 +1,221 @@
-CREATE OR REPLACE package body XXQP_PDFT_CLIENTES_FOTP_PKG is 
+CREATE OR REPLACE package body APPS.XXQP_PDFT_CLIENTES_FOTP_PKG is 
 
 /** 24042020 se invierten p.party_name p.know_as **/
 
-TYPE PartySeacrhTyp IS REF CURSOR;
-TYPE AccountSeacrhTyp IS REF CURSOR;
-TYPE SiteSeacrhTyp IS REF CURSOR;
- 
+TYPE PartySeacrhTyp  IS REF CURSOR;
+TYPE AccountSeacrhTyp  IS REF CURSOR;
+TYPE SiteSeacrhTyp  IS REF CURSOR;
+  
 
  CURSOR get_contactos_tmp_info IS
- select 1 record_id
- , 'Cierre y Seguimiento' tipo_de_contacto 
- from dual
- union 
- select 2 record_id
- ,'Cobranza' tipo_de_contacto
- from dual
- union
- select 3 record_id
- ,'Gerencial' tipo_de_contacto
- from dual
- union
- select 4 record_id
- ,'Directriz' tipo_de_contacto
- from dual
- union
- select 5 record_id
- ,'Auditoria' tipo_de_contacto
- from dual
- union
- select 6 record_id
- ,'Devoluciones' tipo_de_contacto
- from dual;
- 
+    select 1 record_id
+         , 'Cierre y Seguimiento' tipo_de_contacto   
+  from dual
+  union 
+  select 2 record_id
+          ,'Cobranza' tipo_de_contacto
+   from dual
+   union
+   select 3 record_id
+            ,'Gerencial' tipo_de_contacto
+   from dual
+   union
+   select 4 record_id
+           ,'Directriz' tipo_de_contacto
+   from dual
+   union
+   select 5 record_id
+           ,'Auditoria' tipo_de_contacto
+   from dual
+   union
+     select 6 record_id
+             ,'Devoluciones' tipo_de_contacto
+     from dual;
+   
 
- procedure valida_clientes(pso_errmsg out varchar2
- ,pso_errcode out varchar2
- ,psi_nombre_cliente in varchar2
- ,psi_rfc in varchar2
- ,psi_razon_social in varchar2
- ,psi_estado in varchar2
- ,psi_operating_unit in varchar2
- ) is 
- ls_stmt_selectr VARCHAR2(32767);
- ls_stmt_where VARCHAR2(32767);
- ls_acc_select VARCHAR2(32767);
- ls_acc_where VARCHAR2(32767);
- ls_sites_select VARCHAR2(32767);
- ls_sites_where VARCHAR2(32767);
+  procedure valida_clientes(pso_errmsg                    out varchar2
+                                      ,pso_errcode                    out varchar2
+                                      ,psi_nombre_cliente          in   varchar2
+                                      ,psi_rfc                            in   varchar2
+                                      ,psi_razon_social              in   varchar2
+                                      ,psi_estado                      in   varchar2
+                                      ,psi_operating_unit           in   varchar2
+                                        ) is 
+  ls_stmt_selectr      VARCHAR2(32767);
+  ls_stmt_where      VARCHAR2(32767);
+  ls_acc_select      VARCHAR2(32767);
+  ls_acc_where      VARCHAR2(32767);
+  ls_sites_select      VARCHAR2(32767);
+  ls_sites_where      VARCHAR2(32767);
  
- l_PartySeacrhCur PartySeacrhTyp;
- l_AccountSeacrhCur AccountSeacrhTyp;
- l_SitesSeacrhCur SiteSeacrhTyp; 
- 
- ln_count number := 0; 
- 
- begin 
- pso_errmsg := 'NO EXISTEN CLIENTES';
- pso_errcode := '2';
- 
- ls_stmt_where := 'WHERE 1=1';
- 
- if psi_nombre_cliente is not null then 
- ls_stmt_where:= ls_stmt_where||' AND PARTY_NAME LIKE :nombreCliente';
- else
- ls_stmt_where:= ls_stmt_where||' AND PARTY_NAME = nvl(:nombreCliente,PARTY_NAME)';
- end if; 
- 
- if psi_rfc is not null then 
- ls_stmt_where:= ls_stmt_where||' AND RFC LIKE :rfc';
- else
- ls_stmt_where:= ls_stmt_where||' AND RFC = nvl(:rfc,RFC)';
- end if; 
- 
- if psi_razon_social is not null then 
- ls_stmt_where:= ls_stmt_where||' AND PARTY_NAME LIKE :razon_social';
- else
- ls_stmt_where:= ls_stmt_where||' AND PARTY_NAME = nvl(:razon_social,PARTY_NAME)';
- end if; 
- 
- if psi_estado is not null then 
- ls_stmt_where:= ls_stmt_where||' AND STATE LIKE :estado';
- else
- ls_stmt_where:= ls_stmt_where||' AND STATE = nvl(:estado,STATE)';
- end if; 
- 
- ls_stmt_selectr := 'SELECT COUNT(1) FROM XXQP_HzPuiPartySearchRltsVO '||ls_stmt_where;
- 
- OPEN l_PartySeacrhCur FOR ls_stmt_selectr USING psi_nombre_cliente,psi_rfc,psi_razon_social,psi_estado;
- -- Fetch rows from result set one at a time:
- LOOP
- FETCH l_PartySeacrhCur INTO ln_count;
- EXIT WHEN l_PartySeacrhCur%NOTFOUND;
- END LOOP;
- -- Close cursor:
- CLOSE l_PartySeacrhCur;
- 
- if ln_count = 0 then 
- return;
- end if; 
- 
- pso_errmsg := 'NO EXISTEN CLIENTES CON CUENTA';
- pso_errcode := '2';
- 
- 
- ls_acc_where := ' where parties.party_id = acc.party_id';
- 
- if psi_nombre_cliente is not null then 
- ls_acc_where:= ls_acc_where||' AND parties.PARTY_NAME LIKE :nombreCliente';
- else
- ls_acc_where:= ls_acc_where||' AND parties.PARTY_NAME = nvl(:nombreCliente,parties.PARTY_NAME)';
- end if; 
- 
- if psi_rfc is not null then 
- ls_acc_where:= ls_acc_where||' AND parties.RFC LIKE :rfc';
- else
- ls_acc_where:= ls_acc_where||' AND parties.RFC = nvl(:rfc,parties.RFC)';
- end if; 
- 
- if psi_razon_social is not null then 
- ls_acc_where:= ls_acc_where||' AND parties.PARTY_NAME LIKE :razon_social';
- else
- ls_acc_where:= ls_acc_where||' AND parties.PARTY_NAME = nvl(:razon_social,parties.PARTY_NAME)';
- end if; 
- 
- if psi_estado is not null then 
- ls_acc_where:= ls_acc_where||' AND parties.STATE LIKE :estado';
- else
- ls_acc_where:= ls_acc_where||' AND parties.STATE = nvl(:estado,parties.STATE)';
- end if; 
- 
- 
- ls_acc_select := ' select COUNT(1)
- from XXQP_HzPuiAccountTableVO acc
- ,XXQP_HzPuiPartySearchRltsVO parties '||ls_acc_where;
- 
- 
- OPEN l_AccountSeacrhCur FOR ls_acc_select USING psi_nombre_cliente,psi_rfc,psi_razon_social,psi_estado;
- -- Fetch rows from result set one at a time:
- LOOP
- FETCH l_AccountSeacrhCur INTO ln_count;
- EXIT WHEN l_AccountSeacrhCur%NOTFOUND;
- END LOOP;
- -- Close cursor:
- CLOSE l_AccountSeacrhCur;
- 
- if ln_count = 0 then 
- return;
- end if; 
- 
- 
- pso_errmsg := 'NO EXISTE INFORMACION DE SUCURSALES PARA LA UNIDAD OPERATIVA SELLECCIONADA';
- pso_errcode := '2'; 
- 
- ls_sites_where := 'where parties.party_id = acc.party_id
- and sites.cust_account_id = acc.cust_account_id 
- and sites.org_id =:operating_unit';
- 
- if psi_nombre_cliente is not null then 
- ls_sites_where:= ls_sites_where||' AND parties.PARTY_NAME LIKE :nombreCliente';
- else
- ls_sites_where:= ls_sites_where||' AND parties.PARTY_NAME = nvl(:nombreCliente,parties.PARTY_NAME)';
- end if; 
- 
- if psi_rfc is not null then 
- ls_sites_where:= ls_sites_where||' AND parties.RFC LIKE :rfc';
- else
- ls_sites_where:= ls_sites_where||' AND parties.RFC = nvl(:rfc,parties.RFC)';
- end if; 
- 
- if psi_razon_social is not null then 
- ls_sites_where:= ls_sites_where||' AND parties.PARTY_NAME LIKE :razon_social';
- else
- ls_sites_where:= ls_sites_where||' AND parties.PARTY_NAME = nvl(:razon_social,parties.PARTY_NAME)';
- end if; 
- 
- if psi_estado is not null then 
- ls_sites_where:= ls_sites_where||' AND parties.STATE LIKE :estado';
- else
- ls_sites_where:= ls_sites_where||' AND parties.STATE = nvl(:estado,parties.STATE)';
- end if; 
- 
- 
- ls_sites_select := ' select count(1)
- from XXQP_HzPuiAccountTableVO acc
- ,XXQP_HzPuiPartySearchRltsVO parties
- ,XXQP_HzPuiAcctSitesTableVO sites '||ls_sites_where;
- 
- 
- OPEN l_SitesSeacrhCur FOR ls_sites_select USING psi_operating_unit,psi_nombre_cliente,psi_rfc,psi_razon_social,psi_estado;
- -- Fetch rows from result set one at a time:
- LOOP
- FETCH l_SitesSeacrhCur INTO ln_count;
- EXIT WHEN l_SitesSeacrhCur%NOTFOUND;
- END LOOP;
- -- Close cursor:
- CLOSE l_SitesSeacrhCur;
- 
- if ln_count = 0 then 
- return;
- end if; 
- 
- 
- pso_errmsg := 'SE ENCONTRO LA INFORMACION CORRECTAMENTE';
- pso_errcode := '0';
- 
- 
- exception when others then 
- pso_errmsg := 'Exception Others valida_clientes:'||sqlerrm; 
- pso_errcode := '2';
- end valida_clientes; 
- 
- procedure rollback_trx(pni_header_id in number) is 
- 
- ln_clientes_header_id number := pni_header_id;
- 
- begin 
- delete from XXQP_PDFT_CLIENTES_DIR_FISCAL
+  l_PartySeacrhCur        PartySeacrhTyp;
+  l_AccountSeacrhCur    AccountSeacrhTyp;
+  l_SitesSeacrhCur          SiteSeacrhTyp; 
+  
+  ln_count                     number := 0;  
+    
+  begin 
+      pso_errmsg := 'NO EXISTEN CLIENTES';
+      pso_errcode := '2';
+      
+      ls_stmt_where := 'WHERE 1=1';
+      
+      if psi_nombre_cliente is not null then 
+       ls_stmt_where:= ls_stmt_where||' AND PARTY_NAME LIKE :nombreCliente';
+      else
+        ls_stmt_where:= ls_stmt_where||' AND PARTY_NAME =  nvl(:nombreCliente,PARTY_NAME)';
+      end if; 
+      
+        if psi_rfc is not null then 
+       ls_stmt_where:= ls_stmt_where||' AND RFC LIKE :rfc';
+       else
+       ls_stmt_where:= ls_stmt_where||' AND RFC = nvl(:rfc,RFC)';
+      end if; 
+      
+       if psi_razon_social is not null then 
+       ls_stmt_where:= ls_stmt_where||' AND PARTY_NAME LIKE :razon_social';
+       else
+       ls_stmt_where:= ls_stmt_where||' AND PARTY_NAME =  nvl(:razon_social,PARTY_NAME)';
+      end if; 
+      
+      if psi_estado is not null then 
+       ls_stmt_where:= ls_stmt_where||' AND STATE LIKE :estado';
+       else
+       ls_stmt_where:= ls_stmt_where||' AND STATE = nvl(:estado,STATE)';
+      end if; 
+      
+      ls_stmt_selectr := 'SELECT COUNT(1) FROM XXQP_HzPuiPartySearchRltsVO '||ls_stmt_where;
+     
+     OPEN l_PartySeacrhCur FOR ls_stmt_selectr USING psi_nombre_cliente,psi_rfc,psi_razon_social,psi_estado;
+  -- Fetch rows from result set one at a time:
+  LOOP
+    FETCH l_PartySeacrhCur INTO ln_count;
+    EXIT WHEN l_PartySeacrhCur%NOTFOUND;
+  END LOOP;
+  -- Close cursor:
+  CLOSE l_PartySeacrhCur;
+  
+  if ln_count = 0 then 
+   return;
+  end if; 
+  
+   pso_errmsg := 'NO EXISTEN CLIENTES CON CUENTA';
+   pso_errcode := '2';
+  
+  
+      ls_acc_where := ' where parties.party_id = acc.party_id';
+      
+      if psi_nombre_cliente is not null then 
+       ls_acc_where:= ls_acc_where||' AND parties.PARTY_NAME LIKE :nombreCliente';
+      else
+        ls_acc_where:= ls_acc_where||' AND parties.PARTY_NAME =  nvl(:nombreCliente,parties.PARTY_NAME)';
+      end if; 
+      
+        if psi_rfc is not null then 
+       ls_acc_where:= ls_acc_where||' AND parties.RFC LIKE :rfc';
+       else
+       ls_acc_where:= ls_acc_where||' AND parties.RFC = nvl(:rfc,parties.RFC)';
+      end if; 
+      
+       if psi_razon_social is not null then 
+       ls_acc_where:= ls_acc_where||' AND parties.PARTY_NAME LIKE :razon_social';
+       else
+       ls_acc_where:= ls_acc_where||' AND parties.PARTY_NAME =  nvl(:razon_social,parties.PARTY_NAME)';
+      end if; 
+      
+      if psi_estado is not null then 
+       ls_acc_where:= ls_acc_where||' AND parties.STATE LIKE :estado';
+       else
+       ls_acc_where:= ls_acc_where||' AND parties.STATE = nvl(:estado,parties.STATE)';
+      end if; 
+  
+  
+    ls_acc_select := ' select COUNT(1)
+      from XXQP_HzPuiAccountTableVO acc
+             ,XXQP_HzPuiPartySearchRltsVO parties '||ls_acc_where;
+     
+    
+       OPEN l_AccountSeacrhCur FOR ls_acc_select USING psi_nombre_cliente,psi_rfc,psi_razon_social,psi_estado;
+  -- Fetch rows from result set one at a time:
+  LOOP
+    FETCH l_AccountSeacrhCur INTO ln_count;
+    EXIT WHEN l_AccountSeacrhCur%NOTFOUND;
+  END LOOP;
+  -- Close cursor:
+  CLOSE l_AccountSeacrhCur;
+  
+  if ln_count = 0 then 
+   return;
+  end if; 
+  
+  
+    pso_errmsg := 'NO EXISTE INFORMACION DE SUCURSALES PARA LA UNIDAD OPERATIVA SELLECCIONADA';
+    pso_errcode := '2';        
+    
+        ls_sites_where := 'where parties.party_id = acc.party_id
+                                       and sites.cust_account_id = acc.cust_account_id 
+                                       and sites.org_id =:operating_unit';
+      
+      if psi_nombre_cliente is not null then 
+       ls_sites_where:= ls_sites_where||' AND parties.PARTY_NAME LIKE :nombreCliente';
+      else
+        ls_sites_where:= ls_sites_where||' AND parties.PARTY_NAME =  nvl(:nombreCliente,parties.PARTY_NAME)';
+      end if; 
+      
+        if psi_rfc is not null then 
+       ls_sites_where:= ls_sites_where||' AND parties.RFC LIKE :rfc';
+       else
+       ls_sites_where:= ls_sites_where||' AND parties.RFC = nvl(:rfc,parties.RFC)';
+      end if; 
+      
+       if psi_razon_social is not null then 
+       ls_sites_where:= ls_sites_where||' AND parties.PARTY_NAME LIKE :razon_social';
+       else
+       ls_sites_where:= ls_sites_where||' AND parties.PARTY_NAME =  nvl(:razon_social,parties.PARTY_NAME)';
+      end if; 
+      
+      if psi_estado is not null then 
+       ls_sites_where:= ls_sites_where||' AND parties.STATE LIKE :estado';
+       else
+       ls_sites_where:= ls_sites_where||' AND parties.STATE = nvl(:estado,parties.STATE)';
+      end if; 
+  
+  
+    ls_sites_select := ' select count(1)
+      from XXQP_HzPuiAccountTableVO acc
+             ,XXQP_HzPuiPartySearchRltsVO parties
+            ,XXQP_HzPuiAcctSitesTableVO sites '||ls_sites_where;
+     
+    
+       OPEN l_SitesSeacrhCur FOR ls_sites_select USING psi_operating_unit,psi_nombre_cliente,psi_rfc,psi_razon_social,psi_estado;
+  -- Fetch rows from result set one at a time:
+  LOOP
+    FETCH l_SitesSeacrhCur INTO ln_count;
+    EXIT WHEN l_SitesSeacrhCur%NOTFOUND;
+  END LOOP;
+  -- Close cursor:
+  CLOSE l_SitesSeacrhCur;
+  
+  if ln_count = 0 then 
+   return;
+  end if; 
+  
+  
+    pso_errmsg := 'SE ENCONTRO LA INFORMACION CORRECTAMENTE';
+    pso_errcode := '0';
+      
+      
+  exception when others then 
+    pso_errmsg := 'Exception Others valida_clientes:'||sqlerrm; 
+    pso_errcode := '2';
+  end valida_clientes; 
+  
+  procedure rollback_trx(pni_header_id  in number) is 
+  
+  ln_clientes_header_id number := pni_header_id;
+  
+  begin 
+   delete from XXQP_PDFT_CLIENTES_DIR_FISCAL
 where header_id = ln_clientes_header_id; 
 
 delete from XXQP_PDFT_CLIENTES_PUNTO_RECO
@@ -229,171 +229,171 @@ delete from XXQP_PDFT_CLIENTES_FACT_PAG
  commit; 
 delete from XXQP_PDFT_CLIENTES_HEADER
  where id = ln_clientes_header_id; 
- commit; 
- exception when others then 
- null; 
- end rollback_trx; 
+  commit; 
+  exception when others then 
+   null; 
+  end rollback_trx; 
+  
+  procedure from_oracle_to_pdft(pso_errmsg                    out varchar2
+                                               ,pso_errcode                   out varchar2
+                                               ,pni_party_id                    in  number
+                                               ,pni_operating_unit           in number
+                                               ,psi_UserPdftId                 in varchar2
+                                               ,pno_clientes_header_id    out number
+                                              ) is 
  
- procedure from_oracle_to_pdft(pso_errmsg out varchar2
- ,pso_errcode out varchar2
- ,pni_party_id in number
- ,pni_operating_unit in number
- ,psi_UserPdftId in varchar2
- ,pno_clientes_header_id out number
- ) is 
- 
- CURSOR get_organization_info (cur_party_id number) IS
- select hp.party_id
- ,hp.known_as
- ,hp.party_name
- ,hp.attribute_category
- ,hp.attribute1
- ,hp.attribute2
- from hz_parties hp
- , hz_organization_profiles hop
- where 1=1
- and hp.party_type in ('ORGANIZATION')
- and hop.party_id = hp.party_id
- and trunc(sysdate) between nvl(hop.effective_start_date,trunc(sysdate)) and nvl(hop.effective_end_date,to_date ('31/12/4712','DD/MM/YYYY'))
- and hp.party_id = cur_party_id; 
- 
- CURSOR get_location_info(cur_party_id number) IS
- select /** hpsu.party_site_use_id, hpsu.party_site_id, hpsu.site_use_type, hpsu.primary_per_type ,hpsu.status,hpsu.object_version_number **/
- /** hzp.party_site_id, hzp.party_id, hzp.location_id, hzp.party_site_number,hzp.status,hzp.party_site_name,hzp.object_version_number **/
- hl.location_id, hl.address1, hl.address2, hl.address3,hl.address4,hl.city, hl.state, hl.postal_code, hl.country, hl.object_version_number, hl.created_by_module,hzp.PARTY_SITE_ID
+  CURSOR get_organization_info (cur_party_id   number) IS
+      select  hp.party_id
+            ,hp.known_as
+            ,hp.party_name
+            ,hp.attribute_category
+            ,hp.attribute1
+            ,hp.attribute2
+     from hz_parties hp
+           , hz_organization_profiles hop
+   where 1=1
+       and hp.party_type in ('ORGANIZATION')
+       and hop.party_id = hp.party_id
+       and trunc(sysdate) between nvl(hop.effective_start_date,trunc(sysdate)) and nvl(hop.effective_end_date,to_date ('31/12/4712','DD/MM/YYYY'))
+       and  hp.party_id = cur_party_id; 
+  
+  CURSOR get_location_info(cur_party_id     number) IS
+    select /** hpsu.party_site_use_id, hpsu.party_site_id, hpsu.site_use_type, hpsu.primary_per_type ,hpsu.status,hpsu.object_version_number **/
+         /** hzp.party_site_id, hzp.party_id, hzp.location_id, hzp.party_site_number,hzp.status,hzp.party_site_name,hzp.object_version_number **/
+          hl.location_id, hl.address1, hl.address2, hl.address3,hl.address4,hl.city, hl.state, hl.postal_code, hl.country, hl.object_version_number, hl.created_by_module,hzp.PARTY_SITE_ID
 from hz_party_site_uses hpsu
- , hz_party_sites hzp
- , hz_locations hl
- where hpsu.party_site_id = hzp.party_site_id
- and hzp.party_id = cur_party_id
- and hpsu.site_use_type = 'BILL_TO'
- and hl.location_id = hzp.location_id
- and hzp.IDENTIFYING_ADDRESS_FLAG = 'Y';
+      , hz_party_sites hzp
+      , hz_locations hl
+   where hpsu.party_site_id = hzp.party_site_id
+   and hzp.party_id  = cur_party_id
+   and hpsu.site_use_type = 'BILL_TO'
+   and hl.location_id = hzp.location_id
+   and hzp.IDENTIFYING_ADDRESS_FLAG = 'Y';
+   
+  
+CURSOR get_cust_account_info (cur_party_id  number) IS
+        select hca.cust_account_id, hca.party_id, hca.account_number, hca.account_name,hca.attribute_category,hca.attribute1,hca.attribute2,hca.attribute3,hca.attribute4,hca.attribute5,hca.attribute6,hca.orig_system_reference
+     from hz_cust_accounts hca
+    where party_id = cur_party_id; 
+    
+    
+     
+  
+    
+     
+  organization_info_rec         get_organization_info%ROWTYPE;
+  location_info_rec                get_location_info%ROWTYPE;     
+  cust_account_info_rec        get_cust_account_info%ROWTYPE;
+  contactos_tmp_info_rec      get_contactos_tmp_info%ROWTYPE;
+   
+       
+ ln_clientes_header_id       number; 
+ ln_dir_fiscal_id                 number;
+ ln_punto_reco_id              number; 
+ ln_clientes_contactos_id    number;
+ ln_clientes_fact_pag_id     number; 
  
  
-CURSOR get_cust_account_info (cur_party_id number) IS
- select hca.cust_account_id, hca.party_id, hca.account_number, hca.account_name,hca.attribute_category,hca.attribute1,hca.attribute2,hca.attribute3,hca.attribute4,hca.attribute5,hca.attribute6,hca.orig_system_reference
- from hz_cust_accounts hca
- where party_id = cur_party_id; 
+ le_from_oracle_to_pdft     exception;
  
+ ln_prim_org_id                number; 
+ ln_legal_entity_id             number; 
  
+ ls_errmsg                       varchar2(2000); 
+ ls_errcod                        varchar2(2000);
+ ln_xxclient_id                  number; 
  
- 
- 
- 
- organization_info_rec get_organization_info%ROWTYPE;
- location_info_rec get_location_info%ROWTYPE; 
- cust_account_info_rec get_cust_account_info%ROWTYPE;
- contactos_tmp_info_rec get_contactos_tmp_info%ROWTYPE;
- 
- 
- ln_clientes_header_id number; 
- ln_dir_fiscal_id number;
- ln_punto_reco_id number; 
- ln_clientes_contactos_id number;
- ln_clientes_fact_pag_id number; 
- 
- 
- le_from_oracle_to_pdft exception;
- 
- ln_prim_org_id number; 
- ln_legal_entity_id number; 
- 
- ls_errmsg varchar2(2000); 
- ls_errcod varchar2(2000);
- ln_xxclient_id number; 
- 
- begin 
- pso_errmsg := null; 
- pso_errcode := '0';
- 
- insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(1) -> pni_party_id:'||pni_party_id||' pni_operating_unit:'||pni_operating_unit); 
- commit;
- /**********************************************************
- Comienza Inicializacion 
- *********************************************************/
- begin 
- 
- select id 
- into ln_xxclient_id
- from XXQP_PDFT_CLIENTES_HEADER
- where party_id = pni_party_id; 
- 
- insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(1.1) ->ln_xxclient_id:'||ln_xxclient_id); 
- commit;
- 
- 
- APPS.XXQP_PDFT_CLIENTES_FOTP_PKG.upd_header(pso_errmsg => ls_errmsg
- ,pso_errcode => ls_errcod
- ,pni_party_id => pni_party_id
- ,pni_operating_unit => pni_operating_unit
- ,psi_UserPdftId => psi_UserPdftId
- ,pni_clientes_header_id => ln_xxclient_id
- ); 
- 
- pno_clientes_header_id := ln_xxclient_id;
- 
- exception when no_data_found then 
- 
- XXQP_PDFT_CLIENTES_FOTP_PKG. populate_header(pso_errmsg => ls_errmsg
- ,pso_errcode => ls_errcod
- ,pni_party_id => pni_party_id
- ,pni_operating_unit => pni_operating_unit
- ,psi_UserPdftId => psi_UserPdftId 
- ,pno_clientes_header_id => ln_clientes_header_id
- ); 
- 
- insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(1.2) -> ln_clientes_header_id:'||ln_clientes_header_id); 
- commit;
- 
- pno_clientes_header_id := ln_clientes_header_id;
- 
- 
- end; 
- 
- 
- return; 
- 
- 
- 
- 
+  begin 
+  pso_errmsg := null; 
+  pso_errcode := '0';
+  
+   insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(1) -> pni_party_id:'||pni_party_id||' pni_operating_unit:'||pni_operating_unit); 
+   commit;
+  /**********************************************************
+   Comienza Inicializacion 
+   *********************************************************/
+    begin 
+     
+     select id 
+       into ln_xxclient_id
+      from XXQP_PDFT_CLIENTES_HEADER
+     where party_id = pni_party_id; 
+     
+      insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(1.1) ->ln_xxclient_id:'||ln_xxclient_id); 
+      commit;
+      
+  
+    XXQP_PDFT_CLIENTES_FOTP_PKG.upd_header(pso_errmsg                     => ls_errmsg
+                                                                        ,pso_errcode                    =>  ls_errcod
+                                                                        ,pni_party_id                    =>  pni_party_id
+                                                                        ,pni_operating_unit           =>  pni_operating_unit
+                                                                        ,psi_UserPdftId                 => psi_UserPdftId
+                                                                        ,pni_clientes_header_id     => ln_xxclient_id
+                                                                        );    
+  
+     pno_clientes_header_id := ln_xxclient_id;
+        
+    exception when no_data_found then 
+    
+     XXQP_PDFT_CLIENTES_FOTP_PKG. populate_header(pso_errmsg                     => ls_errmsg
+                                                                                 ,pso_errcode                    =>  ls_errcod
+                                                                                 ,pni_party_id                    =>  pni_party_id
+                                                                                 ,pni_operating_unit           =>  pni_operating_unit
+                                                                                 ,psi_UserPdftId                 => psi_UserPdftId  
+                                                                                 ,pno_clientes_header_id    => ln_clientes_header_id
+                                                                                  );  
+     
+      insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(1.2) -> ln_clientes_header_id:'||ln_clientes_header_id); 
+      commit;
+     
+     pno_clientes_header_id := ln_clientes_header_id;
+      
+      
+    end; 
+    
+    
+   return; 
+   
+   
+     
+       
 
- 
- insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6):'); 
- 
- /*********************************************************
- Finaliza Inicializacion 
- *********************************************************/
- 
- insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6)pni_party_id:'||pni_party_id); 
- insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6)ln_clientes_header_id:'||ln_clientes_header_id); 
+  
+   insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6):'); 
+   
+   /*********************************************************
+   Finaliza Inicializacion 
+   *********************************************************/
+  
+  insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6)pni_party_id:'||pni_party_id); 
+  insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6)ln_clientes_header_id:'||ln_clientes_header_id); 
 
- OPEN get_organization_info(pni_party_id);
- LOOP
- FETCH get_organization_info INTO organization_info_rec;
- EXIT WHEN get_organization_info%NOTFOUND;
- 
- insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6.1)'); 
- 
- 
- 
- insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6.3)'); 
- commit;
- 
- END LOOP;
- CLOSE get_organization_info;
- 
- insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(7):'); 
- commit; 
- 
- OPEN get_cust_account_info(pni_party_id);
- LOOP
- FETCH get_cust_account_info INTO cust_account_info_rec;
- EXIT WHEN get_cust_account_info%NOTFOUND;
- 
- update XXQP_PDFT_CLIENTES_FACT_PAG 
- set USO_DEL_CFDI_C = cust_account_info_rec.attribute6
- ,METODO_DE_PAGO_C = cust_account_info_rec.attribute5 
+  OPEN get_organization_info(pni_party_id);
+   LOOP
+      FETCH get_organization_info INTO organization_info_rec;
+      EXIT WHEN get_organization_info%NOTFOUND;
+      
+      insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6.1)'); 
+      
+     
+        
+          insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(6.3)');  
+          commit;
+         
+   END LOOP;
+   CLOSE get_organization_info;
+   
+       insert into xxqp_pdft_debug values(xxqp_pdft_debug_s.nextval,'from_oracle_to_pdft(7):'); 
+       commit; 
+       
+     OPEN get_cust_account_info(pni_party_id);
+      LOOP
+         FETCH get_cust_account_info INTO cust_account_info_rec;
+         EXIT WHEN get_cust_account_info%NOTFOUND;
+         
+           update XXQP_PDFT_CLIENTES_FACT_PAG 
+          set USO_DEL_CFDI_C = cust_account_info_rec.attribute6
+              ,METODO_DE_PAGO_C = cust_account_info_rec.attribute5 
        where  HEADER_ID = ln_clientes_header_id
           and id = ln_clientes_fact_pag_id; 
            commit; 

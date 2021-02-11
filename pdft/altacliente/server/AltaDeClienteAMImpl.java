@@ -1169,4 +1169,10 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
     public HzCountryLOVImpl getHzCountryLOV1() {
         return (HzCountryLOVImpl)findViewObject("HzCountryLOV1");
     }
+
+    /**Container's getter for ExtBanksLov1
+     */
+    public ExtBanksLovImpl getExtBanksLov1() {
+        return (ExtBanksLovImpl)findViewObject("ExtBanksLov1");
+    }
 }

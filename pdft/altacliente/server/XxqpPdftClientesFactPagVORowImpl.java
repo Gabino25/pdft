@@ -52,6 +52,7 @@ public class XxqpPdftClientesFactPagVORowImpl extends OAViewRowImpl {
     public static final int SABADO = 36;
     public static final int VIERNES = 37;
     public static final int CEENVIOFACTURAS = 38;
+    public static final int NOMBREDELBANCOD = 39;
 
     /**This is the default constructor (do not remove)
      */
@@ -529,6 +530,8 @@ public class XxqpPdftClientesFactPagVORowImpl extends OAViewRowImpl {
             return getViernes();
         case CEENVIOFACTURAS:
             return getCeEnvioFacturas();
+        case NOMBREDELBANCOD:
+            return getNombreDelBancoD();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -656,6 +659,9 @@ public class XxqpPdftClientesFactPagVORowImpl extends OAViewRowImpl {
         case CEENVIOFACTURAS:
             setCeEnvioFacturas((String)value);
             return;
+        case NOMBREDELBANCOD:
+            setNombreDelBancoD((String)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -756,5 +762,17 @@ public class XxqpPdftClientesFactPagVORowImpl extends OAViewRowImpl {
      */
     public void setCeEnvioFacturas(String value) {
         setAttributeInternal(CEENVIOFACTURAS, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute NombreDelBancoD
+     */
+    public String getNombreDelBancoD() {
+        return (String) getAttributeInternal(NOMBREDELBANCOD);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute NombreDelBancoD
+     */
+    public void setNombreDelBancoD(String value) {
+        setAttributeInternal(NOMBREDELBANCOD, value);
     }
 }

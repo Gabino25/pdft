@@ -236,6 +236,10 @@ WHERE XPCC.HEADER_ID = CUR_HEADER_ID
  AND T.FLEX_VALUE_MEANING = XPCFP.USO_DEL_CFDI_C
  ) USO_DEL_CFDI_D
  ,XPCFP.CE_ENVIO_FACTURAS
+ ,(select Bank_Name
+ from XXQP_BanksLovVO
+ where Bank_Party_Id = XPCFP.NOMBRE_DEL_BANCO
+ ) NOMBRE_DEL_BANCO_D
  FROM XXQP_PDFT_CLIENTES_FACT_PAG XPCFP
 WHERE XPCFP.HEADER_ID = CUR_HEADER_ID;
 
@@ -510,7 +514,7 @@ PROCEDURE MAIN(PSO_ERRMSG OUT VARCHAR2
  lc_info := lc_info||'<METODO_DE_PAGO_D>'||replace_char_esp(FacPagInforec.METODO_DE_PAGO_D)||'</METODO_DE_PAGO_D>';
  lc_info := lc_info||'<TERMINOS_DE_PAGOS>'||replace_char_esp(FacPagInforec.TERMINOS_DE_PAGOS)||'</TERMINOS_DE_PAGOS>';
  lc_info := lc_info||'<NUMERO_DE_CUENTA>'||replace_char_esp(FacPagInforec.NUMERO_DE_CUENTA)||'</NUMERO_DE_CUENTA>';
- lc_info := lc_info||'<NOMBRE_DEL_BANCO>'||replace_char_esp(FacPagInforec.NOMBRE_DEL_BANCO)||'</NOMBRE_DEL_BANCO>';
+ lc_info := lc_info||'<NOMBRE_DEL_BANCO>'||replace_char_esp(FacPagInforec.NOMBRE_DEL_BANCO_D)||'</NOMBRE_DEL_BANCO>';
  lc_info := lc_info||'<DIAS_DE_RECEPCION>'||replace_char_esp(ls_dias_recepcion)||'</DIAS_DE_RECEPCION>';
  lc_info := lc_info||'<UTILIZA_PORTAL_D>'||replace_char_esp(FacPagInforec.utiliza_portal_d)||'</UTILIZA_PORTAL_D>';
  lc_info := lc_info||'<PORTAL_LINK>'||replace_char_esp(FacPagInforec.portal_link)||'</PORTAL_LINK>';
