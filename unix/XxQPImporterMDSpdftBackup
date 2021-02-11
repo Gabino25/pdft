@@ -1,0 +1,43 @@
+# XxQPImporterMDSpdft
+#java -cp /quality/erp/apps/apps_st/comn/java/classes/:/quality/erp/apps/tech_st/10.1.3/jdbc/lib/ojdbc14.jar:/quality/erp/apps/tech_st/10.1.3/lib/xmlparserv2.jar oracle.jrad.tools.xml.importer.XMLImporter /quality/erp/apps/apps_st/comn/java/classes/xxqp/oracle/apps/ar/pdft/webui/PortalDeFichaTecnicaPG.xml -username apps -password appsqp16 -dbconnection 192.168.0.220:1522:test -rootdir /quality/erp/apps/apps_st/comn/java/classes/
+apps_user=$1
+apps_password=$2
+host=$3
+port=$4
+service_name=$5
+JAVA_TOP=/backup/erp/apps/apps_st/comn/java/classes
+eti1="java -cp /backup/erp/apps/apps_st/comn/java/classes/:/backup/erp/apps/tech_st/10.1.3/jdbc/lib/ojdbc14.jar:/backup/erp/apps/tech_st/10.1.3/lib/xmlparserv2.jar oracle.jrad.tools.xml.importer.XMLImporter"
+eti2=" -username apps -password $apps_password -dbconnection $host:$port:$service_name -rootdir $JAVA_TOP"
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/webui/PortalDeFichaTecnicaPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altacliente/webui/AltaDeClientePG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altacliente/webui/AltaDeClienteReadOnlyPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altacliente/webui/AltaDeClienteUpdPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/conscliente/webui/ConsultaDeClientePG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/conscliente/webui/EstadoRN.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/conscliente/webui/NombreDelClienteRN.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/conscliente/webui/RazonSocialRN.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/conscliente/webui/RfcRN.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/bpo/webui/BpoPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/bpo/webui/BpoReOnPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/bpo/webui/BpoUpdPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/bpo/webui/BpoCancelPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/masiplat/webui/MasivoYPlatinumPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/masiplat/webui/MasivoYPlatinumReOnPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/masiplat/webui/MasivoYPlatinumUpdPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/masiplat/webui/MasivoYPlatinumCancelPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/qplabs/webui/QpLabsPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/qplabs/webui/QpLabsReOnPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/qplabs/webui/QpLabsUpdPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/qplabs/webui/QpLabsCancelPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/mgr/webui/CatalogosPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/mgr/webui/DistribucionFfPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/mgr/webui/AsignacionFormulariosPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/webui/AltaFichaTecnicaPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/webui/BusquedaClienteParaFtPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/webui/BusquedaDeFichaTecnicaPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altafitec/webui/ReportesPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/ss/webui/LoginMgrPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altacliente/webui/HzCountryRN.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/altacliente/webui/ExtBanksRN.xml $eti2
+

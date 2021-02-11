@@ -8,6 +8,7 @@ BEGIN
     jdr_utils.deleteDocument('/xxqp/oracle/apps/ar/pdft/altacliente/webui/AltaDeClienteReadOnlyPG');
     jdr_utils.deleteDocument('/xxqp/oracle/apps/ar/pdft/altacliente/webui/AltaDeClienteUpdPG');
     jdr_utils.deleteDocument('/xxqp/oracle/apps/ar/pdft/altacliente/webui/HzCountryRN');
+    jdr_utils.deleteDocument('/xxqp/oracle/apps/ar/pdft/altacliente/webui/ExtBanksRN');
     
     jdr_utils.deleteDocument('/xxqp/oracle/apps/ar/pdft/conscliente/webui/ConsultaDeClientePG');
     jdr_utils.deleteDocument('/xxqp/oracle/apps/ar/pdft/conscliente/webui/EstadoRN');

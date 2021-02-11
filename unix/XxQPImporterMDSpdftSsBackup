@@ -1,0 +1,21 @@
+# XxQPImporterMDSpdft
+#java -cp /quality/erp/apps/apps_st/comn/java/classes/:/quality/erp/apps/tech_st/10.1.3/jdbc/lib/ojdbc14.jar:/quality/erp/apps/tech_st/10.1.3/lib/xmlparserv2.jar oracle.jrad.tools.xml.importer.XMLImporter /quality/erp/apps/apps_st/comn/java/classes/xxqp/oracle/apps/ar/pdft/webui/PortalDeFichaTecnicaPG.xml -username apps -password appsqp16 -dbconnection 192.168.0.220:1522:test -rootdir /quality/erp/apps/apps_st/comn/java/classes/
+
+
+apps_user=$1
+apps_password=$2
+host=$3
+port=$4
+service_name=$5
+
+JAVA_TOP=/backup/erp/apps/apps_st/comn/java/classes
+
+eti1="java -cp /backup/erp/apps/apps_st/comn/java/classes/:/backup/erp/apps/tech_st/10.1.3/jdbc/lib/ojdbc14.jar:/backup/erp/apps/tech_st/10.1.3/lib/xmlparserv2.jar oracle.jrad.tools.xml.importer.XMLImporter"
+eti2=" -username apps -password $apps_password -dbconnection $host:$port:$service_name -rootdir $JAVA_TOP"
+
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/ss/webui/PortalPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/ss/webui/ConsultaFichaTecnicaPG.xml $eti2
+$eti1 $JAVA_TOP/xxqp/oracle/apps/ar/pdft/ss/webui/LoginPG.xml $eti2
+
+
+
