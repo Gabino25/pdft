@@ -1,4 +1,4 @@
-CREATE OR REPLACE package body xxqp_pdft_clientes_pkg is 
+CREATE OR REPLACE package body APPS.xxqp_pdft_clientes_pkg is 
 
  procedure from_pdft_to_oracle(pso_errmsg out varchar2
  ,pso_errcode out varchar2
@@ -75,13 +75,13 @@ ln_cust_acct_site_id_sec number;
  ); 
  if ls_errmsg is not null then 
  pso_errmsg := 'Ocurrio una excepcion al llamar a call_create_location_sec.'||ls_errmsg;
- pso_errcode := ls_errcode; 
- raise le_from_pdft_to_oracle; 
- end if; 
+    pso_errcode := ls_errcode; 
+    raise le_from_pdft_to_oracle; 
+   end if;                    
+   
+   if ln_location_id_prim is not null then 
  
- if ln_location_id_prim is not null then 
- 
- APPS.xxqp_pdft_clientes_pkg.call_create_cust_account(pso_errmsg                   => ls_errmsg
+     xxqp_pdft_clientes_pkg.call_create_cust_account(pso_errmsg                   => ls_errmsg
                                                                          ,pso_errcode                   => ls_errcode
                                                                          ,pni_cliente_header_id     => pni_cliente_header_id
                                                                          ,pno_party_id                  => ln_party_id 

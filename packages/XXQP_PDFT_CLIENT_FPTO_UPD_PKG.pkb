@@ -1,125 +1,125 @@
-CREATE OR REPLACE package body XXQP_PDFT_CLIENT_FPTO_UPD_PKG is 
+CREATE OR REPLACE package body APPS.XXQP_PDFT_CLIENT_FPTO_UPD_PKG is 
 
-CURSOR get_client_head_info (CUR_CLIENTE_HEADER_ID number) IS
- SELECT xpch.ID 
- ,xpch.NOMBRE_CLIENTE 
- ,xpch.GIRO_EMPRESARIAL_C 
- ,xpch.EMPRESA_QUE_FACTURA_C 
- ,xpch.TIPO_OPERATIVO_C 
- ,xpch.TIPO_ADMINISTRATIVO_C 
- ,xpch.TIPO_COMERCIAL_C 
- ,xpch.COMENTARIOS 
- ,xpch.CREATED_BY 
- ,xpch.CREATION_DATE 
- ,xpch.LAST_UPDATED_BY 
- ,xpch.LAST_UPDATE_DATE 
- ,xpch.LAST_UPDATE_LOGIN 
- ,xpch.ATTRIBUTE_CATEGORY 
- ,xpch.ATTRIBUTE1 
- ,xpch.ATTRIBUTE2 party_id 
- ,xpch.ATTRIBUTE3 cust_account_id 
- ,xpch.ATTRIBUTE4 
- ,xpch.ATTRIBUTE5 
- ,xpch.RFC 
- ,xpch.RAZON_SOCIAL
- ,xpcdf.PRIM_RFC 
- ,xpcdf.PRIM_RAZON_SOCIAL 
- ,xpcdf.PRIM_DIRECCION 
- ,xpcdf.PRIM_ENTRE_CALLES 
- ,xpcdf.PRIM_COLONIA 
- ,xpcdf.PRIM_CIUDAD_O_MPO 
- ,xpcdf.PRIM_ESTADO_C 
- ,xpcdf.PRIM_CODIGO_POSTAL_C 
- ,xpcdf.PRIM_CEDULA 
- ,xpcdf.PRIM_CEDULA_FILE 
- ,xpcdf.SEC_RFC 
- ,xpcdf.SEC_RAZON_SOCIAL 
- ,xpcdf.SEC_DIRECCION 
- ,xpcdf.SEC_ENTRE_CALLES 
- ,xpcdf.SEC_COLONIA 
- ,xpcdf.SEC_CIUDAD_O_MPO 
- ,xpcdf.SEC_ESTADO_C 
- ,xpcdf.SEC_CODIGO_POSTAL_C 
- ,xpcdf.SEC_CEDULA 
- ,xpcfp.ID xpcfp_ID 
- ,xpcfp.HEADER_ID xpcfp_HEADER_ID 
- ,xpcfp.CONDICIONES_DE_PAGO_C 
- ,xpcfp.OBSERVACIONES 
- ,xpcfp.TIPO_DE_PAGO_C 
- ,xpcfp.REQUIERE_ADENDAS_C 
- ,xpcfp.REQUIERE_FACTURA_C 
- ,xpcfp.MOTIVO 
- ,xpcfp.CICLO_DE_FACTURACION_C 
- ,xpcfp.USO_DEL_CFDI_C 
- ,xpcfp.METODO_DE_PAGO_C 
- ,xpcfp.NUMERO_DE_CUENTA 
- ,xpcfp.NOMBRE_DEL_BANCO 
- ,xpcfp.DIAS_NAT_DE_CREDITO 
- ,xpcfp.DIAS_RECEPCION_FACTUR 
- ,xpcfp.UTILIZA_PORTAL_C 
- ,xpcfp.PORTAL_LINK 
- ,xpcfp.ORDEN_DE_COMPRA_C 
- ,xpcfp.CONTRATO_C 
- ,xpcfp.VIGENCIA_CONTRATO 
- ,xpcfp.ATTRIBUTE_CATEGORY xpcfp_ATTRIBUTE_CATEGORY 
- ,xpcfp.ATTRIBUTE1 xpcfp_ATTRIBUTE1 
- ,xpcfp.ATTRIBUTE2 xpcfp_ATTRIBUTE2 
- ,xpcfp.ATTRIBUTE3 xpcfp_ATTRIBUTE3 
- ,xpcfp.ATTRIBUTE4 xpcfp_ATTRIBUTE4 
- ,xpcfp.ATTRIBUTE5 xpcfp_ATTRIBUTE5 
- FROM XXQP_PDFT_CLIENTES_HEADER xpch
- ,XXQP_PDFT_CLIENTES_DIR_FISCAL xpcdf
- ,XXQP_PDFT_CLIENTES_FACT_PAG xpcfp
- WHERE 1=1
- and xpcdf.header_id = xpch.id 
- and xpcfp.header_id = xpch.id 
- and xpch.ID = CUR_CLIENTE_HEADER_ID; 
- 
-procedure upd_from_pdft_to_oracle(pso_errmsg out varchar2
- ,pso_errcode out varchar2
- ,pni_party_id in number
- ,pni_cliente_header_id in number
- ) is
-ln_application_id number; 
-ln_resp_id number; 
+CURSOR get_client_head_info (CUR_CLIENTE_HEADER_ID  number) IS
+     SELECT   xpch.ID                   
+                  ,xpch.NOMBRE_CLIENTE        
+                  ,xpch.GIRO_EMPRESARIAL_C     
+                  ,xpch.EMPRESA_QUE_FACTURA_C  
+                  ,xpch.TIPO_OPERATIVO_C       
+                  ,xpch.TIPO_ADMINISTRATIVO_C   
+                  ,xpch.TIPO_COMERCIAL_C       
+                  ,xpch.COMENTARIOS           
+                  ,xpch.CREATED_BY             
+                  ,xpch.CREATION_DATE          
+                  ,xpch.LAST_UPDATED_BY        
+                  ,xpch.LAST_UPDATE_DATE       
+                  ,xpch.LAST_UPDATE_LOGIN      
+                  ,xpch.ATTRIBUTE_CATEGORY     
+                  ,xpch.ATTRIBUTE1           
+                  ,xpch.ATTRIBUTE2        party_id  
+                  ,xpch.ATTRIBUTE3        cust_account_id    
+                  ,xpch.ATTRIBUTE4            
+                  ,xpch.ATTRIBUTE5        
+                  ,xpch.RFC    
+                  ,xpch.RAZON_SOCIAL
+                  ,xpcdf.PRIM_RFC                
+                  ,xpcdf.PRIM_RAZON_SOCIAL        
+                  ,xpcdf.PRIM_DIRECCION            
+                  ,xpcdf.PRIM_ENTRE_CALLES        
+                  ,xpcdf.PRIM_COLONIA             
+                  ,xpcdf.PRIM_CIUDAD_O_MPO         
+                  ,xpcdf.PRIM_ESTADO_C             
+                  ,xpcdf.PRIM_CODIGO_POSTAL_C    
+                  ,xpcdf.PRIM_CEDULA             
+                  ,xpcdf.PRIM_CEDULA_FILE        
+                  ,xpcdf.SEC_RFC                 
+                  ,xpcdf.SEC_RAZON_SOCIAL        
+                  ,xpcdf.SEC_DIRECCION             
+                  ,xpcdf.SEC_ENTRE_CALLES       
+                  ,xpcdf.SEC_COLONIA              
+                  ,xpcdf.SEC_CIUDAD_O_MPO     
+                  ,xpcdf.SEC_ESTADO_C            
+                  ,xpcdf.SEC_CODIGO_POSTAL_C      
+                  ,xpcdf.SEC_CEDULA    
+                  ,xpcfp.ID                                            xpcfp_ID                     
+                    ,xpcfp.HEADER_ID                            xpcfp_HEADER_ID 
+                    ,xpcfp.CONDICIONES_DE_PAGO_C  
+                    ,xpcfp.OBSERVACIONES          
+                    ,xpcfp.TIPO_DE_PAGO_C         
+                    ,xpcfp.REQUIERE_ADENDAS_C     
+                    ,xpcfp.REQUIERE_FACTURA_C     
+                    ,xpcfp.MOTIVO                 
+                    ,xpcfp.CICLO_DE_FACTURACION_C 
+                    ,xpcfp.USO_DEL_CFDI_C         
+                    ,xpcfp.METODO_DE_PAGO_C       
+                    ,xpcfp.NUMERO_DE_CUENTA       
+                    ,xpcfp.NOMBRE_DEL_BANCO       
+                    ,xpcfp.DIAS_NAT_DE_CREDITO    
+                    ,xpcfp.DIAS_RECEPCION_FACTUR  
+                    ,xpcfp.UTILIZA_PORTAL_C       
+                    ,xpcfp.PORTAL_LINK            
+                    ,xpcfp.ORDEN_DE_COMPRA_C      
+                    ,xpcfp.CONTRATO_C             
+                    ,xpcfp.VIGENCIA_CONTRATO      
+                    ,xpcfp.ATTRIBUTE_CATEGORY     xpcfp_ATTRIBUTE_CATEGORY 
+                    ,xpcfp.ATTRIBUTE1                     xpcfp_ATTRIBUTE1          
+                    ,xpcfp.ATTRIBUTE2                     xpcfp_ATTRIBUTE2         
+                    ,xpcfp.ATTRIBUTE3                     xpcfp_ATTRIBUTE3         
+                    ,xpcfp.ATTRIBUTE4                     xpcfp_ATTRIBUTE4   
+                    ,xpcfp.ATTRIBUTE5                     xpcfp_ATTRIBUTE5                      
+       FROM XXQP_PDFT_CLIENTES_HEADER  xpch
+               ,XXQP_PDFT_CLIENTES_DIR_FISCAL xpcdf
+               ,XXQP_PDFT_CLIENTES_FACT_PAG xpcfp
+     WHERE 1=1
+     and  xpcdf.header_id = xpch.id 
+     and  xpcfp.header_id = xpch.id 
+     and  xpch.ID = CUR_CLIENTE_HEADER_ID; 
+     
+procedure upd_from_pdft_to_oracle(pso_errmsg                    out varchar2
+                                                    ,pso_errcode                    out varchar2
+                                                    ,pni_party_id                    in  number
+                                                    ,pni_cliente_header_id      in  number
+                                                     ) is
+ln_application_id                                     number; 
+ln_resp_id                                              number; 
 
-ls_statement varchar2(2000) := 'alter session set nls_language=''AMERICAN''';
-ls_errmsg varchar2(2000); 
-ls_errcod varchar2(2000); 
- ln_object_version_number number;
- ls_return_status varchar2(2000) := null; 
- ln_msg_count number := null; 
- ls_msg_data varchar2(2000) := null; 
- 
- LT_CUST_ACCOUNT_REC_TYPE HZ_CUST_ACCOUNT_V2PUB.CUST_ACCOUNT_REC_TYPE;
- LT_CUSTOMER_PROFILE_REC_TYPE HZ_CUSTOMER_PROFILE_V2PUB.CUSTOMER_PROFILE_REC_TYPE;
+ls_statement                                           varchar2(2000) := 'alter session set nls_language=''AMERICAN''';
+ls_errmsg    varchar2(2000); 
+ls_errcod     varchar2(2000); 
+ ln_object_version_number      number;
+ ls_return_status                                 varchar2(2000) := null; 
+  ln_msg_count                                    number := null; 
+  ls_msg_data                                     varchar2(2000) := null; 
+  
+ LT_CUST_ACCOUNT_REC_TYPE           HZ_CUST_ACCOUNT_V2PUB.CUST_ACCOUNT_REC_TYPE;
+  LT_CUSTOMER_PROFILE_REC_TYPE     HZ_CUSTOMER_PROFILE_V2PUB.CUSTOMER_PROFILE_REC_TYPE;
 
- 
+              
 begin 
 pso_errmsg := null; 
 pso_errcode := '0';
 
-APPS.XXQP_PDFT_CLIENT_FPTO_UPD_PKG.call_upd_location_prim(pso_errmsg => ls_errmsg
- ,pso_errcode => ls_errcod
- ,pni_cliente_header_id => pni_cliente_header_id
- );
+XXQP_PDFT_CLIENT_FPTO_UPD_PKG.call_upd_location_prim(pso_errmsg                   => ls_errmsg
+                                                                                        ,pso_errcode                  => ls_errcod
+                                                                                        ,pni_cliente_header_id     => pni_cliente_header_id
+                                                                                        );
 
-XXQP_PDFT_CLIENT_FPTO_UPD_PKG.call_upd_location_sec(pso_errmsg => ls_errmsg
- ,pso_errcode => ls_errcod
- ,pni_cliente_header_id => pni_cliente_header_id
- );
- 
+XXQP_PDFT_CLIENT_FPTO_UPD_PKG.call_upd_location_sec(pso_errmsg                   => ls_errmsg
+                                                                                      ,pso_errcode                  => ls_errcod
+                                                                                      ,pni_cliente_header_id     => pni_cliente_header_id
+                                                                                      );
+  
 
- XXQP_PDFT_CLIENT_FPTO_UPD_PKG.call_upd_organization(pso_errmsg => ls_errmsg
- ,pso_errcode => ls_errcod
- ,pni_cliente_header_id => pni_cliente_header_id
- ); 
- 
- XXQP_PDFT_CLIENT_FPTO_UPD_PKG.call_upd_account(pso_errmsg => ls_errmsg
- ,pso_errcode => ls_errcod
- ,pni_cliente_header_id => pni_cliente_header_id
- ); 
- 
+ XXQP_PDFT_CLIENT_FPTO_UPD_PKG.call_upd_organization(pso_errmsg                   => ls_errmsg
+                                                                                      ,pso_errcode                  => ls_errcod
+                                                                                      ,pni_cliente_header_id     => pni_cliente_header_id
+                                                                                      );                                                    
+  
+ XXQP_PDFT_CLIENT_FPTO_UPD_PKG.call_upd_account(pso_errmsg                   => ls_errmsg
+                                                                                  ,pso_errcode                  => ls_errcod
+                                                                                  ,pni_cliente_header_id     => pni_cliente_header_id
+                                                                                   );                                                                                        
+                                                                                     
 
 exception when others then 
 pso_errmsg := 'Excepcion al llamar al metodo upd_from_pdft_to_oracle.'||sqlerrm; 
@@ -127,49 +127,49 @@ pso_errcode := '2';
 end upd_from_pdft_to_oracle; 
 
 
- procedure call_upd_organization(pso_errmsg out varchar2
- ,pso_errcode out varchar2
- ,pni_cliente_header_id in number
- ) is 
- 
- client_head_info_rec get_client_head_info%ROWTYPE;
- ln_application_id number; 
-ln_resp_id number; 
+ procedure call_upd_organization(pso_errmsg                    out varchar2
+                                                  ,pso_errcode                   out varchar2
+                                                  ,pni_cliente_header_id      in   number
+                                                  ) is 
+   
+   client_head_info_rec             get_client_head_info%ROWTYPE;
+   ln_application_id                                     number; 
+ln_resp_id                                              number; 
 
-ls_statement varchar2(2000) := 'alter session set nls_language=''AMERICAN''';
-ls_errmsg varchar2(2000); 
-ls_errcod varchar2(2000); 
- ln_object_version_number number;
- ls_return_status varchar2(2000) := null; 
- ln_msg_count number := null; 
- ls_msg_data varchar2(2000) := null; 
- 
- LT_ORGANIZATION_REC_TYPE HZ_PARTY_V2PUB.ORGANIZATION_REC_TYPE;
- LT_PARTY_REC_TYPE HZ_PARTY_V2PUB.PARTY_REC_TYPE; 
- 
- ln_org_party_obj_version_num number; 
-ln_org_profile_id number; 
-ls_org_return_status varchar2(2000); 
-ln_org_msg_count number; 
-ls_org_msg_data varchar2(2000); 
- 
+ls_statement                                           varchar2(2000) := 'alter session set nls_language=''AMERICAN''';
+ls_errmsg    varchar2(2000); 
+ls_errcod     varchar2(2000); 
+ ln_object_version_number      number;
+ ls_return_status                                 varchar2(2000) := null; 
+  ln_msg_count                                    number := null; 
+  ls_msg_data                                     varchar2(2000) := null; 
+  
+ LT_ORGANIZATION_REC_TYPE             HZ_PARTY_V2PUB.ORGANIZATION_REC_TYPE;
+  LT_PARTY_REC_TYPE                          HZ_PARTY_V2PUB.PARTY_REC_TYPE; 
+                                                  
+ ln_org_party_obj_version_num                 number;                  
+ln_org_profile_id                                     number; 
+ls_org_return_status                               varchar2(2000); 
+ln_org_msg_count                                   number; 
+ls_org_msg_data                                     varchar2(2000);     
+                                                  
  begin 
- 
- if 1 =1 then 
- lt_party_rec_type.party_id :=null; /** NUMBER, **/
- lt_party_rec_type.party_number :=null; /** VARCHAR2(30), **/
- lt_party_rec_type.validated_flag :=null; /** VARCHAR2(1), **/
- lt_party_rec_type.orig_system_reference :=null; /** VARCHAR2(240), **/
- lt_party_rec_type.orig_system :=null; /** VARCHAR2(30), **/
- lt_party_rec_type.status :=null; /** VARCHAR2(1), **/
- lt_party_rec_type.category_code :=null; /** VARCHAR2(30), **/
- lt_party_rec_type.salutation :=null; /** VARCHAR2(60), **/
- lt_party_rec_type.attribute_category :=null; /** VARCHAR2(30), **/
- lt_party_rec_type.attribute1 :=null; /** VARCHAR2(150), **/
- lt_party_rec_type.attribute2 :=null; /** VARCHAR2(150), **/
- lt_party_rec_type.attribute3 :=null; /** VARCHAR2(150), **/
- lt_party_rec_type.attribute4 :=null; /** VARCHAR2(150), **/
- lt_party_rec_type.attribute5                 :=null;   /**  VARCHAR2(150),   **/
+  
+        if 1 =1 then 
+        lt_party_rec_type.party_id                   :=null;   /**  NUMBER,          **/
+        lt_party_rec_type.party_number               :=null;   /**  VARCHAR2(30),    **/
+        lt_party_rec_type.validated_flag             :=null;   /**  VARCHAR2(1),     **/
+        lt_party_rec_type.orig_system_reference      :=null;   /**  VARCHAR2(240),   **/
+        lt_party_rec_type.orig_system                :=null;   /**  VARCHAR2(30),    **/
+        lt_party_rec_type.status                     :=null;   /**  VARCHAR2(1),     **/
+        lt_party_rec_type.category_code              :=null;   /**  VARCHAR2(30),    **/
+        lt_party_rec_type.salutation                 :=null;   /**  VARCHAR2(60),    **/
+        lt_party_rec_type.attribute_category         :=null;   /**  VARCHAR2(30),    **/
+        lt_party_rec_type.attribute1                 :=null;   /**  VARCHAR2(150),   **/
+        lt_party_rec_type.attribute2                 :=null;   /**  VARCHAR2(150),   **/
+        lt_party_rec_type.attribute3                 :=null;   /**  VARCHAR2(150),   **/
+        lt_party_rec_type.attribute4                 :=null;   /**  VARCHAR2(150),   **/
+        lt_party_rec_type.attribute5                 :=null;   /**  VARCHAR2(150),   **/
         lt_party_rec_type.attribute6                 :=null;   /**  VARCHAR2(150),   **/
         lt_party_rec_type.attribute7                 :=null;   /**  VARCHAR2(150),   **/
         lt_party_rec_type.attribute8                 :=null;   /**  VARCHAR2(150),   **/
