@@ -823,7 +823,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                       ||(null==contactosTmpVORowImpl.getCorreoElectronico()||"".equals(contactosTmpVORowImpl.getCorreoElectronico()))
                       ||(null==contactosTmpVORowImpl.getPuesto()||"".equals(contactosTmpVORowImpl.getPuesto()))
                       ||(null==contactosTmpVORowImpl.getNumeroCelular()||"".equals(contactosTmpVORowImpl.getNumeroCelular()))
-                      ||(null==contactosTmpVORowImpl.getCumpleAnios()||"".equals(contactosTmpVORowImpl.getCumpleAnios()))
+                      /** ||(null==contactosTmpVORowImpl.getCumpleAnios()||"".equals(contactosTmpVORowImpl.getCumpleAnios())) 150220211749 **/
                       ){
                           retval.add(new OAException("Tipo de Contacto Cierre y Seguimiento es requerido.",OAException.ERROR));
                       }
@@ -834,7 +834,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                         ||(null==contactosTmpVORowImpl.getCorreoElectronico()||"".equals(contactosTmpVORowImpl.getCorreoElectronico()))
                         ||(null==contactosTmpVORowImpl.getPuesto()||"".equals(contactosTmpVORowImpl.getPuesto()))
                         ||(null==contactosTmpVORowImpl.getNumeroCelular()||"".equals(contactosTmpVORowImpl.getNumeroCelular()))
-                         ||(null==contactosTmpVORowImpl.getCumpleAnios()||"".equals(contactosTmpVORowImpl.getCumpleAnios()))
+                        /** ||(null==contactosTmpVORowImpl.getCumpleAnios()||"".equals(contactosTmpVORowImpl.getCumpleAnios())) 150220211749 **/
                         ){
                             retval.add(new OAException("Tipo de Contacto Cobranza es requerido.",OAException.ERROR));
                         }
@@ -845,7 +845,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                         ||(null==contactosTmpVORowImpl.getCorreoElectronico()||"".equals(contactosTmpVORowImpl.getCorreoElectronico()))
                         ||(null==contactosTmpVORowImpl.getPuesto()||"".equals(contactosTmpVORowImpl.getPuesto()))
                         ||(null==contactosTmpVORowImpl.getNumeroCelular()||"".equals(contactosTmpVORowImpl.getNumeroCelular()))
-                         ||(null==contactosTmpVORowImpl.getCumpleAnios()||"".equals(contactosTmpVORowImpl.getCumpleAnios()))
+                        /** ||(null==contactosTmpVORowImpl.getCumpleAnios()||"".equals(contactosTmpVORowImpl.getCumpleAnios())) 150220211749 **/
                         ){
                             retval.add(new OAException("Tipo de Contacto Gerencial es requerido.",OAException.ERROR));
                         }

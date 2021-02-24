@@ -21,6 +21,7 @@
        XxqpPdftUsuariosRoEO.ATTRIBUTE5, 
        XxqpPdftUsuariosRoEO.ROWID"
    FromList="XXQP_PDFT_USUARIOS_RO XxqpPdftUsuariosRoEO"
+   OrderBy="XxqpPdftUsuariosRoEO.ID DESC"
    BindingStyle="OracleName"
    CustomQuery="false"
    RowClass="xxqp.oracle.apps.ar.pdft.ss.server.XxqpPdftUsuariosRoVORowImpl"
@@ -35,7 +36,8 @@
       Name="XxqpPdftUsuariosRoEO"
       Entity="xxqp.oracle.apps.ar.pdft.ss.schema.server.XxqpPdftUsuariosRoEO" >
       <DesignTime>
-         <Attr Name="_queryClause" Value="false" />
+         <Attr Name="_queryClause" Value="true" />
+         <Attr Name="_queryOrderBy" Value="XxqpPdftUsuariosRoEO.ID DESC" />
       </DesignTime>
    </EntityUsage>
    <ViewAttribute

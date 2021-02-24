@@ -11,6 +11,7 @@ import oracle.apps.fnd.framework.webui.OAPageContext;
 import oracle.apps.fnd.framework.webui.OAWebBeanConstants;
 import oracle.apps.fnd.framework.webui.beans.layout.OASubTabLayoutBean;
 
+import oracle.jbo.Row;
 import oracle.jbo.RowSetIterator;
 
 
@@ -168,18 +169,27 @@ public class SsAMImpl extends OAApplicationModuleImpl {
         if(!xxqpPdftUsuariosRoVOImpl.isPreparedForExecution()){
             xxqpPdftUsuariosRoVOImpl.executeQuery();
         }
+        xxqpPdftUsuariosRoVOImpl.first();
+        xxqpPdftUsuariosRoVOImpl.previous();
         xxqpPdftUsuariosRoVORowImpl = (XxqpPdftUsuariosRoVORowImpl)xxqpPdftUsuariosRoVOImpl.createRow();
         xxqpPdftUsuariosRoVOImpl.insertRow(xxqpPdftUsuariosRoVORowImpl);
+        xxqpPdftUsuariosRoVORowImpl.setNewRowState(Row.STATUS_NEW);
     }
 
     public void saveUserRecord() {
     OADBTransaction   oADBTransaction =  this.getOADBTransaction();
-     oracle.jbo.domain.Number numUsuariosID =   oADBTransaction.getSequenceValue("XXQP_PDFT_USUARIOS_RO_S");
         XxqpPdftUsuariosRoVOImpl  xxqpPdftUsuariosRoVOImpl = getXxqpPdftUsuariosRoVO1();
-        XxqpPdftUsuariosRoVORowImpl  xxqpPdftUsuariosRoVORowImpl = null;
-       xxqpPdftUsuariosRoVORowImpl = (XxqpPdftUsuariosRoVORowImpl)xxqpPdftUsuariosRoVOImpl.getCurrentRow();
-        xxqpPdftUsuariosRoVORowImpl.setId(numUsuariosID);
+        RowSetIterator iterator = xxqpPdftUsuariosRoVOImpl.createRowSetIterator("");
+        while(iterator.hasNext()){
+            XxqpPdftUsuariosRoVORowImpl  xxqpPdftUsuariosRoVORowImpl = null;
+            xxqpPdftUsuariosRoVORowImpl = (XxqpPdftUsuariosRoVORowImpl)iterator.next();
+            if(null==xxqpPdftUsuariosRoVORowImpl.getId()||"".equals(xxqpPdftUsuariosRoVORowImpl.getId())){
+                oracle.jbo.domain.Number numUsuariosID =   oADBTransaction.getSequenceValue("XXQP_PDFT_USUARIOS_RO_S");
+                xxqpPdftUsuariosRoVORowImpl.setId(numUsuariosID);
+            }
+        }
         oADBTransaction.commit();
+        xxqpPdftUsuariosRoVOImpl.executeQuery();
     }
 
     public String validaUsuarioPassword(String strUsuario, 

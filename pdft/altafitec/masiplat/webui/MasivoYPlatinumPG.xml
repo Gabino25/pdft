@@ -156,8 +156,8 @@
                                           <oa:tableLayout id="TabLayFacturacion" hAlign="center">
                                              <ui:contents>
                                                 <oa:messageChoice id="SeFactura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Se Factura" styleClass="OraFieldText" readOnly="false" required="yes"/>
-                                                <oa:messageChoice id="FormatoParaCierre" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.MypFormatoCierreVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Formato para Cierre" styleClass="OraFieldText" readOnly="false" required="yes"/>
-                                                <oa:messageTextInput id="DiasHabilesPago" maximumLength="30" prompt="Dias habiles para pago (Credito)" styleClass="OraFieldText" required="yes"/>
+                                                <oa:messageChoice id="FormatoParaCierre" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.MypFormatoCierreVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Formato para Cierre" styleClass="OraFieldText" readOnly="false" required="no"/>
+                                                <oa:messageTextInput id="DiasHabilesPago" maximumLength="30" prompt="Días para pago (Crédito)" styleClass="OraFieldText" required="yes"/>
                                                 <oa:messageTextInput id="DiasRecepcionDeFacturacion" maximumLength="30" prompt="Dias recepcion de Facturacion" required="yes" rendered="false"/>
                                                 <oa:messageChoice id="RequiereVoBo" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Requiere VoBo" styleClass="OraFieldText" readOnly="false" required="yes"/>
                                                 <oa:messageTextInput id="TipoVoBo" maximumLength="150" prompt="Tipo VoBo" styleClass="OraFieldText" required="no"/>

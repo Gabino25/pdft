@@ -88,6 +88,7 @@ public class BpoCO extends OAControllerImpl
     OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
     OASubTabLayoutBean subTabLayoutRNBean = (OASubTabLayoutBean)webBean.findChildRecursive("SubTabLayoutRN");
     OAPageLayoutBean PageLayoutRNBean = (OAPageLayoutBean)webBean.findChildRecursive("PageLayoutRN");
+    OAMessageChoiceBean EjecutivoBean = (OAMessageChoiceBean)webBean.findChildRecursive("Ejecutivo");
     
       String strPUnidadDeNegocio = pageContext.getParameter("pUnidadDeNegocio");
       String strPEmpresaQueFactura = pageContext.getParameter("pEmpresaQueFactura");
@@ -108,6 +109,39 @@ public class BpoCO extends OAControllerImpl
          *******************************************************************/
       } 
      
+         String strPuserPdft = null; 
+         if(null!=NombreUsuarioEBSBean){
+          if(null!=pageContext.getTransientSessionValue("tsUserPdft")){
+              strPuserPdft =pageContext.getTransientSessionValue("tsUserPdft").toString();
+          }
+          //NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
+           NombreUsuarioEBSBean.setValue(pageContext,strPuserPdft);
+         }
+         
+         String strPuserPdftId = null;
+         if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+          strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+          System.out.println("AltaFichaTecnicaCO strPuserPdftId:"+strPuserPdftId);
+          if(null!=EjecutivoBean){
+                EjecutivoBean.setValue(pageContext,strPuserPdftId);
+                EjecutivoBean.setReadOnly(true);
+          }
+         }
+         
+         
+         
+         if(null==strPuserPdft||null==strPuserPdftId||"".equals(strPuserPdft)||"".equals(strPuserPdftId)){
+          pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
+                                    ,null /*functionName*/
+                                    ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                    ,null /*menuName*/
+                                    ,null /*parameters*/
+                                    ,false /*retainAM*/
+                                    ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                    ,OAException.ERROR /*messagingLevel*/
+                                    );
+         return;
+         }
       
     if(null!=NombreUsuarioEBSBean){
          NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
@@ -281,11 +315,6 @@ public class BpoCO extends OAControllerImpl
                CicloFacturacionBean.setValue(pageContext,strpCicloFacturacion);
              }
             
-            OAMessageChoiceBean EjecutivoBean = (OAMessageChoiceBean)webBean.findChildRecursive("Ejecutivo");
-             if(null!=EjecutivoBean){
-               if(null!=strpEjecutivo&&!"".equals(strpEjecutivo))
-               EjecutivoBean.setValue(pageContext,strpEjecutivo);
-             }
              
             if(null!=bpoAMImpl){
                 bpoAMImpl.fillCamposHead(pageContext,webBean);

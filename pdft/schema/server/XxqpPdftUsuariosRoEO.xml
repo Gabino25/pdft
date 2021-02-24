@@ -20,17 +20,21 @@
    </DesignTime>
    <Attribute
       Name="Id"
+      IsNotNull="true"
       ColumnName="ID"
       Type="oracle.jbo.domain.Number"
       ColumnType="NUMBER"
       SQLType="NUMERIC"
-      TableName="XXQP_PDFT_USUARIOS_RO" >
+      TableName="XXQP_PDFT_USUARIOS_RO"
+      PrimaryKey="true" >
       <DesignTime>
          <Attr Name="_DisplaySize" Value="22" />
       </DesignTime>
    </Attribute>
    <Attribute
       Name="Usuario"
+      IsUnique="true"
+      IsNotNull="true"
       Precision="2000"
       ColumnName="USUARIO"
       Type="java.lang.String"
@@ -264,6 +268,93 @@
          <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
          <Attr Name="_isCheck" Value="true" />
          <Attr Name="_DBObjectName" Value="SYS_C001542332" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669518" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.schema.server.XxqpPdftUsuariosRoEO.CreatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669518" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669519" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.schema.server.XxqpPdftUsuariosRoEO.CreationDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATION_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669519" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669520" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.schema.server.XxqpPdftUsuariosRoEO.LastUpdatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669520" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669521" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.schema.server.XxqpPdftUsuariosRoEO.LastUpdateDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669521" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001828353" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.schema.server.XxqpPdftUsuariosRoEO.Id" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;ID&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001828353" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001828354" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.schema.server.XxqpPdftUsuariosRoEO.Usuario" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;USUARIO&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001828354" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="XxqpPdftUsuariosRoU1" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.schema.server.XxqpPdftUsuariosRoEO.Usuario" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_isUnique" Value="true" />
+         <Attr Name="_DBObjectName" Value="XXQP_PDFT_USUARIOS_RO_U1" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="XxqppdftusuariosroeoPrimaryKey" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.schema.server.XxqpPdftUsuariosRoEO.Id" />
+         <Item Value="xxqp.oracle.apps.ar.pdft.schema.server.XxqpPdftUsuariosRoEO.RowID" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_isPrimary" Value="true" />
+         <Attr Name="_DBObjectName" Value="XXQPPDFTUSUARIOSROEO_PRIMARY_K" />
       </DesignTime>
    </Key>
 </Entity>

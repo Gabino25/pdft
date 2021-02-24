@@ -9,6 +9,7 @@ package xxqp.oracle.apps.ar.pdft.ss.webui;
 import oracle.apps.fnd.common.VersionInfo;
 import oracle.apps.fnd.framework.webui.OAControllerImpl;
 import oracle.apps.fnd.framework.webui.OAPageContext;
+import oracle.apps.fnd.framework.webui.OAWebBeanConstants;
 import oracle.apps.fnd.framework.webui.beans.OAWebBean;
 
 import xxqp.oracle.apps.ar.pdft.ss.server.SsAMImpl;
@@ -51,7 +52,21 @@ public class LoginMgrCO extends OAControllerImpl
     }
     if("GuardarEvt".equals(strEventParam)){
         ssAMImpl.saveUserRecord();
+        return;
     }
+    
+      if("RegresarPaginaInicialEvt".equals(strEventParam)){
+          pageContext.setForwardURL("OA.jsp?page=/oracle/apps/fnd/framework/navigate/webui/NewHomePG"
+                                    ,null /**String functionName,**/
+                                    ,OAWebBeanConstants.KEEP_MENU_CONTEXT /**byte menuContextAction,**/
+                                    ,null /** String menuName, **/
+                                    ,null /** com.sun.java.util.collections.HashMap parameters, **/
+                                    ,false /** boolean retainAM,**/
+                                    ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /**String addBreadCrumb, **/
+                                    ,OAWebBeanConstants.IGNORE_MESSAGES /**byte messagingLevel**/
+                                    );
+         return;
+      }
   }
 
 }

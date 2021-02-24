@@ -6,7 +6,7 @@
             <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
          </ui:corporateBranding>
          <ui:contents>
-            <oa:table id="XxqpPdftUsuariosRoRN">
+            <oa:table id="XxqpPdftUsuariosRoRN" blockSize="200">
                <ui:contents>
                   <oa:messageStyledText id="Id" dataType="NUMBER" prompt="Id" viewName="XxqpPdftUsuariosRoVO1" viewAttr="Id"/>
                   <oa:messageTextInput id="Usuario" dataType="VARCHAR2" prompt="Usuario" viewName="XxqpPdftUsuariosRoVO1" viewAttr="Usuario" maximumLength="2000" required="yes"/>
@@ -29,6 +29,13 @@
                </ui:contents>
             </oa:pageButtonBar>
          </ui:contents>
+         <ui:returnNavigation>
+            <oa:link id="RegresarPaginaInicial" text="Regresar a Pagina Inicial" destination="" serverUnvalidated="true">
+               <ui:primaryClientAction>
+                  <ui:fireAction event="RegresarPaginaInicialEvt" unvalidated="true" id="fireAction1"/>
+               </ui:primaryClientAction>
+            </oa:link>
+         </ui:returnNavigation>
       </oa:pageLayout>
    </content>
 </page>

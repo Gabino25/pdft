@@ -308,7 +308,7 @@
                                     <oa:messageTextInput id="NumeroCelular" dataType="VARCHAR2" prompt="Numero Celular" viewAttr="NumeroCelular" maximumLength="100" required="${oa.XxqpPdftClientesContactosVO1.IsRequired}"/>
                                  </ui:contents>
                               </oa:column>
-                              <oa:column id="CumpleaniosCol">
+                              <oa:column id="CumpleaniosCol" rendered="false">
                                  <ui:columnHeader>
                                     <oa:sortableHeader id="CumpleaniosSH" prompt="Cumpleaños"/>
                                  </ui:columnHeader>
@@ -334,8 +334,8 @@
                                                 <oa:messageTextInput id="Observaciones" maximumLength="200" columns="60" prompt="Observaciones" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="Observaciones" rows="2"/>
                                                 <oa:messageRadioGroup id="RequiereFactura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Requiere Factura" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="RequiereFacturaC"/>
                                                 <oa:messageRadioGroup id="MetodoDePago" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.MetodoDePagoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Forma de Pago SAT" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftClientesFactPagVO1" viewAttr="MetodoDePagoC"/>
-                                                <oa:messageTextInput id="NumCuenta" maximumLength="11" dataType="VARCHAR2" prompt="Num Cuenta de Pago" styleClass="OraFieldNumber" required="yes" viewName="XxqpPdftClientesFactPagVO1" viewAttr="NumeroDeCuenta" readOnly="false"/>
-                                                <oa:messageLovInput id="NombreBanco" prompt="Razón Social del Banco Pagador" required="yes" externalListOfValues="/xxqp/oracle/apps/ar/pdft/altacliente/webui/ExtBanksRN" columns="60" viewName="XxqpPdftClientesFactPagVO1" viewAttr="NombreDelBancoD">
+                                                <oa:messageTextInput id="NumCuenta" maximumLength="11" dataType="VARCHAR2" prompt="Num Cuenta de Pago" styleClass="OraFieldNumber" required="no" viewName="XxqpPdftClientesFactPagVO1" viewAttr="NumeroDeCuenta" readOnly="false"/>
+                                                <oa:messageLovInput id="NombreBanco" prompt="Razón Social del Banco Pagador" required="no" externalListOfValues="/xxqp/oracle/apps/ar/pdft/altacliente/webui/ExtBanksRN" columns="60" viewName="XxqpPdftClientesFactPagVO1" viewAttr="NombreDelBancoD">
                                                    <lovMappings>
                                                       <lovMap id="lovMap14" lovItem="BankName" resultTo="NombreBanco" criteriaFrom="NombreBanco"/>
                                                       <lovMap id="lovMap15" lovItem="BankPartyId" resultTo="BankIdFV"/>

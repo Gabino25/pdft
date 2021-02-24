@@ -78,6 +78,7 @@ public class MasivoYPlatinumCO extends OAControllerImpl
       OAMessageFileUploadBean ContratoExamineBean = (OAMessageFileUploadBean)webBean.findChildRecursive("ContratoExamine");
       OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
       OASubmitButtonBean ValidarBean = (OASubmitButtonBean)webBean.findChildRecursive("Validar");
+      OAMessageChoiceBean  EjecutivoBean = (OAMessageChoiceBean)webBean.findChildRecursive("Ejecutivo");
       
       String strPUnidadDeNegocio = pageContext.getParameter("pUnidadDeNegocio");
       String strPEmpresaQueFactura = pageContext.getParameter("pEmpresaQueFactura");
@@ -108,15 +109,38 @@ public class MasivoYPlatinumCO extends OAControllerImpl
       } 
      
       
+         String strPuserPdft = null; 
       if(null!=NombreUsuarioEBSBean){
-          String strPuserPdft = null; 
           if(null!=pageContext.getTransientSessionValue("tsUserPdft")){
               strPuserPdft =pageContext.getTransientSessionValue("tsUserPdft").toString();
-          }else{
-              strPuserPdft = "CAP CONS_ASTI";
           }
           //NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
            NombreUsuarioEBSBean.setValue(pageContext,strPuserPdft);
+      }
+      
+      String strPuserPdftId = null; 
+      if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+          strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+          System.out.println("AltaFichaTecnicaCO strPuserPdftId:"+strPuserPdftId);
+          if(null!=EjecutivoBean){
+                EjecutivoBean.setValue(pageContext,strPuserPdftId);
+                EjecutivoBean.setReadOnly(true);
+          }
+      }
+      
+      
+       
+      if(null==strPuserPdft||null==strPuserPdftId||"".equals(strPuserPdft)||"".equals(strPuserPdftId)){
+          pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
+                                    ,null /*functionName*/
+                                    ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                    ,null /*menuName*/
+                                    ,null /*parameters*/
+                                    ,false /*retainAM*/
+                                    ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                    ,OAException.ERROR /*messagingLevel*/
+                                    );
+       return;
       }
       
       if(null!=ContratoExamineBean){
@@ -238,11 +262,7 @@ public class MasivoYPlatinumCO extends OAControllerImpl
                CicloFacturacionBean.setValue(pageContext,strpCicloFacturacion);
              }
             
-            OAMessageChoiceBean EjecutivoBean = (OAMessageChoiceBean)webBean.findChildRecursive("Ejecutivo");
-             if(null!=EjecutivoBean){
-                 if(null!=strpEjecutivo&&!"".equals(strpEjecutivo))
-               EjecutivoBean.setValue(pageContext,strpEjecutivo);
-             }
+            
              
             if(null!=masivoYPlatinumAMImpl){
                 masivoYPlatinumAMImpl.fillCamposHead(pageContext,webBean);

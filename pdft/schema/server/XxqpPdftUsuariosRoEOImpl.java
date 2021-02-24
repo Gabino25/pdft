@@ -32,12 +32,15 @@ public class XxqpPdftUsuariosRoEOImpl extends OAEntityImpl {
     public static final int ATTRIBUTE4 = 14;
     public static final int ATTRIBUTE5 = 15;
     public static final int ROWID = 16;
+
+
     private static OAEntityDefImpl mDefinitionObject;
 
     /**This is the default constructor (do not remove)
      */
     public XxqpPdftUsuariosRoEOImpl() {
     }
+
 
     /**Retrieves the definition object for this instance class.
      */
