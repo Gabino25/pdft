@@ -34,18 +34,37 @@ public class PortalDeFichaTecnicaCO extends OAControllerImpl
     super.processRequest(pageContext, webBean);
     OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
     String strPuserPdft =  pageContext.getParameter("pUserPdft");
+    String strPuserPdftId =  pageContext.getParameter("pUserPdftId");
+     
+      if(null==strPuserPdft||null==strPuserPdftId||"".equals(strPuserPdft)||"".equals(strPuserPdftId)){
+         pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
+                                   ,null /*functionName*/
+                                   ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                   ,null /*menuName*/
+                                   ,null /*parameters*/
+                                   ,false /*retainAM*/
+                                   ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                   ,OAException.ERROR /*messagingLevel*/
+                                   );
+      return;
+      }
+    
     if(null!=strPuserPdft&&!"".equals(strPuserPdft)){
       pageContext.putTransientSessionValue("tsUserPdft",strPuserPdft);
     }
-      String strPuserPdftId =  pageContext.getParameter("pUserPdftId");
       System.out.println("strPuserPdftId:"+strPuserPdftId);
       if(null!=strPuserPdftId&&!"".equals(strPuserPdftId)){
         pageContext.putTransientSessionValue("tsUserPdftId",strPuserPdftId);
       }
       
     if(null!=NombreUsuarioEBSBean){
-        NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
+        NombreUsuarioEBSBean.setValue(pageContext,strPuserPdft);
     }
+    
+     
+      
+      
+    
   }
 
   /**

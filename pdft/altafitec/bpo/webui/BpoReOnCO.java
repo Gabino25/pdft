@@ -70,6 +70,32 @@ public class BpoReOnCO extends OAControllerImpl
   {
     super.processRequest(pageContext, webBean);
     
+      String strPuserPdft = null; 
+      System.out.println("BpoReOnCO strPuserPdft:"+strPuserPdft);
+      if(null!=pageContext.getTransientSessionValue("tsUserPdft")){
+          strPuserPdft = pageContext.getTransientSessionValue("tsUserPdft").toString();
+          System.out.println("BpoReOnCO strPuserPdft:"+strPuserPdft);
+      }
+      
+      String strPuserPdftId = null; 
+      if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+          strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+          System.out.println("BpoReOnCO strPuserPdftId:"+strPuserPdftId);
+      }
+      
+      if(null==strPuserPdft||null==strPuserPdftId||"".equals(strPuserPdft)||"".equals(strPuserPdftId)){
+         pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
+                                   ,null /*functionName*/
+                                   ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                   ,null /*menuName*/
+                                   ,null /*parameters*/
+                                   ,false /*retainAM*/
+                                   ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                   ,OAException.ERROR /*messagingLevel*/
+                                   );
+      return;
+      }
+      
       environmentCurrencyFormat(pageContext,webBean);
       
       OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");

@@ -35,6 +35,33 @@ public class BpoCopiarCO extends OAControllerImpl {
     public void processFormRequest(OAPageContext pageContext, OAWebBean webBean)
     {
       super.processFormRequest(pageContext, webBean);
+      
+        String strPuserPdft = null; 
+        System.out.println("BpoCopiarCO strPuserPdft:"+strPuserPdft);
+        if(null!=pageContext.getTransientSessionValue("tsUserPdft")){
+            strPuserPdft = pageContext.getTransientSessionValue("tsUserPdft").toString();
+            System.out.println("BpoCopiarCO strPuserPdft:"+strPuserPdft);
+        }
+        
+        String strPuserPdftId = null; 
+        if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+            strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+            System.out.println("BpoCopiarCO strPuserPdftId:"+strPuserPdftId);
+        }
+        
+        if(null==strPuserPdft||null==strPuserPdftId||"".equals(strPuserPdft)||"".equals(strPuserPdftId)){
+           pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
+                                     ,null /*functionName*/
+                                     ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                     ,null /*menuName*/
+                                     ,null /*parameters*/
+                                     ,false /*retainAM*/
+                                     ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                     ,OAException.ERROR /*messagingLevel*/
+                                     );
+        return;
+        }
+      
         String strCambioDePrecio = null; 
         if(null!=pageContext.getSessionValue("sCambioDePrecio")){
           strCambioDePrecio = (String)pageContext.getSessionValue("sCambioDePrecio"); 
@@ -114,7 +141,8 @@ public class BpoCopiarCO extends OAControllerImpl {
              newPdftBpoHeaderVORowImpl.setAttribute3(xxqpPdftBpoHeaderVORowImpl.getAttribute3());
              newPdftBpoHeaderVORowImpl.setAttribute4(xxqpPdftBpoHeaderVORowImpl.getAttribute4());
              newPdftBpoHeaderVORowImpl.setAttribute5(xxqpPdftBpoHeaderVORowImpl.getAttribute5());
-             newPdftBpoHeaderVORowImpl.setEjecutivo(xxqpPdftBpoHeaderVORowImpl.getEjecutivo());
+          /**   newPdftBpoHeaderVORowImpl.setEjecutivo(xxqpPdftBpoHeaderVORowImpl.getEjecutivo());  010320211357 **/
+             newPdftBpoHeaderVORowImpl.setEjecutivo(strPuserPdftId);
              newPdftBpoHeaderVORowImpl.setArticuloOracle(xxqpPdftBpoHeaderVORowImpl.getArticuloOracle()); /** 17042020 Cuando se realiza un cambio de precio debe permanecer el articulo Oracle **/
              
              xxqpPdftBpoHeaderVOImpl.insertRow(newPdftBpoHeaderVORowImpl);

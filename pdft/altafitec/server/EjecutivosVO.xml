@@ -13,11 +13,15 @@
         , fu.user_name||' - '||fu.description ejecutivo
    from fnd_user fu
 */
-select  lookup_code user_id
+/*select  lookup_code user_id
          ,description ejecutivo
    from xxqp_pdft_mgr_catalogos
 where lookup_type = 'MGR_PDFT_USUARIOS'
-   and nvl(status,'X') = 'Y'
+   and nvl(status,'X') = 'Y'*/
+SELECT XxqpPdftUsuariosRoEO.ID user_id, 
+       XxqpPdftUsuariosRoEO.USUARIO ejecutivo
+FROM XXQP_PDFT_USUARIOS_RO XxqpPdftUsuariosRoEO
+order by usuario asc
    ]]></SQLQuery>
    <DesignTime>
       <Attr Name="_isExpertMode" Value="true" />

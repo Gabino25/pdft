@@ -36,12 +36,43 @@ public class BusquedaDeFichaTecnicaCO extends OAControllerImpl
    */
   public void processRequest(OAPageContext pageContext, OAWebBean webBean)
   {
-      OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
+     super.processRequest(pageContext, webBean);
+     OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
+     
        
       if(null!=NombreUsuarioEBSBean){
            NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
        }
-    super.processRequest(pageContext, webBean);
+      String strPuserPdft = null; 
+      System.out.println("BusquedaDeFichaTecnicaCO strPuserPdft:"+strPuserPdft);
+      if(null!=pageContext.getTransientSessionValue("tsUserPdft")){
+          strPuserPdft = pageContext.getTransientSessionValue("tsUserPdft").toString();
+          System.out.println("BusquedaDeFichaTecnicaCO strPuserPdft:"+strPuserPdft);
+          if(null!=NombreUsuarioEBSBean){
+               NombreUsuarioEBSBean.setValue(pageContext,strPuserPdft);
+           }
+          
+      }
+      
+      String strPuserPdftId = null; 
+      if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+          strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+          System.out.println("BusquedaDeFichaTecnicaCO strPuserPdftId:"+strPuserPdftId);
+      }
+      
+      if(null==strPuserPdft||"".equals(strPuserPdft)||null==strPuserPdftId||"".equals(strPuserPdftId)){
+         pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
+                                   ,null /*functionName*/
+                                   ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                   ,null /*menuName*/
+                                   ,null /*parameters*/
+                                   ,false /*retainAM*/
+                                   ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                   ,OAException.ERROR /*messagingLevel*/
+                                   );
+      return;
+      }
+      
   }
 
   /**
@@ -65,6 +96,24 @@ public class BusquedaDeFichaTecnicaCO extends OAControllerImpl
       String strUnidadDeNegocio = null; 
       String strEmpresaQueFactura = null;
       String strCicloFacturacion = null; 
+      
+      String strPuserPdftId = null; 
+      if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+          strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+      }else{
+          pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
+                                    ,null /*functionName*/
+                                    ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                    ,null /*menuName*/
+                                    ,null /*parameters*/
+                                    ,false /*retainAM*/
+                                    ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                    ,OAException.ERROR /*messagingLevel*/
+                                    );
+          return;
+      }
+      
+      System.out.println("strPuserPdftId:"+strPuserPdftId);
       
       OAMessageTextInputBean  NoFichaTecnicaBean = (OAMessageTextInputBean)webBean.findChildRecursive("NoFichaTecnica"); 
       if(null!=NoFichaTecnicaBean){
@@ -165,12 +214,12 @@ public class BusquedaDeFichaTecnicaCO extends OAControllerImpl
       }
       
       if("CopiarEvt".equals(strEventParam)){
-          altaFichaTecnicaAMImpl.copiarFichaTecnica(pageContext);
+          altaFichaTecnicaAMImpl.copiarFichaTecnica(pageContext,strPuserPdftId);
           return; 
       }
       
       if("CambioDePrecioEvt".equals(strEventParam)){
-          altaFichaTecnicaAMImpl.cambioDePrecioFichaTecnica(pageContext);
+          altaFichaTecnicaAMImpl.cambioDePrecioFichaTecnica(pageContext,strPuserPdftId);
           return; 
       }
       

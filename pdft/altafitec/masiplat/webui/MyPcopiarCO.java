@@ -35,7 +35,35 @@ public class MyPcopiarCO extends OAControllerImpl{
     public void processFormRequest(OAPageContext pageContext, OAWebBean webBean)
     {
       super.processFormRequest(pageContext, webBean);
-        String strCambioDePrecio = null; 
+      
+        String strPuserPdft = null; 
+        System.out.println("MyPcopiarCO strPuserPdft:"+strPuserPdft);
+        if(null!=pageContext.getTransientSessionValue("tsUserPdft")){
+            strPuserPdft = pageContext.getTransientSessionValue("tsUserPdft").toString();
+            System.out.println("MyPcopiarCO strPuserPdft:"+strPuserPdft);
+        }
+        
+        String strPuserPdftId = null; 
+        if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+            strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+            System.out.println("MyPcopiarCO strPuserPdftId:"+strPuserPdftId);
+        }
+        
+        if(null==strPuserPdft||null==strPuserPdftId||"".equals(strPuserPdft)||"".equals(strPuserPdftId)){
+           pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
+                                     ,null /*functionName*/
+                                     ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                     ,null /*menuName*/
+                                     ,null /*parameters*/
+                                     ,false /*retainAM*/
+                                     ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                     ,OAException.ERROR /*messagingLevel*/
+                                     );
+        return;
+        }
+      
+      
+      String strCambioDePrecio = null; 
       if(null!=pageContext.getSessionValue("sCambioDePrecio")){
           strCambioDePrecio = (String)pageContext.getSessionValue("sCambioDePrecio"); 
           pageContext.removeSessionValue("sCambioDePrecio");
@@ -116,7 +144,8 @@ public class MyPcopiarCO extends OAControllerImpl{
               newPdftMypHeaderVORowImpl.setAttribute3(xxqpPdftMypHeaderVORowImpl.getAttribute3());
               newPdftMypHeaderVORowImpl.setAttribute4(xxqpPdftMypHeaderVORowImpl.getAttribute4());
               newPdftMypHeaderVORowImpl.setAttribute5(xxqpPdftMypHeaderVORowImpl.getAttribute5());
-               newPdftMypHeaderVORowImpl.setEjecutivo(xxqpPdftMypHeaderVORowImpl.getEjecutivo());
+             /**  newPdftMypHeaderVORowImpl.setEjecutivo(xxqpPdftMypHeaderVORowImpl.getEjecutivo());  010320211346 **/
+              newPdftMypHeaderVORowImpl.setEjecutivo(strPuserPdftId);
                newPdftMypHeaderVORowImpl.setArticuloOracle(xxqpPdftMypHeaderVORowImpl.getArticuloOracle()); /** 17042020 Cuando se realiza un cambio de precio debe permanecer el articulo Oracle **/
               
               xxqpPdftMypHeaderVOImpl.insertRow(newPdftMypHeaderVORowImpl);

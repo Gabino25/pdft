@@ -639,7 +639,9 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
         } /** END if(null!=fichasTecnicasVOImpl){ **/
     }
 
-    public void copiarFichaTecnica(OAPageContext pageContext) {
+    public void copiarFichaTecnica(OAPageContext pageContext
+                                  ,String pUserPdftId
+                                  ) {
         FichasTecnicasVOImpl fichasTecnicasVOImpl = getFichasTecnicasVO1();
         FichasTecnicasVORowImpl fichasTecnicasVORowImpl = null; 
         int countIsSelected = 0;
@@ -657,6 +659,7 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
                    com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
                    parameters.put("pMyPHeaderId",fichasTecnicasVORowImpl.getId().toString() );
                    parameters.put("pMyPCopiar","Y");
+                   parameters.put("pUserPdftId",pUserPdftId);
                    pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/masiplat/webui/MasivoYPlatinumReOnPG&"+OASubTabLayoutBean.OA_SELECTED_SUBTAB_IDX+"=0" /*url*/
                                              ,null /*functionName*/
                                              ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
@@ -670,6 +673,7 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
                    com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
                    parameters.put("pBpoHeaderId",fichasTecnicasVORowImpl.getId().toString() );
                    parameters.put("pBpoCopiar","Y");
+                   parameters.put("pUserPdftId",pUserPdftId);
                    pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/bpo/webui/BpoReOnPG&"+OASubTabLayoutBean.OA_SELECTED_SUBTAB_IDX+"=0" /*url*/
                                              ,null /*functionName*/
                                              ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
@@ -683,6 +687,7 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
                    com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
                    parameters.put("pQplabsHeaderId",fichasTecnicasVORowImpl.getId().toString() );
                    parameters.put("pQplabsCopiar","Y");
+                   parameters.put("pUserPdftId",pUserPdftId);
                    pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/qplabs/webui/QpLabsReOnPG" /*url*/
                                              ,null /*functionName*/
                                              ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
@@ -1020,7 +1025,9 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
         System.out.println("Sale testDeliveryManager."); 
     }
 
-    public void cambioDePrecioFichaTecnica(OAPageContext pageContext) {
+    public void cambioDePrecioFichaTecnica(OAPageContext pageContext
+                                          ,String pUserPdftId
+                                          ) {
         FichasTecnicasVOImpl fichasTecnicasVOImpl = getFichasTecnicasVO1();
         FichasTecnicasVORowImpl fichasTecnicasVORowImpl = null; 
         int countIsSelected = 0;
@@ -1045,6 +1052,7 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
                    com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
                    parameters.put("pMyPHeaderId",fichasTecnicasVORowImpl.getId().toString() );
                    parameters.put("pMyPCambioDePrecio","Y");
+                   parameters.put("pUserPdftId",pUserPdftId);
                    pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/masiplat/webui/MasivoYPlatinumReOnPG&"+OASubTabLayoutBean.OA_SELECTED_SUBTAB_IDX+"=0" /*url*/
                                              ,null /*functionName*/
                                              ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
@@ -1058,6 +1066,7 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
                    com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
                    parameters.put("pBpoHeaderId",fichasTecnicasVORowImpl.getId().toString() );
                    parameters.put("pBpoCambioDePrecio","Y");
+                   parameters.put("pUserPdftId",pUserPdftId);
                    pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/bpo/webui/BpoReOnPG&"+OASubTabLayoutBean.OA_SELECTED_SUBTAB_IDX+"=0" /*url*/
                                              ,null /*functionName*/
                                              ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
@@ -1071,6 +1080,7 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
                    com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
                    parameters.put("pQplabsHeaderId",fichasTecnicasVORowImpl.getId().toString() );
                    parameters.put("pQplabsCambioDePrecio","Y");
+                   parameters.put("pUserPdftId",pUserPdftId);
                    pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/qplabs/webui/QpLabsReOnPG" /*url*/
                                              ,null /*functionName*/
                                              ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/

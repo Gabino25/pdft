@@ -68,6 +68,33 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
   public void processRequest(OAPageContext pageContext, OAWebBean webBean)
   {
     super.processRequest(pageContext, webBean);
+    
+      String strPuserPdft = null; 
+      System.out.println("MasivoYPlatinumReOnCO strPuserPdft:"+strPuserPdft);
+      if(null!=pageContext.getTransientSessionValue("tsUserPdft")){
+          strPuserPdft = pageContext.getTransientSessionValue("tsUserPdft").toString();
+          System.out.println("MasivoYPlatinumReOnCO strPuserPdft:"+strPuserPdft);
+      }
+      
+      String strPuserPdftId = null; 
+      if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+          strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+          System.out.println("MasivoYPlatinumReOnCO strPuserPdftId:"+strPuserPdftId);
+      }
+      
+      if(null==strPuserPdft||null==strPuserPdftId||"".equals(strPuserPdft)||"".equals(strPuserPdftId)){
+         pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
+                                   ,null /*functionName*/
+                                   ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                   ,null /*menuName*/
+                                   ,null /*parameters*/
+                                   ,false /*retainAM*/
+                                   ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                   ,OAException.ERROR /*messagingLevel*/
+                                   );
+      return;
+      }
+    
       OAWebBean body = pageContext.getRootWebBean(); 
        if (body instanceof OABodyBean){
           ((OABodyBean)body).setBlockOnEverySubmit(true); 
@@ -210,6 +237,8 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
      } 
      
      if("Y".equals(pageContext.getParameter("pMyPCopiar"))){
+         pageContext.putSessionValue("sCambioDePrecio","Y");
+         pageContext.putSessionValue("sUserPdftId",pageContext.getParameter("pUserPdftId"));
          OAProcessingPage oAProcessingPage =  new  OAProcessingPage("xxqp.oracle.apps.ar.pdft.altafitec.masiplat.webui.MyPcopiarCO"); 
          oAProcessingPage.setConciseMessage("This is the concise processing page message."); 
          oAProcessingPage.setDetailedMessage("This is the detailed message which should explain what's happening."); 
@@ -220,6 +249,7 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
       if("Y".equals(pageContext.getParameter("pMyPCambioDePrecio"))){
           xxqpPdftMypHeaderVORowImpl.setStatus("CERRADA");
           pageContext.putSessionValue("sCambioDePrecio","Y");
+          pageContext.putSessionValue("sUserPdftId",pageContext.getParameter("pUserPdftId"));
           OAProcessingPage oAProcessingPage =  new  OAProcessingPage("xxqp.oracle.apps.ar.pdft.altafitec.masiplat.webui.MyPcopiarCO"); 
           oAProcessingPage.setConciseMessage("This is the concise processing page message."); 
           oAProcessingPage.setDetailedMessage("This is the detailed message which should explain what's happening."); 
