@@ -113,6 +113,7 @@ public class MasivoYPlatinumUpdCO extends OAControllerImpl
       OAMessageFileUploadBean Examine2Bean = (OAMessageFileUploadBean)webBean.findChildRecursive("FileUpload2");
       OAMessageFileUploadBean Examine3Bean = (OAMessageFileUploadBean)webBean.findChildRecursive("FileUpload3");
       OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
+      OAMessageTextInputBean ModificacionesRealizadasBean = (OAMessageTextInputBean)webBean.findChildRecursive("ModificacionesRealizadas");
       
       environmentCurrencyFormat(pageContext,webBean);
       
@@ -153,6 +154,11 @@ public class MasivoYPlatinumUpdCO extends OAControllerImpl
           masivoYPlatinumAMImpl.initMypOtrosProcesosVO(strMyPHeaderId);
           masivoYPlatinumAMImpl.initMypComentsProcesosVO(strMyPHeaderId);
           masivoYPlatinumAMImpl.initReglasDeNegocioVO(strMyPHeaderId);
+          if(null!=ModificacionesRealizadasBean){
+              if("CAMBIO_DE_PRECIO".equals(xxqpPdftMypHeaderVORowImpl.getStatus())){
+                  ModificacionesRealizadasBean.setRendered(true);
+              }
+          }
       }else{
       
       }    

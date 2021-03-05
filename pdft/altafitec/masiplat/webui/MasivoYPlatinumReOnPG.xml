@@ -581,6 +581,7 @@
                   </oa:contentContainer>
                </ui:contents>
             </oa:subTabLayout>
+            <oa:messageTextInput id="ModificacionesRealizadas" required="no" dataType="CLOB" prompt="Modificaciones Realizadas" rows="3" columns="200" viewName="XxqpPdftMypHeaderVO1" viewAttr="ModifRealiz" readOnly="true" rendered="false"/>
             <oa:pageButtonBar id="PageButtonBarRN">
                <ui:contents>
                   <oa:button id="CancelarFTBtn" text="Cancelar Ficha Tecnica" prompt="Cancelar Ficha Tecnica">

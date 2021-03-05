@@ -16,7 +16,8 @@ CURSOR get_myp_head_info (cur_myp_header_id number) IS
  decode(myp_head.STATUS,'PRELIMINAR','En captura',
  'ABIERTA','Activa' ,
  'CERRADA','Cerrada',
- 'CANCELADA','Cancelada' ) STATUS_MEANING,
+ 'CANCELADA','Cancelada',
+ 'CAMBIO_DE_PRECIO','Cambio De Precio' ) STATUS_MEANING,
  myp_head.NUMERO_FT_REFERENCIA, 
  myp_head.PARTY_ID, 
  myp_head.PDFT_CLIENTE_HEADER_ID, 
@@ -64,7 +65,8 @@ CURSOR get_myp_head_info (cur_myp_header_id number) IS
  (select usuario 
  from XXQP_PDFT_USUARIOS_RO
  where id = myp_head.ejecutivo ) ejecutivo, 
- myp_head.ARTICULO_ORACLE
+ myp_head.ARTICULO_ORACLE,
+ myp_head.MODIF_REALIZ
 FROM XXQP_PDFT_MYP_HEADER myp_head
 where myp_head.id = cur_myp_header_id;
 
@@ -194,7 +196,8 @@ FROM XXQP_PDFT_MYP_GENERAL myp_gral
  myp_cob.ATTRIBUTE3, 
  myp_cob.ATTRIBUTE4, 
  myp_cob.ATTRIBUTE5, 
- myp_cob.comentarios
+ myp_cob.comentarios,
+ myp_cob.comentarios_ilim
 FROM XXQP_PDFT_MYP_COBERTURA myp_cob
 where myp_cob.MYP_HEADER_ID = cur_myp_header_id; 
 
@@ -298,7 +301,8 @@ WHERE myp_oproc.REGION = 'OTROS_PROCESOS'
  myp_instr.ATTRIBUTE2, 
  myp_instr.ATTRIBUTE3, 
  myp_instr.ATTRIBUTE4, 
- myp_instr.ATTRIBUTE5
+ myp_instr.ATTRIBUTE5,
+ myp_instr.COMENTARIOS_INSTRUCC_ILIM
 FROM XXQP_PDFT_MYP_PROCESOS myp_instr
 WHERE myp_instr.REGION = 'COMENTARIOS'
  and myp_instr.MYP_HEADER_ID = cur_myp_header_id;
@@ -565,6 +569,9 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  v_cadena VARCHAR2(4000);
  BEGIN
  v_cadena := REPLACE(p_cadena, CHR(38), CHR(38) || 'amp;');
+ v_cadena := REPLACE(v_cadena, CHR(60), CHR(38)||'#60;'); /* < */
+ v_cadena := REPLACE(v_cadena, CHR(62), CHR(38)||'#62;'); /* > */
+ v_cadena := REPLACE(v_cadena, CHR(64), CHR(38)||'#64;'); /* arroba */
  v_cadena := REPLACE(v_cadena, CHR(50081), CHR(38)||'#225;'); /* v_cadena := REPLACE(v_cadena, CHR(50081), 'HR(38)||'acute;'); */
  v_cadena := REPLACE(v_cadena, CHR(50089), CHR(38)||'#233;'); /* v_cadena := REPLACE(v_cadena, CHR(50089), CHR(38)||'acute;'); */
  v_cadena := REPLACE(v_cadena, CHR(50093), CHR(38)||'#237;'); /* v_cadena := REPLACE(v_cadena, CHR(50093), CHR(38)||'iacute;'); */
@@ -674,66 +681,81 @@ procedure get_info(pso_errmsg out varchar2
  ln_oproc_precio_sub number:=0; 
  ln_myp_header_id number := pni_myp_header_id; 
  ls_regneg_precio varchar2(200); 
+ v_length_clob number := 0; 
+ v_offset number :=1;
+ v_char          VARCHAR2(10); /** 1 to 10 por acentos **/
 begin 
  pso_errmsg := null; 
  pso_errcod := '0';
  
+ fnd_file.put_line(fnd_file.log,'050320211619');
+ lc_info :='<XXQP_PDFT_MYP>'; 
  
- lc_info := lc_info||'<XXQP_PDFT_MYP>'; 
- 
- 
+  fnd_file.put_line(fnd_file.log,'050320211617');
  OPEN get_myp_head_info(ln_myp_header_id);
  LOOP
  FETCH get_myp_head_info INTO myp_head_info_rec;
  EXIT WHEN get_myp_head_info%NOTFOUND;
  
- lc_info := lc_info||'<NOMBRE_CLIENTE>'||replace_char_esp(myp_head_info_rec.razon_social)||'</NOMBRE_CLIENTE>';
- lc_info := lc_info||'<FECHA_INICIAL_OPERACION>'||myp_head_info_rec.fecha_inicial_operacion||'</FECHA_INICIAL_OPERACION>';
- lc_info := lc_info||'<EMPRESA_QUE_FACTURA>'||replace_char_esp(myp_head_info_rec.empresa_que_factura_m)||'</EMPRESA_QUE_FACTURA>';
- lc_info := lc_info||'<UNIDAD_DE_NEGOCIO>'||myp_head_info_rec.unidad_de_negocio_m||'</UNIDAD_DE_NEGOCIO>';
- lc_info := lc_info||'<HEAD_PERIODICIDAD>'||myp_head_info_rec.FRECUENCIA_FACTURACION_M||'</HEAD_PERIODICIDAD>';
- lc_info := lc_info||'<EJECUTIVO>'||myp_head_info_rec.EJECUTIVO||'</EJECUTIVO>';
- lc_info := lc_info||'<STATUS_MEANING>'||myp_head_info_rec.STATUS_MEANING||'</STATUS_MEANING>';
- lc_info := lc_info||'<NUMERO_FT>'||myp_head_info_rec.NUMERO_FT||'</NUMERO_FT>';
- lc_info := lc_info||'<CREATION_DATE>'||myp_head_info_rec.CREATION_DATE||'</CREATION_DATE>';
- lc_info := lc_info||'<ARTICULO_ORACLE>'||myp_head_info_rec.ARTICULO_ORACLE||'</ARTICULO_ORACLE>';
+ dbms_lob.append(lc_info,'<NOMBRE_CLIENTE>'||replace_char_esp(myp_head_info_rec.razon_social)||'</NOMBRE_CLIENTE>');
+ dbms_lob.append(lc_info,'<FECHA_INICIAL_OPERACION>'||myp_head_info_rec.fecha_inicial_operacion||'</FECHA_INICIAL_OPERACION>');
+ dbms_lob.append(lc_info,'<EMPRESA_QUE_FACTURA>'||replace_char_esp(myp_head_info_rec.empresa_que_factura_m)||'</EMPRESA_QUE_FACTURA>');
+ dbms_lob.append(lc_info,'<UNIDAD_DE_NEGOCIO>'||myp_head_info_rec.unidad_de_negocio_m||'</UNIDAD_DE_NEGOCIO>');
+ dbms_lob.append(lc_info,'<HEAD_PERIODICIDAD>'||myp_head_info_rec.FRECUENCIA_FACTURACION_M||'</HEAD_PERIODICIDAD>');
+ dbms_lob.append(lc_info,'<EJECUTIVO>'||myp_head_info_rec.EJECUTIVO||'</EJECUTIVO>');
+ dbms_lob.append(lc_info,'<STATUS_MEANING>'||myp_head_info_rec.STATUS_MEANING||'</STATUS_MEANING>');
+ dbms_lob.append(lc_info,'<NUMERO_FT>'||myp_head_info_rec.NUMERO_FT||'</NUMERO_FT>');
+ dbms_lob.append(lc_info,'<CREATION_DATE>'||myp_head_info_rec.CREATION_DATE||'</CREATION_DATE>');
+ dbms_lob.append(lc_info,'<ARTICULO_ORACLE>'||myp_head_info_rec.ARTICULO_ORACLE||'</ARTICULO_ORACLE>');
  
- if 'Y' = psi_modif then 
- lc_info := lc_info||'<CAMBIO>Y</CAMBIO>';
+ if 'Y' = psi_modif or myp_head_info_rec.status in ('CAMBIO_DE_PRECIO')  then 
+  dbms_lob.append(lc_info,'<CAMBIO>Y</CAMBIO>');
+  dbms_lob.append(lc_info,'<MODIF_REALIZ>');
+  v_length_clob := dbms_lob.getlength(myp_head_info_rec.MODIF_REALIZ);
+v_offset := 1;
+     while(v_offset<=v_length_clob) LOOP
+        v_char := dbms_lob.substr(myp_head_info_rec.MODIF_REALIZ, 1, v_offset);
+        dbms_lob.append(lc_info,replace_char_esp(v_char));
+        v_offset := v_offset + 1;
+     END LOOP; 
+    dbms_lob.append(lc_info,'</MODIF_REALIZ>');  
+  
  else
- lc_info := lc_info||'<ALTA>Y</ALTA>';
+  dbms_lob.append(lc_info,'<ALTA>Y</ALTA>');
  end if; 
  
  
  END LOOP;
  CLOSE get_myp_head_info;
  
+ fnd_file.put_line(fnd_file.log,'050320211618');
+ 
  
  OPEN get_myp_gral_info(ln_myp_header_id);
  LOOP
  FETCH get_myp_gral_info INTO myp_gral_info_rec;
  EXIT WHEN get_myp_gral_info%NOTFOUND;
- lc_info := lc_info||'<TIPO_PRODUCTO>'||replace_char_esp(myp_gral_info_rec.tipo_producto_m)||'</TIPO_PRODUCTO>';
- lc_info := lc_info||'<IMPRESOR>'||myp_gral_info_rec.impresor||'</IMPRESOR>';
- lc_info := lc_info||'<PUNTO_DE_RECOLECCION>'||myp_gral_info_rec.punto_de_recoleccion||'</PUNTO_DE_RECOLECCION>';
- lc_info := lc_info||'<CONTACTO_PARA_CIERRE>'||myp_gral_info_rec.contacto_para_cierre||'</CONTACTO_PARA_CIERRE>';
- lc_info := lc_info||'<NOMBRE_PRODUCTO>'||myp_gral_info_rec.nombre_producto||'</NOMBRE_PRODUCTO>';
- lc_info := lc_info||'<VOLUMEN_APORX>'||myp_gral_info_rec.volumen_aprox||'</VOLUMEN_APORX>';
-  lc_info := lc_info||'<PERIODICIDAD>'||myp_gral_info_rec.periodicidad_m||'</PERIODICIDAD>'; 
- lc_info := lc_info||'<SE_FACTURA>'||myp_gral_info_rec.se_factura_m||'</SE_FACTURA>';
- lc_info := lc_info||'<FORMATO_PARA_CIERRE>'||replace_char_esp(myp_gral_info_rec.formato_para_cierre_m)||'</FORMATO_PARA_CIERRE>';
- lc_info := lc_info||'<DIAS_HABILES_PAGO>'||myp_gral_info_rec.dias_habiles_pago||'</DIAS_HABILES_PAGO>';
- lc_info := lc_info||'<DIAS_RECEPCION_FATURACION>'||myp_gral_info_rec.dias_recepcion||'</DIAS_RECEPCION_FATURACION>';
- lc_info := lc_info||'<REQUIERE_VOBO>'||myp_gral_info_rec.REQUIERE_VOBO_m||'</REQUIERE_VOBO>';
- lc_info := lc_info||'<TIPO_VOBO>'||myp_gral_info_rec.TIPO_VOBO||'</TIPO_VOBO>';
- lc_info := lc_info||'<TIPO_DE_ENTREGA>'||myp_gral_info_rec.TIPO_DE_ENTREGA_c||'</TIPO_DE_ENTREGA>';
- lc_info := lc_info||'<POLITICA_DE_ENTREGA>'||myp_gral_info_rec.POLITICA_DE_ENTREGA_m||'</POLITICA_DE_ENTREGA>';
- lc_info := lc_info||'<TIPO_COMISION>'||myp_gral_info_rec.TIPO_COMISION_m||'</TIPO_COMISION>';
- lc_info := lc_info||'<PESO_PRODUCTO>'||myp_gral_info_rec.PESO_PRODUCTO_m||'</PESO_PRODUCTO>';
- lc_info := lc_info||'<DIMENSIONES>'||myp_gral_info_rec.DIMENSIONES_m||'</DIMENSIONES>';
- lc_info := lc_info||'<ACUSE>'||nvl(myp_gral_info_rec.ACUSE_M,'N/A')||'</ACUSE>';
- lc_info := lc_info||'<ORDINARIO>'||nvl(myp_gral_info_rec.ORDINARIO_M,'N/A')||'</ORDINARIO>';
- lc_info := lc_info||'<SEMI_ACUSE>'||nvl(myp_gral_info_rec.SEMI_ACUSE_M,'N/A')||'</SEMI_ACUSE>';
+ dbms_lob.append(lc_info,'<TIPO_PRODUCTO>'||replace_char_esp(myp_gral_info_rec.tipo_producto_m)||'</TIPO_PRODUCTO>');
+ dbms_lob.append(lc_info,'<IMPRESOR>'||myp_gral_info_rec.impresor||'</IMPRESOR>');
+ dbms_lob.append(lc_info,'<PUNTO_DE_RECOLECCION>'||myp_gral_info_rec.punto_de_recoleccion||'</PUNTO_DE_RECOLECCION>');
+ dbms_lob.append(lc_info,'<CONTACTO_PARA_CIERRE>'||myp_gral_info_rec.contacto_para_cierre||'</CONTACTO_PARA_CIERRE>');
+ dbms_lob.append(lc_info,'<NOMBRE_PRODUCTO>'||myp_gral_info_rec.nombre_producto||'</NOMBRE_PRODUCTO>');
+ dbms_lob.append(lc_info,'<VOLUMEN_APORX>'||myp_gral_info_rec.volumen_aprox||'</VOLUMEN_APORX>');
+  dbms_lob.append(lc_info,'<PERIODICIDAD>'||myp_gral_info_rec.periodicidad_m||'</PERIODICIDAD>'); 
+ dbms_lob.append(lc_info,'<SE_FACTURA>'||myp_gral_info_rec.se_factura_m||'</SE_FACTURA>');
+ dbms_lob.append(lc_info,'<FORMATO_PARA_CIERRE>'||replace_char_esp(myp_gral_info_rec.formato_para_cierre_m)||'</FORMATO_PARA_CIERRE>');
+ dbms_lob.append(lc_info,'<DIAS_HABILES_PAGO>'||myp_gral_info_rec.dias_habiles_pago||'</DIAS_HABILES_PAGO>');
+ dbms_lob.append(lc_info,'<DIAS_RECEPCION_FATURACION>'||myp_gral_info_rec.dias_recepcion||'</DIAS_RECEPCION_FATURACION>');
+ dbms_lob.append(lc_info,'<REQUIERE_VOBO>'||myp_gral_info_rec.REQUIERE_VOBO_m||'</REQUIERE_VOBO>');
+ dbms_lob.append(lc_info,'<TIPO_VOBO>'||myp_gral_info_rec.TIPO_VOBO||'</TIPO_VOBO>');
+ dbms_lob.append(lc_info,'<TIPO_DE_ENTREGA>'||myp_gral_info_rec.TIPO_DE_ENTREGA_c||'</TIPO_DE_ENTREGA>');
+ dbms_lob.append(lc_info,'<POLITICA_DE_ENTREGA>'||myp_gral_info_rec.POLITICA_DE_ENTREGA_m||'</POLITICA_DE_ENTREGA>');
+ dbms_lob.append(lc_info,'<TIPO_COMISION>'||myp_gral_info_rec.TIPO_COMISION_m||'</TIPO_COMISION>');
+ dbms_lob.append(lc_info,'<PESO_PRODUCTO>'||myp_gral_info_rec.PESO_PRODUCTO_m||'</PESO_PRODUCTO>');
+ dbms_lob.append(lc_info,'<DIMENSIONES>'||myp_gral_info_rec.DIMENSIONES_m||'</DIMENSIONES>');
+ dbms_lob.append(lc_info,'<ACUSE>'||nvl(myp_gral_info_rec.ACUSE_M,'N/A')||'</ACUSE>');
+ dbms_lob.append(lc_info,'<ORDINARIO>'||nvl(myp_gral_info_rec.ORDINARIO_M,'N/A')||'</ORDINARIO>');
+ dbms_lob.append(lc_info,'<SEMI_ACUSE>'||nvl(myp_gral_info_rec.SEMI_ACUSE_M,'N/A')||'</SEMI_ACUSE>');
  
  END LOOP;
  CLOSE get_myp_gral_info;
@@ -743,59 +765,75 @@ begin
  LOOP
  FETCH get_myp_cob_info INTO myp_cob_info_rec;
  EXIT WHEN get_myp_cob_info%NOTFOUND;
- lc_info := lc_info||'<PLAZA_PROPIETARIA>'||myp_cob_info_rec.PLAZA_PROPIETARIA_M||'</PLAZA_PROPIETARIA>';
+dbms_lob.append(lc_info,'<PLAZA_PROPIETARIA>'||myp_cob_info_rec.PLAZA_PROPIETARIA_M||'</PLAZA_PROPIETARIA>');
  /** lc_info := lc_info||'<TIPO_COBERTURA>'||myp_cob_info_rec.TIPO_COBERTURA_C||'</TIPO_COBERTURA>'; **/
- lc_info := lc_info||'<TC_NACIONAL>'||myp_cob_info_rec.TC_NACIONAL||'</TC_NACIONAL>'; 
- lc_info := lc_info||'<TC_REGIONAL>'||myp_cob_info_rec.TC_REGIONAL||'</TC_REGIONAL>'; 
- lc_info := lc_info||'<TC_LOCAL>'||myp_cob_info_rec.TC_LOCAL||'</TC_LOCAL>'; 
+ dbms_lob.append(lc_info,'<TC_NACIONAL>'||myp_cob_info_rec.TC_NACIONAL||'</TC_NACIONAL>'); 
+ dbms_lob.append(lc_info,'<TC_REGIONAL>'||myp_cob_info_rec.TC_REGIONAL||'</TC_REGIONAL>'); 
+ dbms_lob.append(lc_info,'<TC_LOCAL>'||myp_cob_info_rec.TC_LOCAL||'</TC_LOCAL>'); 
 --  lc_info := lc_info||'<MENCIONAR_ESTADOS>'||'<![CDATA' || '['|| 'Hola<br/>Hola' || ']' || ']>'||'</MENCIONAR_ESTADOS>';
- lc_info := lc_info||'<MENCIONAR_ESTADOS>'||myp_cob_info_rec.MENCIONAR_ESTADOS||'</MENCIONAR_ESTADOS>';
- lc_info := lc_info||'<ENTREGA_LOCAL>'||trim(to_char(myp_cob_info_rec.ENTREGA_LOCAL,gs_currency_format))||'</ENTREGA_LOCAL>';
- lc_info := lc_info||'<ENTREGA_FORANEO>'||trim(to_char(myp_cob_info_rec.ENTREGA_FORANEO,gs_currency_format))||'</ENTREGA_FORANEO>';
- lc_info := lc_info||'<DR_LOCAL>'||trim(to_char(myp_cob_info_rec.DR_LOCAL,gs_currency_format))||'</DR_LOCAL>';
- lc_info := lc_info||'<DR_FORANEO>'||trim(to_char(myp_cob_info_rec.DR_FORANEO,gs_currency_format))||'</DR_FORANEO>';
- lc_info := lc_info||'<DI_LOCAL>'||trim(to_char(myp_cob_info_rec.DI_LOCAL,gs_currency_format))||'</DI_LOCAL>';
- lc_info := lc_info||'<DI_FORANEO>'||trim(to_char(myp_cob_info_rec.DI_FORANEO,gs_currency_format))||'</DI_FORANEO>'; 
- lc_info := lc_info||'<COBERTURA_COMENTARIOS>'||myp_cob_info_rec.comentarios||'</COBERTURA_COMENTARIOS>'; 
+ dbms_lob.append(lc_info,'<MENCIONAR_ESTADOS>'||myp_cob_info_rec.MENCIONAR_ESTADOS||'</MENCIONAR_ESTADOS>');
+ dbms_lob.append(lc_info,'<ENTREGA_LOCAL>'||trim(to_char(myp_cob_info_rec.ENTREGA_LOCAL,gs_currency_format))||'</ENTREGA_LOCAL>');
+ dbms_lob.append(lc_info,'<ENTREGA_FORANEO>'||trim(to_char(myp_cob_info_rec.ENTREGA_FORANEO,gs_currency_format))||'</ENTREGA_FORANEO>');
+ dbms_lob.append(lc_info,'<DR_LOCAL>'||trim(to_char(myp_cob_info_rec.DR_LOCAL,gs_currency_format))||'</DR_LOCAL>');
+ dbms_lob.append(lc_info,'<DR_FORANEO>'||trim(to_char(myp_cob_info_rec.DR_FORANEO,gs_currency_format))||'</DR_FORANEO>');
+ dbms_lob.append(lc_info,'<DI_LOCAL>'||trim(to_char(myp_cob_info_rec.DI_LOCAL,gs_currency_format))||'</DI_LOCAL>');
+ dbms_lob.append(lc_info,'<DI_FORANEO>'||trim(to_char(myp_cob_info_rec.DI_FORANEO,gs_currency_format))||'</DI_FORANEO>'); 
+ fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info));
+ dbms_lob.append(lc_info,'<COBERTURA_COMENTARIOS>');
+/** dbms_lob.append(lc_info,myp_cob_info_rec.comentarios_ilim); **/
+v_length_clob := dbms_lob.getlength(myp_cob_info_rec.comentarios_ilim);
+v_offset := 1;
+     while(v_offset<=v_length_clob) LOOP
+        v_char := dbms_lob.substr(myp_cob_info_rec.comentarios_ilim, 1, v_offset);
+        dbms_lob.append(lc_info,replace_char_esp(v_char));
+        v_offset := v_offset + 1;
+     END LOOP; 
+     
+ dbms_lob.append(lc_info,'</COBERTURA_COMENTARIOS>');
+ fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info));
  
  END LOOP;
  CLOSE get_myp_cob_info;
+
+ fnd_file.put_line(fnd_file.log,'040320211642');
  
  OPEN get_myp_dist_info(ln_myp_header_id);
  LOOP
  FETCH get_myp_dist_info INTO myp_dist_info_rec;
  EXIT WHEN get_myp_dist_info%NOTFOUND;
- lc_info := lc_info||'<DIGITALIZACION_ACUSES>'||myp_dist_info_rec.DIGITALIZACION_ACUSES||'</DIGITALIZACION_ACUSES>'; 
- lc_info := lc_info||'<CAPTURA_DEVOLUCIONES>'||myp_dist_info_rec.CAPTURA_DEVOLUCIONES||'</CAPTURA_DEVOLUCIONES>'; 
- lc_info := lc_info||'<REPORTE_GPS>'||myp_dist_info_rec.REPORTE_GPS||'</REPORTE_GPS>';
- lc_info := lc_info||'<REPORTE_RECEPCION>'||myp_dist_info_rec.REPORTE_RECEPCION||'</REPORTE_RECEPCION>'; 
- lc_info := lc_info||'<CAPTURA_ACUSES>'||myp_dist_info_rec.CAPTURA_ACUSES||'</CAPTURA_ACUSES>'; 
- lc_info := lc_info||'<SEGUIMIENTO_QUEJAS>'||myp_dist_info_rec.SEGUIMIENTO_QUEJAS||'</SEGUIMIENTO_QUEJAS>';
- lc_info := lc_info||'<PROPORCIONAMOS_INSUMOS>'||myp_dist_info_rec.PROPORCIONAMOS_INSUMOS||'</PROPORCIONAMOS_INSUMOS>';
- lc_info := lc_info||'<ETIQUETADO>'||myp_dist_info_rec.ETIQUETADO||'</ETIQUETADO>';
- lc_info := lc_info||'<ENSOBRETADO>'||myp_dist_info_rec.ENSOBRETADO||'</ENSOBRETADO>';
- lc_info := lc_info||'<GENERACION_ACUSE>'||myp_dist_info_rec.GENERACION_ACUSE||'</GENERACION_ACUSE>';
- lc_info := lc_info||'<DIAS_OPERACION_LOCAL>'||myp_dist_info_rec.DIAS_OPERACION_LOCAL||'</DIAS_OPERACION_LOCAL>';
- lc_info := lc_info||'<DIAS_OPERACION_FORANEO>'||myp_dist_info_rec.DIAS_OPERACION_FORANEO||'</DIAS_OPERACION_FORANEO>';
- lc_info := lc_info||'<CIERRE_ELECTRONICO>'||myp_dist_info_rec.CIERRE_ELECTRONICO||'</CIERRE_ELECTRONICO>';
- lc_info := lc_info||'<ENVIO_PIEZAS_FISICAS>'||myp_dist_info_rec.ENVIO_PIEZAS_FISICAS||'</ENVIO_PIEZAS_FISICAS>'; 
- lc_info := lc_info||'<COMENTARIOS_DISTRIBUCION>'||replace_char_esp(myp_dist_info_rec.COMENTARIOS_DISTRIBUCION)||'</COMENTARIOS_DISTRIBUCION>'; 
+ dbms_lob.append(lc_info,'<DIGITALIZACION_ACUSES>'||myp_dist_info_rec.DIGITALIZACION_ACUSES||'</DIGITALIZACION_ACUSES>'); 
+ dbms_lob.append(lc_info,'<CAPTURA_DEVOLUCIONES>'||myp_dist_info_rec.CAPTURA_DEVOLUCIONES||'</CAPTURA_DEVOLUCIONES>'); 
+ dbms_lob.append(lc_info,'<REPORTE_GPS>'||myp_dist_info_rec.REPORTE_GPS||'</REPORTE_GPS>');
+ dbms_lob.append(lc_info,'<REPORTE_RECEPCION>'||myp_dist_info_rec.REPORTE_RECEPCION||'</REPORTE_RECEPCION>'); 
+ dbms_lob.append(lc_info,'<CAPTURA_ACUSES>'||myp_dist_info_rec.CAPTURA_ACUSES||'</CAPTURA_ACUSES>'); 
+ dbms_lob.append(lc_info,'<SEGUIMIENTO_QUEJAS>'||myp_dist_info_rec.SEGUIMIENTO_QUEJAS||'</SEGUIMIENTO_QUEJAS>');
+ dbms_lob.append(lc_info,'<PROPORCIONAMOS_INSUMOS>'||myp_dist_info_rec.PROPORCIONAMOS_INSUMOS||'</PROPORCIONAMOS_INSUMOS>');
+ dbms_lob.append(lc_info,'<ETIQUETADO>'||myp_dist_info_rec.ETIQUETADO||'</ETIQUETADO>');
+ dbms_lob.append(lc_info,'<ENSOBRETADO>'||myp_dist_info_rec.ENSOBRETADO||'</ENSOBRETADO>');
+ dbms_lob.append(lc_info,'<GENERACION_ACUSE>'||myp_dist_info_rec.GENERACION_ACUSE||'</GENERACION_ACUSE>');
+ dbms_lob.append(lc_info,'<DIAS_OPERACION_LOCAL>'||myp_dist_info_rec.DIAS_OPERACION_LOCAL||'</DIAS_OPERACION_LOCAL>');
+ dbms_lob.append(lc_info,'<DIAS_OPERACION_FORANEO>'||myp_dist_info_rec.DIAS_OPERACION_FORANEO||'</DIAS_OPERACION_FORANEO>');
+ dbms_lob.append(lc_info,'<CIERRE_ELECTRONICO>'||myp_dist_info_rec.CIERRE_ELECTRONICO||'</CIERRE_ELECTRONICO>');
+ dbms_lob.append(lc_info,'<ENVIO_PIEZAS_FISICAS>'||myp_dist_info_rec.ENVIO_PIEZAS_FISICAS||'</ENVIO_PIEZAS_FISICAS>'); 
+ dbms_lob.append(lc_info,'<COMENTARIOS_DISTRIBUCION>'||replace_char_esp(myp_dist_info_rec.COMENTARIOS_DISTRIBUCION)||'</COMENTARIOS_DISTRIBUCION>'); 
  
  END LOOP;
  CLOSE get_myp_dist_info;
+
+ fnd_file.put_line(fnd_file.log,'040320211643');
  
  OPEN get_myp_proc_info(ln_myp_header_id);
  LOOP
  FETCH get_myp_proc_info INTO myp_proc_info_rec;
  EXIT WHEN get_myp_proc_info%NOTFOUND;
  ln_proc_count :=get_myp_proc_info%ROWCOUNT;
- lc_info := lc_info||'<NOMBRE_PROCESO'||ln_proc_count||'>'||myp_proc_info_rec.PROSESO||'</NOMBRE_PROCESO'||ln_proc_count||'>';
- lc_info := lc_info||'<SELECCIONAR'||ln_proc_count||'>'||myp_proc_info_rec.SELECCIONAR||'</SELECCIONAR'||ln_proc_count||'>';
- lc_info := lc_info||'<PRECIO'||ln_proc_count||'>'||trim(to_char(myp_proc_info_rec.PRECIO,gs_currency_format))||'</PRECIO'||ln_proc_count||'>';
+ dbms_lob.append(lc_info,'<NOMBRE_PROCESO'||ln_proc_count||'>'||myp_proc_info_rec.PROSESO||'</NOMBRE_PROCESO'||ln_proc_count||'>');
+ dbms_lob.append(lc_info,'<SELECCIONAR'||ln_proc_count||'>'||myp_proc_info_rec.SELECCIONAR||'</SELECCIONAR'||ln_proc_count||'>');
+ dbms_lob.append(lc_info,'<PRECIO'||ln_proc_count||'>'||trim(to_char(myp_proc_info_rec.PRECIO,gs_currency_format))||'</PRECIO'||ln_proc_count||'>');
  
  ln_proc_precio_sub := nvl(ln_proc_precio_sub,0) + nvl(myp_proc_info_rec.PRECIO,0);
  END LOOP;
- lc_info := lc_info||'<SUB_PRECIO>'||trim(to_char(ln_proc_precio_sub,gs_currency_format))||'</SUB_PRECIO>';
+ dbms_lob.append(lc_info,'<SUB_PRECIO>'||trim(to_char(ln_proc_precio_sub,gs_currency_format))||'</SUB_PRECIO>');
  CLOSE get_myp_proc_info;
  
  
@@ -804,22 +842,36 @@ begin
  FETCH get_myp_oproc_info INTO myp_oproc_info_rec;
  EXIT WHEN get_myp_oproc_info%NOTFOUND;
  ln_oproc_count :=get_myp_oproc_info%ROWCOUNT;
- lc_info := lc_info||'<O_NOMBRE_PROCESO'||ln_oproc_count||'>'||myp_oproc_info_rec.OTROS_PROCESOS||'</O_NOMBRE_PROCESO'||ln_oproc_count||'>';
- lc_info := lc_info||'<O_SELECCIONAR'||ln_oproc_count||'>'||myp_oproc_info_rec.SELECCIONAR||'</O_SELECCIONAR'||ln_oproc_count||'>';
- lc_info := lc_info||'<O_PRECIO'||ln_oproc_count||'>'||trim(to_char(myp_oproc_info_rec.PRECIO,gs_currency_format))||'</O_PRECIO'||ln_oproc_count||'>';
+ dbms_lob.append(lc_info,'<O_NOMBRE_PROCESO'||ln_oproc_count||'>'||myp_oproc_info_rec.OTROS_PROCESOS||'</O_NOMBRE_PROCESO'||ln_oproc_count||'>');
+ dbms_lob.append(lc_info,'<O_SELECCIONAR'||ln_oproc_count||'>'||myp_oproc_info_rec.SELECCIONAR||'</O_SELECCIONAR'||ln_oproc_count||'>');
+ dbms_lob.append(lc_info,'<O_PRECIO'||ln_oproc_count||'>'||trim(to_char(myp_oproc_info_rec.PRECIO,gs_currency_format))||'</O_PRECIO'||ln_oproc_count||'>');
 
  ln_oproc_precio_sub := nvl(ln_oproc_precio_sub,0) + nvl(myp_oproc_info_rec.PRECIO,0);
 
  END LOOP;
- lc_info := lc_info||'<O_SUB_PRECIO>'||trim(to_char(ln_oproc_precio_sub,gs_currency_format))||'</O_SUB_PRECIO>';
+ dbms_lob.append(lc_info,'<O_SUB_PRECIO>'||trim(to_char(ln_oproc_precio_sub,gs_currency_format))||'</O_SUB_PRECIO>');
 
  CLOSE get_myp_oproc_info;
+ 
+ fnd_file.put_line(fnd_file.log,'040320211628');
  
  OPEN get_myp_instr_info(ln_myp_header_id);
  LOOP
  FETCH get_myp_instr_info INTO myp_instr_info_rec;
  EXIT WHEN get_myp_instr_info%NOTFOUND;
- lc_info := lc_info||'<COMENTARIOS_INSTRUCC>'||myp_instr_info_rec.COMENTARIOS_INSTRUCC||'</COMENTARIOS_INSTRUCC>';
+ fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info));
+ dbms_lob.append(lc_info,'<COMENTARIOS_INSTRUCC>');
+ /** dbms_lob.append(lc_info,myp_instr_info_rec.COMENTARIOS_INSTRUCC_ILIM); **/
+ v_length_clob := dbms_lob.getlength(myp_instr_info_rec.COMENTARIOS_INSTRUCC_ILIM);
+v_offset := 1;
+     while(v_offset<=v_length_clob) LOOP
+        v_char := dbms_lob.substr(myp_instr_info_rec.COMENTARIOS_INSTRUCC_ILIM, 1, v_offset);
+        dbms_lob.append(lc_info,replace_char_esp(v_char));
+        v_offset := v_offset + 1;
+     END LOOP; 
+
+ dbms_lob.append(lc_info,'</COMENTARIOS_INSTRUCC>');
+ fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info));
  END LOOP;
  CLOSE get_myp_instr_info;
  
@@ -828,12 +880,12 @@ begin
            LOOP
               FETCH getRNInfo INTO RNInfo_rec;
               EXIT WHEN getRNInfo%NOTFOUND;
-              lc_info := lc_info||'<G_REGNEG>';  
-              lc_info := lc_info||'<RN_CONCEPTO1>'||RNInfo_rec.RN_CONCEPTO1||'</RN_CONCEPTO1>';  
-              lc_info := lc_info||'<RN_CONCEPTO2>'||RNInfo_rec.RN_CONCEPTO2||'</RN_CONCEPTO2>';  
+              dbms_lob.append(lc_info,'<G_REGNEG>');  
+              dbms_lob.append(lc_info,'<RN_CONCEPTO1>'||RNInfo_rec.RN_CONCEPTO1||'</RN_CONCEPTO1>');  
+              dbms_lob.append(lc_info,'<RN_CONCEPTO2>'||RNInfo_rec.RN_CONCEPTO2||'</RN_CONCEPTO2>');  
               ls_regneg_precio :=trim(to_char(RNInfo_rec.PRECIO,gs_currency_format));
-              lc_info := lc_info||'<RN_PRECIO>'||ls_regneg_precio||'</RN_PRECIO>';  
-              lc_info := lc_info||'</G_REGNEG>'||CHR(10);  
+              dbms_lob.append(lc_info,'<RN_PRECIO>'||ls_regneg_precio||'</RN_PRECIO>');  
+              dbms_lob.append(lc_info,'</G_REGNEG>'||CHR(10));  
            END LOOP;
            CLOSE getRNInfo;
            exception when others then 
@@ -844,9 +896,10 @@ begin
             
            end; 
  
- lc_info := lc_info||'</XXQP_PDFT_MYP>'; 
+dbms_lob.append(lc_info,'</XXQP_PDFT_MYP>'); 
  pco_info := lc_info;
  exception when others then 
+ fnd_file.put_line(fnd_file.log,'Excepcion Paquete APPS.xxqp_pdft_myp_pkg metodo get_info:'||sqlerrm||', '||sqlcode);
  pso_errmsg := 'Excepcion Paquete APPS.xxqp_pdft_myp_pkg metodo get_info:'||sqlerrm||', '||sqlcode;
  pso_errcod := 2; 
 end get_info; 
