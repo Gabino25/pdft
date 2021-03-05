@@ -2,6 +2,7 @@ package xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server;
 
 import oracle.apps.fnd.framework.server.OAViewRowImpl;
 
+import oracle.jbo.domain.ClobDomain;
 import oracle.jbo.domain.Date;
 import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
@@ -38,6 +39,7 @@ public class XxqpPdftMypCoberturaVORowImpl extends OAViewRowImpl {
     public static final int TCNACIONAL = 22;
     public static final int TCREGIONAL = 23;
     public static final int COMENTARIOS = 24;
+    public static final int COMENTARIOSILIM = 25;
 
     /**This is the default constructor (do not remove)
      */
@@ -358,6 +360,8 @@ public class XxqpPdftMypCoberturaVORowImpl extends OAViewRowImpl {
             return getTcRegional();
         case COMENTARIOS:
             return getComentarios();
+        case COMENTARIOSILIM:
+            return getComentariosIlim();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -443,6 +447,9 @@ public class XxqpPdftMypCoberturaVORowImpl extends OAViewRowImpl {
         case COMENTARIOS:
             setComentarios((String)value);
             return;
+        case COMENTARIOSILIM:
+            setComentariosIlim((ClobDomain)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -495,5 +502,17 @@ public class XxqpPdftMypCoberturaVORowImpl extends OAViewRowImpl {
      */
     public void setComentarios(String value) {
         setAttributeInternal(COMENTARIOS, value);
+    }
+
+    /**Gets the attribute value for COMENTARIOS_ILIM using the alias name ComentariosIlim
+     */
+    public ClobDomain getComentariosIlim() {
+        return (ClobDomain) getAttributeInternal(COMENTARIOSILIM);
+    }
+
+    /**Sets <code>value</code> as attribute value for COMENTARIOS_ILIM using the alias name ComentariosIlim
+     */
+    public void setComentariosIlim(ClobDomain value) {
+        setAttributeInternal(COMENTARIOSILIM, value);
     }
 }

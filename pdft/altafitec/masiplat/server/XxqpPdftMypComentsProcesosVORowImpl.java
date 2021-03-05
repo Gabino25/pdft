@@ -2,6 +2,7 @@ package xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server;
 
 import oracle.apps.fnd.framework.server.OAViewRowImpl;
 
+import oracle.jbo.domain.ClobDomain;
 import oracle.jbo.domain.Date;
 import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
@@ -32,6 +33,7 @@ public class XxqpPdftMypComentsProcesosVORowImpl extends OAViewRowImpl {
     public static final int ATTRIBUTE3 = 16;
     public static final int ATTRIBUTE4 = 17;
     public static final int ATTRIBUTE5 = 18;
+    public static final int COMENTARIOSINSTRUCCILIM = 19;
 
     /**This is the default constructor (do not remove)
      */
@@ -315,6 +317,8 @@ public class XxqpPdftMypComentsProcesosVORowImpl extends OAViewRowImpl {
             return getAttribute4();
         case ATTRIBUTE5:
             return getAttribute5();
+        case COMENTARIOSINSTRUCCILIM:
+            return getComentariosInstruccIlim();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -382,9 +386,24 @@ public class XxqpPdftMypComentsProcesosVORowImpl extends OAViewRowImpl {
         case ATTRIBUTE5:
             setAttribute5((String)value);
             return;
+        case COMENTARIOSINSTRUCCILIM:
+            setComentariosInstruccIlim((ClobDomain)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
         }
+    }
+
+    /**Gets the attribute value for the calculated attribute ComentariosInstruccIlim
+     */
+    public ClobDomain getComentariosInstruccIlim() {
+        return (ClobDomain) getAttributeInternal(COMENTARIOSINSTRUCCILIM);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute ComentariosInstruccIlim
+     */
+    public void setComentariosInstruccIlim(ClobDomain value) {
+        setAttributeInternal(COMENTARIOSINSTRUCCILIM, value);
     }
 }

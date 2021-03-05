@@ -351,6 +351,114 @@
          <Attr Name="_DisplaySize" Value="20" />
       </DesignTime>
    </Attribute>
+   <Attribute
+      Name="FileName1"
+      Precision="500"
+      ColumnName="FILE_NAME1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="500" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ContentType1"
+      Precision="500"
+      ColumnName="CONTENT_TYPE1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="500" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="File1"
+      IsQueriable="false"
+      ColumnName="FILE1"
+      Type="oracle.jbo.domain.BlobDomain"
+      ColumnType="BLOB"
+      SQLType="BLOB"
+      TableName="XXQP_PDFT_MYP_HEADER" >
+   </Attribute>
+   <Attribute
+      Name="FileName2"
+      Precision="500"
+      ColumnName="FILE_NAME2"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="500" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ContentType2"
+      Precision="500"
+      ColumnName="CONTENT_TYPE2"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="500" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="File2"
+      IsQueriable="false"
+      ColumnName="FILE2"
+      Type="oracle.jbo.domain.BlobDomain"
+      ColumnType="BLOB"
+      SQLType="BLOB"
+      TableName="XXQP_PDFT_MYP_HEADER" >
+   </Attribute>
+   <Attribute
+      Name="FileName3"
+      Precision="500"
+      ColumnName="FILE_NAME3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="500" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ContentType3"
+      Precision="500"
+      ColumnName="CONTENT_TYPE3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="500" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="File3"
+      IsQueriable="false"
+      ColumnName="FILE3"
+      Type="oracle.jbo.domain.BlobDomain"
+      ColumnType="BLOB"
+      SQLType="BLOB"
+      TableName="XXQP_PDFT_MYP_HEADER" >
+   </Attribute>
+   <Attribute
+      Name="ModifRealiz"
+      IsQueriable="false"
+      ColumnName="MODIF_REALIZ"
+      Type="oracle.jbo.domain.ClobDomain"
+      ColumnType="CLOB"
+      SQLType="CLOB"
+      TableName="XXQP_PDFT_MYP_HEADER" >
+   </Attribute>
    <AccessorAttribute
       Name="XxqpPdftMypGeneralEO"
       Association="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypGeneralFkAssoc"

@@ -7,6 +7,7 @@ import oracle.jbo.AttributeList;
 import oracle.jbo.Key;
 import oracle.jbo.RowIterator;
 import oracle.jbo.domain.BlobDomain;
+import oracle.jbo.domain.ClobDomain;
 import oracle.jbo.domain.Date;
 import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
@@ -45,11 +46,21 @@ public class XxqpPdftMypHeaderEOImpl extends OAEntityImpl {
     public static final int ATTRIBUTE5 = 25;
     public static final int EJECUTIVO = 26;
     public static final int ARTICULOORACLE = 27;
-    public static final int XXQPPDFTMYPGENERALEO = 28;
-    public static final int XXQPPDFTMYPCOBERTURAEO = 29;
-    public static final int XXQPPDFTMYPDISTRIBUCIONEO = 30;
-    public static final int XXQPPDFTMYPPROCESOSEO = 31;
-    public static final int XXQPPDFTMYPREGNEGEO = 32;
+    public static final int FILENAME1 = 28;
+    public static final int CONTENTTYPE1 = 29;
+    public static final int FILE1 = 30;
+    public static final int FILENAME2 = 31;
+    public static final int CONTENTTYPE2 = 32;
+    public static final int FILE2 = 33;
+    public static final int FILENAME3 = 34;
+    public static final int CONTENTTYPE3 = 35;
+    public static final int FILE3 = 36;
+    public static final int MODIFREALIZ = 37;
+    public static final int XXQPPDFTMYPGENERALEO = 38;
+    public static final int XXQPPDFTMYPCOBERTURAEO = 39;
+    public static final int XXQPPDFTMYPDISTRIBUCIONEO = 40;
+    public static final int XXQPPDFTMYPPROCESOSEO = 41;
+    public static final int XXQPPDFTMYPREGNEGEO = 42;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -461,6 +472,26 @@ public class XxqpPdftMypHeaderEOImpl extends OAEntityImpl {
             return getEjecutivo();
         case ARTICULOORACLE:
             return getArticuloOracle();
+        case FILENAME1:
+            return getFileName1();
+        case CONTENTTYPE1:
+            return getContentType1();
+        case FILE1:
+            return getFile1();
+        case FILENAME2:
+            return getFileName2();
+        case CONTENTTYPE2:
+            return getContentType2();
+        case FILE2:
+            return getFile2();
+        case FILENAME3:
+            return getFileName3();
+        case CONTENTTYPE3:
+            return getContentType3();
+        case FILE3:
+            return getFile3();
+        case MODIFREALIZ:
+            return getModifRealiz();
         case XXQPPDFTMYPCOBERTURAEO:
             return getXxqpPdftMypCoberturaEO();
         case XXQPPDFTMYPDISTRIBUCIONEO:
@@ -565,6 +596,36 @@ public class XxqpPdftMypHeaderEOImpl extends OAEntityImpl {
         case ARTICULOORACLE:
             setArticuloOracle((String)value);
             return;
+        case FILENAME1:
+            setFileName1((String)value);
+            return;
+        case CONTENTTYPE1:
+            setContentType1((String)value);
+            return;
+        case FILE1:
+            setFile1((BlobDomain)value);
+            return;
+        case FILENAME2:
+            setFileName2((String)value);
+            return;
+        case CONTENTTYPE2:
+            setContentType2((String)value);
+            return;
+        case FILE2:
+            setFile2((BlobDomain)value);
+            return;
+        case FILENAME3:
+            setFileName3((String)value);
+            return;
+        case CONTENTTYPE3:
+            setContentType3((String)value);
+            return;
+        case FILE3:
+            setFile3((BlobDomain)value);
+            return;
+        case MODIFREALIZ:
+            setModifRealiz((ClobDomain)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -626,6 +687,126 @@ public class XxqpPdftMypHeaderEOImpl extends OAEntityImpl {
      */
     public void setArticuloOracle(String value) {
         setAttributeInternal(ARTICULOORACLE, value);
+    }
+
+    /**Gets the attribute value for FileName1, using the alias name FileName1
+     */
+    public String getFileName1() {
+        return (String)getAttributeInternal(FILENAME1);
+    }
+
+    /**Sets <code>value</code> as the attribute value for FileName1
+     */
+    public void setFileName1(String value) {
+        setAttributeInternal(FILENAME1, value);
+    }
+
+    /**Gets the attribute value for ContentType1, using the alias name ContentType1
+     */
+    public String getContentType1() {
+        return (String)getAttributeInternal(CONTENTTYPE1);
+    }
+
+    /**Sets <code>value</code> as the attribute value for ContentType1
+     */
+    public void setContentType1(String value) {
+        setAttributeInternal(CONTENTTYPE1, value);
+    }
+
+    /**Gets the attribute value for File1, using the alias name File1
+     */
+    public BlobDomain getFile1() {
+        return (BlobDomain)getAttributeInternal(FILE1);
+    }
+
+    /**Sets <code>value</code> as the attribute value for File1
+     */
+    public void setFile1(BlobDomain value) {
+        setAttributeInternal(FILE1, value);
+    }
+
+    /**Gets the attribute value for FileName2, using the alias name FileName2
+     */
+    public String getFileName2() {
+        return (String)getAttributeInternal(FILENAME2);
+    }
+
+    /**Sets <code>value</code> as the attribute value for FileName2
+     */
+    public void setFileName2(String value) {
+        setAttributeInternal(FILENAME2, value);
+    }
+
+    /**Gets the attribute value for ContentType2, using the alias name ContentType2
+     */
+    public String getContentType2() {
+        return (String)getAttributeInternal(CONTENTTYPE2);
+    }
+
+    /**Sets <code>value</code> as the attribute value for ContentType2
+     */
+    public void setContentType2(String value) {
+        setAttributeInternal(CONTENTTYPE2, value);
+    }
+
+    /**Gets the attribute value for File2, using the alias name File2
+     */
+    public BlobDomain getFile2() {
+        return (BlobDomain)getAttributeInternal(FILE2);
+    }
+
+    /**Sets <code>value</code> as the attribute value for File2
+     */
+    public void setFile2(BlobDomain value) {
+        setAttributeInternal(FILE2, value);
+    }
+
+    /**Gets the attribute value for FileName3, using the alias name FileName3
+     */
+    public String getFileName3() {
+        return (String)getAttributeInternal(FILENAME3);
+    }
+
+    /**Sets <code>value</code> as the attribute value for FileName3
+     */
+    public void setFileName3(String value) {
+        setAttributeInternal(FILENAME3, value);
+    }
+
+    /**Gets the attribute value for ContentType3, using the alias name ContentType3
+     */
+    public String getContentType3() {
+        return (String)getAttributeInternal(CONTENTTYPE3);
+    }
+
+    /**Sets <code>value</code> as the attribute value for ContentType3
+     */
+    public void setContentType3(String value) {
+        setAttributeInternal(CONTENTTYPE3, value);
+    }
+
+    /**Gets the attribute value for File3, using the alias name File3
+     */
+    public BlobDomain getFile3() {
+        return (BlobDomain)getAttributeInternal(FILE3);
+    }
+
+    /**Sets <code>value</code> as the attribute value for File3
+     */
+    public void setFile3(BlobDomain value) {
+        setAttributeInternal(FILE3, value);
+    }
+
+    /**Gets the attribute value for ModifRealiz, using the alias name ModifRealiz
+     */
+    public ClobDomain getModifRealiz() {
+        return (ClobDomain)getAttributeInternal(MODIFREALIZ);
+    }
+
+    /**Sets <code>value</code> as the attribute value for ModifRealiz
+     */
+    public void setModifRealiz(ClobDomain value) {
+        setAttributeInternal(MODIFREALIZ, value);
     }
 
     /**Creates a Key object based on given key constituents

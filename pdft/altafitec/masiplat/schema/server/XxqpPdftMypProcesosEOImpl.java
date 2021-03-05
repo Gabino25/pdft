@@ -4,6 +4,7 @@ import oracle.apps.fnd.framework.server.OAEntityDefImpl;
 import oracle.apps.fnd.framework.server.OAEntityImpl;
 
 import oracle.jbo.Key;
+import oracle.jbo.domain.ClobDomain;
 import oracle.jbo.domain.Date;
 import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
@@ -33,7 +34,8 @@ public class XxqpPdftMypProcesosEOImpl extends OAEntityImpl {
     public static final int ATTRIBUTE3 = 16;
     public static final int ATTRIBUTE4 = 17;
     public static final int ATTRIBUTE5 = 18;
-    public static final int XXQPPDFTMYPHEADEREO = 19;
+    public static final int COMENTARIOSINSTRUCCILIM = 19;
+    public static final int XXQPPDFTMYPHEADEREO = 20;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -325,6 +327,8 @@ public class XxqpPdftMypProcesosEOImpl extends OAEntityImpl {
             return getAttribute4();
         case ATTRIBUTE5:
             return getAttribute5();
+        case COMENTARIOSINSTRUCCILIM:
+            return getComentariosInstruccIlim();
         case XXQPPDFTMYPHEADEREO:
             return getXxqpPdftMypHeaderEO();
         default:
@@ -394,6 +398,9 @@ public class XxqpPdftMypProcesosEOImpl extends OAEntityImpl {
         case ATTRIBUTE5:
             setAttribute5((String)value);
             return;
+        case COMENTARIOSINSTRUCCILIM:
+            setComentariosInstruccIlim((ClobDomain)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -410,6 +417,18 @@ public class XxqpPdftMypProcesosEOImpl extends OAEntityImpl {
      */
     public void setXxqpPdftMypHeaderEO(XxqpPdftMypHeaderEOImpl value) {
         setAttributeInternal(XXQPPDFTMYPHEADEREO, value);
+    }
+
+    /**Gets the attribute value for ComentariosInstruccIlim, using the alias name ComentariosInstruccIlim
+     */
+    public ClobDomain getComentariosInstruccIlim() {
+        return (ClobDomain)getAttributeInternal(COMENTARIOSINSTRUCCILIM);
+    }
+
+    /**Sets <code>value</code> as the attribute value for ComentariosInstruccIlim
+     */
+    public void setComentariosInstruccIlim(ClobDomain value) {
+        setAttributeInternal(COMENTARIOSINSTRUCCILIM, value);
     }
 
     /**Creates a Key object based on given key constituents

@@ -27,7 +27,8 @@
        XxqpPdftMypCoberturaEO.TC_LOCAL, 
        XxqpPdftMypCoberturaEO.TC_NACIONAL, 
        XxqpPdftMypCoberturaEO.TC_REGIONAL, 
-       XxqpPdftMypCoberturaEO.COMENTARIOS"
+       XxqpPdftMypCoberturaEO.COMENTARIOS, 
+       XxqpPdftMypCoberturaEO.COMENTARIOS_ILIM"
    FromList="XXQP_PDFT_MYP_COBERTURA XxqpPdftMypCoberturaEO"
    BindingStyle="OracleName"
    CustomQuery="false"
@@ -199,5 +200,12 @@
       EntityAttrName="Comentarios"
       EntityUsage="XxqpPdftMypCoberturaEO"
       AliasName="COMENTARIOS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ComentariosIlim"
+      IsQueriable="false"
+      EntityAttrName="ComentariosIlim"
+      EntityUsage="XxqpPdftMypCoberturaEO"
+      AliasName="COMENTARIOS_ILIM" >
    </ViewAttribute>
 </ViewObject>

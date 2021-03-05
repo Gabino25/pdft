@@ -10,36 +10,41 @@
    UseGlueCode="false" >
    <SQLQuery><![CDATA[
 select 1                  proceso_id
+         ,'Etiquetado' Proceso
+         ,'N'                seleccionar
+      from dual
+   union 
+select 2                  proceso_id
          ,'Ensobretado' Proceso
          ,'N'                seleccionar
       from dual
    union 
-    select 2                  proceso_id
+    select 3                  proceso_id
          ,'Embolsado' Proceso
          ,'N'                seleccionar
       from dual
    union 
-    select 3                  proceso_id
+    select 4                  proceso_id
          ,'Sellado/Cerrado' Proceso
          ,'N'                seleccionar
       from dual   
        union 
-    select 4                  proceso_id
+    select 5                  proceso_id
          ,'Insercion' Proceso
          ,'N'                seleccionar
       from dual  
       union
-       select 5                  proceso_id
+       select 6                  proceso_id
          ,'Clasificacion' Proceso
          ,'N'                seleccionar
       from dual   
        union
-       select 6                  proceso_id
+       select 7                  proceso_id
          ,'Pegado Elemento' Proceso
          ,'N'                seleccionar
       from dual
      union
-      select 7                  proceso_id
+      select 8                  proceso_id
          ,'Match' Proceso
          ,'N'                seleccionar
       from dual

@@ -245,7 +245,17 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                            String pStrCicloFacturacionValue, 
                            String pStrFechaInicioOperacionValue,
                            String pStrPartyID,
-                           String pStrEjecutivoValue ) {
+                           String pStrEjecutivoValue,
+                           String pStrExamineFileName1, 
+                           String pStrExamineContentType1, 
+                           BlobDomain pExamineByteStream1, 
+                           String pStrExamineFileName2, 
+                           String pStrExamineContentType2, 
+                           BlobDomain pExamineByteStream2, 
+                           String pStrExamineFileName3, 
+                           String pStrExamineContentType3, 
+                           BlobDomain pExamineByteStream3 
+                           ) {
      OADBTransaction oADBTransaction =this.getOADBTransaction();
      oracle.jbo.domain.Number numMasiYPlatHeaderId = oADBTransaction.getSequenceValue("XXQP_PDFT_MYP_HEADER_S");
      oracle.jbo.domain.Number numNumeroFt = oADBTransaction.getSequenceValue("XXQP_PDFT_NUMERO_FT_S");
@@ -281,6 +291,19 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
          xxqpPdftMypHeaderVORowImpl.setFechaInicialOperacion(new oracle.jbo.domain.Date(pStrFechaInicioOperacionValue));
          }
          xxqpPdftMypHeaderVORowImpl.setEjecutivo(pStrEjecutivoValue);
+         
+         xxqpPdftMypHeaderVORowImpl.setFileName1(pStrExamineFileName1);
+         xxqpPdftMypHeaderVORowImpl.setContentType1(pStrExamineContentType1);
+         xxqpPdftMypHeaderVORowImpl.setFile1(pExamineByteStream1);
+         
+         xxqpPdftMypHeaderVORowImpl.setFileName2(pStrExamineFileName2);
+         xxqpPdftMypHeaderVORowImpl.setContentType2(pStrExamineContentType2);
+         xxqpPdftMypHeaderVORowImpl.setFile2(pExamineByteStream2);
+         
+         xxqpPdftMypHeaderVORowImpl.setFileName3(pStrExamineFileName3);
+         xxqpPdftMypHeaderVORowImpl.setContentType3(pStrExamineContentType3);
+         xxqpPdftMypHeaderVORowImpl.setFile3(pExamineByteStream3);
+         
          xxqpPdftMypHeaderVOImpl.insertRow(xxqpPdftMypHeaderVORowImpl);
          
          oADBTransaction.commit();
@@ -450,7 +473,8 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                               String pStrEntregaForaneoValue, 
                               String pStrDRForaneoValue, 
                               String pStrDIForaneoValue, 
-                              String pStrComentarios) {
+                              String pStrComentarios,
+                              String pStrComentariosIlim) {
      OADBTransaction oADBTransaction =this.getOADBTransaction();   
      oracle.jbo.domain.Number numMasiYPlatHeaderId = null; 
      oracle.jbo.domain.Number numEntregaLocal = null; 
@@ -504,6 +528,12 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
          xxqpPdftMypCoberturaVORowImpl.setDrForaneo(numDRForaneo);
          xxqpPdftMypCoberturaVORowImpl.setDiForaneo(numDIForaneo);
          xxqpPdftMypCoberturaVORowImpl.setComentarios(pStrComentarios);
+         if(null!=pStrComentariosIlim&&!"".equals(pStrComentariosIlim)){
+             xxqpPdftMypCoberturaVORowImpl.setComentariosIlim(new oracle.jbo.domain.ClobDomain(pStrComentariosIlim));
+         }else{
+             xxqpPdftMypCoberturaVORowImpl.setComentariosIlim(null);
+             
+         }
          
          xxqpPdftMypCoberturaVOImpl.insertRow(xxqpPdftMypCoberturaVORowImpl);
          
@@ -630,7 +660,8 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
 
 
     public void fillProcesosCorreoDirecto(StringBuilder pStrMasiYPlatHeaderId, 
-                                          String pStrComentariosOInstrucciones) {
+                                          String pStrComentariosOInstrucciones,
+                                          String pStrComentariosOInstruccionesIlim) {
     oracle.jbo.domain.Number numMasiYPlatHeaderId=null;
     try {
         numMasiYPlatHeaderId = new oracle.jbo.domain.Number(pStrMasiYPlatHeaderId.toString());
@@ -709,8 +740,15 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
           xxqpPdftMypComentsProcesosVORowImpl.setMypHeaderId(numMasiYPlatHeaderId);
           xxqpPdftMypComentsProcesosVORowImpl.setRegion("COMENTARIOS");
           xxqpPdftMypComentsProcesosVORowImpl.setComentariosInstrucc(pStrComentariosOInstrucciones);
-         xxqpPdftMypComentsProcesosVOImpl.insertRow(xxqpPdftMypComentsProcesosVORowImpl);
+          if(null!=pStrComentariosOInstruccionesIlim&&!"".equals(pStrComentariosOInstruccionesIlim)){
+              xxqpPdftMypComentsProcesosVORowImpl.setComentariosInstruccIlim(new oracle.jbo.domain.ClobDomain(pStrComentariosOInstruccionesIlim));
+          }else{
+           xxqpPdftMypComentsProcesosVORowImpl.setComentariosInstruccIlim(null);
+          }
+          xxqpPdftMypComentsProcesosVOImpl.insertRow(xxqpPdftMypComentsProcesosVORowImpl);
           oADBTransaction.commit();
+          
+        
       } /** END if(null!=xxqpPdftMypComentsProcesosVOImpl){ **/
     
     }
@@ -876,6 +914,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                                ,OAPageContext pageContext
                                ,String pNombreDelCliente
                                ,String pArticuloOracle
+                               ,XxqpPdftMypHeaderVORowImpl pXxqpPdftMypHeaderVORowImpl
                                ) {
         System.out.println("Entra enviaCorreos");
         String retval = null;
@@ -971,7 +1010,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
         map.put("strCrearFlag",strCrearFlag);
         map.put("strNumeroFt",strNumeroFt); 
         if(count>0){
-        testDeliveryManager(pInputStream,map);
+        testDeliveryManager(pInputStream,map,pXxqpPdftMypHeaderVORowImpl);
         }
         
          return retval; 
@@ -979,7 +1018,8 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
     }
     
     private void testDeliveryManager(InputStream inputStream, 
-                                     Map<String, String> map) {
+                                     Map<String, String> map,
+                                     XxqpPdftMypHeaderVORowImpl pXxqpPdftMypHeaderVORowImpl) {
         System.out.println("Entra testDeliveryManager.");
         String strCorreo = map.get("Correo");
         String strSubject = map.get("strSubject"); 
@@ -1059,6 +1099,51 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                            messageBodyPart.setFileName("CambioFichaTecnicaMyP"+strNumeroFt+".pdf");
                        }
                        multipart.addBodyPart(messageBodyPart);
+                  // Part three is attachment
+                   if(null!=pXxqpPdftMypHeaderVORowImpl.getContratoFileName()&&!"".equals(pXxqpPdftMypHeaderVORowImpl.getContratoFileName())){
+                        try {
+                            addAttachment(multipart
+                                            ,pXxqpPdftMypHeaderVORowImpl.getContratoFile().getInputStream()
+                                            ,pXxqpPdftMypHeaderVORowImpl.getContratoFileName()
+                                            ,pXxqpPdftMypHeaderVORowImpl.getContratoContentType()
+                                           );
+                        } catch (IOException e) {
+                           System.out.println("Exception File1:"+e.getMessage());
+                        }
+                   }
+                   if(null!=pXxqpPdftMypHeaderVORowImpl.getFileName1()&&!"".equals(pXxqpPdftMypHeaderVORowImpl.getFileName1())){
+                        try {
+                            addAttachment(multipart
+                                            ,pXxqpPdftMypHeaderVORowImpl.getFile1().getInputStream()
+                                            ,pXxqpPdftMypHeaderVORowImpl.getFileName1()
+                                            ,pXxqpPdftMypHeaderVORowImpl.getContentType1()
+                                           );
+                        } catch (IOException e) {
+                           System.out.println("Exception File1:"+e.getMessage());
+                        }
+                  }
+              if(null!=pXxqpPdftMypHeaderVORowImpl.getFileName2()&&!"".equals(pXxqpPdftMypHeaderVORowImpl.getFileName2())){
+                   try {
+                       addAttachment(multipart
+                                       ,pXxqpPdftMypHeaderVORowImpl.getFile2().getInputStream()
+                                       ,pXxqpPdftMypHeaderVORowImpl.getFileName2()
+                                       ,pXxqpPdftMypHeaderVORowImpl.getContentType2()
+                                      );
+                   } catch (IOException e) {
+                      System.out.println("Exception File2:"+e.getMessage());
+                   }
+              }
+              if(null!=pXxqpPdftMypHeaderVORowImpl.getFileName3()&&!"".equals(pXxqpPdftMypHeaderVORowImpl.getFileName3())){
+                   try {
+                       addAttachment(multipart
+                                       ,pXxqpPdftMypHeaderVORowImpl.getFile3().getInputStream()
+                                       ,pXxqpPdftMypHeaderVORowImpl.getFileName3()
+                                       ,pXxqpPdftMypHeaderVORowImpl.getContentType3()
+                                      );
+                   } catch (IOException e) {
+                      System.out.println("Exception File3:"+e.getMessage());
+                   }
+              }
 
                        // Send the complete message parts
                        message.setContent(multipart);
@@ -1316,6 +1401,19 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
         closeResultSet(resultSet);
         closePreparedStatement(prepStmt);
         return retval; 
+    }
+    
+    private static void addAttachment(Multipart pMultipart
+                                     ,InputStream pInputStream
+                                     ,String pFilename
+                                     ,String pContentType) throws IOException, 
+                                                              MessagingException {
+        
+        DataSource source = new ByteArrayDataSource(pInputStream,pContentType);
+        BodyPart messageBodyPart = new MimeBodyPart();        
+        messageBodyPart.setDataHandler(new DataHandler(source));
+        messageBodyPart.setFileName(pFilename);
+        pMultipart.addBodyPart(messageBodyPart);
     }
     
     

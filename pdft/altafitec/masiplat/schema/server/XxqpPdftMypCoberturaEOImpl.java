@@ -4,6 +4,7 @@ import oracle.apps.fnd.framework.server.OAEntityDefImpl;
 import oracle.apps.fnd.framework.server.OAEntityImpl;
 
 import oracle.jbo.Key;
+import oracle.jbo.domain.ClobDomain;
 import oracle.jbo.domain.Date;
 import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
@@ -39,7 +40,8 @@ public class XxqpPdftMypCoberturaEOImpl extends OAEntityImpl {
     public static final int TCNACIONAL = 22;
     public static final int TCREGIONAL = 23;
     public static final int COMENTARIOS = 24;
-    public static final int XXQPPDFTMYPHEADEREO = 25;
+    public static final int COMENTARIOSILIM = 25;
+    public static final int XXQPPDFTMYPHEADEREO = 26;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -368,6 +370,8 @@ public class XxqpPdftMypCoberturaEOImpl extends OAEntityImpl {
             return getTcRegional();
         case COMENTARIOS:
             return getComentarios();
+        case COMENTARIOSILIM:
+            return getComentariosIlim();
         case XXQPPDFTMYPHEADEREO:
             return getXxqpPdftMypHeaderEO();
         default:
@@ -455,6 +459,9 @@ public class XxqpPdftMypCoberturaEOImpl extends OAEntityImpl {
         case COMENTARIOS:
             setComentarios((String)value);
             return;
+        case COMENTARIOSILIM:
+            setComentariosIlim((ClobDomain)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -519,6 +526,18 @@ public class XxqpPdftMypCoberturaEOImpl extends OAEntityImpl {
      */
     public void setComentarios(String value) {
         setAttributeInternal(COMENTARIOS, value);
+    }
+
+    /**Gets the attribute value for ComentariosIlim, using the alias name ComentariosIlim
+     */
+    public ClobDomain getComentariosIlim() {
+        return (ClobDomain)getAttributeInternal(COMENTARIOSILIM);
+    }
+
+    /**Sets <code>value</code> as the attribute value for ComentariosIlim
+     */
+    public void setComentariosIlim(ClobDomain value) {
+        setAttributeInternal(COMENTARIOSILIM, value);
     }
 
     /**Creates a Key object based on given key constituents

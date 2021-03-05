@@ -76,6 +76,9 @@ public class MasivoYPlatinumCO extends OAControllerImpl
       
       OAPageLayoutBean PageLayoutRNBean = (OAPageLayoutBean)webBean.findChildRecursive("PageLayoutRN");
       OAMessageFileUploadBean ContratoExamineBean = (OAMessageFileUploadBean)webBean.findChildRecursive("ContratoExamine");
+      OAMessageFileUploadBean Examine1Bean = (OAMessageFileUploadBean)webBean.findChildRecursive("Examine1");
+      OAMessageFileUploadBean Examine2Bean = (OAMessageFileUploadBean)webBean.findChildRecursive("Examine2");
+      OAMessageFileUploadBean Examine3Bean = (OAMessageFileUploadBean)webBean.findChildRecursive("Examine3");
       OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
       OASubmitButtonBean ValidarBean = (OASubmitButtonBean)webBean.findChildRecursive("Validar");
       OAMessageChoiceBean  EjecutivoBean = (OAMessageChoiceBean)webBean.findChildRecursive("Ejecutivo");
@@ -146,6 +149,19 @@ public class MasivoYPlatinumCO extends OAControllerImpl
       if(null!=ContratoExamineBean){
           OADataBoundValueViewObject displayNameBoundValue =    new OADataBoundValueViewObject(ContratoExamineBean, "ContratoFileName"); 
           ContratoExamineBean.setAttributeValue(DOWNLOAD_FILE_NAME,displayNameBoundValue); 
+      }
+      
+      if(null!=Examine1Bean){
+          OADataBoundValueViewObject displayNameBoundValue =    new OADataBoundValueViewObject(Examine1Bean, "FileName1"); 
+          Examine1Bean.setAttributeValue(DOWNLOAD_FILE_NAME,displayNameBoundValue); 
+      }
+      if(null!=Examine2Bean){
+          OADataBoundValueViewObject displayNameBoundValue =    new OADataBoundValueViewObject(Examine1Bean, "FileName2"); 
+          Examine2Bean.setAttributeValue(DOWNLOAD_FILE_NAME,displayNameBoundValue); 
+      }
+      if(null!=Examine2Bean){
+          OADataBoundValueViewObject displayNameBoundValue =    new OADataBoundValueViewObject(Examine1Bean, "FileName3"); 
+          Examine3Bean.setAttributeValue(DOWNLOAD_FILE_NAME,displayNameBoundValue); 
       }
     
       
@@ -233,7 +249,7 @@ public class MasivoYPlatinumCO extends OAControllerImpl
             OAButtonBean grabarBean = (OAButtonBean)webBean.findChildRecursive("Grabar"); 
             if(null!=grabarBean){
                 grabarBean.setDisabled(false);
-                grabarBean.setOnClick("this.disabled=true;");
+                grabarBean.setOnClick("this.disabled=true;this.value='Trabajando...';");
             }
         }else{
             OAButtonBean grabarBean = (OAButtonBean)webBean.findChildRecursive("Grabar"); 
@@ -353,6 +369,15 @@ public class MasivoYPlatinumCO extends OAControllerImpl
     String strContratoExamineFileName = null; 
     String strContratoExamineContentType = null; 
     BlobDomain ContratoExamineByteStream = null;
+    String strExamineFileName1 = null; 
+    String strExamineContentType1 = null; 
+    BlobDomain ExamineByteStream1 = null;
+    String strExamineFileName2 = null; 
+    String strExamineContentType2 = null; 
+    BlobDomain ExamineByteStream2 = null;
+    String strExamineFileName3 = null; 
+    String strExamineContentType3 = null; 
+    BlobDomain ExamineByteStream3 = null;
     String strEstatusValue = null; 
     String strUnidadDeNegocioValue = null; 
     String strEmpresaQueFacturaValue = null; 
@@ -388,8 +413,48 @@ public class MasivoYPlatinumCO extends OAControllerImpl
       
     }
     
+       DataObject ExamineUploadData1 =  pageContext.getNamedDataObject("Examine1"); 
+       if(null!=ExamineUploadData1){
+         strExamineFileName1 = ExamineUploadData1.selectValue(null,"UPLOAD_FILE_NAME").toString();
+         strExamineContentType1 = ExamineUploadData1.selectValue(null,"UPLOAD_FILE_MIME_TYPE").toString();
+         ExamineByteStream1 = (BlobDomain)ExamineUploadData1.selectValue(null,strExamineFileName1);
+         System.out.println("strExamineFileName1:"+strExamineFileName1);
+           if(null!=strExamineFileName1){
+           masivoYPlatinumAMImpl.getMypHeaderTmpVO1().getCurrentRow().setAttribute("FileName1",strExamineFileName1);
+           if(null==ExamineByteStream1){
+                ExamineByteStream1 = (BlobDomain)masivoYPlatinumAMImpl.getMypHeaderTmpVO1().getCurrentRow().getAttribute("File1");
+            }
+           }
+       }
     
+      DataObject ExamineUploadData2 =  pageContext.getNamedDataObject("Examine2"); 
+      if(null!=ExamineUploadData2){
+        strExamineFileName2 = ExamineUploadData2.selectValue(null,"UPLOAD_FILE_NAME").toString();
+        strExamineContentType2 = ExamineUploadData2.selectValue(null,"UPLOAD_FILE_MIME_TYPE").toString();
+        ExamineByteStream2 = (BlobDomain)ExamineUploadData2.selectValue(null,strExamineFileName2);
+        System.out.println("strExamineFileName2:"+strExamineFileName2);
+          if(null!=strExamineFileName2){
+          masivoYPlatinumAMImpl.getMypHeaderTmpVO1().getCurrentRow().setAttribute("FileName2",strExamineFileName2);
+          if(null==ExamineByteStream2){
+               ExamineByteStream2 = (BlobDomain)masivoYPlatinumAMImpl.getMypHeaderTmpVO1().getCurrentRow().getAttribute("File2");
+           }
+          }
+      }
    
+      DataObject ExamineUploadData3 =  pageContext.getNamedDataObject("Examine3"); 
+      if(null!=ExamineUploadData3){
+        strExamineFileName3 = ExamineUploadData3.selectValue(null,"UPLOAD_FILE_NAME").toString();
+        strExamineContentType3 = ExamineUploadData3.selectValue(null,"UPLOAD_FILE_MIME_TYPE").toString();
+        ExamineByteStream3 = (BlobDomain)ExamineUploadData3.selectValue(null,strExamineFileName3);
+        System.out.println("strExamineFileName3:"+strExamineFileName3);
+          if(null!=strExamineFileName3){
+          masivoYPlatinumAMImpl.getMypHeaderTmpVO1().getCurrentRow().setAttribute("FileName3",strExamineFileName3);
+          if(null==ExamineByteStream3){
+               ExamineByteStream3 = (BlobDomain)masivoYPlatinumAMImpl.getMypHeaderTmpVO1().getCurrentRow().getAttribute("File3");
+           }
+          }
+      }
+      
     OAMessageChoiceBean  EstatusBean = (OAMessageChoiceBean)webBean.findChildRecursive("Estatus");
     if(null!=EstatusBean){
      if(null!=EstatusBean.getValue(pageContext)){
@@ -456,6 +521,7 @@ public class MasivoYPlatinumCO extends OAControllerImpl
      String strTipoDeEntregaValue = null; 
      String strPoliticaDeEntregaValue = null; 
      String strComentarios = null; 
+     String strComentariosIlim = null; 
      String strLunes = null; 
      String strMartes = null; 
      String strMiercoles = null; 
@@ -493,6 +559,7 @@ public class MasivoYPlatinumCO extends OAControllerImpl
    
       strPoliticaDeEntregaValue = this.getValueFromOAMessageChoiceBean(pageContext,webBean,"PoliticaDeEntrega");
       strComentarios = this.getValueFromOAMessageTextInputBean(pageContext,webBean,"Comentarios");
+      strComentariosIlim = this.getValueFromOAMessageTextInputBean(pageContext,webBean,"ComentariosIlim");
       strLunes = this.getValueFromOAMessageCheckBoxBean(pageContext,webBean,"Lunes");
       strMartes = this.getValueFromOAMessageCheckBoxBean(pageContext,webBean,"Martes");
       strMiercoles = this.getValueFromOAMessageCheckBoxBean(pageContext,webBean,"Miercoles");
@@ -592,7 +659,9 @@ public class MasivoYPlatinumCO extends OAControllerImpl
     ****************************************************************************/
     String strComentariosOInstrucciones = null; 
     strComentariosOInstrucciones = this.getValueFromOAMessageTextInputBean(pageContext,webBean,"ComentariosOInstrucciones"); 
-    
+    String strComentariosOInstruccionesIlim = null; 
+    strComentariosOInstruccionesIlim = this.getValueFromOAMessageTextInputBean(pageContext,webBean,"ComentariosOInstruccionesIlim"); 
+      
     if(3==gIntSelectedIndex){
        ProcesosTmpVOImpl procesosTmpVOImpl =  masivoYPlatinumAMImpl.getProcesosTmpVO1();
        OtrosProcesosTmpVOImpl otrosProcesosTmpVOImpl = masivoYPlatinumAMImpl.getOtrosProcesosTmpVO1();
@@ -639,6 +708,15 @@ public class MasivoYPlatinumCO extends OAControllerImpl
                                     , strFechaInicioOperacionValue 
                                     , strPartyID
                                     , strEjecutivoValue
+                                    , strExamineFileName1 
+                                    , strExamineContentType1 
+                                    , ExamineByteStream1 
+                                    , strExamineFileName2  
+                                    , strExamineContentType2  
+                                    , ExamineByteStream2 
+                                    , strExamineFileName3  
+                                    , strExamineContentType3
+                                    , ExamineByteStream3 
                                     );
                                  
         masivoYPlatinumAMImpl.fillGeneral(strMasiYPlatHeaderId
@@ -686,6 +764,7 @@ public class MasivoYPlatinumCO extends OAControllerImpl
                                            ,strDRForaneoValue 
                                            ,strDIForaneoValue 
                                            ,strComentarios
+                                           ,strComentariosIlim
                                          );    
         
         masivoYPlatinumAMImpl.fillDistribucion(strMasiYPlatHeaderId
@@ -709,6 +788,7 @@ public class MasivoYPlatinumCO extends OAControllerImpl
         if(null!=masivoYPlatinumAMImpl){
             masivoYPlatinumAMImpl.fillProcesosCorreoDirecto(strMasiYPlatHeaderId
                                                            ,strComentariosOInstrucciones
+                                                           ,strComentariosOInstruccionesIlim
                                                            );
         }
         

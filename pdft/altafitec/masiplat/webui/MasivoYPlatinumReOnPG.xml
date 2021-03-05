@@ -94,6 +94,21 @@
                               <oa:messageStyledText id="FactAcc" prompt="Cuenta Facturacion" viewName="XxqpPdftMypHeaderVO1" viewAttr="Factacc" styleClass="OraFieldText"/>
                            </ui:contents>
                         </oa:cellFormat>
+                        <oa:cellFormat id="region575">
+                           <ui:contents>
+                              <oa:messageDownload id="Download1" prompt="" viewName="XxqpPdftMypHeaderVO1" viewAttr="FileName1" contentViewAttributeName="File1" fileContentType="ContentType1"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region576">
+                           <ui:contents>
+                              <oa:messageDownload id="Download2" prompt="" viewName="XxqpPdftMypHeaderVO1" viewAttr="FileName2" contentViewAttributeName="File2" fileContentType="ContentType2"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region577">
+                           <ui:contents>
+                              <oa:messageDownload id="Download3" prompt="" viewName="XxqpPdftMypHeaderVO1" viewAttr="FileName3" contentViewAttributeName="File3" fileContentType="ContentType3"/>
+                           </ui:contents>
+                        </oa:cellFormat>
                      </ui:contents>
                   </oa:rowLayout>
                </ui:contents>
@@ -356,6 +371,7 @@
                            </ui:contents>
                         </oa:tableLayout>
                         <oa:messageTextInput id="Comentarios" prompt="Comentarios" columns="150" viewName="XxqpPdftMypCoberturaVO1" viewAttr="Comentarios" readOnly="true" maximumLength="4000"/>
+                        <oa:messageTextInput id="ComentariosIlim" prompt="Comentarios Ilimitados" columns="150" viewName="XxqpPdftMypCoberturaVO1" viewAttr="ComentariosIlim" readOnly="true" dataType="CLOB" rows="3"/>
                      </ui:contents>
                   </oa:contentContainer>
                   <oa:contentContainer id="DistribucionCont" width="100%" text="Distribucion">
@@ -476,7 +492,7 @@
                                           <oa:table id="OtrosProcesosTmp">
                                              <ui:contents>
                                                 <oa:messageStyledText id="OtrosProcesoId" dataType="NUMBER" prompt="ProcesoId" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="Id" styleClass="OraFieldText" rendered="false"/>
-                                                <oa:messageTextInput id="OtrosProceso" dataType="VARCHAR2" prompt="Otros Procesos" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="OtrosProcesos" styleClass="OraFieldText" maximumLength="30" columns="30" readOnly="true"/>
+                                                <oa:messageTextInput id="OtrosProceso" dataType="VARCHAR2" prompt="Otros Procesos" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="OtrosProcesos" styleClass="OraFieldText" maximumLength="4000" columns="30" readOnly="true"/>
                                                 <oa:messageCheckBox id="OtrosSeleccionar" dataType="VARCHAR2" text="Seleccionar" prompt="Seleccionar" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="Seleccionar" styleClass="OraFieldText" readOnly="true"/>
                                                 <oa:messageTextInput id="OtrosPrecio" dataType="NUMBER" prompt="Precio" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="Precio" rendered="true" styleClass="OraFieldNumber" totalValue="true" readOnly="true"/>
                                              </ui:contents>
@@ -488,6 +504,7 @@
                            </ui:contents>
                         </oa:tableLayout>
                         <oa:messageTextInput id="ComentariosOInstrucciones" prompt="Comentarios o Instricciones Especiales" maximumLength="4000" columns="150" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftMypComentsProcesosVO1" viewAttr="ComentariosInstrucc"/>
+                        <oa:messageTextInput id="ComentariosOInstruccionesIlim" prompt="Comentarios o Instricciones Especiales Ilimitados" columns="150" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftMypComentsProcesosVO1" viewAttr="ComentariosInstruccIlim" dataType="CLOB" rows="3"/>
                      </ui:contents>
                   </oa:contentContainer>
                   <oa:contentContainer id="ReglasDeNegocio" text="Reglas de Negocio">

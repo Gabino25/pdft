@@ -110,6 +110,21 @@
                               </oa:messageLovInput>
                            </ui:contents>
                         </oa:cellFormat>
+                        <oa:cellFormat id="region5742">
+                           <ui:contents>
+                              <oa:messageFileUpload id="FileUpload1" prompt="" viewName="XxqpPdftMypHeaderVO1" viewAttr="File1" dataType="BLOB"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region5743">
+                           <ui:contents>
+                              <oa:messageFileUpload id="FileUpload2" prompt="" viewName="XxqpPdftMypHeaderVO1" viewAttr="File2" dataType="BLOB"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region5744">
+                           <ui:contents>
+                              <oa:messageFileUpload id="FileUpload3" prompt="" viewName="XxqpPdftMypHeaderVO1" viewAttr="File3" dataType="BLOB"/>
+                           </ui:contents>
+                        </oa:cellFormat>
                      </ui:contents>
                   </oa:rowLayout>
                </ui:contents>
@@ -372,6 +387,7 @@
                            </ui:contents>
                         </oa:tableLayout>
                         <oa:messageTextInput id="Comentarios" prompt="Comentarios" columns="150" viewName="XxqpPdftMypCoberturaVO1" viewAttr="Comentarios" maximumLength="4000"/>
+                        <oa:messageTextInput id="ComentariosIlim" prompt="Comentarios" columns="150" viewName="XxqpPdftMypCoberturaVO1" viewAttr="ComentariosIlim" dataType="CLOB" rows="3"/>
                      </ui:contents>
                   </oa:contentContainer>
                   <oa:contentContainer id="DistribucionCont" width="100%" text="Distribucion">
@@ -492,7 +508,7 @@
                                           <oa:table id="OtrosProcesosTmp">
                                              <ui:contents>
                                                 <oa:messageStyledText id="OtrosProcesoId" dataType="NUMBER" prompt="ProcesoId" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="Id" styleClass="OraFieldText" rendered="false"/>
-                                                <oa:messageTextInput id="OtrosProceso" dataType="VARCHAR2" prompt="Otros Procesos" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="OtrosProcesos" styleClass="OraFieldText" maximumLength="30" columns="30" readOnly="false"/>
+                                                <oa:messageTextInput id="OtrosProceso" dataType="VARCHAR2" prompt="Otros Procesos" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="OtrosProcesos" styleClass="OraFieldText" maximumLength="4000" columns="30" readOnly="false"/>
                                                 <oa:messageCheckBox id="OtrosSeleccionar" dataType="VARCHAR2" text="Seleccionar" prompt="Seleccionar" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="Seleccionar" styleClass="OraFieldText" readOnly="false"/>
                                                 <oa:messageTextInput id="OtrosPrecio" dataType="NUMBER" prompt="Precio" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="Precio" rendered="true" styleClass="OraFieldNumber" totalValue="true" readOnly="false"/>
                                              </ui:contents>
@@ -504,6 +520,7 @@
                            </ui:contents>
                         </oa:tableLayout>
                         <oa:messageTextInput id="ComentariosOInstrucciones" prompt="Comentarios o Instricciones Especiales" maximumLength="4000" columns="100" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftMypComentsProcesosVO1" viewAttr="ComentariosInstrucc"/>
+                        <oa:messageTextInput id="ComentariosOInstruccionesIlim" prompt="Comentarios o Instricciones Especiales Ilimitadas" columns="100" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftMypComentsProcesosVO1" viewAttr="ComentariosInstruccIlim" dataType="CLOB" rows="3"/>
                      </ui:contents>
                   </oa:contentContainer>
                   <oa:contentContainer id="ReglasDeNegocio" text="Reglas de Negocio">

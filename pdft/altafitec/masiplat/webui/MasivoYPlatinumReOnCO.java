@@ -385,10 +385,11 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                    
                    byte[] a2Byte =pdfFile.toByteArray(); 
                    InputStream inputStream2 = new ByteArrayInputStream(a2Byte);
-                   oracle.jbo.domain.Number numMypHeaderId =  (oracle.jbo.domain.Number)masivoYPlatinumAMImpl.getXxqpPdftMypHeaderVO1().getCurrentRow().getAttribute("NumeroFtReferencia");
-                   oracle.jbo.domain.Number oracleNumeroFt = (oracle.jbo.domain.Number)masivoYPlatinumAMImpl.getXxqpPdftMypHeaderVO1().getCurrentRow().getAttribute("NumeroFt");
-                   String strNombreCliente = (String)masivoYPlatinumAMImpl.getXxqpPdftMypHeaderVO1().getCurrentRow().getAttribute("NombreDelCliente");
-                   String strArticuloOracle = (String)masivoYPlatinumAMImpl.getXxqpPdftMypHeaderVO1().getCurrentRow().getAttribute("ArticuloOracle");
+                   XxqpPdftMypHeaderVORowImpl xxqpPdftMypHeaderVORowImpl = (XxqpPdftMypHeaderVORowImpl)masivoYPlatinumAMImpl.getXxqpPdftMypHeaderVO1().getCurrentRow();
+                   oracle.jbo.domain.Number numMypHeaderId =  (oracle.jbo.domain.Number)xxqpPdftMypHeaderVORowImpl.getAttribute("NumeroFtReferencia");
+                   oracle.jbo.domain.Number oracleNumeroFt = (oracle.jbo.domain.Number)xxqpPdftMypHeaderVORowImpl.getAttribute("NumeroFt");
+                   String strNombreCliente = (String)xxqpPdftMypHeaderVORowImpl.getAttribute("NombreDelCliente");
+                   String strArticuloOracle = (String)xxqpPdftMypHeaderVORowImpl.getAttribute("ArticuloOracle");
                    if(null==numMypHeaderId){
                        numMypHeaderId = new oracle.jbo.domain.Number(0);
                    }
@@ -401,6 +402,7 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                                                                          ,pageContext
                                                                          ,strNombreCliente
                                                                          ,strArticuloOracle
+                                                                         ,xxqpPdftMypHeaderVORowImpl
                                                                          ); 
                    System.out.println("strCorreos:"+strCorreos);
                    

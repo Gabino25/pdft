@@ -67,7 +67,7 @@
    </Attribute>
    <Attribute
       Name="OtrosProcesos"
-      Precision="30"
+      Precision="4000"
       ColumnName="OTROS_PROCESOS"
       Type="java.lang.String"
       ColumnType="VARCHAR2"
@@ -249,6 +249,15 @@
          <Attr Name="_DisplaySize" Value="2000" />
       </DesignTime>
    </Attribute>
+   <Attribute
+      Name="ComentariosInstruccIlim"
+      IsQueriable="false"
+      ColumnName="COMENTARIOS_INSTRUCC_ILIM"
+      Type="oracle.jbo.domain.ClobDomain"
+      ColumnType="CLOB"
+      SQLType="CLOB"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+   </Attribute>
    <AccessorAttribute
       Name="XxqpPdftMypHeaderEO"
       Association="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosFkAssoc"
@@ -298,6 +307,50 @@
          <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
          <Attr Name="_isCheck" Value="true" />
          <Attr Name="_DBObjectName" Value="SYS_C001448407" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669563" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosEO.CreatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669563" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669564" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosEO.CreationDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATION_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669564" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669565" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosEO.LastUpdatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669565" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669566" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosEO.LastUpdateDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669566" />
       </DesignTime>
    </Key>
    <Key

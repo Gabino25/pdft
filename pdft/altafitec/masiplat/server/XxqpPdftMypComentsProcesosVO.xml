@@ -27,7 +27,8 @@ SELECT XxqpPdftMypProcesosEO.ID,
        XxqpPdftMypProcesosEO.ATTRIBUTE2, 
        XxqpPdftMypProcesosEO.ATTRIBUTE3, 
        XxqpPdftMypProcesosEO.ATTRIBUTE4, 
-       XxqpPdftMypProcesosEO.ATTRIBUTE5
+       XxqpPdftMypProcesosEO.ATTRIBUTE5,
+       XxqpPdftMypProcesosEO.COMENTARIOS_INSTRUCC_ILIM 
 FROM XXQP_PDFT_MYP_PROCESOS XxqpPdftMypProcesosEO
 WHERE XxqpPdftMypProcesosEO.REGION = 'COMENTARIOS'
    ]]></SQLQuery>
@@ -161,5 +162,11 @@ WHERE XxqpPdftMypProcesosEO.REGION = 'COMENTARIOS'
       EntityAttrName="Attribute5"
       EntityUsage="XxqpPdftMypProcesosEO"
       AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ComentariosInstruccIlim"
+      EntityAttrName="ComentariosInstruccIlim"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="COMENTARIOS_INSTRUCC_ILIM" >
    </ViewAttribute>
 </ViewObject>
