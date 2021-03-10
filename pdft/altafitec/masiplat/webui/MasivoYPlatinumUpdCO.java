@@ -136,7 +136,8 @@ public class MasivoYPlatinumUpdCO extends OAControllerImpl
       }
       
       if(null!=NombreUsuarioEBSBean){
-          NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
+          /** NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName()); **/
+          NombreUsuarioEBSBean.setValue(pageContext,strPuserPdft);
       }
       
     

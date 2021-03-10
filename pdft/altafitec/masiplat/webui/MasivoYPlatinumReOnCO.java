@@ -120,7 +120,8 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
         returnNavigation.setDestination("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/webui/BusquedaDeFichaTecnicaPG");
       
     if(null!=NombreUsuarioEBSBean){
-         NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
+         /** NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName()); **/
+         NombreUsuarioEBSBean.setValue(pageContext,strPuserPdft);
      }
       
       MasivoYPlatinumAMImpl masivoYPlatinumAMImpl = (MasivoYPlatinumAMImpl)pageContext.getApplicationModule(webBean);

@@ -1,4 +1,4 @@
-CREATE OR REPLACE package body xxqp_pdft_myp_pkg is 
+CREATE OR REPLACE package body APPS.xxqp_pdft_myp_pkg is 
 
 /** 15042020 se agrega nvl al nombre del cliente **/
 /** 17042020 se agrega nvl al nombre del cliente en obtiene reportes **/
@@ -22,10 +22,10 @@ CURSOR get_myp_head_info (cur_myp_header_id number) IS
  myp_head.PARTY_ID, 
  myp_head.PDFT_CLIENTE_HEADER_ID, 
  myp_head.EMPRESA_QUE_FACTURA_C, 
- ( select LEGAL_ENTITY_IDENTIFIER||' - '||NAME /*LEGAL_ENTITY_NAME*/meaning
- from xle_entity_profiles
- where LEGAL_ENTITY_ID = myp_head.EMPRESA_QUE_FACTURA_C
- ) EMPRESA_QUE_FACTURA_M,
+ (  select LEGAL_ENTITY_IDENTIFIER||' - '||NAME /*LEGAL_ENTITY_NAME*/meaning
+    from xle_entity_profiles
+   where LEGAL_ENTITY_ID = myp_head.EMPRESA_QUE_FACTURA_C
+     ) EMPRESA_QUE_FACTURA_M,
  myp_head.UNIDAD_DE_NEGOCIO_C, 
  (select description 
  from xxqp_pdft_mgr_catalogos
@@ -55,18 +55,18 @@ CURSOR get_myp_head_info (cur_myp_header_id number) IS
  (select nvl(p.known_as,p.party_name) /** 15042020 **/
  from xxqp_pdft_clientes_info_v p /**24042020**/
  where p.party_id = myp_head.party_id) nombre_del_cliente,
- (select p.party_name 
+  (select p.party_name 
  from hz_parties p
  where p.party_id = myp_head.party_id) razon_social,
 /** (select description 
  from xxqp_pdft_mgr_catalogos
  where lookup_type = 'MGR_PDFT_USUARIOS'
- and lookup_code = myp_head.ejecutivo) ejecutivo **/
+ and lookup_code = myp_head.ejecutivo)  ejecutivo  **/
  (select usuario 
- from XXQP_PDFT_USUARIOS_RO
- where id = myp_head.ejecutivo ) ejecutivo, 
- myp_head.ARTICULO_ORACLE,
- myp_head.MODIF_REALIZ
+    from XXQP_PDFT_USUARIOS_RO
+  where id  =  myp_head.ejecutivo ) ejecutivo, 
+  myp_head.ARTICULO_ORACLE,
+  myp_head.MODIF_REALIZ
 FROM XXQP_PDFT_MYP_HEADER myp_head
 where myp_head.id = cur_myp_header_id;
 
@@ -197,7 +197,7 @@ FROM XXQP_PDFT_MYP_GENERAL myp_gral
  myp_cob.ATTRIBUTE4, 
  myp_cob.ATTRIBUTE5, 
  myp_cob.comentarios,
- myp_cob.comentarios_ilim
+  myp_cob.comentarios_ilim
 FROM XXQP_PDFT_MYP_COBERTURA myp_cob
 where myp_cob.MYP_HEADER_ID = cur_myp_header_id; 
 
@@ -308,22 +308,22 @@ WHERE myp_instr.REGION = 'COMENTARIOS'
  and myp_instr.MYP_HEADER_ID = cur_myp_header_id;
  
  
- CURSOR getRNInfo(cur_myp_header_id number) IS
- select (select description
- from fnd_lookup_values
- where lookup_type='XXFT_CONCEPTO_1'
- and language='ESA'
- and lookup_code = XPMRN.ESTADO_CODE
- ) RN_CONCEPTO1,
- (select description
- from fnd_lookup_values
- where lookup_type='XXFT_CONCEPTO_2'
- and language='ESA'
- and lookup_code = XPMRN.CONCEPTO_CODE
- ) RN_CONCEPTO2,
- XPMRN.PRECIO
- from XXQP_PDFT_MYP_REG_NEG XPMRN
- where XPMRN.MYP_HEADER_ID = cur_myp_header_id; 
+  CURSOR getRNInfo(cur_myp_header_id number) IS
+           select (select description
+                 from fnd_lookup_values
+                where lookup_type='XXFT_CONCEPTO_1'
+                  and language='ESA'
+                  and lookup_code = XPMRN.ESTADO_CODE
+                      ) RN_CONCEPTO1,
+              (select description
+                 from fnd_lookup_values
+                where lookup_type='XXFT_CONCEPTO_2'
+                  and language='ESA'
+                  and lookup_code = XPMRN.CONCEPTO_CODE
+                      ) RN_CONCEPTO2,
+                      XPMRN.PRECIO
+        from XXQP_PDFT_MYP_REG_NEG XPMRN
+       where XPMRN.MYP_HEADER_ID = cur_myp_header_id; 
  
  
  CURSOR get_info_reportes_v1 (cur_cliente_desde varchar2
@@ -339,50 +339,50 @@ WHERE myp_instr.REGION = 'COMENTARIOS'
  ,cur_raz_soc_desde varchar2
  ,cur_raz_soc_hasta varchar2
  ) return rep_info_typ is 
- select ID,
- NUMERO_FT,
- REV,
- STATUS,
- STATUS_M,
- NUMERO_FT_REFERENCIA,
- PARTY_ID,
- PDFT_CLIENTE_HEADER_ID,
- EMPRESA_QUE_FACTURA_C,
- EMPRESA_QUE_FACTURA_M,
- EMPRESA_QUE_FACTURA_M_BKP,
- UNIDAD_DE_NEGOCIO_C,
- FRECUENCIA_FACTURACION_C,
- FRECUENCIA_FACTURACION_M,
- FECHA_INICIAL_OPERACION,
- CREATED_BY,
- CREATION_DATE,
- LAST_UPDATED_BY,
- LAST_UPDATE_DATE,
- LAST_UPDATE_LOGIN,
- ATTRIBUTE_CATEGORY,
- ATTRIBUTE1,
- ATTRIBUTE2,
- ATTRIBUTE3,
- ATTRIBUTE4,
- ATTRIBUTE5,
- NOMBRE_DEL_CLIENTE,
- PARTY_NAME,
- EJECUTIVO,
- UNIDAD_DE_NEGOCIO_M,
- CONTRATO_FLAG,
- ARTICULO_ORACLE,
- PRECIO,
- CONCEPTO,
- PRODUCTO,
- DIAS_DE_CREDITO,
- CNT_REG_NEG
+ select   ID,
+   NUMERO_FT,
+   REV,
+   STATUS,
+   STATUS_M,
+   NUMERO_FT_REFERENCIA,
+   PARTY_ID,
+   PDFT_CLIENTE_HEADER_ID,
+   EMPRESA_QUE_FACTURA_C,
+   EMPRESA_QUE_FACTURA_M,
+   EMPRESA_QUE_FACTURA_M_BKP,
+   UNIDAD_DE_NEGOCIO_C,
+   FRECUENCIA_FACTURACION_C,
+   FRECUENCIA_FACTURACION_M,
+   FECHA_INICIAL_OPERACION,
+   CREATED_BY,
+   CREATION_DATE,
+   LAST_UPDATED_BY,
+   LAST_UPDATE_DATE,
+   LAST_UPDATE_LOGIN,
+   ATTRIBUTE_CATEGORY,
+   ATTRIBUTE1,
+   ATTRIBUTE2,
+   ATTRIBUTE3,
+   ATTRIBUTE4,
+   ATTRIBUTE5,
+   NOMBRE_DEL_CLIENTE,
+   PARTY_NAME,
+   EJECUTIVO,
+   UNIDAD_DE_NEGOCIO_M,
+   CONTRATO_FLAG,
+   ARTICULO_ORACLE,
+   PRECIO,
+   CONCEPTO,
+   PRODUCTO,
+   DIAS_DE_CREDITO,
+   CNT_REG_NEG
 from XXQP_PDFT_REPORTES_V
-where upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
- and trunc(creation_date) between nvl(cur_fecha_desde,to_date ('01/01/0001','DD/MM/YYYY')) and nvl(cur_fecha_hasta,to_date ('31/12/4712','DD/MM/YYYY'))
- and NUMERO_FT between nvl(cur_ficha_tecnica_desde,0) and nvl(cur_ficha_tecnica_hasta,9999999999999999999999999999)
- and upper(substr(FRECUENCIA_FACTURACION_C,0,1)) between nvl(upper(substr(cur_fre_fact_desde,0,1)),'A') and nvl(upper(substr(cur_fre_fact_hasta,0,1)),'Z')
- and upper(substr(STATUS,0,1)) between nvl(upper(substr(cur_status_desde,0,1)),'A') and nvl(upper(substr(cur_status_hasta,0,1)),'Z')
- and upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
+where upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and  nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
+  and trunc(creation_date) between nvl(cur_fecha_desde,to_date ('01/01/0001','DD/MM/YYYY')) and nvl(cur_fecha_hasta,to_date ('31/12/4712','DD/MM/YYYY'))
+  and NUMERO_FT between nvl(cur_ficha_tecnica_desde,0) and nvl(cur_ficha_tecnica_hasta,9999999999999999999999999999)
+  and upper(substr(FRECUENCIA_FACTURACION_C,0,1)) between nvl(upper(substr(cur_fre_fact_desde,0,1)),'A') and  nvl(upper(substr(cur_fre_fact_hasta,0,1)),'Z')
+  and upper(substr(STATUS,0,1)) between nvl(upper(substr(cur_status_desde,0,1)),'A') and  nvl(upper(substr(cur_status_hasta,0,1)),'Z')
+  and upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and  nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
 order by NOMBRE_DEL_CLIENTE asc;
 
 CURSOR get_info_reportes_v2 (cur_cliente_desde varchar2
@@ -399,49 +399,49 @@ CURSOR get_info_reportes_v2 (cur_cliente_desde varchar2
  ,cur_raz_soc_hasta varchar2
  ) return rep_info_typ is 
  SELECT ID,
- NUMERO_FT,
- REV,
- STATUS,
- STATUS_M,
- NUMERO_FT_REFERENCIA,
- PARTY_ID,
- PDFT_CLIENTE_HEADER_ID,
- EMPRESA_QUE_FACTURA_C,
- EMPRESA_QUE_FACTURA_M,
- EMPRESA_QUE_FACTURA_M_BKP,
- UNIDAD_DE_NEGOCIO_C,
- FRECUENCIA_FACTURACION_C,
- FRECUENCIA_FACTURACION_M,
- FECHA_INICIAL_OPERACION,
- CREATED_BY,
- CREATION_DATE,
- LAST_UPDATED_BY,
- LAST_UPDATE_DATE,
- LAST_UPDATE_LOGIN,
- ATTRIBUTE_CATEGORY,
- ATTRIBUTE1,
- ATTRIBUTE2,
- ATTRIBUTE3,
- ATTRIBUTE4,
- ATTRIBUTE5,
- NOMBRE_DEL_CLIENTE,
- PARTY_NAME,
- EJECUTIVO,
- UNIDAD_DE_NEGOCIO_M,
- CONTRATO_FLAG,
- ARTICULO_ORACLE,
- PRECIO,
- CONCEPTO,
- PRODUCTO,
- DIAS_DE_CREDITO,
- CNT_REG_NEG
+   NUMERO_FT,
+   REV,
+   STATUS,
+   STATUS_M,
+   NUMERO_FT_REFERENCIA,
+   PARTY_ID,
+   PDFT_CLIENTE_HEADER_ID,
+   EMPRESA_QUE_FACTURA_C,
+   EMPRESA_QUE_FACTURA_M,
+   EMPRESA_QUE_FACTURA_M_BKP,
+   UNIDAD_DE_NEGOCIO_C,
+   FRECUENCIA_FACTURACION_C,
+   FRECUENCIA_FACTURACION_M,
+   FECHA_INICIAL_OPERACION,
+   CREATED_BY,
+   CREATION_DATE,
+   LAST_UPDATED_BY,
+   LAST_UPDATE_DATE,
+   LAST_UPDATE_LOGIN,
+   ATTRIBUTE_CATEGORY,
+   ATTRIBUTE1,
+   ATTRIBUTE2,
+   ATTRIBUTE3,
+   ATTRIBUTE4,
+   ATTRIBUTE5,
+   NOMBRE_DEL_CLIENTE,
+   PARTY_NAME,
+   EJECUTIVO,
+   UNIDAD_DE_NEGOCIO_M,
+   CONTRATO_FLAG,
+   ARTICULO_ORACLE,
+   PRECIO,
+   CONCEPTO,
+   PRODUCTO,
+   DIAS_DE_CREDITO,
+   CNT_REG_NEG
 from XXQP_PDFT_REPORTES_V
-where upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
- and trunc(creation_date) between nvl(cur_fecha_desde,to_date ('01/01/0001','DD/MM/YYYY')) and nvl(cur_fecha_hasta,to_date ('31/12/4712','DD/MM/YYYY'))
- and NUMERO_FT between nvl(cur_ficha_tecnica_desde,0) and nvl(cur_ficha_tecnica_hasta,9999999999999999999999999999)
- and upper(substr(FRECUENCIA_FACTURACION_C,0,1)) between nvl(upper(substr(cur_fre_fact_desde,0,1)),'A') and nvl(upper(substr(cur_fre_fact_hasta,0,1)),'Z')
- and upper(substr(STATUS,0,1)) between nvl(upper(substr(cur_status_desde,0,1)),'A') and nvl(upper(substr(cur_status_hasta,0,1)),'Z')
- and upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
+where upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and  nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
+  and trunc(creation_date) between nvl(cur_fecha_desde,to_date ('01/01/0001','DD/MM/YYYY')) and nvl(cur_fecha_hasta,to_date ('31/12/4712','DD/MM/YYYY'))
+  and NUMERO_FT between nvl(cur_ficha_tecnica_desde,0) and nvl(cur_ficha_tecnica_hasta,9999999999999999999999999999)
+  and upper(substr(FRECUENCIA_FACTURACION_C,0,1)) between nvl(upper(substr(cur_fre_fact_desde,0,1)),'A') and  nvl(upper(substr(cur_fre_fact_hasta,0,1)),'Z')
+  and upper(substr(STATUS,0,1)) between nvl(upper(substr(cur_status_desde,0,1)),'A') and  nvl(upper(substr(cur_status_hasta,0,1)),'Z')
+  and upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and  nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
 order by PRODUCTO asc;
  
  CURSOR get_info_reportes_v3 (cur_cliente_desde varchar2
@@ -458,49 +458,49 @@ order by PRODUCTO asc;
  ,cur_raz_soc_hasta varchar2
  ) return rep_info_typ is 
  SELECT ID,
- NUMERO_FT,
- REV,
- STATUS,
- STATUS_M,
- NUMERO_FT_REFERENCIA,
- PARTY_ID,
- PDFT_CLIENTE_HEADER_ID,
- EMPRESA_QUE_FACTURA_C,
- EMPRESA_QUE_FACTURA_M,
- EMPRESA_QUE_FACTURA_M_BKP,
- UNIDAD_DE_NEGOCIO_C,
- FRECUENCIA_FACTURACION_C,
- FRECUENCIA_FACTURACION_M,
- FECHA_INICIAL_OPERACION,
- CREATED_BY,
- CREATION_DATE,
- LAST_UPDATED_BY,
- LAST_UPDATE_DATE,
- LAST_UPDATE_LOGIN,
- ATTRIBUTE_CATEGORY,
- ATTRIBUTE1,
- ATTRIBUTE2,
- ATTRIBUTE3,
- ATTRIBUTE4,
- ATTRIBUTE5,
- NOMBRE_DEL_CLIENTE,
- PARTY_NAME,
- EJECUTIVO,
- UNIDAD_DE_NEGOCIO_M,
- CONTRATO_FLAG,
- ARTICULO_ORACLE,
- PRECIO,
- CONCEPTO,
- PRODUCTO,
- DIAS_DE_CREDITO,
- CNT_REG_NEG
+   NUMERO_FT,
+   REV,
+   STATUS,
+   STATUS_M,
+   NUMERO_FT_REFERENCIA,
+   PARTY_ID,
+   PDFT_CLIENTE_HEADER_ID,
+   EMPRESA_QUE_FACTURA_C,
+   EMPRESA_QUE_FACTURA_M,
+   EMPRESA_QUE_FACTURA_M_BKP,
+   UNIDAD_DE_NEGOCIO_C,
+   FRECUENCIA_FACTURACION_C,
+   FRECUENCIA_FACTURACION_M,
+   FECHA_INICIAL_OPERACION,
+   CREATED_BY,
+   CREATION_DATE,
+   LAST_UPDATED_BY,
+   LAST_UPDATE_DATE,
+   LAST_UPDATE_LOGIN,
+   ATTRIBUTE_CATEGORY,
+   ATTRIBUTE1,
+   ATTRIBUTE2,
+   ATTRIBUTE3,
+   ATTRIBUTE4,
+   ATTRIBUTE5,
+   NOMBRE_DEL_CLIENTE,
+   PARTY_NAME,
+   EJECUTIVO,
+   UNIDAD_DE_NEGOCIO_M,
+   CONTRATO_FLAG,
+   ARTICULO_ORACLE,
+   PRECIO,
+   CONCEPTO,
+   PRODUCTO,
+   DIAS_DE_CREDITO,
+   CNT_REG_NEG
 from XXQP_PDFT_REPORTES_V
-where upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
- and trunc(creation_date) between nvl(cur_fecha_desde,to_date ('01/01/0001','DD/MM/YYYY')) and nvl(cur_fecha_hasta,to_date ('31/12/4712','DD/MM/YYYY'))
- and NUMERO_FT between nvl(cur_ficha_tecnica_desde,0) and nvl(cur_ficha_tecnica_hasta,9999999999999999999999999999)
- and upper(substr(FRECUENCIA_FACTURACION_C,0,1)) between nvl(upper(substr(cur_fre_fact_desde,0,1)),'A') and nvl(upper(substr(cur_fre_fact_hasta,0,1)),'Z')
- and upper(substr(STATUS,0,1)) between nvl(upper(substr(cur_status_desde,0,1)),'A') and nvl(upper(substr(cur_status_hasta,0,1)),'Z')
- and upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
+where upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and  nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
+  and trunc(creation_date) between nvl(cur_fecha_desde,to_date ('01/01/0001','DD/MM/YYYY')) and nvl(cur_fecha_hasta,to_date ('31/12/4712','DD/MM/YYYY'))
+  and NUMERO_FT between nvl(cur_ficha_tecnica_desde,0) and nvl(cur_ficha_tecnica_hasta,9999999999999999999999999999)
+  and upper(substr(FRECUENCIA_FACTURACION_C,0,1)) between nvl(upper(substr(cur_fre_fact_desde,0,1)),'A') and  nvl(upper(substr(cur_fre_fact_hasta,0,1)),'Z')
+  and upper(substr(STATUS,0,1)) between nvl(upper(substr(cur_status_desde,0,1)),'A') and  nvl(upper(substr(cur_status_hasta,0,1)),'Z')
+  and upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and  nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
 order by NUMERO_FT asc;
 
 CURSOR get_info_reportes_v4 (cur_cliente_desde varchar2
@@ -517,49 +517,49 @@ CURSOR get_info_reportes_v4 (cur_cliente_desde varchar2
  ,cur_raz_soc_hasta varchar2
  ) return rep_info_typ is 
  SELECT ID,
- NUMERO_FT,
- REV,
- STATUS,
- STATUS_M,
- NUMERO_FT_REFERENCIA,
- PARTY_ID,
- PDFT_CLIENTE_HEADER_ID,
- EMPRESA_QUE_FACTURA_C,
- EMPRESA_QUE_FACTURA_M,
- EMPRESA_QUE_FACTURA_M_BKP,
- UNIDAD_DE_NEGOCIO_C,
- FRECUENCIA_FACTURACION_C,
- FRECUENCIA_FACTURACION_M,
- FECHA_INICIAL_OPERACION,
- CREATED_BY,
- CREATION_DATE,
- LAST_UPDATED_BY,
- LAST_UPDATE_DATE,
- LAST_UPDATE_LOGIN,
- ATTRIBUTE_CATEGORY,
- ATTRIBUTE1,
- ATTRIBUTE2,
- ATTRIBUTE3,
- ATTRIBUTE4,
- ATTRIBUTE5,
- NOMBRE_DEL_CLIENTE,
- PARTY_NAME,
- EJECUTIVO,
- UNIDAD_DE_NEGOCIO_M,
- CONTRATO_FLAG,
- ARTICULO_ORACLE,
- PRECIO,
- CONCEPTO,
- PRODUCTO,
- DIAS_DE_CREDITO,
- CNT_REG_NEG
+   NUMERO_FT,
+   REV,
+   STATUS,
+   STATUS_M,
+   NUMERO_FT_REFERENCIA,
+   PARTY_ID,
+   PDFT_CLIENTE_HEADER_ID,
+   EMPRESA_QUE_FACTURA_C,
+   EMPRESA_QUE_FACTURA_M,
+   EMPRESA_QUE_FACTURA_M_BKP,
+   UNIDAD_DE_NEGOCIO_C,
+   FRECUENCIA_FACTURACION_C,
+   FRECUENCIA_FACTURACION_M,
+   FECHA_INICIAL_OPERACION,
+   CREATED_BY,
+   CREATION_DATE,
+   LAST_UPDATED_BY,
+   LAST_UPDATE_DATE,
+   LAST_UPDATE_LOGIN,
+   ATTRIBUTE_CATEGORY,
+   ATTRIBUTE1,
+   ATTRIBUTE2,
+   ATTRIBUTE3,
+   ATTRIBUTE4,
+   ATTRIBUTE5,
+   NOMBRE_DEL_CLIENTE,
+   PARTY_NAME,
+   EJECUTIVO,
+   UNIDAD_DE_NEGOCIO_M,
+   CONTRATO_FLAG,
+   ARTICULO_ORACLE,
+   PRECIO,
+   CONCEPTO,
+   PRODUCTO,
+   DIAS_DE_CREDITO,
+   CNT_REG_NEG
 from XXQP_PDFT_REPORTES_V
-where upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
- and trunc(creation_date) between nvl(cur_fecha_desde,to_date ('01/01/0001','DD/MM/YYYY')) and nvl(cur_fecha_hasta,to_date ('31/12/4712','DD/MM/YYYY'))
- and NUMERO_FT between nvl(cur_ficha_tecnica_desde,0) and nvl(cur_ficha_tecnica_hasta,9999999999999999999999999999)
- and upper(substr(FRECUENCIA_FACTURACION_C,0,1)) between nvl(upper(substr(cur_fre_fact_desde,0,1)),'A') and nvl(upper(substr(cur_fre_fact_hasta,0,1)),'Z')
- and upper(substr(STATUS,0,1)) between nvl(upper(substr(cur_status_desde,0,1)),'A') and nvl(upper(substr(cur_status_hasta,0,1)),'Z')
- and upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
+where upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and  nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
+  and trunc(creation_date) between nvl(cur_fecha_desde,to_date ('01/01/0001','DD/MM/YYYY')) and nvl(cur_fecha_hasta,to_date ('31/12/4712','DD/MM/YYYY'))
+  and NUMERO_FT between nvl(cur_ficha_tecnica_desde,0) and nvl(cur_ficha_tecnica_hasta,9999999999999999999999999999)
+  and upper(substr(FRECUENCIA_FACTURACION_C,0,1)) between nvl(upper(substr(cur_fre_fact_desde,0,1)),'A') and  nvl(upper(substr(cur_fre_fact_hasta,0,1)),'Z')
+  and upper(substr(STATUS,0,1)) between nvl(upper(substr(cur_status_desde,0,1)),'A') and  nvl(upper(substr(cur_status_hasta,0,1)),'Z')
+  and upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and  nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
 order by FRECUENCIA_FACTURACION_M asc;
 
  
@@ -591,8 +591,8 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  END replace_char_esp;
  
 procedure main (pso_errmsg out varchar2
- ,pso_errcod out varchar2
- ,pni_numero_ft in number) is 
+               ,pso_errcod out varchar2
+               ,pni_numero_ft in number) is 
  
 
  myp_head_info_rec get_myp_head_info%ROWTYPE;
@@ -609,53 +609,55 @@ procedure main (pso_errmsg out varchar2
  ln_oproc_precio_sub number:=0; 
  
  ln_myp_header_id number := 152;
- lc_info clob := ''; 
- ls_errmsg varchar2(2000); 
- ls_errcod varchar2(2000); 
- v_new_xml_data varchar2(32767); 
- v_iterations number;
- v_clob_len number; 
- v_chunk_length number := 32767;
- v_length_clob number := 0; 
- v_offset number :=1;
- v_char char(1);
+ lc_info clob := '';          
+ ls_errmsg   varchar2(2000); 
+ ls_errcod   varchar2(2000);    
+ v_new_xml_data varchar2(32767);  
+ v_iterations  number;
+ v_clob_len    number; 
+ v_chunk_length  number := 32767;
+ v_length_clob   number := 0; 
+ v_offset        number :=1;
+ v_char          char(1);
+ ln_instr_clob number := 0;
+ ls_substr_clob varchar2(20000) :=0;
 begin 
  pso_errmsg := null; 
- pso_errcod := '0';
+  pso_errcod  := '0';
+  
+   select id
+     into ln_myp_header_id
+     from XXQP_PDFT_MYP_HEADER
+    WHERE NUMERO_FT = pni_numero_ft; 
  
- select id
- into ln_myp_header_id
- from XXQP_PDFT_MYP_HEADER
- WHERE NUMERO_FT = pni_numero_ft; 
- 
- get_info(pso_errmsg => ls_errmsg
- ,pso_errcod => ls_errcod
- ,pco_info => lc_info
- ,pni_myp_header_id => ln_myp_header_id
- );
- 
- fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info)); 
- fnd_file.put_line(fnd_file.log,'dbms_lob.instr(lc_info):'||dbms_lob.instr(lc_info,'<G_REGNEG>')); 
- v_length_clob := dbms_lob.getlength(lc_info); 
- v_offset := 1;
- while(v_offset<=v_length_clob) LOOP
- v_char := dbms_lob.substr(lc_info, 1, v_offset);
- IF (v_char = CHR(10))
- then
- fnd_file.new_line(fnd_file.output, 1);
- else
- fnd_file.put(fnd_file.output, v_char);
- end if;
- v_offset := v_offset + 1;
- END LOOP; 
- 
- 
- /*
- fnd_file.put_line(fnd_file.output,lc_info); 
- */ 
- 
+     get_info(pso_errmsg               => ls_errmsg
+             ,pso_errcod               => ls_errcod
+             ,pco_info                 => lc_info
+             ,pni_myp_header_id        => ln_myp_header_id
+           );
+     
+     fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info));   
+     fnd_file.put_line(fnd_file.log,'dbms_lob.instr(lc_info):'||dbms_lob.instr(lc_info,'<G_REGNEG>'));  
+     v_length_clob := dbms_lob.getlength(lc_info); 
+     v_offset := 1;
+     while(v_offset<=v_length_clob) LOOP
+        v_char := dbms_lob.substr(lc_info, 1, v_offset);
+        IF (v_char = CHR(10))
+        then
+        fnd_file.new_line(fnd_file.output, 1);
+        else
+        fnd_file.put(fnd_file.output, v_char);
+        end if;
+        v_offset := v_offset + 1;
+     END LOOP; 
+     
+         
+    /*
+     fnd_file.put_line(fnd_file.output,lc_info);  
+     */   
+     
 exception when others then 
- pso_errmsg := 'Excepcion Paquete APPS.xxqp_pdft_myp_pkg metodo main:'||sqlerrm||', '||sqlcode;
+ pso_errmsg := 'Excepcion Paquete xxqp_pdft_myp_pkg metodo main:'||sqlerrm||', '||sqlcode;
  pso_errcod := 2; 
 end main; 
 
@@ -673,17 +675,23 @@ procedure get_info(pso_errmsg out varchar2
  myp_proc_info_rec get_myp_proc_info%ROWTYPE; 
  myp_oproc_info_rec get_myp_oproc_info%ROWTYPE; 
  myp_instr_info_rec get_myp_instr_info%ROWTYPE; 
- RNInfo_rec getRNInfo%ROWTYPE;
- 
+ RNInfo_rec         getRNInfo%ROWTYPE;
+   
  ln_proc_count number:=0; 
  ln_proc_precio_sub number:=0; 
  ln_oproc_count number:=0; 
  ln_oproc_precio_sub number:=0; 
  ln_myp_header_id number := pni_myp_header_id; 
- ls_regneg_precio varchar2(200); 
- v_length_clob number := 0; 
- v_offset number :=1;
+ ls_regneg_precio   varchar2(200); 
+ v_length_clob   number := 0; 
+ v_offset        number :=1;
  v_char          VARCHAR2(10); /** 1 to 10 por acentos **/
+ lc_clob_tmp  clob :='';
+ ln_nth          number := 0; 
+ v_offsetTmp  number := 0;
+ ln_instr_clob  number := 0; 
+ ln_instr_clob_tmp number := 0;
+ ls_substr_clob varchar2(32767) := 0; 
 begin 
  pso_errmsg := null; 
  pso_errcod := '0';
@@ -710,15 +718,25 @@ begin
  
  if 'Y' = psi_modif or myp_head_info_rec.status in ('CAMBIO_DE_PRECIO')  then 
   dbms_lob.append(lc_info,'<CAMBIO>Y</CAMBIO>');
-  dbms_lob.append(lc_info,'<MODIF_REALIZ>');
+ 
   v_length_clob := dbms_lob.getlength(myp_head_info_rec.MODIF_REALIZ);
 v_offset := 1;
+ lc_clob_tmp := EMPTY_CLOB();
+  fnd_file.put_line(fnd_file.log,'090320211544');
      while(v_offset<=v_length_clob) LOOP
         v_char := dbms_lob.substr(myp_head_info_rec.MODIF_REALIZ, 1, v_offset);
-        dbms_lob.append(lc_info,replace_char_esp(v_char));
+        fnd_file.put_line(fnd_file.log,'090320211543');
+        dbms_lob.append(lc_clob_tmp,replace_char_esp(v_char));
         v_offset := v_offset + 1;
      END LOOP; 
-    dbms_lob.append(lc_info,'</MODIF_REALIZ>');  
+      for idx in ( SELECT LEVEL AS id, REGEXP_SUBSTR(lc_clob_tmp, '[^'||chr(10)||']+', 1, LEVEL) AS data
+                                FROM dual
+                           CONNECT BY REGEXP_SUBSTR(lc_clob_tmp, '[^'||chr(10)||']+', 1, LEVEL) IS NOT NULL) loop
+                  dbms_lob.append(lc_info,'<MODIF_REALIZ>');          
+                   lc_info := lc_info||'<MODIF>'||idx.data||'</MODIF>';
+                 dbms_lob.append(lc_info,'</MODIF_REALIZ>');  
+              end loop; 
+   
   
  else
   dbms_lob.append(lc_info,'<ALTA>Y</ALTA>');
@@ -779,17 +797,56 @@ dbms_lob.append(lc_info,'<PLAZA_PROPIETARIA>'||myp_cob_info_rec.PLAZA_PROPIETARI
  dbms_lob.append(lc_info,'<DI_LOCAL>'||trim(to_char(myp_cob_info_rec.DI_LOCAL,gs_currency_format))||'</DI_LOCAL>');
  dbms_lob.append(lc_info,'<DI_FORANEO>'||trim(to_char(myp_cob_info_rec.DI_FORANEO,gs_currency_format))||'</DI_FORANEO>'); 
  fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info));
- dbms_lob.append(lc_info,'<COBERTURA_COMENTARIOS>');
+ 
 /** dbms_lob.append(lc_info,myp_cob_info_rec.comentarios_ilim); **/
 v_length_clob := dbms_lob.getlength(myp_cob_info_rec.comentarios_ilim);
+ fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(v_length_clob):'||v_length_clob);
 v_offset := 1;
+v_offsetTmp := 1;
+     DBMS_LOB.CREATETEMPORARY(       lob_loc => lc_clob_tmp     , cache   => true     , dur     => dbms_lob.call);
+     DBMS_LOB.OPEN(       lob_loc    => lc_clob_tmp     , open_mode  => DBMS_LOB.LOB_READWRITE);
      while(v_offset<=v_length_clob) LOOP
         v_char := dbms_lob.substr(myp_cob_info_rec.comentarios_ilim, 1, v_offset);
-        dbms_lob.append(lc_info,replace_char_esp(v_char));
+        fnd_file.put_line(fnd_file.log,'v_char:'||v_char);
+        dbms_lob.append(lc_clob_tmp,replace_char_esp(v_char));
         v_offset := v_offset + 1;
+        if v_char = chr(10) then 
+         ln_nth := ln_nth+1;
+         fnd_file.put_line(fnd_file.log,'v_offsetTmp:'||v_offsetTmp||', ln_nth:'||ln_nth||', ln_instr_clob_tmp:'||ln_instr_clob_tmp);
+         ln_instr_clob := dbms_lob.instr(lc_clob_tmp,chr(10),1,ln_nth);
+         fnd_file.put_line(fnd_file.log,'dbms_lob.instr(lc_clob_tmp,chr(10),1,ln_nth):'||dbms_lob.instr(lc_clob_tmp,chr(10),1,ln_nth));
+         ls_substr_clob := dbms_lob.substr(lc_clob_tmp,ln_instr_clob-ln_instr_clob_tmp-1,v_offsetTmp);
+         fnd_file.put_line(fnd_file.log,'dbms_lob.substr(lc_clob_tmp,ln_instr_clob,v_offsetTmp):'||ls_substr_clob);
+         dbms_lob.append(lc_info,'<COBERTURA_COMENTARIOS>');     
+         dbms_lob.append(lc_info,'<COB_COM>'||ls_substr_clob||'</COB_COM>');     
+         dbms_lob.append(lc_info,'</COBERTURA_COMENTARIOS>');
+         v_offsetTmp := ln_instr_clob+1;
+         ln_instr_clob_tmp := ln_instr_clob;
+         
+        end if; 
+        
+        
      END LOOP; 
      
- dbms_lob.append(lc_info,'</COBERTURA_COMENTARIOS>');
+      if (v_offset-1) = v_length_clob AND ln_nth>0  then 
+           fnd_file.put_line(fnd_file.log,'v_offsetTmp:'||v_offsetTmp);
+         --  fnd_file.put_line(fnd_file.log,'v_offset-ln_instr_clob_tmp-1:'||v_offset-ln_instr_clob_tmp-1);
+           ls_substr_clob := dbms_lob.substr(lc_clob_tmp,v_offset-ln_instr_clob_tmp,v_offsetTmp);
+             fnd_file.put_line(fnd_file.log,'v_offset = v_length_clob:'||ls_substr_clob);
+           dbms_lob.append(lc_info,'<COBERTURA_COMENTARIOS>');     
+         dbms_lob.append(lc_info,'<COB_COM>'||ls_substr_clob||'</COB_COM>');     
+         dbms_lob.append(lc_info,'</COBERTURA_COMENTARIOS>');
+        end if;
+     
+     
+--       for idx in ( SELECT LEVEL AS id, REGEXP_SUBSTR(lc_clob_tmp, '[^'||chr(10)||']+', 1, LEVEL) AS data
+--                                FROM dual
+--                           CONNECT BY REGEXP_SUBSTR(lc_clob_tmp, '[^'||chr(10)||']+', 1, LEVEL) IS NOT NULL) loop
+--                 dbms_lob.append(lc_info,'<COBERTURA_COMENTARIOS>');     
+--                   lc_info := lc_info||'<COB_COM>'||idx.data||'</COB_COM>';
+--                 dbms_lob.append(lc_info,'</COBERTURA_COMENTARIOS>');
+--              end loop; 
+     
  fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info));
  
  END LOOP;
