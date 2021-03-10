@@ -55,6 +55,16 @@ INNER JOIN gl_code_combinations GL ON I.SALES_ACCOUNT = GL.code_combination_id
 WHERE 1=1
 AND I.ORGANIZATION_ID = 97
 AND I.SEGMENT1 = XxqpPdftBpoHeaderEO.articulo_oracle) as FACTACC
+,XxqpPdftBpoHeaderEO.FILE_NAME1
+,XxqpPdftBpoHeaderEO.CONTENT_TYPE1
+,XxqpPdftBpoHeaderEO.FILE1
+,XxqpPdftBpoHeaderEO.FILE_NAME2
+,XxqpPdftBpoHeaderEO.CONTENT_TYPE2
+,XxqpPdftBpoHeaderEO.FILE2
+,XxqpPdftBpoHeaderEO.FILE_NAME3
+,XxqpPdftBpoHeaderEO.CONTENT_TYPE3
+,XxqpPdftBpoHeaderEO.FILE3
+,XxqpPdftBpoHeaderEO.MODIF_REALIZ
 FROM XXQP_PDFT_BPO_HEADER XxqpPdftBpoHeaderEO
    ]]></SQLQuery>
    <DesignTime>
@@ -279,5 +289,65 @@ FROM XXQP_PDFT_BPO_HEADER XxqpPdftBpoHeaderEO
       <DesignTime>
          <Attr Name="_DisplaySize" Value="207" />
       </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FileName1"
+      EntityAttrName="FileName1"
+      EntityUsage="XxqpPdftBpoHeaderEO"
+      AliasName="FILE_NAME1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ContentType1"
+      EntityAttrName="ContentType1"
+      EntityUsage="XxqpPdftBpoHeaderEO"
+      AliasName="CONTENT_TYPE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="File1"
+      EntityAttrName="File1"
+      EntityUsage="XxqpPdftBpoHeaderEO"
+      AliasName="FILE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FileName2"
+      EntityAttrName="FileName2"
+      EntityUsage="XxqpPdftBpoHeaderEO"
+      AliasName="FILE_NAME2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ContentType2"
+      EntityAttrName="ContentType2"
+      EntityUsage="XxqpPdftBpoHeaderEO"
+      AliasName="CONTENT_TYPE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="File2"
+      EntityAttrName="File2"
+      EntityUsage="XxqpPdftBpoHeaderEO"
+      AliasName="FILE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FileName3"
+      EntityAttrName="FileName3"
+      EntityUsage="XxqpPdftBpoHeaderEO"
+      AliasName="FILE_NAME3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ContentType3"
+      EntityAttrName="ContentType3"
+      EntityUsage="XxqpPdftBpoHeaderEO"
+      AliasName="CONTENT_TYPE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="File3"
+      EntityAttrName="File3"
+      EntityUsage="XxqpPdftBpoHeaderEO"
+      AliasName="FILE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifRealiz"
+      EntityAttrName="ModifRealiz"
+      EntityUsage="XxqpPdftBpoHeaderEO"
+      AliasName="MODIF_REALIZ" >
    </ViewAttribute>
 </ViewObject>

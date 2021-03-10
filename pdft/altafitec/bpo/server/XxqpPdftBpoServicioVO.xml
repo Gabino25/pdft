@@ -38,7 +38,10 @@
        XxqpPdftBpoServicioEO.MARTES, 
        XxqpPdftBpoServicioEO.MIERCOLES, 
        XxqpPdftBpoServicioEO.SABADO, 
-       XxqpPdftBpoServicioEO.VIERNES"
+       XxqpPdftBpoServicioEO.VIERNES, 
+       XxqpPdftBpoServicioEO.OTROS_ILIM, 
+       XxqpPdftBpoServicioEO.DIRECCION_BASE_ILIM, 
+       XxqpPdftBpoServicioEO.OBSERVACIONES_ILIM"
    FromList="XXQP_PDFT_BPO_SERVICIO XxqpPdftBpoServicioEO"
    BindingStyle="OracleName"
    CustomQuery="false"
@@ -277,5 +280,26 @@
       EntityAttrName="Viernes"
       EntityUsage="XxqpPdftBpoServicioEO"
       AliasName="VIERNES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OtrosIlim"
+      IsQueriable="false"
+      EntityAttrName="OtrosIlim"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="OTROS_ILIM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DireccionBaseIlim"
+      IsQueriable="false"
+      EntityAttrName="DireccionBaseIlim"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="DIRECCION_BASE_ILIM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ObservacionesIlim"
+      IsQueriable="false"
+      EntityAttrName="ObservacionesIlim"
+      EntityUsage="XxqpPdftBpoServicioEO"
+      AliasName="OBSERVACIONES_ILIM" >
    </ViewAttribute>
 </ViewObject>

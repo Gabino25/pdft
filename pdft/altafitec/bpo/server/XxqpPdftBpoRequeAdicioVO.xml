@@ -31,7 +31,8 @@
        XxqpPdftBpoRequeAdicioEO.ATTRIBUTE2, 
        XxqpPdftBpoRequeAdicioEO.ATTRIBUTE3, 
        XxqpPdftBpoRequeAdicioEO.ATTRIBUTE4, 
-       XxqpPdftBpoRequeAdicioEO.ATTRIBUTE5"
+       XxqpPdftBpoRequeAdicioEO.ATTRIBUTE5, 
+       XxqpPdftBpoRequeAdicioEO.COMENTARIOS_ILIM"
    FromList="XXQP_PDFT_BPO_REQUE_ADICIO XxqpPdftBpoRequeAdicioEO"
    BindingStyle="OracleName"
    CustomQuery="false"
@@ -228,5 +229,12 @@
       EntityAttrName="Attribute5"
       EntityUsage="XxqpPdftBpoRequeAdicioEO"
       AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ComentariosIlim"
+      IsQueriable="false"
+      EntityAttrName="ComentariosIlim"
+      EntityUsage="XxqpPdftBpoRequeAdicioEO"
+      AliasName="COMENTARIOS_ILIM" >
    </ViewAttribute>
 </ViewObject>

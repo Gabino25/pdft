@@ -2,6 +2,7 @@ package xxqp.oracle.apps.ar.pdft.altafitec.bpo.server;
 
 import oracle.apps.fnd.framework.server.OAViewRowImpl;
 
+import oracle.jbo.domain.ClobDomain;
 import oracle.jbo.domain.Date;
 import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
@@ -49,6 +50,9 @@ public class XxqpPdftBpoServicioVORowImpl extends OAViewRowImpl {
     public static final int MIERCOLES = 33;
     public static final int SABADO = 34;
     public static final int VIERNES = 35;
+    public static final int OTROSILIM = 36;
+    public static final int DIRECCIONBASEILIM = 37;
+    public static final int OBSERVACIONESILIM = 38;
 
     /**This is the default constructor (do not remove)
      */
@@ -462,6 +466,12 @@ public class XxqpPdftBpoServicioVORowImpl extends OAViewRowImpl {
             return getSabado();
         case VIERNES:
             return getViernes();
+        case OTROSILIM:
+            return getOtrosIlim();
+        case DIRECCIONBASEILIM:
+            return getDireccionBaseIlim();
+        case OBSERVACIONESILIM:
+            return getObservacionesIlim();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -580,6 +590,15 @@ public class XxqpPdftBpoServicioVORowImpl extends OAViewRowImpl {
         case VIERNES:
             setViernes((String)value);
             return;
+        case OTROSILIM:
+            setOtrosIlim((ClobDomain)value);
+            return;
+        case DIRECCIONBASEILIM:
+            setDireccionBaseIlim((ClobDomain)value);
+            return;
+        case OBSERVACIONESILIM:
+            setObservacionesIlim((ClobDomain)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -692,5 +711,41 @@ public class XxqpPdftBpoServicioVORowImpl extends OAViewRowImpl {
      */
     public void setViernes(String value) {
         setAttributeInternal(VIERNES, value);
+    }
+
+    /**Gets the attribute value for OTROS_ILIM using the alias name OtrosIlim
+     */
+    public ClobDomain getOtrosIlim() {
+        return (ClobDomain) getAttributeInternal(OTROSILIM);
+    }
+
+    /**Sets <code>value</code> as attribute value for OTROS_ILIM using the alias name OtrosIlim
+     */
+    public void setOtrosIlim(ClobDomain value) {
+        setAttributeInternal(OTROSILIM, value);
+    }
+
+    /**Gets the attribute value for DIRECCION_BASE_ILIM using the alias name DireccionBaseIlim
+     */
+    public ClobDomain getDireccionBaseIlim() {
+        return (ClobDomain) getAttributeInternal(DIRECCIONBASEILIM);
+    }
+
+    /**Sets <code>value</code> as attribute value for DIRECCION_BASE_ILIM using the alias name DireccionBaseIlim
+     */
+    public void setDireccionBaseIlim(ClobDomain value) {
+        setAttributeInternal(DIRECCIONBASEILIM, value);
+    }
+
+    /**Gets the attribute value for OBSERVACIONES_ILIM using the alias name ObservacionesIlim
+     */
+    public ClobDomain getObservacionesIlim() {
+        return (ClobDomain) getAttributeInternal(OBSERVACIONESILIM);
+    }
+
+    /**Sets <code>value</code> as attribute value for OBSERVACIONES_ILIM using the alias name ObservacionesIlim
+     */
+    public void setObservacionesIlim(ClobDomain value) {
+        setAttributeInternal(OBSERVACIONESILIM, value);
     }
 }

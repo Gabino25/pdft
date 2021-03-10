@@ -371,6 +371,15 @@
          <Attr Name="_DisplaySize" Value="2000" />
       </DesignTime>
    </Attribute>
+   <Attribute
+      Name="ComentariosIlim"
+      IsQueriable="false"
+      ColumnName="COMENTARIOS_ILIM"
+      Type="oracle.jbo.domain.ClobDomain"
+      ColumnType="CLOB"
+      SQLType="CLOB"
+      TableName="XXQP_PDFT_BPO_REQUE_ADICIO" >
+   </Attribute>
    <AccessorAttribute
       Name="XxqpPdftBpoHeaderEO"
       Association="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoRequeAdicioFkAssoc"
@@ -431,6 +440,61 @@
          <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
          <Attr Name="_isCheck" Value="true" />
          <Attr Name="_DBObjectName" Value="SYS_C001448457" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669583" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoRequeAdicioEO.Id" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;ID&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669583" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669584" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoRequeAdicioEO.CreatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669584" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669585" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoRequeAdicioEO.CreationDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATION_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669585" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669586" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoRequeAdicioEO.LastUpdatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669586" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669587" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoRequeAdicioEO.LastUpdateDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669587" />
       </DesignTime>
    </Key>
    <Key

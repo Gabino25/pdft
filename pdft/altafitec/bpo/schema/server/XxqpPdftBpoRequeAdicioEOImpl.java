@@ -4,6 +4,7 @@ import oracle.apps.fnd.framework.server.OAEntityDefImpl;
 import oracle.apps.fnd.framework.server.OAEntityImpl;
 
 import oracle.jbo.Key;
+import oracle.jbo.domain.ClobDomain;
 import oracle.jbo.domain.Date;
 import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
@@ -43,7 +44,8 @@ public class XxqpPdftBpoRequeAdicioEOImpl extends OAEntityImpl {
     public static final int ATTRIBUTE3 = 26;
     public static final int ATTRIBUTE4 = 27;
     public static final int ATTRIBUTE5 = 28;
-    public static final int XXQPPDFTBPOHEADEREO = 29;
+    public static final int COMENTARIOSILIM = 29;
+    public static final int XXQPPDFTBPOHEADEREO = 30;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -475,6 +477,8 @@ public class XxqpPdftBpoRequeAdicioEOImpl extends OAEntityImpl {
             return getAttribute4();
         case ATTRIBUTE5:
             return getAttribute5();
+        case COMENTARIOSILIM:
+            return getComentariosIlim();
         case XXQPPDFTBPOHEADEREO:
             return getXxqpPdftBpoHeaderEO();
         default:
@@ -574,6 +578,9 @@ public class XxqpPdftBpoRequeAdicioEOImpl extends OAEntityImpl {
         case ATTRIBUTE5:
             setAttribute5((String)value);
             return;
+        case COMENTARIOSILIM:
+            setComentariosIlim((ClobDomain)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -590,6 +597,18 @@ public class XxqpPdftBpoRequeAdicioEOImpl extends OAEntityImpl {
      */
     public void setXxqpPdftBpoHeaderEO(XxqpPdftBpoHeaderEOImpl value) {
         setAttributeInternal(XXQPPDFTBPOHEADEREO, value);
+    }
+
+    /**Gets the attribute value for ComentariosIlim, using the alias name ComentariosIlim
+     */
+    public ClobDomain getComentariosIlim() {
+        return (ClobDomain)getAttributeInternal(COMENTARIOSILIM);
+    }
+
+    /**Sets <code>value</code> as the attribute value for ComentariosIlim
+     */
+    public void setComentariosIlim(ClobDomain value) {
+        setAttributeInternal(COMENTARIOSILIM, value);
     }
 
     /**Creates a Key object based on given key constituents
