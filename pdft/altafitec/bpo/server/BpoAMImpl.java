@@ -240,7 +240,16 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                            String pStrFechaInicioOperacionValue, 
                            String pStrPartyID,
                            String pStrEjecutivo,
-                           String pStrArticuloOracle) {
+                           String pStrArticuloOracle,
+                           String pStrExamine1FileName, 
+                           String pStrExamine1ContentType, 
+                           BlobDomain Examine1ByteStream, 
+                           String pStrExamine2FileName, 
+                           String pStrExamine2ContentType, 
+                           BlobDomain Examine2ByteStream, 
+                           String pStrExamine3FileName, 
+                           String pStrExamine3ContentType, 
+                           BlobDomain Examine3ByteStream) {
         
            
         XxqpPdftBpoHeaderVOImpl xxqpPdftBpoHeaderVOImpl = getXxqpPdftBpoHeaderVO1();  
@@ -278,6 +287,16 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
             xxqpPdftBpoHeaderVORowImpl.setPartyId(numPartyId);
             xxqpPdftBpoHeaderVORowImpl.setEjecutivo(pStrEjecutivo);
             xxqpPdftBpoHeaderVORowImpl.setArticuloOracle(pStrArticuloOracle);
+            xxqpPdftBpoHeaderVORowImpl.setFileName1(pStrExamine1FileName);
+            xxqpPdftBpoHeaderVORowImpl.setContentType1(pStrExamine1ContentType);
+            xxqpPdftBpoHeaderVORowImpl.setFile1(Examine1ByteStream);
+            xxqpPdftBpoHeaderVORowImpl.setFileName2(pStrExamine2FileName);
+            xxqpPdftBpoHeaderVORowImpl.setContentType2(pStrExamine2ContentType);
+            xxqpPdftBpoHeaderVORowImpl.setFile2(Examine2ByteStream);
+            xxqpPdftBpoHeaderVORowImpl.setFileName3(pStrExamine3FileName);
+            xxqpPdftBpoHeaderVORowImpl.setContentType3(pStrExamine3ContentType);
+            xxqpPdftBpoHeaderVORowImpl.setFile3(Examine3ByteStream);
+          
             xxqpPdftBpoHeaderVOImpl.insertRow(xxqpPdftBpoHeaderVORowImpl);
             
           oADBTransaction.commit();
@@ -440,7 +459,10 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                              String pStrJueves,
                              String pStrViernes,
                              String pStrSabado,
-                             String pStrDomingo
+                             String pStrDomingo,
+                             String pStrOtrosIlimitadoValue, 
+                             String pStrDireccionBaseIlimitadoValue, 
+                             String pStrObservacionesIlimitadoValue
                              ) {
         oracle.jbo.domain.Number numBpoHeaderId=null;
         try {
@@ -484,6 +506,21 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
             xxqpPdftBpoServicioVORowImpl.setViernes(pStrViernes);
             xxqpPdftBpoServicioVORowImpl.setSabado(pStrSabado);
             xxqpPdftBpoServicioVORowImpl.setDomingo(pStrDomingo);
+            if(null!=pStrOtrosIlimitadoValue&&!"".equals(pStrOtrosIlimitadoValue)){
+                xxqpPdftBpoServicioVORowImpl.setOtrosIlim(new oracle.jbo.domain.ClobDomain(pStrOtrosIlimitadoValue));
+            }else{
+                xxqpPdftBpoServicioVORowImpl.setOtrosIlim(null);
+            }
+            if(null!=pStrDireccionBaseIlimitadoValue&&!"".equals(pStrDireccionBaseIlimitadoValue)){
+                xxqpPdftBpoServicioVORowImpl.setDireccionBaseIlim(new oracle.jbo.domain.ClobDomain(pStrDireccionBaseIlimitadoValue));
+            }else{
+                xxqpPdftBpoServicioVORowImpl.setDireccionBaseIlim(null);
+            }
+            if(null!=pStrObservacionesIlimitadoValue&&!"".equals(pStrObservacionesIlimitadoValue)){
+                xxqpPdftBpoServicioVORowImpl.setObservacionesIlim(new oracle.jbo.domain.ClobDomain(pStrObservacionesIlimitadoValue));
+            }else{
+                xxqpPdftBpoServicioVORowImpl.setObservacionesIlim(null);
+            }
             
             xxqpPdftBpoServicioVOImpl.insertRow(xxqpPdftBpoServicioVORowImpl);
             oADBTransaction.commit();
@@ -525,7 +562,8 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                                 String pStrAutomovilValue, 
                                 String pStrGuiaRojiValue, 
                                 String pStrOtrosValue, 
-                                String pStrComentariosValue) {
+                                String pStrComentariosValue,
+                                String pStrComentariosIlimitadoValue) {
         oracle.jbo.domain.Number numBpoHeaderId=null;
         try {
             numBpoHeaderId = new oracle.jbo.domain.Number(pStrBpoHeaderId.toString());
@@ -559,6 +597,11 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
             xxqpPdftBpoRequeAdicioVORowImpl.setGuiaRoji(pStrGuiaRojiValue);
             xxqpPdftBpoRequeAdicioVORowImpl.setOtros(pStrOtrosValue);
             xxqpPdftBpoRequeAdicioVORowImpl.setComentarios(pStrComentariosValue);
+            if(null!=pStrComentariosIlimitadoValue&&!"".equals(pStrComentariosIlimitadoValue)){
+                xxqpPdftBpoRequeAdicioVORowImpl.setComentariosIlim(new oracle.jbo.domain.ClobDomain(pStrComentariosIlimitadoValue));
+            }else{
+                xxqpPdftBpoRequeAdicioVORowImpl.setComentariosIlim(null);
+            }
             xxqpPdftBpoRequeAdicioVOImpl.insertRow(xxqpPdftBpoRequeAdicioVORowImpl);
             oADBTransaction.commit();
         } /** END if(null!=xxqpPdftBpoRequeAdicioVOImpl){ **/
@@ -824,6 +867,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                                ,OAPageContext pageContext
                                ,String pStrNombreCliente
                                ,String pArticuloOracle
+                               ,XxqpPdftBpoHeaderVORowImpl pXxqpPdftBpoHeaderVORowImpl
                                ) {
          System.out.println("Entra enviaCorreos");
          String retval = null;
@@ -922,14 +966,15 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
          map.put("strNumeroFt",strNumeroFt);
          
          if(count>0){
-         testDeliveryManager(pInputStream,map);
+         testDeliveryManager(pInputStream,map,pXxqpPdftBpoHeaderVORowImpl);
          }
           return retval; 
           
      }
      
      private void testDeliveryManager(InputStream inputStream, 
-                                      Map<String, String> map) {
+                                      Map<String, String> map,
+                                      XxqpPdftBpoHeaderVORowImpl pXxqpPdftBpoHeaderVORowImpl) {
          System.out.println("Entra testDeliveryManager.");
          DeliveryManager deliveryManager = null;
          DeliveryRequest deliveryRequest = null; 
@@ -1010,7 +1055,51 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                             messageBodyPart.setFileName("CambioFichaTecnicaBpo"+strNumeroFt+".pdf");
                           }
                        multipart.addBodyPart(messageBodyPart);
-
+              // Part three is attachment
+               if(null!=pXxqpPdftBpoHeaderVORowImpl.getContratoFileName()&&!"".equals(pXxqpPdftBpoHeaderVORowImpl.getContratoFileName())){
+                    try {
+                        addAttachment(multipart
+                                        ,pXxqpPdftBpoHeaderVORowImpl.getContratoFile().getInputStream()
+                                        ,pXxqpPdftBpoHeaderVORowImpl.getContratoFileName()
+                                        ,pXxqpPdftBpoHeaderVORowImpl.getContratoContentType()
+                                       );
+                    } catch (IOException e) {
+                       System.out.println("Exception Contrato:"+e.getMessage());
+                    }
+               }
+              if(null!=pXxqpPdftBpoHeaderVORowImpl.getFileName1()&&!"".equals(pXxqpPdftBpoHeaderVORowImpl.getFileName1())){
+                   try {
+                       addAttachment(multipart
+                                       ,pXxqpPdftBpoHeaderVORowImpl.getFile1().getInputStream()
+                                       ,pXxqpPdftBpoHeaderVORowImpl.getFileName1()
+                                       ,pXxqpPdftBpoHeaderVORowImpl.getContentType1()
+                                      );
+                   } catch (IOException e) {
+                      System.out.println("Exception File 1:"+e.getMessage());
+                   }
+              }
+              if(null!=pXxqpPdftBpoHeaderVORowImpl.getFileName2()&&!"".equals(pXxqpPdftBpoHeaderVORowImpl.getFileName2())){
+                   try {
+                       addAttachment(multipart
+                                       ,pXxqpPdftBpoHeaderVORowImpl.getFile2().getInputStream()
+                                       ,pXxqpPdftBpoHeaderVORowImpl.getFileName2()
+                                       ,pXxqpPdftBpoHeaderVORowImpl.getContentType2()
+                                      );
+                   } catch (IOException e) {
+                      System.out.println("Exception File 2:"+e.getMessage());
+                   }
+              }
+              if(null!=pXxqpPdftBpoHeaderVORowImpl.getFileName3()&&!"".equals(pXxqpPdftBpoHeaderVORowImpl.getFileName3())){
+                   try {
+                       addAttachment(multipart
+                                       ,pXxqpPdftBpoHeaderVORowImpl.getFile3().getInputStream()
+                                       ,pXxqpPdftBpoHeaderVORowImpl.getFileName3()
+                                       ,pXxqpPdftBpoHeaderVORowImpl.getContentType3()
+                                      );
+                   } catch (IOException e) {
+                      System.out.println("Exception File 3:"+e.getMessage());
+                   }
+              }
                        // Send the complete message parts
                        message.setContent(multipart);
               
@@ -1345,6 +1434,19 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
         closeResultSet(resultSet);
         closePreparedStatement(prepStmt);
         return retval; 
+    }
+    
+    private static void addAttachment(Multipart pMultipart
+                                     ,InputStream pInputStream
+                                     ,String pFilename
+                                     ,String pContentType) throws IOException, 
+                                                              MessagingException {
+        
+        DataSource source = new ByteArrayDataSource(pInputStream,pContentType);
+        BodyPart messageBodyPart = new MimeBodyPart();        
+        messageBodyPart.setDataHandler(new DataHandler(source));
+        messageBodyPart.setFileName(pFilename);
+        pMultipart.addBodyPart(messageBodyPart);
     }
     
 }

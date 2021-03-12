@@ -16,6 +16,12 @@ public class BpoHeaderTmpVORowImpl extends OAViewRowImpl {
     public static final int CONTRATOFILENAME = 1;
     public static final int CONTRATO = 2;
     public static final int FECHAINICIOOPERACION = 3;
+    public static final int FILE1 = 4;
+    public static final int FILENAME1 = 5;
+    public static final int FILE2 = 6;
+    public static final int FILENAME2 = 7;
+    public static final int FILE3 = 8;
+    public static final int FILENAME3 = 9;
 
     /**This is the default constructor (do not remove)
      */
@@ -64,6 +70,18 @@ public class BpoHeaderTmpVORowImpl extends OAViewRowImpl {
             return getContrato();
         case FECHAINICIOOPERACION:
             return getFechaInicioOperacion();
+        case FILE1:
+            return getFile1();
+        case FILENAME1:
+            return getFileName1();
+        case FILE2:
+            return getFile2();
+        case FILENAME2:
+            return getFileName2();
+        case FILE3:
+            return getFile3();
+        case FILENAME3:
+            return getFileName3();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -85,6 +103,24 @@ public class BpoHeaderTmpVORowImpl extends OAViewRowImpl {
             return;
         case FECHAINICIOOPERACION:
             setFechaInicioOperacion((Date)value);
+            return;
+        case FILE1:
+            setFile1((BlobDomain)value);
+            return;
+        case FILENAME1:
+            setFileName1((String)value);
+            return;
+        case FILE2:
+            setFile2((BlobDomain)value);
+            return;
+        case FILENAME2:
+            setFileName2((String)value);
+            return;
+        case FILE3:
+            setFile3((BlobDomain)value);
+            return;
+        case FILENAME3:
+            setFileName3((String)value);
             return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
@@ -114,5 +150,77 @@ public class BpoHeaderTmpVORowImpl extends OAViewRowImpl {
      */
     public void setFechaInicioOperacion(Date value) {
         setAttributeInternal(FECHAINICIOOPERACION, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute File1
+     */
+    public BlobDomain getFile1() {
+        return (BlobDomain) getAttributeInternal(FILE1);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute File1
+     */
+    public void setFile1(BlobDomain value) {
+        setAttributeInternal(FILE1, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute FileName1
+     */
+    public String getFileName1() {
+        return (String) getAttributeInternal(FILENAME1);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute FileName1
+     */
+    public void setFileName1(String value) {
+        setAttributeInternal(FILENAME1, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute File2
+     */
+    public BlobDomain getFile2() {
+        return (BlobDomain) getAttributeInternal(FILE2);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute File2
+     */
+    public void setFile2(BlobDomain value) {
+        setAttributeInternal(FILE2, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute FileName2
+     */
+    public String getFileName2() {
+        return (String) getAttributeInternal(FILENAME2);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute FileName2
+     */
+    public void setFileName2(String value) {
+        setAttributeInternal(FILENAME2, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute File3
+     */
+    public BlobDomain getFile3() {
+        return (BlobDomain) getAttributeInternal(FILE3);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute File3
+     */
+    public void setFile3(BlobDomain value) {
+        setAttributeInternal(FILE3, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute FileName3
+     */
+    public String getFileName3() {
+        return (String) getAttributeInternal(FILENAME3);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute FileName3
+     */
+    public void setFileName3(String value) {
+        setAttributeInternal(FILENAME3, value);
     }
 }

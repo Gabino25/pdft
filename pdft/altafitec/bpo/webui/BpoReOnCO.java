@@ -117,7 +117,8 @@ public class BpoReOnCO extends OAControllerImpl
           returnNavigation.setDestination("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/webui/BusquedaDeFichaTecnicaPG");
           
       if(null!=NombreUsuarioEBSBean){
-           NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
+           /** NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());  110320211527 **/
+            NombreUsuarioEBSBean.setValue(pageContext,strPuserPdft); 
        }
        
     BpoAMImpl bpoAMImpl = (BpoAMImpl)pageContext.getApplicationModule(webBean);
@@ -267,12 +268,12 @@ public class BpoReOnCO extends OAControllerImpl
     String strEventParam = pageContext.getParameter(this.EVENT_PARAM);
     
     BpoAMImpl bpoAMImpl = (BpoAMImpl)pageContext.getApplicationModule(webBean);
-    
+    XxqpPdftBpoHeaderVORowImpl xxqpPdftBpoHeaderVORowImpl = null; 
+    xxqpPdftBpoHeaderVORowImpl = (XxqpPdftBpoHeaderVORowImpl)bpoAMImpl.getXxqpPdftBpoHeaderVO1().getCurrentRow();
+      
     if("ModificarEvt".equals(strEventParam)){
         /** Creacion Numeracion de las revisiones **/
         oracle.jbo.domain.Number numRev = null; 
-        XxqpPdftBpoHeaderVORowImpl xxqpPdftBpoHeaderVORowImpl = null; 
-        xxqpPdftBpoHeaderVORowImpl = (XxqpPdftBpoHeaderVORowImpl)bpoAMImpl.getXxqpPdftBpoHeaderVO1().getCurrentRow();
         numRev = xxqpPdftBpoHeaderVORowImpl.getRev();
         if(null==numRev){
             xxqpPdftBpoHeaderVORowImpl.setRev(new oracle.jbo.domain.Number(1));
@@ -361,10 +362,10 @@ public class BpoReOnCO extends OAControllerImpl
             
             byte[] a2Byte =pdfFile.toByteArray(); 
             InputStream inputStream2 = new ByteArrayInputStream(a2Byte);
-            oracle.jbo.domain.Number numBpoNumeroFtReferencia =  (oracle.jbo.domain.Number)bpoAMImpl.getXxqpPdftBpoHeaderVO1().getCurrentRow().getAttribute("NumeroFtReferencia");
-            oracle.jbo.domain.Number numBpoNumeroFt =  (oracle.jbo.domain.Number)bpoAMImpl.getXxqpPdftBpoHeaderVO1().getCurrentRow().getAttribute("NumeroFt");
-            String strNombreCliente = (String)bpoAMImpl.getXxqpPdftBpoHeaderVO1().getCurrentRow().getAttribute("NombreDelCliente");
-            String strArticuloOracle = (String)bpoAMImpl.getXxqpPdftBpoHeaderVO1().getCurrentRow().getAttribute("ArticuloOracle");
+            oracle.jbo.domain.Number numBpoNumeroFtReferencia =  (oracle.jbo.domain.Number)xxqpPdftBpoHeaderVORowImpl.getAttribute("NumeroFtReferencia");
+            oracle.jbo.domain.Number numBpoNumeroFt =  (oracle.jbo.domain.Number)xxqpPdftBpoHeaderVORowImpl.getAttribute("NumeroFt");
+            String strNombreCliente = (String)xxqpPdftBpoHeaderVORowImpl.getAttribute("NombreDelCliente");
+            String strArticuloOracle = (String)xxqpPdftBpoHeaderVORowImpl.getAttribute("ArticuloOracle");
             if(null==numBpoNumeroFtReferencia){
                 numBpoNumeroFtReferencia = new oracle.jbo.domain.Number(0);
             }
@@ -380,6 +381,7 @@ public class BpoReOnCO extends OAControllerImpl
                                                       ,pageContext
                                                       ,strNombreCliente
                                                       ,strArticuloOracle
+                                                      ,xxqpPdftBpoHeaderVORowImpl
                                                       ); 
             System.out.println("strCorreos:"+strCorreos);
             

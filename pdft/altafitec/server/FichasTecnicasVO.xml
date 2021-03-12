@@ -13,8 +13,8 @@ select myp.id
         ,myp.numero_ft 
         ,myp.status
         ,myp.party_id
-       ,(select nvl(p.known_as,p.party_name) 
-          from XXQP_PDFT_CLIENTES_INFO_V p
+       ,(select p.party_name 
+          from hz_parties p
          where p.party_id = myp.party_id) nombre_del_cliente
        ,myp.unidad_de_negocio_c
        ,myp.empresa_que_factura_c
@@ -33,8 +33,8 @@ where id = myp.ejecutivo) ejecutivo
         ,bpo.numero_ft 
         ,bpo.status
         ,bpo.party_id
-       ,(select nvl(p.known_as,p.party_name) 
-          from XXQP_PDFT_CLIENTES_INFO_V p
+       ,(select p.party_name 
+          from hz_parties p
          where p.party_id = bpo.party_id) nombre_del_cliente
        ,bpo.unidad_de_negocio_c
        ,bpo.empresa_que_factura_c
@@ -53,8 +53,8 @@ where id = bpo.ejecutivo) ejecutivo
         ,qplabs.numero_ft 
         ,qplabs.status
         ,qplabs.party_id
-       ,(select nvl(p.known_as,p.party_name) 
-          from XXQP_PDFT_CLIENTES_INFO_V p
+       ,(select p.party_name
+          from hz_parties p
          where p.party_id = qplabs.party_id) nombre_del_cliente
        ,qplabs.unidad_de_negocio_c
        ,qplabs.empresa_que_factura_c

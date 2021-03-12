@@ -82,6 +82,33 @@ public class BpoUpdCO extends OAControllerImpl
   public void processRequest(OAPageContext pageContext, OAWebBean webBean)
   {
     super.processRequest(pageContext, webBean);
+    
+      String strPuserPdft = null; 
+      System.out.println("BpoUpdCO strPuserPdft:"+strPuserPdft);
+      if(null!=pageContext.getTransientSessionValue("tsUserPdft")){
+          strPuserPdft = pageContext.getTransientSessionValue("tsUserPdft").toString();
+          System.out.println("BpoUpdCO strPuserPdft:"+strPuserPdft);
+      }
+      
+      String strPuserPdftId = null; 
+      if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+          strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+          System.out.println("BpoUpdCO strPuserPdftId:"+strPuserPdftId);
+      }
+      
+      if(null==strPuserPdft||null==strPuserPdftId||"".equals(strPuserPdft)||"".equals(strPuserPdftId)){
+         pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
+                                   ,null /*functionName*/
+                                   ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                   ,null /*menuName*/
+                                   ,null /*parameters*/
+                                   ,false /*retainAM*/
+                                   ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                   ,OAException.ERROR /*messagingLevel*/
+                                   );
+      return;
+      }
+    
       OAWebBean body = pageContext.getRootWebBean(); 
       if (body instanceof OABodyBean){
            ((OABodyBean)body).setBlockOnEverySubmit(true); 
@@ -91,6 +118,9 @@ public class BpoUpdCO extends OAControllerImpl
       
       OAPageLayoutBean PageLayoutRNBean = (OAPageLayoutBean)webBean.findChildRecursive("PageLayoutRN"); 
       OAMessageFileUploadBean ContratoExamineBean = (OAMessageFileUploadBean)webBean.findChildRecursive("ContratoFileUpload");
+      OAMessageFileUploadBean Examine1Bean = (OAMessageFileUploadBean)webBean.findChildRecursive("FileUpload1");
+      OAMessageFileUploadBean Examine2Bean = (OAMessageFileUploadBean)webBean.findChildRecursive("FileUpload2");
+      OAMessageFileUploadBean Examine3Bean = (OAMessageFileUploadBean)webBean.findChildRecursive("FileUpload3");
       OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
       OASubTabLayoutBean subTabLayoutRNBean = (OASubTabLayoutBean)webBean.findChildRecursive("SubTabLayoutRN");
       OATableBean PdftBpoPrecioBean = (OATableBean)webBean.findChildRecursive("PdftBpoPrecio");
@@ -102,7 +132,8 @@ public class BpoUpdCO extends OAControllerImpl
       }
       
       if(null!=NombreUsuarioEBSBean){
-           NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
+         /**  NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName()); 110320211529 **/
+          NombreUsuarioEBSBean.setValue(pageContext,strPuserPdft);
        }
        
         if(null!=ContratoExamineBean){
@@ -110,6 +141,21 @@ public class BpoUpdCO extends OAControllerImpl
             ContratoExamineBean.setAttributeValue(DOWNLOAD_FILE_NAME,displayNameBoundValue); 
         }
         
+      if(null!=Examine1Bean){
+          OADataBoundValueViewObject displayNameBoundValue =    new OADataBoundValueViewObject(ContratoExamineBean, "FileName1"); 
+          Examine1Bean.setAttributeValue(DOWNLOAD_FILE_NAME,displayNameBoundValue); 
+      }
+      
+      if(null!=Examine2Bean){
+          OADataBoundValueViewObject displayNameBoundValue =    new OADataBoundValueViewObject(ContratoExamineBean, "FileName2"); 
+          Examine2Bean.setAttributeValue(DOWNLOAD_FILE_NAME,displayNameBoundValue); 
+      }
+      
+      if(null!=Examine3Bean){
+          OADataBoundValueViewObject displayNameBoundValue =    new OADataBoundValueViewObject(ContratoExamineBean, "FileName3"); 
+          Examine3Bean.setAttributeValue(DOWNLOAD_FILE_NAME,displayNameBoundValue); 
+      }
+      
       if(null!=subTabLayoutRNBean){
         gIntSelectedIndex =  subTabLayoutRNBean.getSelectedIndex(pageContext);
       }
@@ -535,6 +581,7 @@ public class BpoUpdCO extends OAControllerImpl
                                                              ,pageContext
                                                              ,strNombreCliente
                                                              ,strArticuloOracle
+                                                             ,xxqpPdftBpoHeaderVORowImpl
                                                              ); 
                    System.out.println("strCorreos:"+strCorreos);
                    

@@ -68,6 +68,33 @@ public class BpoCO extends OAControllerImpl
   public void processRequest(OAPageContext pageContext, OAWebBean webBean)
   {
     super.processRequest(pageContext, webBean);
+    
+      String strPuserPdft = null; 
+      System.out.println("BpoCO strPuserPdft:"+strPuserPdft);
+      if(null!=pageContext.getTransientSessionValue("tsUserPdft")){
+          strPuserPdft = pageContext.getTransientSessionValue("tsUserPdft").toString();
+          System.out.println("BpoCO strPuserPdft:"+strPuserPdft);
+      }
+      
+      String strPuserPdftId = null; 
+      if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+          strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+          System.out.println("BpoCO strPuserPdftId:"+strPuserPdftId);
+      }
+      
+      if(null==strPuserPdft||null==strPuserPdftId||"".equals(strPuserPdft)||"".equals(strPuserPdftId)){
+         pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
+                                   ,null /*functionName*/
+                                   ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                   ,null /*menuName*/
+                                   ,null /*parameters*/
+                                   ,false /*retainAM*/
+                                   ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                   ,OAException.ERROR /*messagingLevel*/
+                                   );
+      return;
+      }
+    
     OAWebBean body = pageContext.getRootWebBean(); 
      if (body instanceof OABodyBean){
           ((OABodyBean)body).setBlockOnEverySubmit(true); 
@@ -85,6 +112,9 @@ public class BpoCO extends OAControllerImpl
     OAMessageTextInputBean IVABean = (OAMessageTextInputBean)webBean.findChildRecursive("IVA");
     OAMessageStyledTextBean TotalBean = (OAMessageStyledTextBean)webBean.findChildRecursive("Total");
     OAMessageFileUploadBean ContratoExamineBean = (OAMessageFileUploadBean)webBean.findChildRecursive("ContratoExamine");
+    OAMessageFileUploadBean Examine1Bean = (OAMessageFileUploadBean)webBean.findChildRecursive("Examine1");
+    OAMessageFileUploadBean Examine2Bean = (OAMessageFileUploadBean)webBean.findChildRecursive("Examine2");
+    OAMessageFileUploadBean Examine3Bean = (OAMessageFileUploadBean)webBean.findChildRecursive("Examine3");
     OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
     OASubTabLayoutBean subTabLayoutRNBean = (OASubTabLayoutBean)webBean.findChildRecursive("SubTabLayoutRN");
     OAPageLayoutBean PageLayoutRNBean = (OAPageLayoutBean)webBean.findChildRecursive("PageLayoutRN");
@@ -109,42 +139,14 @@ public class BpoCO extends OAControllerImpl
          *******************************************************************/
       } 
      
-         String strPuserPdft = null; 
-         if(null!=NombreUsuarioEBSBean){
-          if(null!=pageContext.getTransientSessionValue("tsUserPdft")){
-              strPuserPdft =pageContext.getTransientSessionValue("tsUserPdft").toString();
-          }
-          //NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
-           NombreUsuarioEBSBean.setValue(pageContext,strPuserPdft);
-         }
-         
-         String strPuserPdftId = null;
-         if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
-          strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
-          System.out.println("AltaFichaTecnicaCO strPuserPdftId:"+strPuserPdftId);
-          if(null!=EjecutivoBean){
-                EjecutivoBean.setValue(pageContext,strPuserPdftId);
-                EjecutivoBean.setReadOnly(true);
-          }
-         }
-         
-         
-         
-         if(null==strPuserPdft||null==strPuserPdftId||"".equals(strPuserPdft)||"".equals(strPuserPdftId)){
-          pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
-                                    ,null /*functionName*/
-                                    ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
-                                    ,null /*menuName*/
-                                    ,null /*parameters*/
-                                    ,false /*retainAM*/
-                                    ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
-                                    ,OAException.ERROR /*messagingLevel*/
-                                    );
-         return;
-         }
+      if(null!=EjecutivoBean){
+            EjecutivoBean.setValue(pageContext,strPuserPdftId);
+            EjecutivoBean.setReadOnly(true);
+      }
       
     if(null!=NombreUsuarioEBSBean){
-         NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
+        /** NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());  110320211539 **/
+         NombreUsuarioEBSBean.setValue(pageContext,strPuserPdft);
      }
         
       if(null==PageLayoutRNBean){
@@ -240,6 +242,19 @@ public class BpoCO extends OAControllerImpl
           ContratoExamineBean.setAttributeValue(DOWNLOAD_FILE_NAME,displayNameBoundValue); 
       }   
    
+      if(null!=Examine1Bean){
+          OADataBoundValueViewObject displayNameBoundValue =    new OADataBoundValueViewObject(Examine1Bean, "FileName1"); 
+          Examine1Bean.setAttributeValue(DOWNLOAD_FILE_NAME,displayNameBoundValue); 
+      }   
+      if(null!=Examine2Bean){
+          OADataBoundValueViewObject displayNameBoundValue =    new OADataBoundValueViewObject(Examine2Bean, "FileName2"); 
+          Examine2Bean.setAttributeValue(DOWNLOAD_FILE_NAME,displayNameBoundValue); 
+      }   
+      if(null!=Examine3Bean){
+          OADataBoundValueViewObject displayNameBoundValue =    new OADataBoundValueViewObject(Examine3Bean, "FileName3"); 
+          Examine3Bean.setAttributeValue(DOWNLOAD_FILE_NAME,displayNameBoundValue); 
+      }   
+      
       if(!pageContext.isFormSubmission()){
             String lstrPartyID = null; 
             OAFormValueBean PartyIdBean = (OAFormValueBean)webBean.findChildRecursive("PartyId");
@@ -394,6 +409,15 @@ public class BpoCO extends OAControllerImpl
       String strContratoExamineFileName = null; 
       String strContratoExamineContentType = null; 
       BlobDomain ContratoExamineByteStream = null;
+      String strExamine1FileName = null; 
+      String strExamine1ContentType = null; 
+      BlobDomain Examine1ByteStream = null;
+      String strExamine2FileName = null; 
+      String strExamine2ContentType = null; 
+      BlobDomain Examine2ByteStream = null;
+      String strExamine3FileName = null; 
+      String strExamine3ContentType = null; 
+      BlobDomain Examine3ByteStream = null;
       String strEstatusValue = null; 
       String strUnidadDeNegocioValue = null; 
       String strEmpresaQueFacturaValue = null; 
@@ -417,6 +441,34 @@ public class BpoCO extends OAControllerImpl
         ContratoExamineByteStream = (BlobDomain)ContratoExamineUploadData.selectValue(null,strContratoExamineFileName);
         if(null==ContratoExamineByteStream){
             ContratoExamineByteStream = (BlobDomain)bpoAMImpl.getBpoHeaderTmpVO1().getCurrentRow().getAttribute("ContratoFile");
+        }
+      }
+      
+      DataObject Examine1UploadData =  pageContext.getNamedDataObject("Examine1"); 
+      if(null!=Examine1UploadData){
+        strExamine1FileName = Examine1UploadData.selectValue(null,"UPLOAD_FILE_NAME").toString();
+        strExamine1ContentType = Examine1UploadData.selectValue(null,"UPLOAD_FILE_MIME_TYPE").toString();
+        Examine1ByteStream = (BlobDomain)Examine1UploadData.selectValue(null,strExamine1FileName);
+        if(null==Examine1ByteStream){
+            Examine1ByteStream = (BlobDomain)bpoAMImpl.getBpoHeaderTmpVO1().getCurrentRow().getAttribute("File1");
+        }
+      }
+      DataObject Examine2UploadData =  pageContext.getNamedDataObject("Examine2"); 
+      if(null!=Examine2UploadData){
+        strExamine2FileName = Examine2UploadData.selectValue(null,"UPLOAD_FILE_NAME").toString();
+        strExamine2ContentType = Examine2UploadData.selectValue(null,"UPLOAD_FILE_MIME_TYPE").toString();
+        Examine2ByteStream = (BlobDomain)Examine2UploadData.selectValue(null,strExamine2FileName);
+        if(null==Examine2ByteStream){
+            Examine2ByteStream = (BlobDomain)bpoAMImpl.getBpoHeaderTmpVO1().getCurrentRow().getAttribute("File2");
+        }
+      }
+      DataObject Examine3UploadData =  pageContext.getNamedDataObject("Examine3"); 
+      if(null!=Examine3UploadData){
+        strExamine3FileName = Examine3UploadData.selectValue(null,"UPLOAD_FILE_NAME").toString();
+        strExamine3ContentType = Examine3UploadData.selectValue(null,"UPLOAD_FILE_MIME_TYPE").toString();
+        Examine3ByteStream = (BlobDomain)Examine3UploadData.selectValue(null,strExamine3FileName);
+        if(null==Examine3ByteStream){
+            Examine3ByteStream = (BlobDomain)bpoAMImpl.getBpoHeaderTmpVO1().getCurrentRow().getAttribute("File3");
         }
       }
       
@@ -492,6 +544,7 @@ public class BpoCO extends OAControllerImpl
        String strRecoleDocumMaterValue = null; 
        String strEntregaAdomicilioValue = null; 
        String strOtrosValue = null; 
+       String strOtrosIlimitadoValue = null; 
       /** java.sql.Timestamp  datFechaInicioDelServicioValue = null;  **/
        String strFechaInicioDelServicioValue = null;
        String strDiasSemanaLaboraraValue = null; 
@@ -500,6 +553,8 @@ public class BpoCO extends OAControllerImpl
        String strHorarioDeTrabajoValue = null; 
        String strDireccionBaseValue = null; 
        String strObservacionesValue = null; 
+       String strDireccionBaseIlimitadoValue = null; 
+       String strObservacionesIlimitadoValue = null; 
        String strHoraInicial = null; 
        String strMinutoInicial = null; 
        String strHoraFinal = null; 
@@ -565,6 +620,7 @@ public class BpoCO extends OAControllerImpl
        strRecoleDocumMaterValue =this.getValueFromOAMessageCheckBoxBean(pageContext,webBean,"RecoleDocumMater");   
        strEntregaAdomicilioValue = this.getValueFromOAMessageCheckBoxBean(pageContext,webBean,"EntregaAdomicilio"); 
        strOtrosValue = this.getValueFromOAMessageTextInputBean(pageContext,webBean,"Otros"); 
+       strOtrosIlimitadoValue = this.getValueFromOAMessageTextInputBean(pageContext,webBean,"OtrosIlim"); 
        System.out.println("gIntSelectedIndex:"+gIntSelectedIndex);
       System.out.println("strCobranzaValue:"+strCobranzaValue);
       System.out.println("strVentasValue:"+strVentasValue);
@@ -602,7 +658,8 @@ public class BpoCO extends OAControllerImpl
        strHorarioDeTrabajoValue = this.getValueFromOAMessageChoiceBean(pageContext,webBean,"HorarioDeTrabajo"); 
        strDireccionBaseValue = this.getValueFromOAMessageTextInputBean(pageContext,webBean,"DireccionBase"); 
        strObservacionesValue = this.getValueFromOAMessageTextInputBean(pageContext,webBean,"Observaciones");
-       
+      strDireccionBaseIlimitadoValue = this.getValueFromOAMessageTextInputBean(pageContext,webBean,"DireccionBaseIlim"); 
+      strObservacionesIlimitadoValue = this.getValueFromOAMessageTextInputBean(pageContext,webBean,"ObservacionesIlim");
       /*************************************************************************
        ************** Requerimientos Adicionales********************************
        *************************************************************************/
@@ -675,7 +732,8 @@ public class BpoCO extends OAControllerImpl
         String strOperGuiaRojiValue = null; 
         String strOperOtrosValue = null; 
         String strOperComentariosValue = null; 
-        
+        String strOperComentariosIlimitadoValue = null; 
+      
       strOperMoto125Value=this.getValueFromOAMessageCheckBoxBean(pageContext,webBean,"OperMoto125");
            strOperCascoValue=this.getValueFromOAMessageCheckBoxBean(pageContext,webBean,"OperCasco");
            strOperCajaGrandeValue=this.getValueFromOAMessageCheckBoxBean(pageContext,webBean,"OperCajaGrande");
@@ -690,8 +748,9 @@ public class BpoCO extends OAControllerImpl
            strOperAutomovilValue=this.getValueFromOAMessageCheckBoxBean(pageContext,webBean,"OperAutomovil");
            strOperGuiaRojiValue=this.getValueFromOAMessageCheckBoxBean(pageContext,webBean,"OperGuiaRoji");
            strOperOtrosValue=this.getValueFromOAMessageCheckBoxBean(pageContext,webBean,"OperOtros");
-      strOperComentariosValue = this.getValueFromOAMessageTextInputBean(pageContext,webBean,"OperComentarios");
-        
+           strOperComentariosValue = this.getValueFromOAMessageTextInputBean(pageContext,webBean,"OperComentarios");
+           strOperComentariosIlimitadoValue = this.getValueFromOAMessageTextInputBean(pageContext,webBean,"OperComentariosIlim");
+      
       if("N".equals(strOperMoto125Value)
        &&"N".equals(strOperCascoValue)
        &&"N".equals(strOperCajaGrandeValue)
@@ -976,6 +1035,15 @@ public class BpoCO extends OAControllerImpl
                                            , strPartyID
                                            , strEjecutivoValue
                                            , strArticuloOracle
+                                           , strExamine1FileName 
+                                           , strExamine1ContentType 
+                                           , Examine1ByteStream 
+                                           , strExamine2FileName 
+                                           , strExamine2ContentType 
+                                           , Examine2ByteStream 
+                                           , strExamine3FileName 
+                                           , strExamine3ContentType 
+                                           , Examine3ByteStream 
                                            );
                       
                       bpoAMImpl.fillPrecio(strBpoHeaderId);  
@@ -1005,6 +1073,9 @@ public class BpoCO extends OAControllerImpl
                                             ,strViernes
                                             ,strSabado
                                             ,strDomingo
+                                            ,strOtrosIlimitadoValue
+                                            ,strDireccionBaseIlimitadoValue 
+                                            ,strObservacionesIlimitadoValue 
                                             ); 
                     bpoAMImpl.fillRequeAdicio(strBpoHeaderId
                                              ,"GYC"
@@ -1023,6 +1094,7 @@ public class BpoCO extends OAControllerImpl
                                              ,strGyCGuiaRojiValue  
                                              ,strGyCOtrosValue 
                                              ,strGyCComentariosValue 
+                                             ,null
                                              );  
                     bpoAMImpl.fillRequeAdicio(strBpoHeaderId
                                              ,"OPER"
@@ -1041,6 +1113,7 @@ public class BpoCO extends OAControllerImpl
                                              ,strOperGuiaRojiValue  
                                              ,strOperOtrosValue 
                                              ,strOperComentariosValue 
+                                             ,strOperComentariosIlimitadoValue
                                              );  
                     bpoAMImpl.fillRequeAdicio(strBpoHeaderId
                                              ,"ADQU"
@@ -1059,6 +1132,7 @@ public class BpoCO extends OAControllerImpl
                                              ,strAdquGuiaRojiValue  
                                              ,strAdquOtrosValue 
                                              ,strAdquComentariosValue 
+                                             ,null
                                              );      
                     
                        bpoAMImpl.fillPago(strBpoHeaderId

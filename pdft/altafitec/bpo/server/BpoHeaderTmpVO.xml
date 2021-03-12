@@ -49,4 +49,58 @@
       AliasName="VIEW_ATTR"
       SQLType="DATE" >
    </ViewAttribute>
+   <ViewAttribute
+      Name="File1"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.BlobDomain"
+      ColumnType="BLOB"
+      AliasName="VIEW_ATTR"
+      SQLType="BLOB" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FileName1"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="File2"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.BlobDomain"
+      ColumnType="BLOB"
+      AliasName="VIEW_ATTR"
+      SQLType="BLOB" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FileName2"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="File3"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.BlobDomain"
+      ColumnType="BLOB"
+      AliasName="VIEW_ATTR"
+      SQLType="BLOB" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FileName3"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
 </ViewObject>

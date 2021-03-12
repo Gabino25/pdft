@@ -94,6 +94,21 @@
                               <oa:messageStyledText id="FactAcc" prompt="Cuenta Facturacion" viewName="XxqpPdftBpoHeaderVO1" viewAttr="Factacc" styleClass="OraFieldText"/>
                            </ui:contents>
                         </oa:cellFormat>
+                        <oa:cellFormat id="region5742">
+                           <ui:contents>
+                              <oa:messageDownload id="Download1" prompt="" viewName="XxqpPdftBpoHeaderVO1" viewAttr="FileName1" contentViewAttributeName="File1" fileContentType="ContentType1"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region5743">
+                           <ui:contents>
+                              <oa:messageDownload id="Download2" prompt="" viewName="XxqpPdftBpoHeaderVO1" viewAttr="FileName2" contentViewAttributeName="File2" fileContentType="ContentType2"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region5744">
+                           <ui:contents>
+                              <oa:messageDownload id="Download3" prompt="" viewName="XxqpPdftBpoHeaderVO1" viewAttr="FileName3" contentViewAttributeName="File2" fileContentType="ContentType3"/>
+                           </ui:contents>
+                        </oa:cellFormat>
                      </ui:contents>
                   </oa:rowLayout>
                </ui:contents>
@@ -175,6 +190,7 @@
                                           <oa:tableLayout id="TabLayOtros" hAlign="center">
                                              <ui:contents>
                                                 <oa:messageTextInput id="Otros" prompt="Otros" styleClass="OraFieldText" rows="3" viewName="XxqpPdftBpoServicioVO1" viewAttr="Otros" readOnly="true" maximumLength="4000" required="yes"/>
+                                                <oa:messageTextInput id="OtrosIlim" prompt="Otros" styleClass="OraFieldText" rows="3" viewName="XxqpPdftBpoServicioVO1" viewAttr="OtrosIlim" readOnly="true" required="yes" dataType="CLOB"/>
                                              </ui:contents>
                                           </oa:tableLayout>
                                        </ui:contents>
@@ -320,6 +336,8 @@
                                              <ui:contents>
                                                 <oa:messageTextInput id="DireccionBase" maximumLength="4000" styleClass="OraFieldText" prompt="Direccion Base Donde se Reporta el Mensajero" columns="90" rows="2" readOnly="true" viewName="XxqpPdftBpoServicioVO1" viewAttr="DireccionBase" required="yes"/>
                                                 <oa:messageTextInput id="Observaciones" maximumLength="4000" prompt="Observaciones" styleClass="OraFieldText" columns="90" rows="2" viewName="XxqpPdftBpoServicioVO1" viewAttr="Observaciones" readOnly="true"/>
+                                                <oa:messageTextInput id="DireccionBaseIlim" styleClass="OraFieldText" prompt="Direccion Base Donde se Reporta el Mensajero" columns="90" rows="2" readOnly="true" viewName="XxqpPdftBpoServicioVO1" viewAttr="DireccionBaseIlim" required="yes" dataType="CLOB"/>
+                                                <oa:messageTextInput id="ObservacionesIlim" prompt="Observaciones" styleClass="OraFieldText" columns="90" rows="2" viewName="XxqpPdftBpoServicioVO1" viewAttr="ObservacionesIlim" readOnly="true" dataType="CLOB"/>
                                              </ui:contents>
                                           </oa:tableLayout>
                                        </ui:contents>
@@ -460,6 +478,7 @@
                            </ui:contents>
                         </oa:tableLayout>
                         <oa:messageTextInput id="OperComentarios" maximumLength="4000" prompt="Comentarios" styleClass="OraFieldText" columns="150" readOnly="true" viewName="XxqpPdftBpoRequeAdicioOperVO1" viewAttr="Comentarios"/>
+                        <oa:messageTextInput id="OperComentariosIlim" prompt="Comentarios Ilimitado" styleClass="OraFieldText" columns="150" readOnly="true" viewName="XxqpPdftBpoRequeAdicioOperVO1" viewAttr="ComentariosIlim" dataType="CLOB" rows="3"/>
                         <oa:tableLayout id="TabLayTituloAdqu" hAlign="center" rendered="false">
                            <ui:contents>
                               <oa:rowLayout id="RowLayTituloAdqu">

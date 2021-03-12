@@ -1108,7 +1108,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                                             ,pXxqpPdftMypHeaderVORowImpl.getContratoContentType()
                                            );
                         } catch (IOException e) {
-                           System.out.println("Exception File1:"+e.getMessage());
+                           System.out.println("Exception Contrato:"+e.getMessage());
                         }
                    }
                    if(null!=pXxqpPdftMypHeaderVORowImpl.getFileName1()&&!"".equals(pXxqpPdftMypHeaderVORowImpl.getFileName1())){

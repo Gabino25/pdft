@@ -110,6 +110,21 @@
                               </oa:messageLovInput>
                            </ui:contents>
                         </oa:cellFormat>
+                        <oa:cellFormat id="region5742">
+                           <ui:contents>
+                              <oa:messageFileUpload id="FileUpload1" prompt="" viewName="XxqpPdftBpoHeaderVO1" viewAttr="File1" dataType="BLOB"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region5743">
+                           <ui:contents>
+                              <oa:messageFileUpload id="FileUpload2" prompt="" viewName="XxqpPdftBpoHeaderVO1" viewAttr="File2" dataType="BLOB"/>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region5744">
+                           <ui:contents>
+                              <oa:messageFileUpload id="FileUpload3" prompt="" viewName="XxqpPdftBpoHeaderVO1" viewAttr="File3" dataType="BLOB"/>
+                           </ui:contents>
+                        </oa:cellFormat>
                      </ui:contents>
                   </oa:rowLayout>
                </ui:contents>
@@ -207,6 +222,7 @@
                                           <oa:tableLayout id="TabLayOtros" hAlign="center">
                                              <ui:contents>
                                                 <oa:messageTextInput id="Otros" prompt="Otros" styleClass="OraFieldText" rows="3" viewName="XxqpPdftBpoServicioVO1" viewAttr="Otros" readOnly="false" maximumLength="4000" required="no"/>
+                                                <oa:messageTextInput id="OtrosIlim" prompt="Otros Ilimitado" styleClass="OraFieldText" rows="3" viewName="XxqpPdftBpoServicioVO1" viewAttr="OtrosIlim" readOnly="false" required="no" dataType="CLOB"/>
                                              </ui:contents>
                                           </oa:tableLayout>
                                        </ui:contents>
@@ -378,6 +394,8 @@
                                              <ui:contents>
                                                 <oa:messageTextInput id="DireccionBase" maximumLength="4000" styleClass="OraFieldText" prompt="Direccion Base Donde se Reporta el Mensajero" columns="90" rows="2" readOnly="false" viewName="XxqpPdftBpoServicioVO1" viewAttr="DireccionBase" required="yes"/>
                                                 <oa:messageTextInput id="Observaciones" maximumLength="4000" prompt="Observaciones" styleClass="OraFieldText" columns="90" rows="2" viewName="XxqpPdftBpoServicioVO1" viewAttr="Observaciones" readOnly="false"/>
+                                                <oa:messageTextInput id="DireccionBaseIlim" styleClass="OraFieldText" prompt="Direccion Base Donde se Reporta el Mensajero Ilimitado" columns="90" rows="2" readOnly="false" viewName="XxqpPdftBpoServicioVO1" viewAttr="DireccionBaseIlim" required="yes" dataType="CLOB"/>
+                                                <oa:messageTextInput id="ObservacionesIlim" prompt="Observaciones Ilimitado" styleClass="OraFieldText" columns="90" rows="2" viewName="XxqpPdftBpoServicioVO1" viewAttr="ObservacionesIlim" readOnly="false" dataType="CLOB"/>
                                              </ui:contents>
                                           </oa:tableLayout>
                                        </ui:contents>
@@ -518,6 +536,7 @@
                            </ui:contents>
                         </oa:tableLayout>
                         <oa:messageTextInput id="OperComentarios" maximumLength="4000" prompt="Comentarios" styleClass="OraFieldText" columns="150" readOnly="false" viewName="XxqpPdftBpoRequeAdicioOperVO1" viewAttr="Comentarios"/>
+                        <oa:messageTextInput id="OperComentariosIlim" prompt="Comentarios Ilimitado" styleClass="OraFieldText" columns="150" readOnly="false" viewName="XxqpPdftBpoRequeAdicioOperVO1" viewAttr="ComentariosIlim" dataType="CLOB" rows="3"/>
                         <oa:tableLayout id="TabLayTituloAdqu" hAlign="center" rendered="false">
                            <ui:contents>
                               <oa:rowLayout id="RowLayTituloAdqu">
