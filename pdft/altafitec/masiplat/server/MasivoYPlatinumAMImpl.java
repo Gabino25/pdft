@@ -570,7 +570,8 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                                  String pStrDiasOperacionForaneoValue, 
                                  String pStrCierreElectronicoValue, 
                                  String pStrEnvioPiezasFisicasValue, 
-                                 String pStrComentariosSobreDistribucionValue) {
+                                 String pStrComentariosSobreDistribucionValue,
+                                 String strComentariosSobreDistribucionIlimValue) {
         oracle.jbo.domain.Number numMasiYPlatHeaderId = null; 
         oracle.jbo.domain.Number numDiasOperacionLocal = null; 
         oracle.jbo.domain.Number numDiasOperacionForaneo = null; 
@@ -617,6 +618,11 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
             xxqpPdftMypDistribucionVORowImpl.setCierreElectronico(numCierreElectronico);
             xxqpPdftMypDistribucionVORowImpl.setEnvioPiezasFisicas(numEnvioPiezasFisicas);
             xxqpPdftMypDistribucionVORowImpl.setComentariosDistribucion(pStrComentariosSobreDistribucionValue); 
+            if(null!=strComentariosSobreDistribucionIlimValue&&!"".equals(strComentariosSobreDistribucionIlimValue)){
+              xxqpPdftMypDistribucionVORowImpl.setComentariosDistribucionIlim(new oracle.jbo.domain.ClobDomain(strComentariosSobreDistribucionIlimValue));
+             }else{
+              xxqpPdftMypDistribucionVORowImpl.setComentariosDistribucionIlim(null);
+            }
             
             xxqpPdftMypDistribucionVOImpl.insertRow(xxqpPdftMypDistribucionVORowImpl);
             oADBTransaction.commit();
@@ -855,7 +861,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                 retvalxml = retvalxml+line;
             }
             
-            System.out.println(retvalxml);
+            /** System.out.println(retvalxml); **/
             retval = retvalxml;
             bufferReader.close();
             reader.close();
@@ -1070,7 +1076,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                                                           }
                                                           }
                                                  );
-         session.setDebug(true);                                       
+         /** session.setDebug(true);   120320211619 debug muy grande**/                                    
          Message message = new MimeMessage(session);
          try {
               message.setFrom( new InternetAddress(MasivoYPlatinumAMImpl.strXxqpPdftEmail));

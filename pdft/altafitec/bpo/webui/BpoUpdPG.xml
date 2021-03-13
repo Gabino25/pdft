@@ -746,6 +746,7 @@
                   </oa:contentContainer>
                </ui:contents>
             </oa:subTabLayout>
+            <oa:messageTextInput id="ModificacionesRealizadas" required="yes" dataType="CLOB" prompt="Modificaciones Realizadas" rows="3" columns="200" viewName="XxqpPdftBpoHeaderVO1" viewAttr="ModifRealiz" rendered="false"/>
             <oa:pageButtonBar id="PageButtonBarRN">
                <ui:contents>
                   <oa:button id="Procesar" text="Procesar" prompt="Procesar">

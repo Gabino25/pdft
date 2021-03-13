@@ -601,7 +601,7 @@ public class MasivoYPlatinumCO extends OAControllerImpl
      String strCierreElectronicoValue = null; 
      String strEnvioPiezasFisicasValue = null; 
      String strComentariosSobreDistribucionValue = null; 
-     
+     String strComentariosSobreDistribucionIlimValue = null; 
       
      
      strDigitalizacionDeAcusesValue = this.getValueFromOAMessageCheckBoxBean(pageContext,webBean,"DigitalizacionDeAcuses");
@@ -620,6 +620,7 @@ public class MasivoYPlatinumCO extends OAControllerImpl
      strCierreElectronicoValue =this.getValueFromOAMessageTextInputBean(pageContext,webBean,"CierreElectronico");
      strEnvioPiezasFisicasValue =this.getValueFromOAMessageTextInputBean(pageContext,webBean,"EnvioPiezasFisicas");
      strComentariosSobreDistribucionValue=this.getValueFromOAMessageTextInputBean(pageContext,webBean,"ComentariosSobreDistribucion");
+     strComentariosSobreDistribucionIlimValue=this.getValueFromOAMessageTextInputBean(pageContext,webBean,"ComentariosSobreDistribucionIlim");
       
        
     /***************************************************************************
@@ -783,6 +784,7 @@ public class MasivoYPlatinumCO extends OAControllerImpl
                                              , strCierreElectronicoValue
                                              , strEnvioPiezasFisicasValue 
                                              , strComentariosSobreDistribucionValue   
+                                             , strComentariosSobreDistribucionIlimValue
                                                );                                  
      
         if(null!=masivoYPlatinumAMImpl){

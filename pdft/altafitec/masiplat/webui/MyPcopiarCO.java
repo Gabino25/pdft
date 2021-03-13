@@ -147,7 +147,17 @@ public class MyPcopiarCO extends OAControllerImpl{
              /**  newPdftMypHeaderVORowImpl.setEjecutivo(xxqpPdftMypHeaderVORowImpl.getEjecutivo());  010320211346 **/
               newPdftMypHeaderVORowImpl.setEjecutivo(strPuserPdftId);
                newPdftMypHeaderVORowImpl.setArticuloOracle(xxqpPdftMypHeaderVORowImpl.getArticuloOracle()); /** 17042020 Cuando se realiza un cambio de precio debe permanecer el articulo Oracle **/
-              
+               
+                newPdftMypHeaderVORowImpl.setFileName1(xxqpPdftMypHeaderVORowImpl.getFileName1());
+                newPdftMypHeaderVORowImpl.setContentType1(xxqpPdftMypHeaderVORowImpl.getContentType1());
+                newPdftMypHeaderVORowImpl.setFile1(xxqpPdftMypHeaderVORowImpl.getFile1());
+               newPdftMypHeaderVORowImpl.setFileName2(xxqpPdftMypHeaderVORowImpl.getFileName2());
+               newPdftMypHeaderVORowImpl.setContentType2(xxqpPdftMypHeaderVORowImpl.getContentType2());
+               newPdftMypHeaderVORowImpl.setFile2(xxqpPdftMypHeaderVORowImpl.getFile2());
+               newPdftMypHeaderVORowImpl.setFileName3(xxqpPdftMypHeaderVORowImpl.getFileName3());
+               newPdftMypHeaderVORowImpl.setContentType3(xxqpPdftMypHeaderVORowImpl.getContentType3());
+               newPdftMypHeaderVORowImpl.setFile3(xxqpPdftMypHeaderVORowImpl.getFile3());
+               
               xxqpPdftMypHeaderVOImpl.insertRow(newPdftMypHeaderVORowImpl);
               oADBTransaction.commit();
            } /** END while(MypHeaderIterator.hasNext()){ **/
@@ -232,6 +242,7 @@ public class MyPcopiarCO extends OAControllerImpl{
                newPdftMypCoberturaVORowImpl.setAttribute4(xxqpPdftMypCoberturaVORowImpl.getAttribute4());
                newPdftMypCoberturaVORowImpl.setAttribute5(xxqpPdftMypCoberturaVORowImpl.getAttribute5());
                newPdftMypCoberturaVORowImpl.setComentarios(xxqpPdftMypCoberturaVORowImpl.getComentarios());
+               newPdftMypCoberturaVORowImpl.setComentariosIlim(xxqpPdftMypCoberturaVORowImpl.getComentariosIlim());
                
                xxqpPdftMypCoberturaVOImpl.insertRow(newPdftMypCoberturaVORowImpl);
                oADBTransaction.commit();
@@ -271,7 +282,7 @@ public class MyPcopiarCO extends OAControllerImpl{
              newPdftMypDistribucionVORowImpl.setAttribute3(xxqpPdftMypDistribucionVORowImpl.getAttribute3());
              newPdftMypDistribucionVORowImpl.setAttribute4(xxqpPdftMypDistribucionVORowImpl.getAttribute4());
              newPdftMypDistribucionVORowImpl.setAttribute5(xxqpPdftMypDistribucionVORowImpl.getAttribute5());
-             
+             newPdftMypDistribucionVORowImpl.setComentariosDistribucionIlim(xxqpPdftMypDistribucionVORowImpl.getComentariosDistribucionIlim());
              
              xxqpPdftMypDistribucionVOImpl.insertRow(newPdftMypDistribucionVORowImpl);
              oADBTransaction.commit();
@@ -374,6 +385,7 @@ public class MyPcopiarCO extends OAControllerImpl{
               newPdftMypComentsProcesosVORowImpl.setMypHeaderId(numMasiYPlatHeaderId);
               newPdftMypComentsProcesosVORowImpl.setRegion("COMENTARIOS");
               newPdftMypComentsProcesosVORowImpl.setComentariosInstrucc(xxqpPdftMypComentsProcesosVORowImpl.getComentariosInstrucc());
+              newPdftMypComentsProcesosVORowImpl.setComentariosInstruccIlim(xxqpPdftMypComentsProcesosVORowImpl.getComentariosInstruccIlim());
               xxqpPdftMypComentsProcesosVOImpl.insertRow(newPdftMypComentsProcesosVORowImpl);
               oADBTransaction.commit();
               

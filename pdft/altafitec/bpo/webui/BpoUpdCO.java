@@ -124,6 +124,7 @@ public class BpoUpdCO extends OAControllerImpl
       OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
       OASubTabLayoutBean subTabLayoutRNBean = (OASubTabLayoutBean)webBean.findChildRecursive("SubTabLayoutRN");
       OATableBean PdftBpoPrecioBean = (OATableBean)webBean.findChildRecursive("PdftBpoPrecio");
+      OAMessageTextInputBean ModificacionesRealizadasBean = (OAMessageTextInputBean)webBean.findChildRecursive("ModificacionesRealizadas");
       
       if(null!=PdftBpoPrecioBean){
        if(null!=PdftBpoPrecioBean.getName(pageContext)){
@@ -177,7 +178,11 @@ public class BpoUpdCO extends OAControllerImpl
             bpoAMImpl.intiAllBpoRequeAdicioVOS(strBpoHeaderId); 
             bpoAMImpl.initBpoPagoVO(strBpoHeaderId); 
             bpoAMImpl.initReglasDeNegocioVO(strBpoHeaderId);
-            
+            if(null!=ModificacionesRealizadasBean){
+                if("CAMBIO_DE_PRECIO".equals(xxqpPdftBpoHeaderVORowImpl.getStatus())){
+                    ModificacionesRealizadasBean.setRendered(true);
+                }
+            }
         }
       }else{
       
@@ -487,7 +492,7 @@ public class BpoUpdCO extends OAControllerImpl
           ServletOutputStream os=null;
          
            String strXML = null;
-              strXML = bpoAMImpl.executeBpoGetInfo();
+              strXML = bpoAMImpl.executeBpoGetInfo("N");
               try {
                   os = response.getOutputStream();
                   byte[] aByte = strXML.getBytes();
@@ -550,7 +555,7 @@ public class BpoUpdCO extends OAControllerImpl
                  strArticuloOracle = xxqpPdftBpoHeaderVORowImpl.getArticuloOracle();
                 }
                 bpoAMImpl.getOADBTransaction().commit();          /** Se solicito Cambiar el status antes de enviar el correo 25072018 **/
-               strXML = bpoAMImpl.executeBpoGetInfo();
+               strXML = bpoAMImpl.executeBpoGetInfo(strModificacion);
                try {
                    byte[] aByte = strXML.getBytes();
                    ByteArrayInputStream inputStream = new ByteArrayInputStream(aByte);

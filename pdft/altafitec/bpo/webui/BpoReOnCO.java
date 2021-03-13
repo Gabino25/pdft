@@ -305,7 +305,7 @@ public class BpoReOnCO extends OAControllerImpl
           ServletOutputStream os=null;
          
            String strXML = null;
-              strXML = bpoAMImpl.executeBpoGetInfo();
+              strXML = bpoAMImpl.executeBpoGetInfo("N");
               try {
                   os = response.getOutputStream();
                   byte[] aByte = strXML.getBytes();
@@ -340,7 +340,7 @@ public class BpoReOnCO extends OAControllerImpl
           
     if("EnviarPorCorreoEvt".equals(strEventParam)){
         String strXML = null;
-        strXML = bpoAMImpl.executeBpoGetInfo();
+        strXML = bpoAMImpl.executeBpoGetInfo("N");
         try {
             byte[] aByte = strXML.getBytes();
             ByteArrayInputStream inputStream = new ByteArrayInputStream(aByte);

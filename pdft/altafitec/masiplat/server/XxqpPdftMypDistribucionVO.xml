@@ -30,7 +30,8 @@
        XxqpPdftMypDistribucionEO.ATTRIBUTE2, 
        XxqpPdftMypDistribucionEO.ATTRIBUTE3, 
        XxqpPdftMypDistribucionEO.ATTRIBUTE4, 
-       XxqpPdftMypDistribucionEO.ATTRIBUTE5"
+       XxqpPdftMypDistribucionEO.ATTRIBUTE5, 
+       XxqpPdftMypDistribucionEO.COMENTARIOS_DISTRIBUCION_ILIM"
    FromList="XXQP_PDFT_MYP_DISTRIBUCION XxqpPdftMypDistribucionEO"
    BindingStyle="OracleName"
    CustomQuery="false"
@@ -220,5 +221,12 @@
       EntityAttrName="Attribute5"
       EntityUsage="XxqpPdftMypDistribucionEO"
       AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ComentariosDistribucionIlim"
+      IsQueriable="false"
+      EntityAttrName="ComentariosDistribucionIlim"
+      EntityUsage="XxqpPdftMypDistribucionEO"
+      AliasName="COMENTARIOS_DISTRIBUCION_ILIM" >
    </ViewAttribute>
 </ViewObject>

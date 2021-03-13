@@ -354,6 +354,15 @@
          <Attr Name="_DisplaySize" Value="2000" />
       </DesignTime>
    </Attribute>
+   <Attribute
+      Name="ComentariosDistribucionIlim"
+      IsQueriable="false"
+      ColumnName="COMENTARIOS_DISTRIBUCION_ILIM"
+      Type="oracle.jbo.domain.ClobDomain"
+      ColumnType="CLOB"
+      SQLType="CLOB"
+      TableName="XXQP_PDFT_MYP_DISTRIBUCION" >
+   </Attribute>
    <AccessorAttribute
       Name="XxqpPdftMypHeaderEO"
       Association="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypDistribucionFkAssoc"
@@ -403,6 +412,50 @@
          <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
          <Attr Name="_isCheck" Value="true" />
          <Attr Name="_DBObjectName" Value="SYS_C001448392" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669568" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypDistribucionEO.CreatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669568" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669569" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypDistribucionEO.CreationDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;CREATION_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669569" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669570" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypDistribucionEO.LastUpdatedBy" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATED_BY&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669570" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC001669571" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypDistribucionEO.LastUpdateDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;LAST_UPDATE_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C001669571" />
       </DesignTime>
    </Key>
    <Key

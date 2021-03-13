@@ -370,8 +370,8 @@
                               </oa:rowLayout>
                            </ui:contents>
                         </oa:tableLayout>
-                        <oa:messageTextInput id="Comentarios" prompt="Comentarios" columns="150" viewName="XxqpPdftMypCoberturaVO1" viewAttr="Comentarios" readOnly="true" maximumLength="4000"/>
-                        <oa:messageTextInput id="ComentariosIlim" prompt="Comentarios Ilimitados" columns="150" viewName="XxqpPdftMypCoberturaVO1" viewAttr="ComentariosIlim" readOnly="true" dataType="CLOB" rows="3"/>
+                        <oa:messageTextInput id="Comentarios" prompt="Comentarios" columns="150" viewName="XxqpPdftMypCoberturaVO1" viewAttr="Comentarios" readOnly="true" maximumLength="4000" rendered="false"/>
+                        <oa:messageTextInput id="ComentariosIlim" prompt="Comentarios" columns="150" viewName="XxqpPdftMypCoberturaVO1" viewAttr="ComentariosIlim" readOnly="true" dataType="CLOB" rows="3"/>
                      </ui:contents>
                   </oa:contentContainer>
                   <oa:contentContainer id="DistribucionCont" width="100%" text="Distribucion">
@@ -447,7 +447,8 @@
                                                                         <oa:cellFormat id="CellComentarios2">
                                                                            <ui:contents>
                                                                               <oa:rawText id="RawTextComentariosSobreDistribucion" text="Comentarios Sobre Distribucion"/>
-                                                                              <oa:messageTextInput id="ComentariosSobreDistribucion" maximumLength="4000" styleClass="OraFieldText" rows="3" columns="90" readOnly="true" viewName="XxqpPdftMypDistribucionVO1" viewAttr="ComentariosDistribucion"/>
+                                                                              <oa:messageTextInput id="ComentariosSobreDistribucion" maximumLength="4000" styleClass="OraFieldText" rows="3" columns="90" readOnly="true" viewName="XxqpPdftMypDistribucionVO1" viewAttr="ComentariosDistribucion" rendered="false"/>
+                                                                              <oa:messageTextInput id="ComentariosSobreDistribucionIlim" styleClass="OraFieldText" rows="3" columns="90" readOnly="true" viewName="XxqpPdftMypDistribucionVO1" viewAttr="ComentariosDistribucionIlim" dataType="CLOB"/>
                                                                            </ui:contents>
                                                                         </oa:cellFormat>
                                                                      </ui:contents>
@@ -503,8 +504,8 @@
                               </oa:rowLayout>
                            </ui:contents>
                         </oa:tableLayout>
-                        <oa:messageTextInput id="ComentariosOInstrucciones" prompt="Comentarios o Instricciones Especiales" maximumLength="4000" columns="150" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftMypComentsProcesosVO1" viewAttr="ComentariosInstrucc"/>
-                        <oa:messageTextInput id="ComentariosOInstruccionesIlim" prompt="Comentarios o Instricciones Especiales Ilimitados" columns="150" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftMypComentsProcesosVO1" viewAttr="ComentariosInstruccIlim" dataType="CLOB" rows="3"/>
+                        <oa:messageTextInput id="ComentariosOInstrucciones" prompt="Comentarios o Instricciones Especiales" maximumLength="4000" columns="150" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftMypComentsProcesosVO1" viewAttr="ComentariosInstrucc" rendered="false"/>
+                        <oa:messageTextInput id="ComentariosOInstruccionesIlim" prompt="Comentarios o Instrucciones" columns="150" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftMypComentsProcesosVO1" viewAttr="ComentariosInstruccIlim" dataType="CLOB" rows="3"/>
                      </ui:contents>
                   </oa:contentContainer>
                   <oa:contentContainer id="ReglasDeNegocio" text="Reglas de Negocio">

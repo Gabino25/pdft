@@ -1086,7 +1086,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                                                         }
                                                         }
                                                );
-        session.setDebug(true);
+        /** session.setDebug(true); 120320211621 Debug muy grande **/
         Message message = new MimeMessage(session);
         try {
           message.setFrom( new InternetAddress(AltaDeClienteAMImpl.strXxqpPdftEmail));

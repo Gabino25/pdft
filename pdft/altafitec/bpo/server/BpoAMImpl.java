@@ -768,13 +768,14 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
         
     }
 
-    public String executeBpoGetInfo(){
+    public String executeBpoGetInfo(String pModificacion){
         String retval = null; 
         String strCallableStmt = " BEGIN \n" + 
                                  "  APPS.XXQP_PDFT_BPO_PKG.GET_INFO ( PSO_ERRMSG         => :1\n" + 
                                  "                                  , PSO_ERRCOD         => :2\n" + 
                                  "                                  , PCO_INFO           => :3\n" + 
-                                 "                                  , PNI_BPO_HEADER_ID  => :4 "+
+                                 "                                  , PNI_BPO_HEADER_ID  => :4\n "+
+                                 "                                  , PSI_MODIF          => :5\n" + 
                                  "                                  );\n" + 
                                  " END; \n";
         OADBTransaction oadbtransaction = (OADBTransaction)getTransaction();
@@ -786,6 +787,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
             oraclecallablestatement.registerOutParameter(2,Types.VARCHAR);
             oraclecallablestatement.registerOutParameter(3,Types.CLOB);
             oraclecallablestatement.setDouble(4,numBpoHeaderId.doubleValue());
+            oraclecallablestatement.setString(5,pModificacion);
             oraclecallablestatement.execute();
             java.sql.Clob retvalClob = oraclecallablestatement.getClob(3);
             java.io.Reader reader =retvalClob.getCharacterStream();
@@ -795,7 +797,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
             while((line = bufferReader.readLine())!=null){
                 retvalxml = retvalxml+line;
             }
-            System.out.println("retvalxml:"+retvalxml);
+            /** System.out.println("retvalxml:"+retvalxml); **/
             retval = retvalxml;
             bufferReader.close();
             reader.close();
@@ -1026,7 +1028,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                                                           }
                                                           }
                                                  );
-          session.setDebug(true);
+          /** session.setDebug(true); 120320211620 Debug muy grande **/
           Message message = new MimeMessage(session);
           try {
               message.setFrom( new InternetAddress(BpoAMImpl.strXxqpPdftEmail));

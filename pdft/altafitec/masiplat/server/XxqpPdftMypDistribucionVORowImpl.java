@@ -2,6 +2,7 @@ package xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server;
 
 import oracle.apps.fnd.framework.server.OAViewRowImpl;
 
+import oracle.jbo.domain.ClobDomain;
 import oracle.jbo.domain.Date;
 import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
@@ -41,6 +42,7 @@ public class XxqpPdftMypDistribucionVORowImpl extends OAViewRowImpl {
     public static final int ATTRIBUTE3 = 25;
     public static final int ATTRIBUTE4 = 26;
     public static final int ATTRIBUTE5 = 27;
+    public static final int COMENTARIOSDISTRIBUCIONILIM = 28;
 
     /**This is the default constructor (do not remove)
      */
@@ -450,6 +452,8 @@ public class XxqpPdftMypDistribucionVORowImpl extends OAViewRowImpl {
             return getAttribute4();
         case ATTRIBUTE5:
             return getAttribute5();
+        case COMENTARIOSDISTRIBUCIONILIM:
+            return getComentariosDistribucionIlim();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -544,9 +548,24 @@ public class XxqpPdftMypDistribucionVORowImpl extends OAViewRowImpl {
         case ATTRIBUTE5:
             setAttribute5((String)value);
             return;
+        case COMENTARIOSDISTRIBUCIONILIM:
+            setComentariosDistribucionIlim((ClobDomain)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
         }
+    }
+
+    /**Gets the attribute value for COMENTARIOS_DISTRIBUCION_ILIM using the alias name ComentariosDistribucionIlim
+     */
+    public ClobDomain getComentariosDistribucionIlim() {
+        return (ClobDomain) getAttributeInternal(COMENTARIOSDISTRIBUCIONILIM);
+    }
+
+    /**Sets <code>value</code> as attribute value for COMENTARIOS_DISTRIBUCION_ILIM using the alias name ComentariosDistribucionIlim
+     */
+    public void setComentariosDistribucionIlim(ClobDomain value) {
+        setAttributeInternal(COMENTARIOSDISTRIBUCIONILIM, value);
     }
 }

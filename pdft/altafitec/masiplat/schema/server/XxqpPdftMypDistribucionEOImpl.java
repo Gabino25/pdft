@@ -4,6 +4,7 @@ import oracle.apps.fnd.framework.server.OAEntityDefImpl;
 import oracle.apps.fnd.framework.server.OAEntityImpl;
 
 import oracle.jbo.Key;
+import oracle.jbo.domain.ClobDomain;
 import oracle.jbo.domain.Date;
 import oracle.jbo.domain.Number;
 import oracle.jbo.server.AttributeDefImpl;
@@ -42,7 +43,8 @@ public class XxqpPdftMypDistribucionEOImpl extends OAEntityImpl {
     public static final int ATTRIBUTE3 = 25;
     public static final int ATTRIBUTE4 = 26;
     public static final int ATTRIBUTE5 = 27;
-    public static final int XXQPPDFTMYPHEADEREO = 28;
+    public static final int COMENTARIOSDISTRIBUCIONILIM = 28;
+    public static final int XXQPPDFTMYPHEADEREO = 29;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -460,6 +462,8 @@ public class XxqpPdftMypDistribucionEOImpl extends OAEntityImpl {
             return getAttribute4();
         case ATTRIBUTE5:
             return getAttribute5();
+        case COMENTARIOSDISTRIBUCIONILIM:
+            return getComentariosDistribucionIlim();
         case XXQPPDFTMYPHEADEREO:
             return getXxqpPdftMypHeaderEO();
         default:
@@ -556,6 +560,9 @@ public class XxqpPdftMypDistribucionEOImpl extends OAEntityImpl {
         case ATTRIBUTE5:
             setAttribute5((String)value);
             return;
+        case COMENTARIOSDISTRIBUCIONILIM:
+            setComentariosDistribucionIlim((ClobDomain)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -572,6 +579,18 @@ public class XxqpPdftMypDistribucionEOImpl extends OAEntityImpl {
      */
     public void setXxqpPdftMypHeaderEO(XxqpPdftMypHeaderEOImpl value) {
         setAttributeInternal(XXQPPDFTMYPHEADEREO, value);
+    }
+
+    /**Gets the attribute value for ComentariosDistribucionIlim, using the alias name ComentariosDistribucionIlim
+     */
+    public ClobDomain getComentariosDistribucionIlim() {
+        return (ClobDomain)getAttributeInternal(COMENTARIOSDISTRIBUCIONILIM);
+    }
+
+    /**Sets <code>value</code> as the attribute value for ComentariosDistribucionIlim
+     */
+    public void setComentariosDistribucionIlim(ClobDomain value) {
+        setAttributeInternal(COMENTARIOSDISTRIBUCIONILIM, value);
     }
 
     /**Creates a Key object based on given key constituents
