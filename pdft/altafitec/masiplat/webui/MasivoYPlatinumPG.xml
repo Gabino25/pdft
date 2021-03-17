@@ -490,7 +490,7 @@
                                           <oa:table id="OtrosProcesosTmp">
                                              <ui:contents>
                                                 <oa:messageStyledText id="OtrosProcesoId" dataType="NUMBER" prompt="ProcesoId" viewName="OtrosProcesosTmpVO1" viewAttr="ProcesoId" styleClass="OraFieldText" rendered="false"/>
-                                                <oa:messageTextInput id="OtrosProceso" dataType="VARCHAR2" prompt="Otros Procesos" viewName="OtrosProcesosTmpVO1" viewAttr="Proceso" styleClass="OraFieldText" maximumLength="30" columns="30"/>
+                                                <oa:messageTextInput id="OtrosProceso" dataType="VARCHAR2" prompt="Otros Procesos" viewName="OtrosProcesosTmpVO1" viewAttr="Proceso" styleClass="OraFieldText" maximumLength="4000" columns="30"/>
                                                 <oa:messageCheckBox id="OtrosSeleccionar" dataType="VARCHAR2" text="Seleccionar" prompt="Seleccionar" viewName="OtrosProcesosTmpVO1" viewAttr="Seleccionar" styleClass="OraFieldText"/>
                                                 <oa:messageTextInput id="OtrosPrecio" dataType="NUMBER" prompt="Precio" viewName="OtrosProcesosTmpVO1" viewAttr="Precio" rendered="true" styleClass="OraFieldNumber" totalValue="true"/>
                                              </ui:contents>

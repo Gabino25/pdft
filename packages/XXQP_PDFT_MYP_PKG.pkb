@@ -52,8 +52,8 @@ CURSOR get_myp_head_info (cur_myp_header_id number) IS
  myp_head.ATTRIBUTE3, 
  myp_head.ATTRIBUTE4, 
  myp_head.ATTRIBUTE5,
- (select nvl(p.known_as,p.party_name) /** 15042020 **/
- from xxqp_pdft_clientes_info_v p /**24042020**/
+ (select p.party_name /** 15042020 **/
+ from hz_parties p /**24042020**/
  where p.party_id = myp_head.party_id) nombre_del_cliente,
  (select p.party_name 
  from hz_parties p
@@ -229,7 +229,8 @@ where myp_cob.MYP_HEADER_ID = cur_myp_header_id;
  myp_dist.ATTRIBUTE2, 
  myp_dist.ATTRIBUTE3, 
  myp_dist.ATTRIBUTE4, 
- myp_dist.ATTRIBUTE5
+ myp_dist.ATTRIBUTE5,
+ myp_dist.COMENTARIOS_DISTRIBUCION_ILIM
 FROM XXQP_PDFT_MYP_DISTRIBUCION myp_dist
 where myp_dist.MYP_HEADER_ID = cur_myp_header_id; 
 
@@ -776,7 +777,12 @@ dbms_lob.append(lc_info,'<PLAZA_PROPIETARIA>'||myp_cob_info_rec.PLAZA_PROPIETARI
  dbms_lob.append(lc_info,'<TC_REGIONAL>'||myp_cob_info_rec.TC_REGIONAL||'</TC_REGIONAL>'); 
  dbms_lob.append(lc_info,'<TC_LOCAL>'||myp_cob_info_rec.TC_LOCAL||'</TC_LOCAL>'); 
 --  lc_info := lc_info||'<MENCIONAR_ESTADOS>'||'<![CDATA' || '['|| 'Hola<br/>Hola' || ']' || ']>'||'</MENCIONAR_ESTADOS>';
- dbms_lob.append(lc_info,'<MENCIONAR_ESTADOS>'||myp_cob_info_rec.MENCIONAR_ESTADOS||'</MENCIONAR_ESTADOS>');
+ /** dbms_lob.append(lc_info,'<MENCIONAR_ESTADOS>'||myp_cob_info_rec.MENCIONAR_ESTADOS||'</MENCIONAR_ESTADOS>'); **/
+ xxqp_pdft_myp_pkg.split_varchar2(PCI_CLOB_REP          => lc_info
+                                                 ,PSI_VARCHAR_ALIM   => myp_cob_info_rec.MENCIONAR_ESTADOS
+                                                 ,PSI_NODE                  => 'MEN_EST_R'
+                                                 ,PSI_NODE_CHILD        => 'MEN_EST'
+                                                  );
  dbms_lob.append(lc_info,'<ENTREGA_LOCAL>'||trim(to_char(myp_cob_info_rec.ENTREGA_LOCAL,gs_currency_format))||'</ENTREGA_LOCAL>');
  dbms_lob.append(lc_info,'<ENTREGA_FORANEO>'||trim(to_char(myp_cob_info_rec.ENTREGA_FORANEO,gs_currency_format))||'</ENTREGA_FORANEO>');
  dbms_lob.append(lc_info,'<DR_LOCAL>'||trim(to_char(myp_cob_info_rec.DR_LOCAL,gs_currency_format))||'</DR_LOCAL>');
@@ -865,8 +871,8 @@ dbms_lob.append(lc_info,'<PLAZA_PROPIETARIA>'||myp_cob_info_rec.PLAZA_PROPIETARI
  dbms_lob.append(lc_info,'<ENVIO_PIEZAS_FISICAS>'||myp_dist_info_rec.ENVIO_PIEZAS_FISICAS||'</ENVIO_PIEZAS_FISICAS>'); 
  
  /*dbms_lob.append(lc_info,'<COMENTARIOS_DISTRIBUCION>'||replace_char_esp(myp_dist_info_rec.COMENTARIOS_DISTRIBUCION)||'</COMENTARIOS_DISTRIBUCION>');*/
-  xxqp_pdft_myp_pkg.split_varchar2(PCI_CLOB_REP           => lc_info
-                                                    ,PSI_VARCHAR_ALIM   => myp_dist_info_rec.COMENTARIOS_DISTRIBUCION
+  xxqp_pdft_myp_pkg.split_ilim(PCI_CLOB_REP           => lc_info
+                                                    ,PCI_CLOB_ALIM   => myp_dist_info_rec.COMENTARIOS_DISTRIBUCION_ILIM
                                                     ,PSI_NODE                  => 'COM_DIST_R'
                                                     ,PSI_NODE_CHILD        => 'COM_DIST'
                                                     );
@@ -1310,7 +1316,11 @@ ln_nth          number := 0;
            dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE||'>');     
          dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE_CHILD||'>'||ls_substr_clob||'</'||PSI_NODE_CHILD||'>');     
          dbms_lob.append(PCI_CLOB_REP,'</'||PSI_NODE||'>');
-         
+   
+     elsif (v_offset-1) = v_length_clob AND ln_nth=0 AND lc_clob_tmp is not null then      
+          dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE||'>');     
+          dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE_CHILD||'>'||lc_clob_tmp||'</'||PSI_NODE_CHILD||'>');     
+          dbms_lob.append(PCI_CLOB_REP,'</'||PSI_NODE||'>');
         end if;
     
   

@@ -12,6 +12,7 @@ CREATE OR REPLACE package xxqp_pdft_bpo_pkg is
  ,pso_errcod out varchar2
  ,pco_info out clob
  ,pni_bpo_header_id in number
+ ,psi_modif in varchar2
  ); 
 
  procedure get_client_info(pso_errmsg out varchar2
@@ -30,6 +31,6 @@ CREATE OR REPLACE package xxqp_pdft_bpo_pkg is
  ,pso_domingo out varchar2 
  ); 
  
- end APPS.xxqp_pdft_bpo_pkg; 
+ end APPS.xxqp_pdft_bpo_pkg;
 /
 

@@ -14,7 +14,8 @@ gs_currency_format varchar2(2000) := '$999,999,999,999,999,990.99';
  decode(bpo_head.STATUS,'PRELIMINAR','En captura',
  'ABIERTA','Activa' ,
  'CERRADA','Cerrada',
- 'CANCELADA','Cancelada' ) STATUS_MEANING,
+ 'CANCELADA','Cancelada',
+ 'CAMBIO_DE_PRECIO','Cambio de Precio' ) STATUS_MEANING,
  bpo_head.NUMERO_FT_REFERENCIA, 
  bpo_head.PARTY_ID, 
  bpo_head.PDFT_CLIENTE_HEADER_ID, 
@@ -45,13 +46,14 @@ gs_currency_format varchar2(2000) := '$999,999,999,999,999,990.99';
  bpo_head.ATTRIBUTE3, 
  bpo_head.ATTRIBUTE4, 
  bpo_head.ATTRIBUTE5,
-(select nvl(p.known_as,p.party_name) /* 15042020 */ 
- from xxqp_pdft_clientes_info_v p /** 24042020 **/
+(select p.party_name /* 15042020 */ 
+ from hz_parties p /** 24042020 **/
  where p.party_id = bpo_head.party_id) nombre_del_cliente,
  (select usuario 
  from XXQP_PDFT_USUARIOS_RO
  where id = bpo_head.ejecutivo ) ejecutivo,
- bpo_head.articulo_oracle
+ bpo_head.articulo_oracle,
+ bpo_head.modif_realiz
 FROM XXQP_PDFT_BPO_HEADER bpo_head
 where bpo_head.id =cur_bpo_header_id; /* 52*/
 
@@ -105,7 +107,10 @@ where bpo_head.id =cur_bpo_header_id; /* 52*/
  decode(bpo_serv.JUEVES,'Y','J','')||','||
  decode(bpo_serv.VIERNES,'Y','V','')||','||
  decode(bpo_serv.SABADO,'Y','S','')||','||
- decode(bpo_serv.DOMINGO,'Y','D','') DIAS_SEMANA_LABORARA_V2
+ decode(bpo_serv.DOMINGO,'Y','D','') DIAS_SEMANA_LABORARA_V2,
+ bpo_serv.OTROS_ILIM,
+ bpo_serv.DIRECCION_BASE_ILIM, 
+ bpo_serv.OBSERVACIONES_ILIM
 FROM XXQP_PDFT_BPO_SERVICIO bpo_serv
  where bpo_serv.bpo_header_id = cur_bpo_header_id; /*52*/
  
@@ -174,7 +179,8 @@ WHERE bpo_gyc.CATEGORIA='GYC'
  bpo_oper.ATTRIBUTE2, 
  bpo_oper.ATTRIBUTE3, 
  bpo_oper.ATTRIBUTE4, 
- bpo_oper.ATTRIBUTE5
+ bpo_oper.ATTRIBUTE5,
+ bpo_oper.COMENTARIOS_ILIM
 FROM XXQP_PDFT_BPO_REQUE_ADICIO bpo_oper
 WHERE bpo_oper.CATEGORIA = 'OPER'
 and bpo_oper.bpo_header_id = cur_bpo_header_id; /*52*/
@@ -321,6 +327,7 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  ,pso_errcod => ls_errcod
  ,pco_info => lc_info
  ,pni_bpo_header_id => ln_bpo_header_id
+ ,psi_modif => 'N'
  );
  
  fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info)); 
@@ -349,6 +356,7 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  ,pso_errcod out varchar2
  ,pco_info out clob
  ,pni_bpo_header_id in number
+ ,psi_modif in varchar2
  ) is
  lc_info clob := ''; 
  
@@ -377,19 +385,31 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  LOOP
  FETCH get_bpo_head_info INTO bpo_head_info_rec;
  EXIT WHEN get_bpo_head_info%NOTFOUND;
- lc_info := lc_info||'<UNIDAD_DE_NEGOCIO>'||replace_char_esp(bpo_head_info_rec.UNIDAD_DE_NEGOCIO_M)||'</UNIDAD_DE_NEGOCIO>'; 
- lc_info := lc_info||'<NOMBRE_CLIENTE>'||replace_char_esp(bpo_head_info_rec.nombre_del_cliente)||'</NOMBRE_CLIENTE>'; 
- lc_info := lc_info||'<EMPRESA_QUE_FACTURA>'||replace_char_esp(bpo_head_info_rec.empresa_que_factura_m)||'</EMPRESA_QUE_FACTURA>'; 
- lc_info := lc_info||'<EJECUTIVO>'||replace_char_esp(bpo_head_info_rec.EJECUTIVO)||'</EJECUTIVO>'; 
- lc_info := lc_info||'<NUMERO_FT>'||bpo_head_info_rec.NUMERO_FT||'</NUMERO_FT>'; 
- lc_info := lc_info||'<STATUS_MEANING>'||replace_char_esp(bpo_head_info_rec.STATUS_MEANING)||'</STATUS_MEANING>'; 
- lc_info := lc_info||'<CREATION_DATE>'||TO_CHAR(bpo_head_info_rec.creation_date,'DD-MON-YYYY', 'NLS_DATE_LANGUAGE = SPANISH')||'</CREATION_DATE>'; 
- lc_info := lc_info||'<ARTICULO_ORACLE>'||bpo_head_info_rec.ARTICULO_ORACLE||'</ARTICULO_ORACLE>';
+ dbms_lob.append(lc_info,'<UNIDAD_DE_NEGOCIO>'||replace_char_esp(bpo_head_info_rec.UNIDAD_DE_NEGOCIO_M)||'</UNIDAD_DE_NEGOCIO>'); 
+ dbms_lob.append(lc_info,'<NOMBRE_CLIENTE>'||replace_char_esp(bpo_head_info_rec.nombre_del_cliente)||'</NOMBRE_CLIENTE>'); 
+ dbms_lob.append(lc_info,'<EMPRESA_QUE_FACTURA>'||replace_char_esp(bpo_head_info_rec.empresa_que_factura_m)||'</EMPRESA_QUE_FACTURA>'); 
+ dbms_lob.append(lc_info,'<EJECUTIVO>'||replace_char_esp(bpo_head_info_rec.EJECUTIVO)||'</EJECUTIVO>'); 
+ dbms_lob.append(lc_info,'<NUMERO_FT>'||bpo_head_info_rec.NUMERO_FT||'</NUMERO_FT>'); 
+ dbms_lob.append(lc_info,'<STATUS_MEANING>'||replace_char_esp(bpo_head_info_rec.STATUS_MEANING)||'</STATUS_MEANING>'); 
+ dbms_lob.append(lc_info,'<CREATION_DATE>'||TO_CHAR(bpo_head_info_rec.creation_date,'DD-MON-YYYY', 'NLS_DATE_LANGUAGE = SPANISH')||'</CREATION_DATE>'); 
+ dbms_lob.append(lc_info,'<ARTICULO_ORACLE>'||bpo_head_info_rec.ARTICULO_ORACLE||'</ARTICULO_ORACLE>');
  fnd_file.put_line(fnd_file.log,'<ARTICULO_ORACLE>'||bpo_head_info_rec.ARTICULO_ORACLE||'</ARTICULO_ORACLE>');
 
  END LOOP;
  CLOSE get_bpo_head_info;
  
+ if 'Y' = psi_modif or bpo_head_info_rec.status in ('CAMBIO_DE_PRECIO') then 
+ dbms_lob.append(lc_info,'<CAMBIO>Y</CAMBIO>');
+ 
+ xxqp_pdft_myp_pkg.split_ilim(PCI_CLOB_REP => lc_info
+ ,PCI_CLOB_ALIM => bpo_head_info_rec.MODIF_REALIZ
+ ,PSI_NODE => 'MODIF_REALIZ_R'
+ ,PSI_NODE_CHILD => 'MODIF_REALIZ'
+ );
+ 
+ else
+ dbms_lob.append(lc_info,'<ALTA>Y</ALTA>');
+ end if; 
  
  ln_sum1 := 0; 
  ln_sum2 := 0; 
@@ -399,12 +419,12 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  LOOP
  FETCH get_precio_info INTO precio_info_rec;
  EXIT WHEN get_precio_info%NOTFOUND;
- lc_info := lc_info||'<G_PRECIO>'; 
- lc_info := lc_info||'<CONCEPTO>'||precio_info_rec.concepto||'</CONCEPTO>'; 
- lc_info := lc_info||'<CANTIDAD>'||precio_info_rec.cantidad||'</CANTIDAD>'; 
- lc_info := lc_info||'<PRECIO_UNITARIO>'||trim(to_char(precio_info_rec.precio_unitario,gs_currency_format))||'</PRECIO_UNITARIO>'; 
- lc_info := lc_info||'<TOTAL_CONCEPTO>'||trim(to_char(precio_info_rec.total_concepto,gs_currency_format))||'</TOTAL_CONCEPTO>'; 
- lc_info := lc_info||'</G_PRECIO>'; 
+ dbms_lob.append(lc_info,'<G_PRECIO>'); 
+ dbms_lob.append(lc_info,'<CONCEPTO>'||precio_info_rec.concepto||'</CONCEPTO>'); 
+ dbms_lob.append(lc_info,'<CANTIDAD>'||precio_info_rec.cantidad||'</CANTIDAD>'); 
+ dbms_lob.append(lc_info,'<PRECIO_UNITARIO>'||trim(to_char(precio_info_rec.precio_unitario,gs_currency_format))||'</PRECIO_UNITARIO>'); 
+ dbms_lob.append(lc_info,'<TOTAL_CONCEPTO>'||trim(to_char(precio_info_rec.total_concepto,gs_currency_format))||'</TOTAL_CONCEPTO>'); 
+ dbms_lob.append(lc_info,'</G_PRECIO>'); 
  ln_sum1 := nvl(ln_sum1,0)+precio_info_rec.cantidad; 
  ln_sum2 := nvl(ln_sum2,0)+precio_info_rec.precio_unitario; 
  ln_sum3 := nvl(ln_sum3,0)+precio_info_rec.total_concepto; 
@@ -413,9 +433,9 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  END LOOP;
  CLOSE get_precio_info;
  
- lc_info := lc_info||'<SUM1>'||ln_sum1||'</SUM1>'; 
- lc_info := lc_info||'<SUM2>'||trim(to_char(ln_sum2,gs_currency_format))||'</SUM2>'; 
- lc_info := lc_info||'<SUM3>'||trim(to_char(ln_sum3,gs_currency_format))||'</SUM3>'; 
+ dbms_lob.append(lc_info,'<SUM1>'||ln_sum1||'</SUM1>'); 
+ dbms_lob.append(lc_info,'<SUM2>'||trim(to_char(ln_sum2,gs_currency_format))||'</SUM2>'); 
+ dbms_lob.append(lc_info,'<SUM3>'||trim(to_char(ln_sum3,gs_currency_format))||'</SUM3>'); 
  
  OPEN get_bpo_serv_info(pni_bpo_header_id);
  LOOP
@@ -423,39 +443,56 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  EXIT WHEN get_bpo_serv_info%NOTFOUND;
  
  if 'Y' = bpo_serv_info_rec.COBRANZA then 
- lc_info := lc_info||'<COBRANZA>'||'Cobranza.'||'</COBRANZA>'; 
+ dbms_lob.append(lc_info,'<COBRANZA>'||'Cobranza.'||'</COBRANZA>'); 
  end if; 
  
  if 'Y' = bpo_serv_info_rec.GESTOR_ADMINISTRATIVO then 
- lc_info := lc_info||'<GESTOR_ADMINISTRATIVO>'||'Gestor Administrativo.'||'</GESTOR_ADMINISTRATIVO>'; 
+ dbms_lob.append(lc_info,'<GESTOR_ADMINISTRATIVO>'||'Gestor Administrativo.'||'</GESTOR_ADMINISTRATIVO>'); 
  end if; 
  
  if 'Y' = bpo_serv_info_rec.VENTAS then 
- lc_info := lc_info||'<VENTAS>'||'Ventas.'||'</VENTAS>'; 
+ dbms_lob.append(lc_info,'<VENTAS>'||'Ventas.'||'</VENTAS>'); 
  end if; 
  
  if 'Y' = bpo_serv_info_rec.RECOLE_DOC_MATER then 
- lc_info := lc_info||'<RECOLE_DOC_MATER>'||'Recoleccion documentos y/o materiales.'||'</RECOLE_DOC_MATER>'; 
+ dbms_lob.append(lc_info,'<RECOLE_DOC_MATER>'||'Recoleccion documentos y/o materiales.'||'</RECOLE_DOC_MATER>'); 
  end if; 
  
  if 'Y' = bpo_serv_info_rec.ENTREGA_A_DOMICILIO then 
- lc_info := lc_info||'<ENTREGA_A_DOMICILIO>'||'Entrega a domicilio.'||'</ENTREGA_A_DOMICILIO>'; 
+ dbms_lob.append(lc_info,'<ENTREGA_A_DOMICILIO>'||'Entrega a domicilio.'||'</ENTREGA_A_DOMICILIO>'); 
  end if; 
  
  
  if 'Y' = bpo_serv_info_rec.TECNICO then 
- lc_info := lc_info||'<TECNICO>'||'Tecnico.'||'</TECNICO>'; 
+ dbms_lob.append(lc_info,'<TECNICO>'||'Tecnico.'||'</TECNICO>'); 
  end if; 
  
- lc_info := lc_info||'<OTROS>'||bpo_serv_info_rec.OTROS||'</OTROS>'; 
- lc_info := lc_info||'<FECHA_INICIO_SERVICIO>'|| replace(to_char(bpo_serv_info_rec.FECHA_INICIO_SERVICIO,'DD Month YYYY', 'NLS_DATE_LANGUAGE = SPANISH'),' ',' ')||'</FECHA_INICIO_SERVICIO>';
- lc_info := lc_info||'<EL_MENSAJERO_MANEJE>'||bpo_serv_info_rec.el_mensajero_maneje_c||'</EL_MENSAJERO_MANEJE>'; 
- lc_info := lc_info||'<DIAS_SEMANA_LABORARA>'||bpo_serv_info_rec.DIAS_SEMANA_LABORARA_V2||'</DIAS_SEMANA_LABORARA>'; 
- lc_info := lc_info||'<NO_HRS_DIARIAS>'||bpo_serv_info_rec.NO_HRS_DIARIAS||'</NO_HRS_DIARIAS>'; 
- lc_info := lc_info||'<HORARIO_DE_TRABAJO>'||bpo_serv_info_rec.HORARIO_DE_TRABAJO_V2||'</HORARIO_DE_TRABAJO>'; 
- lc_info := lc_info||'<DIRECCION_BASE>'||replace_char_esp(bpo_serv_info_rec.DIRECCION_BASE)||'</DIRECCION_BASE>'; 
- lc_info := lc_info||'<OBSERVACIONES>'||replace_char_esp(bpo_serv_info_rec.OBSERVACIONES)||'</OBSERVACIONES>'; 
+ /** dbms_lob.append(lc_info,'<OTROS>'||bpo_serv_info_rec.OTROS||'</OTROS>'); **/
+ xxqp_pdft_myp_pkg.split_ilim(PCI_CLOB_REP => lc_info
+ ,PCI_CLOB_ALIM => bpo_serv_info_rec.OTROS_ILIM
+ ,PSI_NODE => 'OTROS_R'
+ ,PSI_NODE_CHILD => 'OTRO'
+ );
  
+ dbms_lob.append(lc_info,'<FECHA_INICIO_SERVICIO>'|| replace(to_char(bpo_serv_info_rec.FECHA_INICIO_SERVICIO,'DD Month YYYY', 'NLS_DATE_LANGUAGE = SPANISH'),' ',' ')||'</FECHA_INICIO_SERVICIO>');
+ dbms_lob.append(lc_info,'<EL_MENSAJERO_MANEJE>'||bpo_serv_info_rec.el_mensajero_maneje_c||'</EL_MENSAJERO_MANEJE>'); 
+ dbms_lob.append(lc_info,'<DIAS_SEMANA_LABORARA>'||bpo_serv_info_rec.DIAS_SEMANA_LABORARA_V2||'</DIAS_SEMANA_LABORARA>'); 
+ dbms_lob.append(lc_info,'<NO_HRS_DIARIAS>'||bpo_serv_info_rec.NO_HRS_DIARIAS||'</NO_HRS_DIARIAS>'); 
+ dbms_lob.append(lc_info,'<HORARIO_DE_TRABAJO>'||bpo_serv_info_rec.HORARIO_DE_TRABAJO_V2||'</HORARIO_DE_TRABAJO>'); 
+ /*********************
+ dbms_lob.append(lc_info,'<DIRECCION_BASE>'||replace_char_esp(bpo_serv_info_rec.DIRECCION_BASE)||'</DIRECCION_BASE>'); 
+ dbms_lob.append(lc_info,'<OBSERVACIONES>'||replace_char_esp(bpo_serv_info_rec.OBSERVACIONES)||'</OBSERVACIONES>'); 
+ *********************/
+ xxqp_pdft_myp_pkg.split_ilim(PCI_CLOB_REP => lc_info
+ ,PCI_CLOB_ALIM => bpo_serv_info_rec.DIRECCION_BASE_ILIM
+ ,PSI_NODE => 'DIR_BAS_R'
+ ,PSI_NODE_CHILD => 'DIR_BAS'
+ );
+ xxqp_pdft_myp_pkg.split_ilim(PCI_CLOB_REP => lc_info
+ ,PCI_CLOB_ALIM => bpo_serv_info_rec.OBSERVACIONES_ILIM
+ ,PSI_NODE => 'OBS_R'
+ ,PSI_NODE_CHILD => 'OBS'
+ ); 
  
  END LOOP;
  CLOSE get_bpo_serv_info;
@@ -464,21 +501,21 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  LOOP
  FETCH get_bpo_gyc_info INTO bpo_gyc_info_rec;
  EXIT WHEN get_bpo_gyc_info%NOTFOUND;
- lc_info := lc_info||'<GYC_MOTO_125>'||bpo_gyc_info_rec.MOTO_125||'</GYC_MOTO_125>'; 
- lc_info := lc_info||'<GYC_CASCO>'||bpo_gyc_info_rec.CASCO||'</GYC_CASCO>'; 
- lc_info := lc_info||'<GYC_CAJA_GRANDE>'||bpo_gyc_info_rec.CAJA_GRANDE||'</GYC_CAJA_GRANDE>'; 
- lc_info := lc_info||'<GYC_CAJA_CHICA_ROJA>'||bpo_gyc_info_rec.CAJA_CHICA_ROJA||'</GYC_CAJA_CHICA_ROJA>'; 
- lc_info := lc_info||'<GYC_CAMISAS>'||bpo_gyc_info_rec.CAMISAS||'</GYC_CAMISAS>'; 
- lc_info := lc_info||'<GYC_IMPERMEABLE>'||bpo_gyc_info_rec.IMPERMEABLE||'</GYC_IMPERMEABLE>'; 
- lc_info := lc_info||'<GYC_TARJETA_GASOLINA>'||bpo_gyc_info_rec.TARJETA_GASOLINA||'</GYC_TARJETA_GASOLINA>'; 
- lc_info := lc_info||'<GYC_PANTALON_VESTIR>'||bpo_gyc_info_rec.PANTALON_VESTIR||'</GYC_PANTALON_VESTIR>'; 
- lc_info := lc_info||'<GYC_CAJA_NEGRA>'||bpo_gyc_info_rec.CAJA_NEGRA||'</GYC_CAJA_NEGRA>'; 
- lc_info := lc_info||'<GYC_HIELERA>'||bpo_gyc_info_rec.HIELERA||'</GYC_HIELERA>'; 
- lc_info := lc_info||'<GYC_MOVIL>'||bpo_gyc_info_rec.MOVIL||'</GYC_MOVIL>'; 
- lc_info := lc_info||'<GYC_AUTOMOVIL>'||bpo_gyc_info_rec.AUTOMOVIL||'</GYC_AUTOMOVIL>'; 
- lc_info := lc_info||'<GYC_GUIA_ROJI>'||bpo_gyc_info_rec.GUIA_ROJI||'</GYC_GUIA_ROJI>'; 
- lc_info := lc_info||'<GYC_OTROS>'||bpo_gyc_info_rec.OTROS||'</GYC_OTROS>'; 
- lc_info := lc_info||'<GYC_COMENTARIOS>'||bpo_gyc_info_rec.COMENTARIOS||'</GYC_COMENTARIOS>'; 
+ dbms_lob.append(lc_info,'<GYC_MOTO_125>'||bpo_gyc_info_rec.MOTO_125||'</GYC_MOTO_125>'); 
+ dbms_lob.append(lc_info,'<GYC_CASCO>'||bpo_gyc_info_rec.CASCO||'</GYC_CASCO>'); 
+ dbms_lob.append(lc_info,'<GYC_CAJA_GRANDE>'||bpo_gyc_info_rec.CAJA_GRANDE||'</GYC_CAJA_GRANDE>'); 
+ dbms_lob.append(lc_info,'<GYC_CAJA_CHICA_ROJA>'||bpo_gyc_info_rec.CAJA_CHICA_ROJA||'</GYC_CAJA_CHICA_ROJA>'); 
+ dbms_lob.append(lc_info,'<GYC_CAMISAS>'||bpo_gyc_info_rec.CAMISAS||'</GYC_CAMISAS>'); 
+ dbms_lob.append(lc_info,'<GYC_IMPERMEABLE>'||bpo_gyc_info_rec.IMPERMEABLE||'</GYC_IMPERMEABLE>'); 
+ dbms_lob.append(lc_info,'<GYC_TARJETA_GASOLINA>'||bpo_gyc_info_rec.TARJETA_GASOLINA||'</GYC_TARJETA_GASOLINA>'); 
+ dbms_lob.append(lc_info,'<GYC_PANTALON_VESTIR>'||bpo_gyc_info_rec.PANTALON_VESTIR||'</GYC_PANTALON_VESTIR>'); 
+ dbms_lob.append(lc_info,'<GYC_CAJA_NEGRA>'||bpo_gyc_info_rec.CAJA_NEGRA||'</GYC_CAJA_NEGRA>'); 
+ dbms_lob.append(lc_info,'<GYC_HIELERA>'||bpo_gyc_info_rec.HIELERA||'</GYC_HIELERA>'); 
+ dbms_lob.append(lc_info,'<GYC_MOVIL>'||bpo_gyc_info_rec.MOVIL||'</GYC_MOVIL>'); 
+ dbms_lob.append(lc_info,'<GYC_AUTOMOVIL>'||bpo_gyc_info_rec.AUTOMOVIL||'</GYC_AUTOMOVIL>'); 
+ dbms_lob.append(lc_info,'<GYC_GUIA_ROJI>'||bpo_gyc_info_rec.GUIA_ROJI||'</GYC_GUIA_ROJI>'); 
+ dbms_lob.append(lc_info,'<GYC_OTROS>'||bpo_gyc_info_rec.OTROS||'</GYC_OTROS>'); 
+ dbms_lob.append(lc_info,'<GYC_COMENTARIOS>'||bpo_gyc_info_rec.COMENTARIOS||'</GYC_COMENTARIOS>'); 
  
  END LOOP;
  CLOSE get_bpo_gyc_info;
@@ -488,21 +525,26 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  FETCH get_bpo_oper_info INTO bpo_oper_info_rec;
  EXIT WHEN get_bpo_oper_info%NOTFOUND;
  
- lc_info := lc_info||'<OPER_MOTO_125>'||bpo_OPER_info_rec.MOTO_125||'</OPER_MOTO_125>'; 
- lc_info := lc_info||'<OPER_CASCO>'||bpo_OPER_info_rec.CASCO||'</OPER_CASCO>'; 
- lc_info := lc_info||'<OPER_CAJA_GRANDE>'||bpo_OPER_info_rec.CAJA_GRANDE||'</OPER_CAJA_GRANDE>'; 
- lc_info := lc_info||'<OPER_CAJA_CHICA_ROJA>'||bpo_OPER_info_rec.CAJA_CHICA_ROJA||'</OPER_CAJA_CHICA_ROJA>'; 
- lc_info := lc_info||'<OPER_CAMISAS>'||bpo_OPER_info_rec.CAMISAS||'</OPER_CAMISAS>'; 
- lc_info := lc_info||'<OPER_IMPERMEABLE>'||bpo_OPER_info_rec.IMPERMEABLE||'</OPER_IMPERMEABLE>'; 
- lc_info := lc_info||'<OPER_TARJETA_GASOLINA>'||bpo_OPER_info_rec.TARJETA_GASOLINA||'</OPER_TARJETA_GASOLINA>'; 
- lc_info := lc_info||'<OPER_PANTALON_VESTIR>'||bpo_OPER_info_rec.PANTALON_VESTIR||'</OPER_PANTALON_VESTIR>'; 
- lc_info := lc_info||'<OPER_CAJA_NEGRA>'||bpo_OPER_info_rec.CAJA_NEGRA||'</OPER_CAJA_NEGRA>'; 
- lc_info := lc_info||'<OPER_HIELERA>'||bpo_OPER_info_rec.HIELERA||'</OPER_HIELERA>'; 
- lc_info := lc_info||'<OPER_MOVIL>'||bpo_OPER_info_rec.MOVIL||'</OPER_MOVIL>'; 
- lc_info := lc_info||'<OPER_AUTOMOVIL>'||bpo_OPER_info_rec.AUTOMOVIL||'</OPER_AUTOMOVIL>'; 
- lc_info := lc_info||'<OPER_GUIA_ROJI>'||bpo_OPER_info_rec.GUIA_ROJI||'</OPER_GUIA_ROJI>'; 
- lc_info := lc_info||'<OPER_OTROS>'||bpo_OPER_info_rec.OTROS||'</OPER_OTROS>'; 
- lc_info := lc_info||'<OPER_COMENTARIOS>'||bpo_OPER_info_rec.COMENTARIOS||'</OPER_COMENTARIOS>'; 
+ dbms_lob.append(lc_info,'<OPER_MOTO_125>'||bpo_OPER_info_rec.MOTO_125||'</OPER_MOTO_125>'); 
+ dbms_lob.append(lc_info,'<OPER_CASCO>'||bpo_OPER_info_rec.CASCO||'</OPER_CASCO>'); 
+ dbms_lob.append(lc_info,'<OPER_CAJA_GRANDE>'||bpo_OPER_info_rec.CAJA_GRANDE||'</OPER_CAJA_GRANDE>'); 
+ dbms_lob.append(lc_info,'<OPER_CAJA_CHICA_ROJA>'||bpo_OPER_info_rec.CAJA_CHICA_ROJA||'</OPER_CAJA_CHICA_ROJA>'); 
+ dbms_lob.append(lc_info,'<OPER_CAMISAS>'||bpo_OPER_info_rec.CAMISAS||'</OPER_CAMISAS>'); 
+ dbms_lob.append(lc_info,'<OPER_IMPERMEABLE>'||bpo_OPER_info_rec.IMPERMEABLE||'</OPER_IMPERMEABLE>'); 
+ dbms_lob.append(lc_info,'<OPER_TARJETA_GASOLINA>'||bpo_OPER_info_rec.TARJETA_GASOLINA||'</OPER_TARJETA_GASOLINA>'); 
+ dbms_lob.append(lc_info,'<OPER_PANTALON_VESTIR>'||bpo_OPER_info_rec.PANTALON_VESTIR||'</OPER_PANTALON_VESTIR>'); 
+ dbms_lob.append(lc_info,'<OPER_CAJA_NEGRA>'||bpo_OPER_info_rec.CAJA_NEGRA||'</OPER_CAJA_NEGRA>'); 
+ dbms_lob.append(lc_info,'<OPER_HIELERA>'||bpo_OPER_info_rec.HIELERA||'</OPER_HIELERA>'); 
+ dbms_lob.append(lc_info,'<OPER_MOVIL>'||bpo_OPER_info_rec.MOVIL||'</OPER_MOVIL>'); 
+ dbms_lob.append(lc_info,'<OPER_AUTOMOVIL>'||bpo_OPER_info_rec.AUTOMOVIL||'</OPER_AUTOMOVIL>'); 
+ dbms_lob.append(lc_info,'<OPER_GUIA_ROJI>'||bpo_OPER_info_rec.GUIA_ROJI||'</OPER_GUIA_ROJI>'); 
+ dbms_lob.append(lc_info,'<OPER_OTROS>'||bpo_OPER_info_rec.OTROS||'</OPER_OTROS>'); 
+ dbms_lob.append(lc_info,'<OPER_COMENTARIOS>'||bpo_OPER_info_rec.COMENTARIOS||'</OPER_COMENTARIOS>'); 
+ xxqp_pdft_myp_pkg.split_ilim(PCI_CLOB_REP => lc_info
+ ,PCI_CLOB_ALIM =>bpo_OPER_info_rec.COMENTARIOS
+ ,PSI_NODE => 'OPER_COM_R'
+ ,PSI_NODE_CHILD => 'OPER_COM'
+ ); 
  
  END LOOP;
  CLOSE get_bpo_oper_info;
@@ -512,21 +554,21 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  FETCH get_bpo_adqu_info INTO bpo_adqu_info_rec;
  EXIT WHEN get_bpo_adqu_info%NOTFOUND;
  
- lc_info := lc_info||'<ADQU_MOTO_125>'||bpo_ADQU_info_rec.MOTO_125||'</ADQU_MOTO_125>'; 
- lc_info := lc_info||'<ADQU_CASCO>'||bpo_ADQU_info_rec.CASCO||'</ADQU_CASCO>'; 
- lc_info := lc_info||'<ADQU_CAJA_GRANDE>'||bpo_ADQU_info_rec.CAJA_GRANDE||'</ADQU_CAJA_GRANDE>'; 
- lc_info := lc_info||'<ADQU_CAJA_CHICA_ROJA>'||bpo_ADQU_info_rec.CAJA_CHICA_ROJA||'</ADQU_CAJA_CHICA_ROJA>'; 
- lc_info := lc_info||'<ADQU_CAMISAS>'||bpo_ADQU_info_rec.CAMISAS||'</ADQU_CAMISAS>'; 
- lc_info := lc_info||'<ADQU_IMPERMEABLE>'||bpo_ADQU_info_rec.IMPERMEABLE||'</ADQU_IMPERMEABLE>'; 
- lc_info := lc_info||'<ADQU_TARJETA_GASOLINA>'||bpo_ADQU_info_rec.TARJETA_GASOLINA||'</ADQU_TARJETA_GASOLINA>'; 
- lc_info := lc_info||'<ADQU_PANTALON_VESTIR>'||bpo_ADQU_info_rec.PANTALON_VESTIR||'</ADQU_PANTALON_VESTIR>'; 
- lc_info := lc_info||'<ADQU_CAJA_NEGRA>'||bpo_ADQU_info_rec.CAJA_NEGRA||'</ADQU_CAJA_NEGRA>'; 
- lc_info := lc_info||'<ADQU_HIELERA>'||bpo_ADQU_info_rec.HIELERA||'</ADQU_HIELERA>'; 
- lc_info := lc_info||'<ADQU_MOVIL>'||bpo_ADQU_info_rec.MOVIL||'</ADQU_MOVIL>'; 
- lc_info := lc_info||'<ADQU_AUTOMOVIL>'||bpo_ADQU_info_rec.AUTOMOVIL||'</ADQU_AUTOMOVIL>'; 
- lc_info := lc_info||'<ADQU_GUIA_ROJI>'||bpo_ADQU_info_rec.GUIA_ROJI||'</ADQU_GUIA_ROJI>'; 
- lc_info := lc_info||'<ADQU_OTROS>'||bpo_ADQU_info_rec.OTROS||'</ADQU_OTROS>'; 
- lc_info := lc_info||'<ADQU_COMENTARIOS>'||bpo_ADQU_info_rec.COMENTARIOS||'</ADQU_COMENTARIOS>'; 
+ dbms_lob.append(lc_info,'<ADQU_MOTO_125>'||bpo_ADQU_info_rec.MOTO_125||'</ADQU_MOTO_125>'); 
+ dbms_lob.append(lc_info,'<ADQU_CASCO>'||bpo_ADQU_info_rec.CASCO||'</ADQU_CASCO>'); 
+ dbms_lob.append(lc_info,'<ADQU_CAJA_GRANDE>'||bpo_ADQU_info_rec.CAJA_GRANDE||'</ADQU_CAJA_GRANDE>'); 
+ dbms_lob.append(lc_info,'<ADQU_CAJA_CHICA_ROJA>'||bpo_ADQU_info_rec.CAJA_CHICA_ROJA||'</ADQU_CAJA_CHICA_ROJA>'); 
+ dbms_lob.append(lc_info,'<ADQU_CAMISAS>'||bpo_ADQU_info_rec.CAMISAS||'</ADQU_CAMISAS>'); 
+ dbms_lob.append(lc_info,'<ADQU_IMPERMEABLE>'||bpo_ADQU_info_rec.IMPERMEABLE||'</ADQU_IMPERMEABLE>'); 
+ dbms_lob.append(lc_info,'<ADQU_TARJETA_GASOLINA>'||bpo_ADQU_info_rec.TARJETA_GASOLINA||'</ADQU_TARJETA_GASOLINA>'); 
+ dbms_lob.append(lc_info,'<ADQU_PANTALON_VESTIR>'||bpo_ADQU_info_rec.PANTALON_VESTIR||'</ADQU_PANTALON_VESTIR>'); 
+ dbms_lob.append(lc_info,'<ADQU_CAJA_NEGRA>'||bpo_ADQU_info_rec.CAJA_NEGRA||'</ADQU_CAJA_NEGRA>'); 
+ dbms_lob.append(lc_info,'<ADQU_HIELERA>'||bpo_ADQU_info_rec.HIELERA||'</ADQU_HIELERA>'); 
+ dbms_lob.append(lc_info,'<ADQU_MOVIL>'||bpo_ADQU_info_rec.MOVIL||'</ADQU_MOVIL>'); 
+ dbms_lob.append(lc_info,'<ADQU_AUTOMOVIL>'||bpo_ADQU_info_rec.AUTOMOVIL||'</ADQU_AUTOMOVIL>'); 
+ dbms_lob.append(lc_info,'<ADQU_GUIA_ROJI>'||bpo_ADQU_info_rec.GUIA_ROJI||'</ADQU_GUIA_ROJI>'); 
+ dbms_lob.append(lc_info,'<ADQU_OTROS>'||bpo_ADQU_info_rec.OTROS||'</ADQU_OTROS>'); 
+ dbms_lob.append(lc_info,'<ADQU_COMENTARIOS>'||bpo_ADQU_info_rec.COMENTARIOS||'</ADQU_COMENTARIOS>'); 
  
  END LOOP;
  CLOSE get_bpo_adqu_info;
@@ -536,13 +578,13 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  LOOP
  FETCH get_bpo_pago_info INTO bpo_pago_info_rec;
  EXIT WHEN get_bpo_pago_info%NOTFOUND;
- lc_info := lc_info||'<EJECUTIVO_DE_VENTAS>'||bpo_pago_info_rec.EJECUTIVO_DE_VENTAS||'</EJECUTIVO_DE_VENTAS>'; 
- lc_info := lc_info||'<PLAZA>'||bpo_pago_info_rec.PLAZA||'</PLAZA>'; 
- lc_info := lc_info||'<SUBTOTAL>'||trim(to_char(bpo_pago_info_rec.SUBTOTAL,gs_currency_format))||'</SUBTOTAL>'; 
- lc_info := lc_info||'<IVA>'||trim(to_char(bpo_pago_info_rec.IVA,gs_currency_format))||'</IVA>'; 
- lc_info := lc_info||'<TOTAL>'||trim(to_char(bpo_pago_info_rec.TOTAL,gs_currency_format))||'</TOTAL>'; 
- lc_info := lc_info||'<FORMA_DE_PAGO>'||bpo_pago_info_rec.FORMA_DE_PAGO_C||'</FORMA_DE_PAGO>'; 
- lc_info := lc_info||'<DIA_DE_PAGO>'||replace_char_esp(bpo_pago_info_rec.DIA_DE_PAGO)||'</DIA_DE_PAGO>'; 
+ dbms_lob.append(lc_info,'<EJECUTIVO_DE_VENTAS>'||bpo_pago_info_rec.EJECUTIVO_DE_VENTAS||'</EJECUTIVO_DE_VENTAS>'); 
+ dbms_lob.append(lc_info,'<PLAZA>'||bpo_pago_info_rec.PLAZA||'</PLAZA>'); 
+ dbms_lob.append(lc_info,'<SUBTOTAL>'||trim(to_char(bpo_pago_info_rec.SUBTOTAL,gs_currency_format))||'</SUBTOTAL>'); 
+ dbms_lob.append(lc_info,'<IVA>'||trim(to_char(bpo_pago_info_rec.IVA,gs_currency_format))||'</IVA>'); 
+ dbms_lob.append(lc_info,'<TOTAL>'||trim(to_char(bpo_pago_info_rec.TOTAL,gs_currency_format))||'</TOTAL>'); 
+ dbms_lob.append(lc_info,'<FORMA_DE_PAGO>'||bpo_pago_info_rec.FORMA_DE_PAGO_C||'</FORMA_DE_PAGO>'); 
+ dbms_lob.append(lc_info,'<DIA_DE_PAGO>'||replace_char_esp(bpo_pago_info_rec.DIA_DE_PAGO)||'</DIA_DE_PAGO>'); 
  
  END LOOP;
  CLOSE get_bpo_pago_info;
@@ -552,12 +594,12 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  LOOP
  FETCH getRNInfo INTO RNInfo_rec;
  EXIT WHEN getRNInfo%NOTFOUND;
- lc_info := lc_info||'<G_REGNEG>'; 
- lc_info := lc_info||'<RN_CONCEPTO1>'||RNInfo_rec.RN_CONCEPTO1||'</RN_CONCEPTO1>'; 
- lc_info := lc_info||'<RN_CONCEPTO2>'||RNInfo_rec.RN_CONCEPTO2||'</RN_CONCEPTO2>'; 
+ dbms_lob.append(lc_info,'<G_REGNEG>'); 
+ dbms_lob.append(lc_info,'<RN_CONCEPTO1>'||RNInfo_rec.RN_CONCEPTO1||'</RN_CONCEPTO1>'); 
+ dbms_lob.append(lc_info,'<RN_CONCEPTO2>'||RNInfo_rec.RN_CONCEPTO2||'</RN_CONCEPTO2>'); 
  ls_regneg_precio :=trim(to_char(RNInfo_rec.PRECIO,gs_currency_format));
- lc_info := lc_info||'<RN_PRECIO>'||ls_regneg_precio||'</RN_PRECIO>'; 
- lc_info := lc_info||'</G_REGNEG>'||CHR(10); 
+ dbms_lob.append(lc_info,'<RN_PRECIO>'||ls_regneg_precio||'</RN_PRECIO>'); 
+ dbms_lob.append(lc_info,'</G_REGNEG>'||CHR(10)); 
  END LOOP;
  CLOSE getRNInfo;
  exception when others then 
@@ -568,7 +610,7 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  
  end; 
  
- lc_info := lc_info||'</XXQP_PDFT_BPO>'; 
+ dbms_lob.append(lc_info,'</XXQP_PDFT_BPO>'); 
  
  pco_info := lc_info;
  

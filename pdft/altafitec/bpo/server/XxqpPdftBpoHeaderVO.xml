@@ -36,8 +36,8 @@ SELECT XxqpPdftBpoHeaderEO.ID,
        XxqpPdftBpoHeaderEO.ATTRIBUTE3, 
        XxqpPdftBpoHeaderEO.ATTRIBUTE4, 
        XxqpPdftBpoHeaderEO.ATTRIBUTE5,
-(select nvl(p.known_as,p.party_name) 
-          from XXQP_PDFT_CLIENTES_INFO_V p
+(select p.party_name 
+          from hz_parties p
          where p.party_id = XxqpPdftBpoHeaderEO.party_id) nombre_del_cliente,
       /* (select  fu.user_name||' - '||fu.description
           from fnd_user fu 

@@ -70,9 +70,9 @@ select 1                  proceso_id
    <ViewAttribute
       Name="Proceso"
       IsPersistent="false"
-      Precision="30"
+      Precision="4000"
       Type="java.lang.String"
-      ColumnType="CHAR"
+      ColumnType="VARCHAR2"
       AliasName="PROCESO"
       Expression="PROCESO"
       SQLType="VARCHAR" >
