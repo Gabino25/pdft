@@ -32,6 +32,7 @@ public class XxqpPdftMypProcesosVORowImpl extends OAViewRowImpl {
     public static final int ATTRIBUTE3 = 16;
     public static final int ATTRIBUTE4 = 17;
     public static final int ATTRIBUTE5 = 18;
+    public static final int PRECIOPROTON = 19;
 
     /**This is the default constructor (do not remove)
      */
@@ -315,6 +316,8 @@ public class XxqpPdftMypProcesosVORowImpl extends OAViewRowImpl {
             return getAttribute4();
         case ATTRIBUTE5:
             return getAttribute5();
+        case PRECIOPROTON:
+            return getPrecioProton();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -382,9 +385,26 @@ public class XxqpPdftMypProcesosVORowImpl extends OAViewRowImpl {
         case ATTRIBUTE5:
             setAttribute5((String)value);
             return;
+        case PRECIOPROTON:
+            setPrecioProton((Number)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
         }
     }
+
+    /**Gets the attribute value for the calculated attribute PrecioProton
+     */
+    public Number getPrecioProton() {
+        return (Number) getAttributeInternal(PRECIOPROTON);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute PrecioProton
+     */
+    public void setPrecioProton(Number value) {
+        setAttributeInternal(PRECIOPROTON, value);
+    }
+
+
 }

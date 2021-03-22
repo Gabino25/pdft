@@ -27,7 +27,8 @@ SELECT XxqpPdftMypProcesosEO.ID,
        XxqpPdftMypProcesosEO.ATTRIBUTE2, 
        XxqpPdftMypProcesosEO.ATTRIBUTE3, 
        XxqpPdftMypProcesosEO.ATTRIBUTE4, 
-       XxqpPdftMypProcesosEO.ATTRIBUTE5
+       XxqpPdftMypProcesosEO.ATTRIBUTE5,
+       XxqpPdftMypProcesosEO.PRECIO_PROTON
 FROM XXQP_PDFT_MYP_PROCESOS XxqpPdftMypProcesosEO
 WHERE XxqpPdftMypProcesosEO.REGION = 'PROCESO'
    ]]></SQLQuery>
@@ -161,5 +162,11 @@ WHERE XxqpPdftMypProcesosEO.REGION = 'PROCESO'
       EntityAttrName="Attribute5"
       EntityUsage="XxqpPdftMypProcesosEO"
       AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrecioProton"
+      EntityAttrName="PrecioProton"
+      EntityUsage="XxqpPdftMypProcesosEO"
+      AliasName="PRECIO_PROTON" >
    </ViewAttribute>
 </ViewObject>

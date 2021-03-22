@@ -482,7 +482,8 @@
                                                 <oa:messageStyledText id="ProcesoId" dataType="NUMBER" prompt="ProcesoId" viewName="XxqpPdftMypProcesosVO1" viewAttr="Id" rendered="false" styleClass="OraFieldText"/>
                                                 <oa:messageStyledText id="Proceso" dataType="VARCHAR2" prompt="Proceso" viewName="XxqpPdftMypProcesosVO1" viewAttr="Proseso" maximumLength="15" styleClass="OraFieldText"/>
                                                 <oa:messageCheckBox id="Seleccionar" dataType="VARCHAR2" prompt="Seleccionar" readOnly="true" viewName="XxqpPdftMypProcesosVO1" viewAttr="Seleccionar" styleClass="OraFieldText"/>
-                                                <oa:messageTextInput id="Precio" dataType="NUMBER" prompt="Precio" viewName="XxqpPdftMypProcesosVO1" viewAttr="Precio" totalValue="true" styleClass="OraFieldNumber" readOnly="true"/>
+                                                <oa:messageTextInput id="Precio" dataType="NUMBER" prompt="Precio Cliente" viewName="XxqpPdftMypProcesosVO1" viewAttr="Precio" totalValue="true" styleClass="OraFieldNumber" readOnly="true"/>
+                                                <oa:messageTextInput id="PrecioProton" dataType="NUMBER" prompt="Precio PROTON" viewName="XxqpPdftMypProcesosVO1" viewAttr="PrecioProton" totalValue="true" styleClass="OraFieldNumber" readOnly="true"/>
                                              </ui:contents>
                                           </oa:table>
                                        </ui:contents>
@@ -495,7 +496,8 @@
                                                 <oa:messageStyledText id="OtrosProcesoId" dataType="NUMBER" prompt="ProcesoId" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="Id" styleClass="OraFieldText" rendered="false"/>
                                                 <oa:messageTextInput id="OtrosProceso" dataType="VARCHAR2" prompt="Otros Procesos" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="OtrosProcesos" styleClass="OraFieldText" maximumLength="4000" columns="30" readOnly="true"/>
                                                 <oa:messageCheckBox id="OtrosSeleccionar" dataType="VARCHAR2" text="Seleccionar" prompt="Seleccionar" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="Seleccionar" styleClass="OraFieldText" readOnly="true"/>
-                                                <oa:messageTextInput id="OtrosPrecio" dataType="NUMBER" prompt="Precio" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="Precio" rendered="true" styleClass="OraFieldNumber" totalValue="true" readOnly="true"/>
+                                                <oa:messageTextInput id="OtrosPrecio" dataType="NUMBER" prompt="Precio Cliente" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="Precio" rendered="true" styleClass="OraFieldNumber" totalValue="true" readOnly="true"/>
+                                                <oa:messageTextInput id="OtrosPrecioProton" dataType="NUMBER" prompt="Precio PROTON" viewName="XxqpPdftMypOtrosProcesosVO1" viewAttr="PrecioProton" rendered="true" styleClass="OraFieldNumber" totalValue="true" readOnly="true"/>
                                              </ui:contents>
                                           </oa:table>
                                        </ui:contents>

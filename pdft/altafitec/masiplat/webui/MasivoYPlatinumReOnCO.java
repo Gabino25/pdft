@@ -438,6 +438,10 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                if(null!=PrecioBean){
                    PrecioBean.setAttributeValue(OAWebBeanConstants.CURRENCY_CODE,"USD");
                }
+                 OAMessageTextInputBean PrecioProtonBean = (OAMessageTextInputBean)ProcesosTmpBean.findChildRecursive("PrecioProton");
+                 if(null!=PrecioProtonBean){
+                     PrecioProtonBean.setAttributeValue(OAWebBeanConstants.CURRENCY_CODE,"USD");
+                 }
              }
              
                 OATableBean OtrosProcesosTmpBean = (OATableBean)webBean.findChildRecursive("OtrosProcesosTmp");
@@ -446,6 +450,10 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                   if(null!=OtrosPrecioBean){
                       OtrosPrecioBean.setAttributeValue(OAWebBeanConstants.CURRENCY_CODE,"USD");
                   }
+                    OAMessageTextInputBean OtrosPrecioProtonBean = (OAMessageTextInputBean)OtrosProcesosTmpBean.findChildRecursive("OtrosPrecioProton");
+                    if(null!=OtrosPrecioProtonBean){
+                        OtrosPrecioProtonBean.setAttributeValue(OAWebBeanConstants.CURRENCY_CODE,"USD");
+                    }
                 }
                 
                 OATableBean ReglasDeNegocioVORNBean = (OATableBean)webBean.findChildRecursive("ReglasDeNegocioVORN");

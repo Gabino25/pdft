@@ -35,7 +35,8 @@ public class XxqpPdftMypProcesosEOImpl extends OAEntityImpl {
     public static final int ATTRIBUTE4 = 17;
     public static final int ATTRIBUTE5 = 18;
     public static final int COMENTARIOSINSTRUCCILIM = 19;
-    public static final int XXQPPDFTMYPHEADEREO = 20;
+    public static final int PRECIOPROTON = 20;
+    public static final int XXQPPDFTMYPHEADEREO = 21;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -329,6 +330,8 @@ public class XxqpPdftMypProcesosEOImpl extends OAEntityImpl {
             return getAttribute5();
         case COMENTARIOSINSTRUCCILIM:
             return getComentariosInstruccIlim();
+        case PRECIOPROTON:
+            return getPrecioProton();
         case XXQPPDFTMYPHEADEREO:
             return getXxqpPdftMypHeaderEO();
         default:
@@ -401,6 +404,9 @@ public class XxqpPdftMypProcesosEOImpl extends OAEntityImpl {
         case COMENTARIOSINSTRUCCILIM:
             setComentariosInstruccIlim((ClobDomain)value);
             return;
+        case PRECIOPROTON:
+            setPrecioProton((Number)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -429,6 +435,18 @@ public class XxqpPdftMypProcesosEOImpl extends OAEntityImpl {
      */
     public void setComentariosInstruccIlim(ClobDomain value) {
         setAttributeInternal(COMENTARIOSINSTRUCCILIM, value);
+    }
+
+    /**Gets the attribute value for PrecioProton, using the alias name PrecioProton
+     */
+    public Number getPrecioProton() {
+        return (Number)getAttributeInternal(PRECIOPROTON);
+    }
+
+    /**Sets <code>value</code> as the attribute value for PrecioProton
+     */
+    public void setPrecioProton(Number value) {
+        setAttributeInternal(PRECIOPROTON, value);
     }
 
     /**Creates a Key object based on given key constituents

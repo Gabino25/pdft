@@ -99,4 +99,13 @@ select 1                  proceso_id
       AliasName="VIEW_ATTR"
       SQLType="NUMERIC" >
    </ViewAttribute>
+   <ViewAttribute
+      Name="PrecioProton"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
 </ViewObject>

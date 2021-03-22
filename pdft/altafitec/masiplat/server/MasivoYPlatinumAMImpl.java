@@ -697,6 +697,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
               xxqpPdftMypProcesosVORowImpl.setProseso(procesosTmpVORowImpl.getProceso());
               xxqpPdftMypProcesosVORowImpl.setSeleccionar(procesosTmpVORowImpl.getSeleccionar());
               xxqpPdftMypProcesosVORowImpl.setPrecio(procesosTmpVORowImpl.getPrecio());
+              xxqpPdftMypProcesosVORowImpl.setPrecioProton(procesosTmpVORowImpl.getPrecioProton());
               xxqpPdftMypProcesosVOImpl.insertRow(xxqpPdftMypProcesosVORowImpl);
               
               oADBTransaction.commit();
@@ -726,6 +727,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                xxqpPdftMypOtrosProcesosVORowImpl.setOtrosProcesos(otrosProcesosTmpVORowImpl.getProceso());
                xxqpPdftMypOtrosProcesosVORowImpl.setSeleccionar(otrosProcesosTmpVORowImpl.getSeleccionar());
                xxqpPdftMypOtrosProcesosVORowImpl.setPrecio(otrosProcesosTmpVORowImpl.getPrecio());
+               xxqpPdftMypOtrosProcesosVORowImpl.setPrecioProton(otrosProcesosTmpVORowImpl.getPrecioProton());
                xxqpPdftMypOtrosProcesosVOImpl.insertRow(xxqpPdftMypOtrosProcesosVORowImpl);
                
                 oADBTransaction.commit();
@@ -1421,6 +1423,35 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
         messageBodyPart.setFileName(pFilename);
         pMultipart.addBodyPart(messageBodyPart);
     }
-    
-    
+
+
+    public void createRowRegNeg(String[] pAttributes) {
+        ReglasDeNegocioTmpVOImpl reglasDeNegocioTmpVOImpl =getReglasDeNegocioTmpVO1(); 
+        if(!reglasDeNegocioTmpVOImpl.isPreparedForExecution()){
+            reglasDeNegocioTmpVOImpl.executeQuery();
+          }
+          reglasDeNegocioTmpVOImpl.setMaxFetchSize(0);
+          reglasDeNegocioTmpVOImpl.last();   // Go to the last Row of the VO
+          System.out.println(reglasDeNegocioTmpVOImpl.getCurrentRow());
+          oracle.jbo.domain.Number IdNum = null; 
+          if(null==reglasDeNegocioTmpVOImpl.getCurrentRow()){
+              IdNum = new  oracle.jbo.domain.Number(0);
+          }else{
+             String idNumTmp = reglasDeNegocioTmpVOImpl.getCurrentRow().getAttribute("Id").toString(); 
+              IdNum = new oracle.jbo.domain.Number(Integer.parseInt(idNumTmp)+1);
+          }
+           reglasDeNegocioTmpVOImpl.next();
+           ReglasDeNegocioTmpVORowImpl reglasDeNegocioTmpRowVOImpl = (ReglasDeNegocioTmpVORowImpl)reglasDeNegocioTmpVOImpl.createRow(); 
+           reglasDeNegocioTmpRowVOImpl.setId(IdNum);
+           reglasDeNegocioTmpRowVOImpl.setEstadoMeaning(pAttributes[0]);
+           reglasDeNegocioTmpRowVOImpl.setConceptoMeaning(pAttributes[1]);
+           oracle.jbo.domain.Number nPrecio=null;
+            try {
+                nPrecio = new oracle.jbo.domain.Number(pAttributes[2]);
+            } catch (SQLException e) {
+                // TODO
+            }
+           reglasDeNegocioTmpRowVOImpl.setPrecio(nPrecio);
+           reglasDeNegocioTmpVOImpl.insertRow(reglasDeNegocioTmpRowVOImpl);
+    }
 }

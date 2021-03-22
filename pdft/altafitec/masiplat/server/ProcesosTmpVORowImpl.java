@@ -14,6 +14,7 @@ public class ProcesosTmpVORowImpl extends OAViewRowImpl {
     public static final int PROCESO = 1;
     public static final int SELECCIONAR = 2;
     public static final int PRECIO = 3;
+    public static final int PRECIOPROTON = 4;
 
     /**This is the default constructor (do not remove)
      */
@@ -81,6 +82,8 @@ public class ProcesosTmpVORowImpl extends OAViewRowImpl {
             return getSeleccionar();
         case PRECIO:
             return getPrecio();
+        case PRECIOPROTON:
+            return getPrecioProton();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -103,9 +106,24 @@ public class ProcesosTmpVORowImpl extends OAViewRowImpl {
         case PRECIO:
             setPrecio((Number)value);
             return;
+        case PRECIOPROTON:
+            setPrecioProton((Number)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
         }
+    }
+
+    /**Gets the attribute value for the calculated attribute PrecioProton
+     */
+    public Number getPrecioProton() {
+        return (Number) getAttributeInternal(PRECIOPROTON);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute PrecioProton
+     */
+    public void setPrecioProton(Number value) {
+        setAttributeInternal(PRECIOPROTON, value);
     }
 }

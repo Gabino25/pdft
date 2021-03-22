@@ -258,6 +258,17 @@
       SQLType="CLOB"
       TableName="XXQP_PDFT_MYP_PROCESOS" >
    </Attribute>
+   <Attribute
+      Name="PrecioProton"
+      ColumnName="PRECIO_PROTON"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXQP_PDFT_MYP_PROCESOS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
    <AccessorAttribute
       Name="XxqpPdftMypHeaderEO"
       Association="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypProcesosFkAssoc"
