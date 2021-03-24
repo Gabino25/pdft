@@ -241,7 +241,11 @@
             </oa:tableLayout>
          </ui:contents>
          <ui:returnNavigation>
-            <oa:link id="RegresarPantallaPrincipal" text="Regresar a Pantalla Principal" destination="OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/PortalDeFichaTecnicaPG"/>
+            <oa:link id="RegresarPantallaPrincipal" text="Regresar a Pantalla Principal" destination="">
+               <ui:primaryClientAction>
+                  <ui:firePartialAction event="RegresarPortalEvt"/>
+               </ui:primaryClientAction>
+            </oa:link>
          </ui:returnNavigation>
          <ui:userInfo>
             <oa:messageStyledText id="NombreUsuarioEBS" prompt="Nombre Usuario:" styleClass="OraFieldText"/>

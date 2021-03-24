@@ -237,10 +237,11 @@ public class BpoReOnCO extends OAControllerImpl
       } 
     
       if("Y".equals(pageContext.getParameter("pBpoCopiar"))){
+          pageContext.putSessionValue("sCambioDePrecio","N");
           OAProcessingPage oAProcessingPage =  new  OAProcessingPage("xxqp.oracle.apps.ar.pdft.altafitec.bpo.webui.BpoCopiarCO"); 
-          oAProcessingPage.setConciseMessage("This is the concise processing page message."); 
-          oAProcessingPage.setDetailedMessage("This is the detailed message which should explain what's happening."); 
-          oAProcessingPage.setProcessName("<Process Name>"); 
+          oAProcessingPage.setConciseMessage("Reglas de Negocio para una copia"); 
+          oAProcessingPage.setDetailedMessage("El estatus de la ficha tecnica a copiar no debera moverse, el estatus de la nueva ficha tecnica sera Preliminar y el articulo Oracle no debera copiarse"); 
+          oAProcessingPage.setProcessName("<Copia de Ficha Tecnica>"); 
           pageContext.forwardToProcessingPage(oAProcessingPage);  
       }
     
@@ -248,9 +249,9 @@ public class BpoReOnCO extends OAControllerImpl
           xxqpPdftBpoHeaderVORowImpl.setStatus("CERRADA");
           pageContext.putSessionValue("sCambioDePrecio","Y");
           OAProcessingPage oAProcessingPage =  new  OAProcessingPage("xxqp.oracle.apps.ar.pdft.altafitec.bpo.webui.BpoCopiarCO"); 
-          oAProcessingPage.setConciseMessage("This is the concise processing page message."); 
-          oAProcessingPage.setDetailedMessage("This is the detailed message which should explain what's happening."); 
-          oAProcessingPage.setProcessName("<Process Name>"); 
+          oAProcessingPage.setConciseMessage("Reglas de Negocio para un cambio de precio"); 
+          oAProcessingPage.setDetailedMessage("El estatus de la ficha a cambiar de precio sera Cerrada, y el estatus de la nueva ficha sera Cambio de Precio, El articulo Oracle se copiara de la anterior a la nueva"); 
+          oAProcessingPage.setProcessName("<Cambio de Precio de Ficha Tecnica>"); 
           pageContext.forwardToProcessingPage(oAProcessingPage);  
       }
       
@@ -405,10 +406,11 @@ public class BpoReOnCO extends OAControllerImpl
     } /** END if("EnviarPorCorreoEvt".equals(strEventParam)){ **/
           
        if("CopiarEvt".equals(strEventParam)){
+           pageContext.putSessionValue("sCambioDePrecio","N");
            OAProcessingPage oAProcessingPage =  new  OAProcessingPage("xxqp.oracle.apps.ar.pdft.altafitec.bpo.webui.BpoCopiarCO"); 
-           oAProcessingPage.setConciseMessage("This is the concise processing page message."); 
-           oAProcessingPage.setDetailedMessage("This is the detailed message which should explain what's happening."); 
-           oAProcessingPage.setProcessName("<Process Name>"); 
+           oAProcessingPage.setConciseMessage("Reglas de Negocio para una copia"); 
+           oAProcessingPage.setDetailedMessage("El estatus de la ficha tecnica a copiar no debera moverse, el estatus de la nueva ficha tecnica sera Preliminar y el articulo Oracle no debera copiarse"); 
+           oAProcessingPage.setProcessName("<Copia de Ficha Tecnica>"); 
            pageContext.forwardToProcessingPage(oAProcessingPage);  
        }   
        

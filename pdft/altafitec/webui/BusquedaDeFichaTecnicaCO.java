@@ -238,7 +238,30 @@ public class BusquedaDeFichaTecnicaCO extends OAControllerImpl
                                     ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
                                     ,OAException.ERROR /*messagingLevel*/
                                     );    
+         return;
       }
+      
+      if("RegresarPortalEvt".equals(strEventParam)){
+       
+          com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
+          if(null!=pageContext.getTransientSessionValue("tsUserPdft")&&!"".equals(pageContext.getTransientSessionValue("tsUserPdft"))){
+           parameters.put("pUserPdft",pageContext.getTransientSessionValue("tsUserPdft"));
+          }
+          if(null!=pageContext.getTransientSessionValue("tsUserPdftId")&&!"".equals(pageContext.getTransientSessionValue("tsUserPdftId"))){
+           parameters.put("pUserPdftId",pageContext.getTransientSessionValue("tsUserPdftId"));
+          }
+          pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/PortalDeFichaTecnicaPG" /*url*/
+                                    ,null /*functionName*/
+                                    ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                    ,null /*menuName*/
+                                    ,parameters /*parameters*/
+                                    ,true /*retainAM*/
+                                    ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                    ,OAException.ERROR /*messagingLevel*/
+                                    );    
+          return;
+      }
+      
      
   }
 

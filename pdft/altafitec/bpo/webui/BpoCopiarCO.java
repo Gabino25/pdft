@@ -122,6 +122,7 @@ public class BpoCopiarCO extends OAControllerImpl {
              newPdftBpoHeaderVORowImpl.setNumeroFt(numNumeroFt);
              if(null!=strCambioDePrecio&&"Y".equals(strCambioDePrecio)){
                  newPdftBpoHeaderVORowImpl.setStatus("CAMBIO_DE_PRECIO");
+                 newPdftBpoHeaderVORowImpl.setArticuloOracle(xxqpPdftBpoHeaderVORowImpl.getArticuloOracle()); /** 17042020 Cuando se realiza un cambio de precio debe permanecer el articulo Oracle **/
              }else{
                  newPdftBpoHeaderVORowImpl.setStatus("PRELIMINAR");
              }
@@ -143,7 +144,6 @@ public class BpoCopiarCO extends OAControllerImpl {
              newPdftBpoHeaderVORowImpl.setAttribute5(xxqpPdftBpoHeaderVORowImpl.getAttribute5());
           /**   newPdftBpoHeaderVORowImpl.setEjecutivo(xxqpPdftBpoHeaderVORowImpl.getEjecutivo());  010320211357 **/
              newPdftBpoHeaderVORowImpl.setEjecutivo(strPuserPdftId);
-             newPdftBpoHeaderVORowImpl.setArticuloOracle(xxqpPdftBpoHeaderVORowImpl.getArticuloOracle()); /** 17042020 Cuando se realiza un cambio de precio debe permanecer el articulo Oracle **/
              
              xxqpPdftBpoHeaderVOImpl.insertRow(newPdftBpoHeaderVORowImpl);
              

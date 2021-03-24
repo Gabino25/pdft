@@ -124,6 +124,7 @@ public class MyPcopiarCO extends OAControllerImpl{
               newPdftMypHeaderVORowImpl.setRev(null);
               if(null!=strCambioDePrecio&&"Y".equals(strCambioDePrecio)){
                   newPdftMypHeaderVORowImpl.setStatus("CAMBIO_DE_PRECIO");
+                  newPdftMypHeaderVORowImpl.setArticuloOracle(xxqpPdftMypHeaderVORowImpl.getArticuloOracle()); /** 17042020 Cuando se realiza un cambio de precio debe permanecer el articulo Oracle **/
               }else{
                   newPdftMypHeaderVORowImpl.setStatus("PRELIMINAR");
               }
@@ -146,7 +147,6 @@ public class MyPcopiarCO extends OAControllerImpl{
               newPdftMypHeaderVORowImpl.setAttribute5(xxqpPdftMypHeaderVORowImpl.getAttribute5());
              /**  newPdftMypHeaderVORowImpl.setEjecutivo(xxqpPdftMypHeaderVORowImpl.getEjecutivo());  010320211346 **/
               newPdftMypHeaderVORowImpl.setEjecutivo(strPuserPdftId);
-               newPdftMypHeaderVORowImpl.setArticuloOracle(xxqpPdftMypHeaderVORowImpl.getArticuloOracle()); /** 17042020 Cuando se realiza un cambio de precio debe permanecer el articulo Oracle **/
                
                 newPdftMypHeaderVORowImpl.setFileName1(xxqpPdftMypHeaderVORowImpl.getFileName1());
                 newPdftMypHeaderVORowImpl.setContentType1(xxqpPdftMypHeaderVORowImpl.getContentType1());
