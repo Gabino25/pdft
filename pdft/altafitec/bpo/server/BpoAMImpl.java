@@ -893,6 +893,10 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
              strActualizarFlag = "Y";
              strSubject = pageContext.getMessage("XXQP","XXQP_PDFT_CAMBI_FT_SUBJECT_MSG",msgtoken1);
              strBody = pageContext.getMessage("XXQP","XXQP_PDFT_CAMBIO_FT_BODY_MSG",msgtoken2);
+             strBody = strBody+"\n\nMODIFICACIONES REALIZADAS:\n";
+             if(null!=pXxqpPdftBpoHeaderVORowImpl.getModifRealiz()){
+                 strBody = strBody+pXxqpPdftBpoHeaderVORowImpl.getModifRealiz().toString();
+             }            
          }else if(ref.compareTo(pNumeroFtRef)==0){
              strCrearFlag = "Y";
              strSubject = pageContext.getMessage("XXQP","XXQP_PDFT_ALTA_FT_SUBJECT_MSG",msgtoken1);

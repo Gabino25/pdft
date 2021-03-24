@@ -564,6 +564,7 @@ where upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente
 order by FRECUENCIA_FACTURACION_M asc;
 
  
+/** https://dev.w3.org/html5/html-author/charref **/ 
 /**Funcion de reemplazo**/
 FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  RETURN VARCHAR2 IS
@@ -584,7 +585,7 @@ FUNCTION replace_char_esp(p_cadena IN VARCHAR2)
  v_cadena := REPLACE(v_cadena, CHR(50067), CHR(38)||'#211;'); /* v_cadena := REPLACE(v_cadena, CHR(50067), CHR(38)||'Oacute;'); */
  v_cadena := REPLACE(v_cadena, CHR(50074), CHR(38)||'#218;'); /* v_cadena := REPLACE(v_cadena, CHR(50074), CHR(38)||'Uacute;'); */
  v_cadena := REPLACE(v_cadena, CHR(50065), CHR(38)||'#209;'); /* v_cadena := REPLACE(v_cadena, CHR(50065), CHR(38)||'Ntilde;'); */
- v_cadena := REPLACE(v_cadena, CHR(50065), CHR(38)||'#241;'); /* v_cadena := REPLACE(v_cadena, CHR(50097), CHR(38)||'ntilde'); */
+ v_cadena := REPLACE(v_cadena, CHR(50097), CHR(38)||'#241;'); /* v_cadena := REPLACE(v_cadena, CHR(50097), CHR(38)||'ntilde'); */
  v_cadena := REPLACE(v_cadena, CHR(49844), '');
  v_cadena := REPLACE(v_cadena, CHR(50090), '');
  v_cadena := REPLACE(v_cadena, CHR(50056), 'E');
@@ -619,7 +620,7 @@ procedure main (pso_errmsg out varchar2
  v_chunk_length number := 32767;
  v_length_clob number := 0; 
  v_offset number :=1;
- v_char char(1);
+ v_char char(10); /** PL/SQL: error : character string buffer too small numérico o de valor, -6502 **/
  ln_instr_clob number := 0;
  ls_substr_clob varchar2(20000) :=0;
 begin 
@@ -658,7 +659,7 @@ begin
  */ 
  
 exception when others then 
- pso_errmsg := 'Excepcion Paquete APPS.xxqp_pdft_myp_pkg metodo main:'||sqlerrm||', '||sqlcode;
+ pso_errmsg := 'Excepcion Paquete xxqp_pdft_myp_pkg metodo main:'||sqlerrm||', '||sqlcode;
  pso_errcod := 2; 
 end main; 
 
@@ -686,11 +687,11 @@ procedure get_info(pso_errmsg out varchar2
  ls_regneg_precio varchar2(200); 
  v_length_clob number := 0; 
  v_offset number :=1;
- v_char          VARCHAR2(10); /** 1 to 10 por acentos **/
- lc_clob_tmp  clob :='';
- ln_nth          number := 0; 
- v_offsetTmp  number := 0;
- ln_instr_clob  number := 0; 
+ v_char VARCHAR2(10); /** 1 to 10 por acentos **/
+ lc_clob_tmp clob :='';
+ ln_nth number := 0; 
+ v_offsetTmp number := 0;
+ ln_instr_clob number := 0; 
  ln_instr_clob_tmp number := 0;
  ls_substr_clob varchar2(32767) := 0; 
 begin 
@@ -700,7 +701,7 @@ begin
  fnd_file.put_line(fnd_file.log,'050320211619');
  lc_info :='<XXQP_PDFT_MYP>'; 
  
-  fnd_file.put_line(fnd_file.log,'050320211617');
+ fnd_file.put_line(fnd_file.log,'050320211617');
  OPEN get_myp_head_info(ln_myp_header_id);
  LOOP
  FETCH get_myp_head_info INTO myp_head_info_rec;
@@ -717,17 +718,17 @@ begin
  dbms_lob.append(lc_info,'<CREATION_DATE>'||myp_head_info_rec.CREATION_DATE||'</CREATION_DATE>');
  dbms_lob.append(lc_info,'<ARTICULO_ORACLE>'||myp_head_info_rec.ARTICULO_ORACLE||'</ARTICULO_ORACLE>');
  
- if 'Y' = psi_modif or myp_head_info_rec.status in ('CAMBIO_DE_PRECIO')  then 
-  dbms_lob.append(lc_info,'<CAMBIO>Y</CAMBIO>');
-   
-  xxqp_pdft_myp_pkg.split_ilim(PCI_CLOB_REP     => lc_info
-                                           ,PCI_CLOB_ALIM    => myp_head_info_rec.MODIF_REALIZ
-                                           ,PSI_NODE            => 'MODIF_REALIZ_R'
-                                           ,PSI_NODE_CHILD  => 'MODIF_REALIZ'
-                                           );
-                                           
-  else
-  dbms_lob.append(lc_info,'<ALTA>Y</ALTA>');
+ if 'Y' = psi_modif or myp_head_info_rec.status in ('CAMBIO_DE_PRECIO') then 
+ dbms_lob.append(lc_info,'<CAMBIO>Y</CAMBIO>');
+ 
+ APPS.xxqp_pdft_myp_pkg.split_ilim(PCI_CLOB_REP => lc_info
+ ,PCI_CLOB_ALIM => myp_head_info_rec.MODIF_REALIZ
+ ,PSI_NODE => 'MODIF_REALIZ_R'
+ ,PSI_NODE_CHILD => 'MODIF_REALIZ'
+ );
+ 
+ else
+ dbms_lob.append(lc_info,'<ALTA>Y</ALTA>');
  end if; 
  
  
@@ -1260,6 +1261,7 @@ procedure split_ilim(PCI_CLOB_REP  IN OUT NOCOPY CLOB
                             ,PSI_NODE_CHILD  IN VARCHAR2
                             ) IS 
 
+v_char_before VARCHAR2(10):=''; /** 1 to 10 por acentos **/
 v_length_clob  number:=0 ;
 v_offset         number := 1;
  v_char          VARCHAR2(10); /** 1 to 10 por acentos **/
@@ -1289,6 +1291,7 @@ ln_nth          number := 0;
    while(v_offset<=v_length_clob) LOOP
         v_char := dbms_lob.substr(PCI_CLOB_ALIM, 1, v_offset);
         fnd_file.put_line(fnd_file.log,'v_char:'||v_char);
+        
         dbms_lob.append(lc_clob_tmp,replace_char_esp(v_char));
          v_offset := v_offset + 1;
         if v_char = chr(10) then 
@@ -1298,14 +1301,30 @@ ln_nth          number := 0;
          fnd_file.put_line(fnd_file.log,'dbms_lob.instr(lc_clob_tmp,chr(10),1,ln_nth):'||dbms_lob.instr(lc_clob_tmp,chr(10),1,ln_nth));
          ls_substr_clob := dbms_lob.substr(lc_clob_tmp,ln_instr_clob-ln_instr_clob_tmp-1,v_offsetTmp);
          fnd_file.put_line(fnd_file.log,'dbms_lob.substr(lc_clob_tmp,ln_instr_clob,v_offsetTmp):'||ls_substr_clob);
+         fnd_file.put_line(fnd_file.log,'length(ls_substr_clob):'||length(ls_substr_clob));
+         if ls_substr_clob is not null  then 
          dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE||'>');     
          dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE_CHILD||'>'||ls_substr_clob||'</'||PSI_NODE_CHILD||'>');     
          dbms_lob.append(PCI_CLOB_REP,'</'||PSI_NODE||'>');
+         else
+        dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE||'>');     
+         dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE_CHILD||'>&#160;</'||PSI_NODE_CHILD||'>');     
+         dbms_lob.append(PCI_CLOB_REP,'</'||PSI_NODE||'>');
+         end if; 
+         
          v_offsetTmp := ln_instr_clob+1;
          ln_instr_clob_tmp := ln_instr_clob;
-         
+        
+--        elsif  v_char = chr(10) and v_char_before = chr(10) then
+--            fnd_file.put_line(fnd_file.log,'Salto de linea solo detectado'); 
+--          dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE||'>');     
+--         dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE_CHILD||'>&#160;</'||PSI_NODE_CHILD||'>');  
+--       --  dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE_CHILD||'>a</'||PSI_NODE_CHILD||'>');     
+--          dbms_lob.append(PCI_CLOB_REP,'</'||PSI_NODE||'>');
         end if; 
-       
+   
+       v_char_before :=  v_char;   
+   
    END LOOP;
    
      if (v_offset-1) = v_length_clob AND ln_nth>0  then 
@@ -1322,14 +1341,15 @@ ln_nth          number := 0;
           dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE_CHILD||'>'||lc_clob_tmp||'</'||PSI_NODE_CHILD||'>');     
           dbms_lob.append(PCI_CLOB_REP,'</'||PSI_NODE||'>');
         end if;
-    
+  
+   DBMS_LOB.CLOSE(lob_loc    => lc_clob_tmp);
   
   fnd_file.put_line(fnd_file.log,'Finaliza split_ilim');
  EXCEPTION WHEN OTHERS THEN 
   fnd_file.put_line(fnd_file.log,'Exception split_ilim:'||sqlerrm||','||sqlcode);
  END split_ilim; 
 
- procedure split_varchar2(PCI_CLOB_REP    IN OUT NOCOPY CLOB
+ procedure split_varchar2_bkp(PCI_CLOB_REP    IN OUT NOCOPY CLOB
                                      ,PSI_VARCHAR_ALIM   IN VARCHAR2
                                      ,PSI_NODE           IN VARCHAR2
                                     ,PSI_NODE_CHILD  IN VARCHAR2
@@ -1351,8 +1371,28 @@ ln_nth          number := 0;
      fnd_file.put_line(fnd_file.log,'Finaliza split_varchar2'); 
  EXCEPTION WHEN OTHERS THEN 
   fnd_file.put_line(fnd_file.log,'Exception split_varchar2:'||sqlerrm||','||sqlcode);
- END split_varchar2;                                    
-                                     
+ END split_varchar2_bkp;                                    
+ 
+ 
+  procedure split_varchar2(PCI_CLOB_REP    IN OUT NOCOPY CLOB
+                                     ,PSI_VARCHAR_ALIM   IN VARCHAR2
+                                     ,PSI_NODE           IN VARCHAR2
+                                    ,PSI_NODE_CHILD  IN VARCHAR2
+                                     ) is              
+                                                            
+  ls_split_vachar  varchar2(32767);
+  
+ BEGIN 
+    fnd_file.put_line(fnd_file.log,'Comienza split_varchar2'); 
+      ls_split_vachar := replace_char_esp(PSI_VARCHAR_ALIM);
+      ls_split_vachar := replace(ls_split_vachar,chr(10),'&#10;');
+    dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE||'>');     
+    dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE_CHILD||'>'||ls_split_vachar||'</'||PSI_NODE_CHILD||'>');     
+    dbms_lob.append(PCI_CLOB_REP,'</'||PSI_NODE||'>');
+   fnd_file.put_line(fnd_file.log,'Finaliza split_varchar2'); 
+ EXCEPTION WHEN OTHERS THEN 
+  fnd_file.put_line(fnd_file.log,'Exception split_varchar2:'||sqlerrm||','||sqlcode);
+ END split_varchar2;                   
 
 end  xxqp_pdft_myp_pkg;
 /
