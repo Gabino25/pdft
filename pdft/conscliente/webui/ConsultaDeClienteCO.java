@@ -40,22 +40,67 @@ public class ConsultaDeClienteCO extends OAControllerImpl
   public void processRequest(OAPageContext pageContext, OAWebBean webBean)
   {
     super.processRequest(pageContext, webBean);
+      String strPuserPdft = null; 
+      System.out.println("ConsultaDeClienteCO strPuserPdft:"+strPuserPdft);
+      if(null!=pageContext.getTransientSessionValue("tsUserPdft")){
+          strPuserPdft = pageContext.getTransientSessionValue("tsUserPdft").toString();
+          System.out.println("ConsultaDeClienteCO strPuserPdft:"+strPuserPdft);
+      }
+      
+      String strPuserPdftId = null; 
+      if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+          strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+          System.out.println("ConsultaDeClienteCO strPuserPdftId:"+strPuserPdftId);
+      }
+      
+      if(null==strPuserPdft||null==strPuserPdftId||"".equals(strPuserPdft)||"".equals(strPuserPdftId)){
+          if("Y".equals(pageContext.getParameter("pClienteExtern"))){
+              pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/ss/webui/LoginPG" /*url*/
+                                        ,null /*functionName*/
+                                        ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                        ,null /*menuName*/
+                                        ,null /*parameters*/
+                                        ,false /*retainAM*/
+                                        ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                        ,OAException.ERROR /*messagingLevel*/
+                                        );
+          }else{
+              pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
+                                        ,null /*functionName*/
+                                        ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                        ,null /*menuName*/
+                                        ,null /*parameters*/
+                                        ,false /*retainAM*/
+                                        ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                        ,OAException.ERROR /*messagingLevel*/
+                                        );  
+          }
+         return;
+      }
+      
       OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
       if(null!=NombreUsuarioEBSBean){
-          NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
+         /** NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName()); **/
+          NombreUsuarioEBSBean.setValue(pageContext,strPuserPdft);
       }
       
       OALinkBean RegresarPantallaPrincipalBean = (OALinkBean)webBean.findChildRecursive("RegresarPantallaPrincipal");
+      /*
       if(null!=RegresarPantallaPrincipalBean)
           RegresarPantallaPrincipalBean.setDestination("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/PortalDeFichaTecnicaPG");
-      
+      */
       OAFormValueBean FvClienteExternBean = (OAFormValueBean)webBean.findChildRecursive("FvClienteExtern");
       
       String strClienteExtern = pageContext.getParameter("pClienteExtern"); 
       System.out.println("strClienteExtern:"+strClienteExtern);
       if("Y".equals(strClienteExtern)){
+          if(null==pageContext.getSessionValue("sHasLogin")||"".equals(pageContext.getSessionValue("sHasLogin"))){
+              pageContext.putSessionValue("sHasLogin","Y");
+          }
+          /*
           if(null!=RegresarPantallaPrincipalBean)
               RegresarPantallaPrincipalBean.setDestination("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/ss/webui/PortalPG");
+          */    
           if(null!=FvClienteExternBean)
               FvClienteExternBean.setValue(pageContext,"Y");
           if(null!=NombreUsuarioEBSBean)
@@ -244,6 +289,43 @@ public class ConsultaDeClienteCO extends OAControllerImpl
         } /** END if(null!=strPdftClientesHeaderID&&!"".equals(strPdftClientesHeaderID)){ **/ 
          
     }
+    
+         if("RegresarPortalEvt".equals(strEventParam)){
+            
+             com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
+             if(null!=pageContext.getSessionValue("sHasLogin")&&!"".equals(pageContext.getSessionValue("sHasLogin"))){
+              parameters.put("pClienteExtern","Y");
+             }
+             if(null!=pageContext.getTransientSessionValue("tsUserPdft")&&!"".equals(pageContext.getTransientSessionValue("tsUserPdft"))){
+              parameters.put("pUserPdft",pageContext.getTransientSessionValue("tsUserPdft"));
+             }
+             if(null!=pageContext.getTransientSessionValue("tsUserPdftId")&&!"".equals(pageContext.getTransientSessionValue("tsUserPdftId"))){
+              parameters.put("pUserPdftId",pageContext.getTransientSessionValue("tsUserPdftId"));
+             }
+             
+             if(null!=pageContext.getSessionValue("sHasLogin")&&!"".equals(pageContext.getSessionValue("sHasLogin"))){
+                 pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/ss/webui/PortalPG" /*url*/
+                                           ,null /*functionName*/
+                                           ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                           ,null /*menuName*/
+                                           ,parameters /*parameters*/
+                                           ,true /*retainAM*/
+                                           ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                           ,OAException.ERROR /*messagingLevel*/
+                                           );    
+             }else{
+                 pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/PortalDeFichaTecnicaPG" /*url*/
+                                           ,null /*functionName*/
+                                           ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                           ,null /*menuName*/
+                                           ,parameters /*parameters*/
+                                           ,true /*retainAM*/
+                                           ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                           ,OAException.ERROR /*messagingLevel*/
+                                           );    
+             }
+             return;
+         }
     
     
   }

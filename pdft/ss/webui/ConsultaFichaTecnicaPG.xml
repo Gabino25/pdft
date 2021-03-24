@@ -183,7 +183,11 @@
             <oa:formValue id="FvUserId"/>
          </ui:contents>
          <ui:returnNavigation>
-            <oa:link id="RegresarPantallaPrincipal" text="Regresar a Pantalla Principal" destination="OA.jsp?page=/xxqp/oracle/apps/ar/pdft/ss/webui/PortalPG"/>
+            <oa:link id="RegresarPantallaPrincipal" text="Regresar a Pantalla Principal" destination="">
+               <ui:primaryClientAction>
+                  <ui:firePartialAction event="RegresarPortalEvt"/>
+               </ui:primaryClientAction>
+            </oa:link>
          </ui:returnNavigation>
       </oa:pageLayout>
    </content>

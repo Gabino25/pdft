@@ -63,6 +63,8 @@ public class Utils {
         String strNombreCliente = rowHeader.getNombreCliente();
         String strOperatingUnit = rowDirFiscal.getPrimOperatingUnit();
         System.out.println("strNombreCliente:"+strNombreCliente);
+        strNombreCliente = strNombreCliente.replaceAll("\\.","");
+        strNombreCliente = strNombreCliente.replaceAll(",","");
         strNombreCliente = strNombreCliente.replaceAll("\\s","_")+strOperatingUnit;
         System.out.println("strNombreCliente:"+strNombreCliente);
         DataObject sessionDictionary = (DataObject)pageContext.getNamedDataObject("_SessionParameters");

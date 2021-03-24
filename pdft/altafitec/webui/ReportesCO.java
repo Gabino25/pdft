@@ -58,15 +58,61 @@ public class ReportesCO extends OAControllerImpl
   {
     super.processRequest(pageContext, webBean);
       OAMessageStyledTextBean NombreUsuarioEBSBean = (OAMessageStyledTextBean)webBean.findChildRecursive("NombreUsuarioEBS");
+      
+      String strPuserPdft = null; 
+      System.out.println("ReportesCO strPuserPdft:"+strPuserPdft);
+      if(null!=pageContext.getTransientSessionValue("tsUserPdft")){
+          strPuserPdft = pageContext.getTransientSessionValue("tsUserPdft").toString();
+          System.out.println("ReportesCO strPuserPdft:"+strPuserPdft);
+      }
+      
+      String strPuserPdftId = null; 
+      if(null!=pageContext.getTransientSessionValue("tsUserPdftId")){
+          strPuserPdftId = pageContext.getTransientSessionValue("tsUserPdftId").toString();
+          System.out.println("ReportesCO strPuserPdftId:"+strPuserPdftId);
+      }
+      
+      if(null==strPuserPdft||null==strPuserPdftId||"".equals(strPuserPdft)||"".equals(strPuserPdftId)){
+          if("Y".equals(pageContext.getParameter("pClienteExtern"))){
+              pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/ss/webui/LoginPG" /*url*/
+                                        ,null /*functionName*/
+                                        ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                        ,null /*menuName*/
+                                        ,null /*parameters*/
+                                        ,false /*retainAM*/
+                                        ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                        ,OAException.ERROR /*messagingLevel*/
+                                        );
+          }else{
+              pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/LoginPdftPG" /*url*/
+                                        ,null /*functionName*/
+                                        ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                        ,null /*menuName*/
+                                        ,null /*parameters*/
+                                        ,false /*retainAM*/
+                                        ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                        ,OAException.ERROR /*messagingLevel*/
+                                        );  
+          }
+         return;
+      }
+      
       if(null!=NombreUsuarioEBSBean){
-          NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName());
+         /** NombreUsuarioEBSBean.setValue(pageContext,pageContext.getUserName()); **/
+          NombreUsuarioEBSBean.setValue(pageContext,strPuserPdft);
       }
       /** java.lang.ClassCastException: oracle.apps.fnd.framework.webui.beans.nav.OALinkBean**/
       OALinkBean  oALinkBean = (OALinkBean)webBean.findChildRecursive("RegresarPantallaPrincipal");
       if("Y".equals(pageContext.getParameter("pClienteExtern"))){
-       if(null!=oALinkBean){
+          if(null==pageContext.getSessionValue("sHasLogin")||"".equals(pageContext.getSessionValue("sHasLogin"))){
+              pageContext.putSessionValue("sHasLogin","Y");
+          }
+       
+       /*
+        if(null!=oALinkBean){
            oALinkBean.setDestination("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/ss/webui/PortalPG");
        }
+       */
        if(null!=NombreUsuarioEBSBean){
            NombreUsuarioEBSBean.setRendered(false);
        }
@@ -329,6 +375,43 @@ public class ReportesCO extends OAControllerImpl
           }
           
       }
+     }
+     
+     if("RegresarPortalEvt".equals(strEventParam)){
+        
+         com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
+         if(null!=pageContext.getSessionValue("sHasLogin")&&!"".equals(pageContext.getSessionValue("sHasLogin"))){
+          parameters.put("pClienteExtern","Y");
+         }
+         if(null!=pageContext.getTransientSessionValue("tsUserPdft")&&!"".equals(pageContext.getTransientSessionValue("tsUserPdft"))){
+          parameters.put("pUserPdft",pageContext.getTransientSessionValue("tsUserPdft"));
+         }
+         if(null!=pageContext.getTransientSessionValue("tsUserPdftId")&&!"".equals(pageContext.getTransientSessionValue("tsUserPdftId"))){
+          parameters.put("pUserPdftId",pageContext.getTransientSessionValue("tsUserPdftId"));
+         }
+         
+         if(null!=pageContext.getSessionValue("sHasLogin")&&!"".equals(pageContext.getSessionValue("sHasLogin"))){
+             pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/ss/webui/PortalPG" /*url*/
+                                       ,null /*functionName*/
+                                       ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                       ,null /*menuName*/
+                                       ,parameters /*parameters*/
+                                       ,true /*retainAM*/
+                                       ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                       ,OAException.ERROR /*messagingLevel*/
+                                       );    
+         }else{
+             pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/webui/PortalDeFichaTecnicaPG" /*url*/
+                                       ,null /*functionName*/
+                                       ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                       ,null /*menuName*/
+                                       ,parameters /*parameters*/
+                                       ,true /*retainAM*/
+                                       ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                       ,OAException.ERROR /*messagingLevel*/
+                                       );    
+         }
+         return;
      }
     
   }

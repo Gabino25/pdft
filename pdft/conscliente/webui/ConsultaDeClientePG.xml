@@ -116,7 +116,11 @@
             <oa:messageStyledText id="NombreUsuarioEBS" prompt="Nombre Usuario:" styleClass="OraFieldText"/>
          </ui:userInfo>
          <ui:returnNavigation>
-            <oa:link id="RegresarPantallaPrincipal" text="Regresar a Pantalla Principal" destination=""/>
+            <oa:link id="RegresarPantallaPrincipal" text="Regresar a Pantalla Principal" destination="">
+               <ui:primaryClientAction>
+                  <ui:firePartialAction event="RegresarPortalEvt" unvalidated="true" formSubmitted="false"/>
+               </ui:primaryClientAction>
+            </oa:link>
          </ui:returnNavigation>
       </oa:pageLayout>
    </content>

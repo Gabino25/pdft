@@ -208,4 +208,23 @@ public class SsAMImpl extends OAApplicationModuleImpl {
         UsuarioIterator.closeRowSetIterator();
         return retval;
     }
+
+    public String getUsuarioId(String strUsuario
+                            , String strConstrasenia
+                            , OAPageContext pageContext
+                            ) {
+        String retval = "Usuario y/o Password Invalidos."; 
+        XxqpPdftUsuariosRoVOImpl  xxqpPdftUsuariosRoVOImpl = getXxqpPdftUsuariosRoVO1();
+        XxqpPdftUsuariosRoVORowImpl  xxqpPdftUsuariosRoVORowImpl = null; 
+        xxqpPdftUsuariosRoVOImpl.initByUserPassword(strUsuario
+                                                   ,strConstrasenia
+                                                   );
+        RowSetIterator UsuarioIterator = xxqpPdftUsuariosRoVOImpl.createRowSetIterator(null); 
+        if(UsuarioIterator.hasNext()){
+            xxqpPdftUsuariosRoVORowImpl = (XxqpPdftUsuariosRoVORowImpl)UsuarioIterator.next();
+            retval = xxqpPdftUsuariosRoVORowImpl.getId().toString(); 
+        }
+        UsuarioIterator.closeRowSetIterator();
+        return retval;  
+    }
 }

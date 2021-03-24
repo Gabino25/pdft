@@ -48,6 +48,32 @@ public class PortalCO extends OAControllerImpl
                                     );
                                     return; 
       }
+    
+      String strPuserPdft =  pageContext.getParameter("pUserPdft");
+      String strPuserPdftId =  pageContext.getParameter("pUserPdftId");
+       
+        if(null==strPuserPdft||null==strPuserPdftId||"".equals(strPuserPdft)||"".equals(strPuserPdftId)){
+            pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/ss/webui/LoginPG" /*url*/
+                                      ,null /*functionName*/
+                                      ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
+                                      ,null /*menuName*/
+                                      ,null /*parameters*/
+                                      ,false /*retainAM*/
+                                      ,OAWebBeanConstants.ADD_BREAD_CRUMB_NO /*addBreadCrumb*/
+                                      ,OAException.ERROR /*messagingLevel*/
+                                      );
+            return; 
+        }
+      
+      if(null!=strPuserPdft&&!"".equals(strPuserPdft)){
+        pageContext.putTransientSessionValue("tsUserPdft",strPuserPdft);
+      }
+        System.out.println("strPuserPdftId:"+strPuserPdftId);
+        if(null!=strPuserPdftId&&!"".equals(strPuserPdftId)){
+          pageContext.putTransientSessionValue("tsUserPdftId",strPuserPdftId);
+        }
+        
+      
   }
 
   /**

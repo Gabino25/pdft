@@ -80,10 +80,16 @@ public class LoginCO extends OAControllerImpl
        if(null!=strValidaUsuarioPassword){
         throw new OAException(strValidaUsuarioPassword,OAException.ERROR); 
        }else{
-       
+           String strUsuarioID = ssAMImpl.getUsuarioId(strUsuario
+                                                      ,strConstrasenia
+                                                      ,pageContext
+                                                      );
+           System.out.println("LoginPdftCO strPuserPdftId:"+strUsuarioID);        
            com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
            parameters.put("pClienteExtern","Y");
            pageContext.putSessionValue("sHasLogin","Y");
+           parameters.put("pUserPdft",strUsuario);
+           parameters.put("pUserPdftId",strUsuarioID);
            pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/ss/webui/PortalPG" /*url*/
                                      ,null /*functionName*/
                                      ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
