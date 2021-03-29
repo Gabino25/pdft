@@ -1458,4 +1458,58 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
            reglasDeNegocioTmpRowVOImpl.setPrecio(nPrecio);
            reglasDeNegocioTmpVOImpl.insertRow(reglasDeNegocioTmpRowVOImpl);
     }
+
+    public void deleteAllRowRegNeg() {
+        ReglasDeNegocioTmpVOImpl reglasDeNegocioTmpVOImpl =getReglasDeNegocioTmpVO1(); 
+        if(null!=reglasDeNegocioTmpVOImpl){
+          RowSetIterator iter =  reglasDeNegocioTmpVOImpl.createRowSetIterator(null);
+          while(iter.hasNext()){
+              ReglasDeNegocioTmpVORowImpl reglasDeNegocioTmpVORowImpl = null; 
+              reglasDeNegocioTmpVORowImpl = (ReglasDeNegocioTmpVORowImpl)iter.next();
+              reglasDeNegocioTmpVORowImpl.remove();
+          }
+        }
+    }
+
+    public void createRowRegNegUpd(String[] pAttributes
+                                  ,oracle.jbo.domain.Number pMypHeaderId) {
+        OADBTransaction oADBTransaction =this.getOADBTransaction();   
+        XxqpPdftMypRegNegVOImpl xxqpPdftMypRegNegVOImpl = getXxqpPdftMypRegNegVO1();
+        if(!xxqpPdftMypRegNegVOImpl.isPreparedForExecution()){
+            xxqpPdftMypRegNegVOImpl.executeQuery();
+          }
+          xxqpPdftMypRegNegVOImpl.setMaxFetchSize(0);
+          xxqpPdftMypRegNegVOImpl.last();   // Go to the last Row of the VO
+          System.out.println(xxqpPdftMypRegNegVOImpl.getCurrentRow());
+          oracle.jbo.domain.Number IdNum = null; 
+          IdNum = oADBTransaction.getSequenceValue("XXQP_PDFT_MYP_REG_NEG_S");
+          xxqpPdftMypRegNegVOImpl.next();
+          XxqpPdftMypRegNegVORowImpl xxqpPdftMypRegNegVORowImpl = (XxqpPdftMypRegNegVORowImpl)xxqpPdftMypRegNegVOImpl.createRow(); 
+          xxqpPdftMypRegNegVORowImpl.setId(IdNum);
+          xxqpPdftMypRegNegVORowImpl.setMypHeaderId(pMypHeaderId);
+          xxqpPdftMypRegNegVORowImpl.setEstadoMeaning(pAttributes[0]);
+          xxqpPdftMypRegNegVORowImpl.setConceptoMeaning(pAttributes[1]);
+        oracle.jbo.domain.Number nPrecio=null;
+         try {
+             nPrecio = new oracle.jbo.domain.Number(pAttributes[2]);
+         } catch (SQLException e) {
+             // TODO
+         }
+         xxqpPdftMypRegNegVORowImpl.setPrecio(nPrecio);
+          xxqpPdftMypRegNegVOImpl.insertRow(xxqpPdftMypRegNegVORowImpl);
+    }
+
+    public void deleteAllRowRegNegUpd() {
+        OADBTransaction oADBTransaction =this.getOADBTransaction();   
+        XxqpPdftMypRegNegVOImpl xxqpPdftMypRegNegVOImpl = getXxqpPdftMypRegNegVO1();
+        if(null!=xxqpPdftMypRegNegVOImpl){
+           RowSetIterator iter =  xxqpPdftMypRegNegVOImpl.createRowSetIterator(null);
+           XxqpPdftMypRegNegVORowImpl xxqpPdftMypRegNegVORowImpl = null; 
+           while(iter.hasNext()){
+               xxqpPdftMypRegNegVORowImpl = (XxqpPdftMypRegNegVORowImpl)iter.next();
+               xxqpPdftMypRegNegVORowImpl.remove();
+           }
+        }
+        /** oADBTransaction.commit() **/
+    }
 }

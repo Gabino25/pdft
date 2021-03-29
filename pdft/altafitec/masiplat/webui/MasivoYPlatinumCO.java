@@ -344,6 +344,11 @@ public class MasivoYPlatinumCO extends OAControllerImpl
        return; 
     }
     
+      if("BorrarTodoEvt".equals(strEventParam)){
+         masivoYPlatinumAMImpl.deleteAllRowRegNeg();
+         return; 
+      }
+    
     if("lovPrepare".equals(strEventParam)){
       String lovInputSourceId = pageContext.getLovInputSourceId();
       String lstrPartyID = null; 

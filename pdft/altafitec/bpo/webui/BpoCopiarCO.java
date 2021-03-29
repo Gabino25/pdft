@@ -219,6 +219,9 @@ public class BpoCopiarCO extends OAControllerImpl {
               newPdftBpoServicioVORowImpl.setViernes(xxqpPdftBpoServicioVORowImpl.getViernes());
               newPdftBpoServicioVORowImpl.setSabado(xxqpPdftBpoServicioVORowImpl.getSabado());
               newPdftBpoServicioVORowImpl.setDomingo(xxqpPdftBpoServicioVORowImpl.getDomingo());
+              newPdftBpoServicioVORowImpl.setOtrosIlim(xxqpPdftBpoServicioVORowImpl.getOtrosIlim());
+              newPdftBpoServicioVORowImpl.setDireccionBaseIlim(xxqpPdftBpoServicioVORowImpl.getDireccionBaseIlim());
+              newPdftBpoServicioVORowImpl.setObservacionesIlim(xxqpPdftBpoServicioVORowImpl.getObservacionesIlim());
               
               xxqpPdftBpoServicioVOImpl.insertRow(newPdftBpoServicioVORowImpl);
               oADBTransaction.commit();
@@ -297,7 +300,7 @@ public class BpoCopiarCO extends OAControllerImpl {
                newPdftBpoRequeAdicioOperVORowImpl.setAttribute3(xxqpPdftBpoRequeAdicioOperVORowImpl.getAttribute3());
                newPdftBpoRequeAdicioOperVORowImpl.setAttribute4(xxqpPdftBpoRequeAdicioOperVORowImpl.getAttribute4());
                newPdftBpoRequeAdicioOperVORowImpl.setAttribute5(xxqpPdftBpoRequeAdicioOperVORowImpl.getAttribute5());
-               
+               newPdftBpoRequeAdicioOperVORowImpl.setComentariosIlim(xxqpPdftBpoRequeAdicioOperVORowImpl.getComentariosIlim());
                xxqpPdftBpoRequeAdicioOperVOImpl.insertRow(newPdftBpoRequeAdicioOperVORowImpl);
                oADBTransaction.commit();
            } /** END while(BpoRequeAdicioOperIterator.hasNext()){ **/

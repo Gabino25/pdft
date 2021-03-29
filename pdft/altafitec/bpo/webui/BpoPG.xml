@@ -673,74 +673,100 @@
                   </oa:contentContainer>
                   <oa:contentContainer id="ReglasDeNegocio" text="Reglas de Negocio">
                      <ui:contents>
-                        <oa:table id="ReglasDeNegocioTmpVORN" blockSize="100">
+                        <oa:tableLayout id="region5745" hAlign="center">
                            <ui:contents>
-                              <oa:messageStyledText id="Id" dataType="NUMBER" prompt="Id" viewName="ReglasDeNegocioTmpVO1" viewAttr="Id" rendered="false"/>
-                              <oa:messageLovInput id="EstadoMeaning" viewName="ReglasDeNegocioTmpVO1" viewAttr="EstadoMeaning" prompt="Concepto 1" required="yes" lookAheadMinChars="1">
-                                 <lovContents>
-                                    <oa:listOfValues id="region5741">
-                                       <ui:contents>
-                                          <oa:table name="region5741" id="XxqpPdftBpoEstadosTab" controllerClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.webui.EstadosCO">
-                                             <ui:contents>
-                                                <oa:messageStyledText id="LookupCode1" dataType="VARCHAR2" prompt="LookupCode" viewName="XxqpPdftBpoEstadosVO1" viewAttr="LookupCode" maximumLength="30" rendered="false"/>
-                                                <oa:messageStyledText id="Meaning1" dataType="VARCHAR2" prompt="Concepto 1" viewName="XxqpPdftBpoEstadosVO1" viewAttr="Meaning" maximumLength="80" queryable="true"/>
-                                                <oa:messageStyledText id="Description1" dataType="VARCHAR2" prompt="Description" viewName="XxqpPdftBpoEstadosVO1" viewAttr="Description" maximumLength="240" rendered="false"/>
-                                             </ui:contents>
-                                          </oa:table>
-                                       </ui:contents>
-                                    </oa:listOfValues>
-                                 </lovContents>
-                                 <lovMappings>
-                                    <lovMap id="lovMap3" lovItem="Meaning1" resultTo="EstadoMeaning" criteriaFrom="EstadoMeaning"/>
-                                    <lovMap id="lovMap4" lovItem="LookupCode1" resultTo="EstadoCodeFv"/>
-                                 </lovMappings>
-                              </oa:messageLovInput>
-                              <oa:messageStyledText id="EstadoCode" viewName="ReglasDeNegocioTmpVO1" viewAttr="EstadoCode" prompt="" rendered="true" required="yes" styleClass="OraFieldText"/>
-                              <oa:messageLovInput id="ConceptoMeaning" viewName="ReglasDeNegocioTmpVO1" viewAttr="ConceptoMeaning" prompt="Concepto 2" required="yes" lookAheadMinChars="1">
-                                 <lovContents>
-                                    <oa:listOfValues id="region5731">
-                                       <ui:contents>
-                                          <oa:table name="region5731" id="XxqpPdftBpoConceptosTab" controllerClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.webui.ConceptosCO">
-                                             <ui:contents>
-                                                <oa:messageStyledText id="LookupCode" dataType="VARCHAR2" prompt="LookupCode" viewName="XxqpPdftBpoConceptosVO1" viewAttr="LookupCode" maximumLength="30" rendered="false"/>
-                                                <oa:messageStyledText id="Meaning" dataType="VARCHAR2" prompt="Concepto 2" viewName="XxqpPdftBpoConceptosVO1" viewAttr="Meaning" maximumLength="80" queryable="true"/>
-                                                <oa:messageStyledText id="Description2" dataType="VARCHAR2" prompt="Description" viewName="XxqpPdftBpoConceptosVO1" viewAttr="Description" maximumLength="240" rendered="false"/>
-                                             </ui:contents>
-                                          </oa:table>
-                                       </ui:contents>
-                                    </oa:listOfValues>
-                                 </lovContents>
-                                 <lovMappings>
-                                    <lovMap id="lovMap11" lovItem="Meaning" resultTo="ConceptoMeaning" criteriaFrom="ConceptoMeaning"/>
-                                    <lovMap id="lovMap2" lovItem="LookupCode" resultTo="ConceptoCodeFv"/>
-                                 </lovMappings>
-                              </oa:messageLovInput>
-                              <oa:messageStyledText id="ConceptoCode" viewName="ReglasDeNegocioTmpVO1" viewAttr="ConceptoCode" prompt="" rendered="true" required="yes" styleClass="OraFieldText"/>
-                              <oa:messageTextInput id="PrecioRegNeg" dataType="NUMBER" prompt="Precio" viewName="ReglasDeNegocioTmpVO1" viewAttr="Precio" required="yes"/>
-                              <oa:formValue id="ConceptoCodeFv" viewName="ReglasDeNegocioTmpVO1" viewAttr="ConceptoCode"/>
-                              <oa:formValue id="EstadoCodeFv" viewName="ReglasDeNegocioTmpVO1" viewAttr="EstadoCode"/>
-                              <oa:image id="item174" source="deleteicon_enabled.gif" use="/oracle/apps/fnd/attributesets/Buttons/Delete" serverUnvalidated="true">
-                                 <ui:primaryClientAction>
-                                    <ui:fireAction formSubmitted="true" event="DeleteRegNegEvt" unvalidated="true" id="fireAction12">
-                                       <ui:parameters>
-                                          <ui:parameter key="pDeleteRegNegId" value="${oa.ReglasDeNegocioTmpVO1.Id}"/>
-                                       </ui:parameters>
-                                    </ui:fireAction>
-                                 </ui:primaryClientAction>
-                              </oa:image>
-                           </ui:contents>
-                           <ui:tableActions>
-                              <oa:flowLayout id="region5721">
+                              <oa:rowLayout id="region5746">
                                  <ui:contents>
-                                    <oa:button id="AgregarRegNegBtn" text="Agregar Registro" prompt="Agregar Registro" serverUnvalidated="true">
-                                       <ui:primaryClientAction>
-                                          <ui:firePartialAction formSubmitted="false" event="AgregarRegNegEvt" unvalidated="true" id="firePartialAction1"/>
-                                       </ui:primaryClientAction>
-                                    </oa:button>
+                                    <oa:cellFormat id="region5747" vAlign="top">
+                                       <ui:contents>
+                                          <oa:table id="ReglasDeNegocioTmpVORN" blockSize="100">
+                                             <ui:contents>
+                                                <oa:messageStyledText id="Id" dataType="NUMBER" prompt="Id" viewName="ReglasDeNegocioTmpVO1" viewAttr="Id" rendered="false"/>
+                                                <oa:messageLovInput id="EstadoMeaning" viewName="ReglasDeNegocioTmpVO1" viewAttr="EstadoMeaning" prompt="Concepto 1" required="yes" lookAheadMinChars="1">
+                                                   <lovContents>
+                                                      <oa:listOfValues id="region5741">
+                                                         <ui:contents>
+                                                            <oa:table name="region5741" id="XxqpPdftBpoEstadosTab" controllerClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.webui.EstadosCO">
+                                                               <ui:contents>
+                                                                  <oa:messageStyledText id="LookupCode1" dataType="VARCHAR2" prompt="LookupCode" viewName="XxqpPdftBpoEstadosVO1" viewAttr="LookupCode" maximumLength="30" rendered="false"/>
+                                                                  <oa:messageStyledText id="Meaning1" dataType="VARCHAR2" prompt="Concepto 1" viewName="XxqpPdftBpoEstadosVO1" viewAttr="Meaning" maximumLength="80" queryable="true"/>
+                                                                  <oa:messageStyledText id="Description1" dataType="VARCHAR2" prompt="Description" viewName="XxqpPdftBpoEstadosVO1" viewAttr="Description" maximumLength="240" rendered="false"/>
+                                                               </ui:contents>
+                                                            </oa:table>
+                                                         </ui:contents>
+                                                      </oa:listOfValues>
+                                                   </lovContents>
+                                                   <lovMappings>
+                                                      <lovMap id="lovMap3" lovItem="Meaning1" resultTo="EstadoMeaning" criteriaFrom="EstadoMeaning"/>
+                                                      <lovMap id="lovMap4" lovItem="LookupCode1" resultTo="EstadoCodeFv"/>
+                                                   </lovMappings>
+                                                </oa:messageLovInput>
+                                                <oa:messageStyledText id="EstadoCode" viewName="ReglasDeNegocioTmpVO1" viewAttr="EstadoCode" prompt="" rendered="true" required="yes" styleClass="OraFieldText"/>
+                                                <oa:messageLovInput id="ConceptoMeaning" viewName="ReglasDeNegocioTmpVO1" viewAttr="ConceptoMeaning" prompt="Concepto 2" required="yes" lookAheadMinChars="1">
+                                                   <lovContents>
+                                                      <oa:listOfValues id="region5731">
+                                                         <ui:contents>
+                                                            <oa:table name="region5731" id="XxqpPdftBpoConceptosTab" controllerClass="xxqp.oracle.apps.ar.pdft.altafitec.bpo.webui.ConceptosCO">
+                                                               <ui:contents>
+                                                                  <oa:messageStyledText id="LookupCode" dataType="VARCHAR2" prompt="LookupCode" viewName="XxqpPdftBpoConceptosVO1" viewAttr="LookupCode" maximumLength="30" rendered="false"/>
+                                                                  <oa:messageStyledText id="Meaning" dataType="VARCHAR2" prompt="Concepto 2" viewName="XxqpPdftBpoConceptosVO1" viewAttr="Meaning" maximumLength="80" queryable="true"/>
+                                                                  <oa:messageStyledText id="Description2" dataType="VARCHAR2" prompt="Description" viewName="XxqpPdftBpoConceptosVO1" viewAttr="Description" maximumLength="240" rendered="false"/>
+                                                               </ui:contents>
+                                                            </oa:table>
+                                                         </ui:contents>
+                                                      </oa:listOfValues>
+                                                   </lovContents>
+                                                   <lovMappings>
+                                                      <lovMap id="lovMap11" lovItem="Meaning" resultTo="ConceptoMeaning" criteriaFrom="ConceptoMeaning"/>
+                                                      <lovMap id="lovMap2" lovItem="LookupCode" resultTo="ConceptoCodeFv"/>
+                                                   </lovMappings>
+                                                </oa:messageLovInput>
+                                                <oa:messageStyledText id="ConceptoCode" viewName="ReglasDeNegocioTmpVO1" viewAttr="ConceptoCode" prompt="" rendered="true" required="yes" styleClass="OraFieldText"/>
+                                                <oa:messageTextInput id="PrecioRegNeg" dataType="NUMBER" prompt="Precio" viewName="ReglasDeNegocioTmpVO1" viewAttr="Precio" required="yes"/>
+                                                <oa:formValue id="ConceptoCodeFv" viewName="ReglasDeNegocioTmpVO1" viewAttr="ConceptoCode"/>
+                                                <oa:formValue id="EstadoCodeFv" viewName="ReglasDeNegocioTmpVO1" viewAttr="EstadoCode"/>
+                                                <oa:image id="item174" source="deleteicon_enabled.gif" use="/oracle/apps/fnd/attributesets/Buttons/Delete" serverUnvalidated="true">
+                                                   <ui:primaryClientAction>
+                                                      <ui:fireAction formSubmitted="true" event="DeleteRegNegEvt" unvalidated="true" id="fireAction12">
+                                                         <ui:parameters>
+                                                            <ui:parameter key="pDeleteRegNegId" value="${oa.ReglasDeNegocioTmpVO1.Id}"/>
+                                                         </ui:parameters>
+                                                      </ui:fireAction>
+                                                   </ui:primaryClientAction>
+                                                </oa:image>
+                                             </ui:contents>
+                                             <ui:tableActions>
+                                                <oa:flowLayout id="region5721">
+                                                   <ui:contents>
+                                                      <oa:button id="AgregarRegNegBtn" text="Agregar Registro" prompt="Agregar Registro" serverUnvalidated="true">
+                                                         <ui:primaryClientAction>
+                                                            <ui:firePartialAction formSubmitted="false" event="AgregarRegNegEvt" unvalidated="true" id="firePartialAction1"/>
+                                                         </ui:primaryClientAction>
+                                                      </oa:button>
+                                                      <oa:button id="BorrarTodoBtn" text="Borrar Todo" prompt="Borrar Todo" serverUnvalidated="true">
+                                                         <ui:primaryClientAction>
+                                                            <ui:firePartialAction formSubmitted="false" event="BorrarTodoEvt" unvalidated="true" id="firePartialAction11"/>
+                                                         </ui:primaryClientAction>
+                                                      </oa:button>
+                                                   </ui:contents>
+                                                </oa:flowLayout>
+                                             </ui:tableActions>
+                                          </oa:table>
+                                       </ui:contents>
+                                    </oa:cellFormat>
+                                    <oa:cellFormat id="region5748" vAlign="top">
+                                       <ui:contents>
+                                          <oa:messageTextInput id="ReglasDeNegocioLines" dataType="CLOB" rows="10" columns="100">
+                                             <ui:primaryClientAction>
+                                                <ui:firePartialAction event="ReglasDeNegocioLinesEvt" id="firePartialAction2" formSubmitted="false"/>
+                                             </ui:primaryClientAction>
+                                          </oa:messageTextInput>
+                                       </ui:contents>
+                                    </oa:cellFormat>
                                  </ui:contents>
-                              </oa:flowLayout>
-                           </ui:tableActions>
-                        </oa:table>
+                              </oa:rowLayout>
+                           </ui:contents>
+                        </oa:tableLayout>
                      </ui:contents>
                   </oa:contentContainer>
                </ui:contents>

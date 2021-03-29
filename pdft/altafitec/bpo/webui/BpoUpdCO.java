@@ -40,6 +40,7 @@ import oracle.apps.fnd.framework.webui.beans.message.OAMessageFileUploadBean;
 
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageStyledTextBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageTextInputBean;
+import oracle.apps.fnd.framework.webui.beans.nav.OAButtonBean;
 import oracle.apps.fnd.framework.webui.beans.table.OATableBean;
 import oracle.apps.xdo.XDOException;
 import oracle.apps.xdo.oa.schema.server.TemplateHelper;
@@ -114,6 +115,8 @@ public class BpoUpdCO extends OAControllerImpl
            ((OABodyBean)body).setBlockOnEverySubmit(true); 
        }
       
+      
+      
       environmentCurrencyFormat(pageContext,webBean);
       
       OAPageLayoutBean PageLayoutRNBean = (OAPageLayoutBean)webBean.findChildRecursive("PageLayoutRN"); 
@@ -125,6 +128,10 @@ public class BpoUpdCO extends OAControllerImpl
       OASubTabLayoutBean subTabLayoutRNBean = (OASubTabLayoutBean)webBean.findChildRecursive("SubTabLayoutRN");
       OATableBean PdftBpoPrecioBean = (OATableBean)webBean.findChildRecursive("PdftBpoPrecio");
       OAMessageTextInputBean ModificacionesRealizadasBean = (OAMessageTextInputBean)webBean.findChildRecursive("ModificacionesRealizadas");
+      OAButtonBean  ProcesarBean = (OAButtonBean)webBean.findChildRecursive("Procesar");
+      if(null!=ProcesarBean){
+      ProcesarBean.setOnClick("this.disabled=true;this.value='Trabajando...';");
+      }
       
       if(null!=PdftBpoPrecioBean){
        if(null!=PdftBpoPrecioBean.getName(pageContext)){
