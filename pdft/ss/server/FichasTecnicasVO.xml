@@ -13,7 +13,7 @@ select myp.id
         ,myp.numero_ft 
         ,myp.status
         ,myp.party_id
-       ,(select p.known_as 
+       ,(select p.party_name 
           from hz_parties p
          where p.party_id = myp.party_id) nombre_del_cliente
        ,myp.unidad_de_negocio_c
@@ -32,7 +32,7 @@ select myp.id
         ,bpo.numero_ft 
         ,bpo.status
         ,bpo.party_id
-       ,(select p.known_as 
+       ,(select p.party_name
           from hz_parties p
          where p.party_id = bpo.party_id) nombre_del_cliente
        ,bpo.unidad_de_negocio_c
@@ -51,7 +51,7 @@ select myp.id
         ,qplabs.numero_ft 
         ,qplabs.status
         ,qplabs.party_id
-       ,(select p.known_as 
+       ,(select p.party_name 
           from hz_parties p
          where p.party_id = qplabs.party_id) nombre_del_cliente
        ,qplabs.unidad_de_negocio_c
