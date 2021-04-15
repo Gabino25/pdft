@@ -598,6 +598,11 @@
                                                             <ui:firePartialAction formSubmitted="false" event="AgregarRegNegEvt" unvalidated="true" id="firePartialAction1"/>
                                                          </ui:primaryClientAction>
                                                       </oa:button>
+                                                      <oa:button id="BorrarTodoBtn" text="Borrar Todo" prompt="Borrar Todo" serverUnvalidated="true">
+                                                         <ui:primaryClientAction>
+                                                            <ui:firePartialAction formSubmitted="false" event="BorrarTodoEvt" unvalidated="true" id="firePartialAction11"/>
+                                                         </ui:primaryClientAction>
+                                                      </oa:button>
                                                    </ui:contents>
                                                 </oa:flowLayout>
                                              </ui:tableActions>

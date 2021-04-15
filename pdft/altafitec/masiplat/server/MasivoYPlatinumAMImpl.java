@@ -1459,18 +1459,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
            reglasDeNegocioTmpVOImpl.insertRow(reglasDeNegocioTmpRowVOImpl);
     }
 
-    public void deleteAllRowRegNeg() {
-        ReglasDeNegocioTmpVOImpl reglasDeNegocioTmpVOImpl =getReglasDeNegocioTmpVO1(); 
-        if(null!=reglasDeNegocioTmpVOImpl){
-          RowSetIterator iter =  reglasDeNegocioTmpVOImpl.createRowSetIterator(null);
-          while(iter.hasNext()){
-              ReglasDeNegocioTmpVORowImpl reglasDeNegocioTmpVORowImpl = null; 
-              reglasDeNegocioTmpVORowImpl = (ReglasDeNegocioTmpVORowImpl)iter.next();
-              reglasDeNegocioTmpVORowImpl.remove();
-          }
-        }
-    }
-
+  
     public void createRowRegNegUpd(String[] pAttributes
                                   ,oracle.jbo.domain.Number pMypHeaderId) {
         OADBTransaction oADBTransaction =this.getOADBTransaction();   
@@ -1499,6 +1488,18 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
           xxqpPdftMypRegNegVOImpl.insertRow(xxqpPdftMypRegNegVORowImpl);
     }
 
+    public void deleteAllRowRegNeg() {
+        ReglasDeNegocioTmpVOImpl reglasDeNegocioTmpVOImpl =getReglasDeNegocioTmpVO1(); 
+        if(null!=reglasDeNegocioTmpVOImpl){
+          RowSetIterator iter =  reglasDeNegocioTmpVOImpl.createRowSetIterator(null);
+          while(iter.hasNext()){
+              ReglasDeNegocioTmpVORowImpl reglasDeNegocioTmpVORowImpl = null; 
+              reglasDeNegocioTmpVORowImpl = (ReglasDeNegocioTmpVORowImpl)iter.next();
+              reglasDeNegocioTmpVORowImpl.remove();
+          }
+        }
+    }
+    
     public void deleteAllRowRegNegUpd() {
         OADBTransaction oADBTransaction =this.getOADBTransaction();   
         XxqpPdftMypRegNegVOImpl xxqpPdftMypRegNegVOImpl = getXxqpPdftMypRegNegVO1();

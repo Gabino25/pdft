@@ -316,6 +316,71 @@ public class BpoUpdCO extends OAControllerImpl
          bpoAMImpl.deleteRowRegNegUpd(strDeleteRegNegId);
          return; 
       }
+      
+      if("BorrarTodoEvt".equals(strEventParam)){
+         bpoAMImpl.deleteAllRowRegNegUpd();
+         return; 
+      }
+      
+      if("ReglasDeNegocioLinesEvt".equals(strEventParam)){
+          OAMessageTextInputBean ReglasDeNegocioLinesBean = (OAMessageTextInputBean)webBean.findChildRecursive("ReglasDeNegocioLines"); 
+          String strReglasDeNegocioLines = null; 
+          System.out.println("ReglasDeNegocioLinesBean:"+ReglasDeNegocioLinesBean);
+          if(null!=ReglasDeNegocioLinesBean){
+            strReglasDeNegocioLines = (String)ReglasDeNegocioLinesBean.getValue(pageContext);
+          }
+          System.out.println("strReglasDeNegocioLines:"+strReglasDeNegocioLines);
+          if(null!=strReglasDeNegocioLines&&!"".equals(strReglasDeNegocioLines)){
+            String arrayReglasDeNegocioLines[] = strReglasDeNegocioLines.split("\\r?\\n");
+            com.sun.java.util.collections.List exceptions = new com.sun.java.util.collections.ArrayList();
+              
+            for(int i=0;i<arrayReglasDeNegocioLines.length;i++){
+              if(null!=arrayReglasDeNegocioLines[i]&&!"".equals(arrayReglasDeNegocioLines[i])){
+                  String strAttributes[] = arrayReglasDeNegocioLines[i].split(",");
+                  String strIndicador = "Linea ("+(i+1)+"):";
+                  String strMsg = "";
+                  if(strAttributes.length!=3){
+                      strMsg =strMsg+"No existen 3 atributos";
+                  }else{
+                      if(null==strAttributes[0]||"".equals(strAttributes[0])){
+                          strMsg =strMsg+"El primer atributo esta vacio";
+                      }
+                      if(null==strAttributes[1]||"".equals(strAttributes[1])){
+                          strMsg =strMsg+"El segundo atributo esta vacio";
+                      }
+                      if(null==strAttributes[2]||"".equals(strAttributes[2])){
+                          strMsg =strMsg+"El tercer atributo esta vacio";
+                      }
+                      oracle.jbo.domain.Number nPrecio=null;
+                      try {
+                          nPrecio = new oracle.jbo.domain.Number(strAttributes[2]);
+                      } catch (SQLException e) {
+                           strMsg =strMsg+"El tercer atributo no es un numero";
+                      }
+                  }/** if(strAttributes.length!=3){ **/
+                   if(null!=strMsg&&!"".equals(strMsg)){
+                     exceptions.add(new OAException(strIndicador+strMsg,OAException.ERROR));
+                   }  
+                }
+            }
+            
+              if(exceptions.size()>0){
+              OAException.raiseBundledOAException(exceptions);
+              }else{
+                  for(int i=0;i<arrayReglasDeNegocioLines.length;i++){
+                    if(null!=arrayReglasDeNegocioLines[i]&&!"".equals(arrayReglasDeNegocioLines[i])){
+                        String strAttributes[] = arrayReglasDeNegocioLines[i].split(",");
+                        bpoAMImpl.createRowRegNegUpd(strAttributes
+                                                    ,xxqpPdftBpoHeaderVORowImpl.getId()
+                                                    );
+                    }
+                  }
+              }
+            
+          }
+          return;
+      }
+      
       if("lovPrepare".equals(strEventParam)){
             String lovInputSourceId = pageContext.getLovInputSourceId();
             String lstrPartyID = null; 

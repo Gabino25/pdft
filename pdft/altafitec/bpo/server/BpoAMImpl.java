@@ -1490,4 +1490,46 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
            }
         }
     }
+
+    public void deleteAllRowRegNegUpd() {
+        OADBTransaction oADBTransaction =this.getOADBTransaction();
+        XxqpPdftBpoRegNegVOImpl XxqpPdftBpoRegNegVOImpl = getXxqpPdftBpoRegNegVO1();
+              if(null!=XxqpPdftBpoRegNegVOImpl){
+                 RowSetIterator iter =  XxqpPdftBpoRegNegVOImpl.createRowSetIterator(null);
+                 XxqpPdftBpoRegNegVORowImpl XxqpPdftBpoRegNegVORowImpl = null; 
+                 while(iter.hasNext()){
+                     XxqpPdftBpoRegNegVORowImpl = (XxqpPdftBpoRegNegVORowImpl)iter.next();
+                     XxqpPdftBpoRegNegVORowImpl.remove();
+                 }
+              }
+        /** oADBTransaction.commit() **/       
+    }
+
+    public void createRowRegNegUpd(String[] pAttributes
+                                  ,oracle.jbo.domain.Number pBpoHeaderId) {
+        OADBTransaction oADBTransaction =this.getOADBTransaction();                            
+        XxqpPdftBpoRegNegVOImpl XxqpPdftBpoRegNegVOImpl =getXxqpPdftBpoRegNegVO1(); 
+        if(!XxqpPdftBpoRegNegVOImpl.isPreparedForExecution()){
+        XxqpPdftBpoRegNegVOImpl.executeQuery();
+        }
+        XxqpPdftBpoRegNegVOImpl.setMaxFetchSize(0);
+        XxqpPdftBpoRegNegVOImpl.last();   // Go to the last Row of the VO
+        System.out.println(XxqpPdftBpoRegNegVOImpl.getCurrentRow());
+        XxqpPdftBpoRegNegVOImpl.next();
+        oracle.jbo.domain.Number IdNum = null; 
+        IdNum = oADBTransaction.getSequenceValue("XXQP_PDFT_BPO_REG_NEG_S");
+        XxqpPdftBpoRegNegVORowImpl reglasDeNegocioTmpRowVOImpl = (XxqpPdftBpoRegNegVORowImpl)XxqpPdftBpoRegNegVOImpl.createRow();
+        reglasDeNegocioTmpRowVOImpl.setId(IdNum);
+        reglasDeNegocioTmpRowVOImpl.setBpoHeaderId(pBpoHeaderId);
+        reglasDeNegocioTmpRowVOImpl.setEstadoMeaning(pAttributes[0]);
+        reglasDeNegocioTmpRowVOImpl.setConceptoMeaning(pAttributes[1]);
+        oracle.jbo.domain.Number nPrecio=null;
+        try {
+          nPrecio = new oracle.jbo.domain.Number(pAttributes[2]);
+        } catch (SQLException e) {
+          // TODO
+        }
+        reglasDeNegocioTmpRowVOImpl.setPrecio(nPrecio);
+        XxqpPdftBpoRegNegVOImpl.insertRow(reglasDeNegocioTmpRowVOImpl);
+    }
 }
