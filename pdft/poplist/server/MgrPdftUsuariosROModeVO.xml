@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="MgrPdftUsuariosROModeVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="xxqp.oracle.apps.ar.pdft.poplist.server.MgrPdftUsuariosROModeVORowImpl"
+   ComponentClass="xxqp.oracle.apps.ar.pdft.poplist.server.MgrPdftUsuariosROModeVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+select id   lookup_code 
+           ,usuario  meaning
+     from XXQP_PDFT_USUARIOS_RO
+       order by usuario asc
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="LookupCode"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LOOKUP_CODE"
+      Expression="LOOKUP_CODE"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Meaning"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="2000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MEANING"
+      Expression="MEANING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

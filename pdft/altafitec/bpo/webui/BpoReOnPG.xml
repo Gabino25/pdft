@@ -45,7 +45,7 @@
                               <oa:tableLayout id="TabLayFecha" hAlign="center">
                                  <ui:contents>
                                     <oa:messageTextInput id="Fecha" prompt="Fecha" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftBpoHeaderVO1" viewAttr="CreationDate" required="yes"/>
-                                    <oa:messageChoice id="Ejecutivo" prompt="Ejecutivo" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftBpoHeaderVO1" viewAttr="Ejecutivo" required="yes" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.MgrPdftUsuariosVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode"/>
+                                    <oa:messageChoice id="Ejecutivo" prompt="Ejecutivo" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftBpoHeaderVO1" viewAttr="Ejecutivo" required="yes" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.MgrPdftUsuariosROModeVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode"/>
                                  </ui:contents>
                               </oa:tableLayout>
                            </ui:contents>

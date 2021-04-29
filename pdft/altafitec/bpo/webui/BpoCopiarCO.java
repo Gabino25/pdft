@@ -7,6 +7,8 @@ import oracle.apps.fnd.framework.webui.OAPageContext;
 import oracle.apps.fnd.framework.webui.OAWebBeanConstants;
 import oracle.apps.fnd.framework.webui.beans.OAWebBean;
 
+import oracle.apps.fnd.framework.webui.beans.layout.OASubTabLayoutBean;
+
 import oracle.jbo.RowSetIterator;
 
 import xxqp.oracle.apps.ar.pdft.altafitec.bpo.server.BpoAMImpl;
@@ -412,7 +414,7 @@ public class BpoCopiarCO extends OAControllerImpl {
              System.out.println("numBpoHeaderId:"+numBpoHeaderId);
              parameters.put("pBpoHeaderId",numBpoHeaderId.toString());
          }
-         pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/bpo/webui/BpoUpdPG" /*url*/
+         pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/bpo/webui/BpoUpdPG&"+OASubTabLayoutBean.OA_SELECTED_SUBTAB_IDX+"=0" /*url*/
                                    ,null /*functionName*/
                                    ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
                                    ,null /*menuName*/

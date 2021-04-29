@@ -23,6 +23,7 @@ public class XxqpPdftUsuariosRoVOImpl extends OAViewObjectImpl {
         // 4. Set attribute values to filter on in appropriate view criteria rows
         vcr1.setAttribute("Usuario",strUsuario); 
         vcr1.setAttribute("Password",strConstrasenia); 
+        vcr1.setAttribute("Status","Y");
         // 5. Add the view criteria rows to the view critera row set 
         vc.add(vcr1); 
         // 6. Apply the view criteria to the view object

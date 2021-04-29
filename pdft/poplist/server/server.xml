@@ -80,6 +80,11 @@
       ObjectType="ViewObject" >
    </Containee>
    <Containee
+      Name="MgrPdftUsuariosROModeVO"
+      FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MgrPdftUsuariosROModeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
       Name="MgrPdftUsuariosVO"
       FullName="xxqp.oracle.apps.ar.pdft.poplist.server.MgrPdftUsuariosVO"
       ObjectType="ViewObject" >

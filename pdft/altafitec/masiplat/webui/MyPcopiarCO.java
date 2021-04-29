@@ -7,6 +7,8 @@ import oracle.apps.fnd.framework.webui.OAPageContext;
 import oracle.apps.fnd.framework.webui.OAWebBeanConstants;
 import oracle.apps.fnd.framework.webui.beans.OAWebBean;
 
+import oracle.apps.fnd.framework.webui.beans.layout.OASubTabLayoutBean;
+
 import oracle.jbo.RowSetIterator;
 
 import xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.MasivoYPlatinumAMImpl;
@@ -428,7 +430,7 @@ public class MyPcopiarCO extends OAControllerImpl{
             System.out.println("numMasiYPlatHeaderId:"+numMasiYPlatHeaderId);
             parameters.put("pMyPHeaderId",numMasiYPlatHeaderId.toString());
         }
-        pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/masiplat/webui/MasivoYPlatinumUpdPG" /*url*/
+        pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/masiplat/webui/MasivoYPlatinumUpdPG&"+OASubTabLayoutBean.OA_SELECTED_SUBTAB_IDX+"=0" /*url*/
                                   ,null /*functionName*/
                                   ,OAWebBeanConstants.KEEP_MENU_CONTEXT /*menuContextAction*/
                                   ,null /*menuName*/
