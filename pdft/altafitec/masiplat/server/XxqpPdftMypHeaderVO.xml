@@ -63,7 +63,8 @@ XxqpPdftMypHeaderEO.FILE_NAME2,
 XxqpPdftMypHeaderEO.FILE_NAME3, 
        XxqpPdftMypHeaderEO.CONTENT_TYPE3, 
        XxqpPdftMypHeaderEO.FILE3,
-       XxqpPdftMypHeaderEO.MODIF_REALIZ
+       XxqpPdftMypHeaderEO.MODIF_REALIZ,
+        XXQP_PDFT_MYP_STATUS_MAIL(XxqpPdftMypHeaderEO.NUMERO_FT,XxqpPdftMypHeaderEO.NUMERO_FT_REFERENCIA) STATUS_MAIL
 FROM XXQP_PDFT_MYP_HEADER XxqpPdftMypHeaderEO
    ]]></SQLQuery>
    <DesignTime>
@@ -351,5 +352,18 @@ FROM XXQP_PDFT_MYP_HEADER XxqpPdftMypHeaderEO
       EntityAttrName="ModifRealiz"
       EntityUsage="XxqpPdftMypHeaderEO"
       AliasName="MODIF_REALIZ" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StatusMail"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS_MAIL"
+      Expression="STATUS_MAIL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
    </ViewAttribute>
 </ViewObject>

@@ -56,6 +56,7 @@ public class XxqpPdftMypHeaderVORowImpl extends OAViewRowImpl {
     public static final int CONTENTTYPE3 = 38;
     public static final int FILE3 = 39;
     public static final int MODIFREALIZ = 40;
+    public static final int STATUSMAIL = 41;
 
     /**This is the default constructor (do not remove)
      */
@@ -472,6 +473,8 @@ public class XxqpPdftMypHeaderVORowImpl extends OAViewRowImpl {
             return getFile3();
         case MODIFREALIZ:
             return getModifRealiz();
+        case STATUSMAIL:
+            return getStatusMail();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -604,6 +607,9 @@ public class XxqpPdftMypHeaderVORowImpl extends OAViewRowImpl {
             return;
         case MODIFREALIZ:
             setModifRealiz((ClobDomain)value);
+            return;
+        case STATUSMAIL:
+            setStatusMail((String)value);
             return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
@@ -790,5 +796,17 @@ public class XxqpPdftMypHeaderVORowImpl extends OAViewRowImpl {
      */
     public void setModifRealiz(ClobDomain value) {
         setAttributeInternal(MODIFREALIZ, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute StatusMail
+     */
+    public String getStatusMail() {
+        return (String) getAttributeInternal(STATUSMAIL);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute StatusMail
+     */
+    public void setStatusMail(String value) {
+        setAttributeInternal(STATUSMAIL, value);
     }
 }

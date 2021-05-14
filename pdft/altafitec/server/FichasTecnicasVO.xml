@@ -68,7 +68,7 @@ where id = bpo.ejecutivo) ejecutivo
         ,'QP_LABS' origin
         ,null ejecutivo_code
    from xxqp_pdft_qplabs_header qplabs
-   order by numero_ft
+   order by numero_ft desc
    ]]></SQLQuery>
    <DesignTime>
       <Attr Name="_isCodegen" Value="true" />

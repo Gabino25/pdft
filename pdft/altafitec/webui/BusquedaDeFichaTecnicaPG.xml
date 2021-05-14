@@ -218,7 +218,7 @@
                         <oa:cellFormat id="region182" width="5%"/>
                         <oa:cellFormat id="region16">
                            <ui:contents>
-                              <oa:button id="EnviarBtn" text="Enviar Por Correo" prompt="Enviar Por Correo">
+                              <oa:button id="EnviarBtn" text="Enviar Por Correo" prompt="Enviar Por Correo" rendered="false">
                                  <ui:primaryClientAction>
                                     <ui:fireAction event="EnviarEvt" id="fireAction5"/>
                                  </ui:primaryClientAction>

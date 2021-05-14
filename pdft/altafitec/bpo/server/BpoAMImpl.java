@@ -35,6 +35,7 @@ import javax.mail.util.ByteArrayDataSource;
 
 import oracle.apps.fnd.common.MessageToken;
 import oracle.apps.fnd.framework.OAException;
+import oracle.apps.fnd.framework.OAFwkConstants;
 import oracle.apps.fnd.framework.server.OAApplicationModuleImpl;
 import oracle.apps.fnd.framework.server.OADBTransaction;
 import oracle.apps.fnd.framework.webui.OAPageContext;
@@ -865,7 +866,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                                ,String pArticuloOracle
                                ,XxqpPdftBpoHeaderVORowImpl pXxqpPdftBpoHeaderVORowImpl
                                ) {
-         System.out.println("Entra enviaCorreos");
+         pageContext.writeDiagnostics(this,"Entra enviaCorreos",OAFwkConstants.STATEMENT);
          String retval = null;
          OADBTransaction  oADBTransaction = this.getOADBTransaction();
          String strCrearFlag = "N"; 
@@ -1046,7 +1047,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                          try {
                              source = new ByteArrayDataSource(inputStream,"application/pdf");
                          } catch (IOException e) {
-                             // TODO
+                              throw new OAException("inputStream to ByteArrayDataSource testDeliveryManager BPO:"+e.getMessage(),OAException.ERROR);
                          }
                        messageBodyPart.setDataHandler(new DataHandler(source));
                           if("Y".equals(strCrearFlag)){
@@ -1065,6 +1066,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                                        );
                     } catch (IOException e) {
                        System.out.println("Exception Contrato:"+e.getMessage());
+                       throw new OAException("Exception Contrato:"+e.getMessage(),OAException.ERROR); 
                     }
                }
               if(null!=pXxqpPdftBpoHeaderVORowImpl.getFileName1()&&!"".equals(pXxqpPdftBpoHeaderVORowImpl.getFileName1())){
@@ -1076,6 +1078,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                                       );
                    } catch (IOException e) {
                       System.out.println("Exception File 1:"+e.getMessage());
+                      throw new OAException("Exception File 1:"+e.getMessage(),OAException.ERROR); 
                    }
               }
               if(null!=pXxqpPdftBpoHeaderVORowImpl.getFileName2()&&!"".equals(pXxqpPdftBpoHeaderVORowImpl.getFileName2())){
@@ -1087,6 +1090,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                                       );
                    } catch (IOException e) {
                       System.out.println("Exception File 2:"+e.getMessage());
+                      throw new OAException("Exception File 2:"+e.getMessage(),OAException.ERROR); 
                    }
               }
               if(null!=pXxqpPdftBpoHeaderVORowImpl.getFileName3()&&!"".equals(pXxqpPdftBpoHeaderVORowImpl.getFileName3())){
@@ -1098,6 +1102,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                                       );
                    } catch (IOException e) {
                       System.out.println("Exception File 3:"+e.getMessage());
+                      throw new OAException("Exception File 3:"+e.getMessage(),OAException.ERROR); 
                    }
               }
                        // Send the complete message parts
@@ -1106,6 +1111,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
               Transport.send(message);
           } catch (MessagingException me) {
               System.out.println("MessagingException:"+me.getMessage());
+              throw new OAException("MessagingException:"+me.getMessage(),OAException.ERROR); 
           }
           
          System.out.println("Sale testDeliveryManager."); 
@@ -1531,5 +1537,117 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
         }
         reglasDeNegocioTmpRowVOImpl.setPrecio(nPrecio);
         XxqpPdftBpoRegNegVOImpl.insertRow(reglasDeNegocioTmpRowVOImpl);
+    }
+
+    public String enviaCorreosReOn(InputStream pInputStream
+                               ,oracle.jbo.domain.Number pNumeroFtRef
+                               ,String pStatusFT
+                               ,oracle.jbo.domain.Number pNumeroFt
+                               ,OAPageContext pageContext
+                               ,String pStrNombreCliente
+                               ,String pArticuloOracle
+                               ,XxqpPdftBpoHeaderVORowImpl pXxqpPdftBpoHeaderVORowImpl
+                               ,String pStatusMail) {
+        pageContext.writeDiagnostics(this,"Entra enviaCorreosReOn",OAFwkConstants.STATEMENT);
+        String retval = null;
+        OADBTransaction  oADBTransaction = this.getOADBTransaction();
+        String strCrearFlag = "N"; 
+        String strActualizarFlag = "N"; 
+        oracle.jbo.domain.Number ref = new oracle.jbo.domain.Number(0);
+        String strNumeroFt = ""; 
+        if(null!=pNumeroFt){
+            strNumeroFt = pNumeroFt.toString();
+        }
+        String strSubject =""; 
+        String strBody="";
+        MessageToken[] msgtoken1 = {new MessageToken("NO_FT",strNumeroFt)};
+        MessageToken[] msgtoken2 = {new MessageToken("NO_FT",strNumeroFt)
+                                  , new MessageToken("NOMBRE_CLIENTE",pStrNombreCliente)
+                                  , new MessageToken("PRODUCT_ID",pArticuloOracle)
+                                  };
+        
+        if("MODIFICACION".equals(pStatusMail)){
+            strActualizarFlag = "Y";
+            strSubject = pageContext.getMessage("XXQP","XXQP_PDFT_CAMBI_FT_SUBJECT_MSG",msgtoken1);
+            strBody = pageContext.getMessage("XXQP","XXQP_PDFT_CAMBIO_FT_BODY_MSG",msgtoken2);
+            strBody = strBody+"\n\nMODIFICACIONES REALIZADAS:\n";
+            if(null!=pXxqpPdftBpoHeaderVORowImpl.getModifRealiz()){
+                strBody = strBody+pXxqpPdftBpoHeaderVORowImpl.getModifRealiz().toString();
+            }            
+        }else if("ALTA".equals(pStatusMail)){
+            strCrearFlag = "Y";
+            strSubject = pageContext.getMessage("XXQP","XXQP_PDFT_ALTA_FT_SUBJECT_MSG",msgtoken1);
+            strBody = pageContext.getMessage("XXQP","XXQP_PDFT_ALTA_FT_BODY_MSG",msgtoken2);
+        }
+        
+        
+        Connection connection =   oADBTransaction.getJdbcConnection();
+          String strPrepStmt = " SELECT ID                     \n" + 
+                               "        ,RESPONSABILIDAD   \n" + 
+                               "        ,USUARIO               \n" + 
+                               "        ,AREA                  \n" + 
+                               "        ,CORREO               \n" + 
+                               "        ,IS_ENABLED               \n" + 
+                               "        ,CREATED_BY               \n" + 
+                               "        ,CREATION_DATE          \n" + 
+                               "        ,LAST_UPDATED_BY        \n" + 
+                               "        ,LAST_UPDATE_DATE      \n" + 
+                               "        ,LAST_UPDATE_LOGIN     \n" + 
+                               "        ,ATTRIBUTE_CATEGORY    \n" + 
+                               "        ,ATTRIBUTE1            \n" + 
+                               "        ,ATTRIBUTE2            \n" + 
+                               "        ,ATTRIBUTE3            \n" + 
+                               "        ,ATTRIBUTE4            \n" + 
+                               "        ,ATTRIBUTE5            \n" + 
+                               " FROM  XXQP_PDFT_DISTRIBUCION\n" + 
+                               " WHERE IS_ENABLED = 'Y' ";
+              if("Y".equals(strCrearFlag)){
+                  strPrepStmt =strPrepStmt+" AND ATTRIBUTE1 ='Y'";
+              }else if("Y".equals(strActualizarFlag)){
+                  strPrepStmt =strPrepStmt+" AND ATTRIBUTE2 ='Y'";
+              }
+           
+              int count = 0; 
+              PreparedStatement prepStmt = null;
+              ResultSet resultSet = null;
+              try
+              {
+                prepStmt = connection.prepareStatement(strPrepStmt,ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_READ_ONLY);
+                resultSet = prepStmt.executeQuery();
+              
+                while(resultSet.next()){
+                    String strCorreo = null; 
+                    strCorreo = resultSet.getString("CORREO");  
+                    if(count>0){
+                        retval = retval+","+strCorreo;
+                    }else if(count==0){
+                        retval = strCorreo; 
+                    }
+                   count = count +1; 
+               }
+                
+             } catch (SQLException sqle)
+             {
+              throw new OAException("EXCEPTION metodo enviaCorreos clase BpoAMImpl:"+sqle.getErrorCode()+" , "+sqle.getMessage(),OAException.ERROR);
+             }
+            closeResultSet(resultSet);
+            closePreparedStatement(prepStmt);
+         
+        
+        java.util.Map<String,String> map = new java.util.HashMap<String,String>();
+        map.put("Responsablidad",""); 
+        map.put("Usuario",""); 
+        map.put("Area",""); 
+        map.put("Correo",retval); 
+        map.put("strSubject",strSubject);
+        map.put("strBody",strBody);
+        map.put("strCrearFlag",strCrearFlag);
+        map.put("strNumeroFt",strNumeroFt);
+        
+        if(count>0){
+        testDeliveryManager(pInputStream,map,pXxqpPdftBpoHeaderVORowImpl);
+        }
+        pageContext.writeDiagnostics(this,"Sale enviaCorreosReOn",OAFwkConstants.STATEMENT);
+         return retval; 
     }
 }

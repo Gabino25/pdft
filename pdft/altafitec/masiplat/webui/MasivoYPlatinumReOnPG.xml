@@ -604,12 +604,12 @@
                   </oa:button>
                   <oa:button id="EnviarPorCorreoBtn" text="Enviar por Correo" prompt="Enviar por Correo">
                      <ui:primaryClientAction>
-                        <ui:fireAction event="EnviarPorCorreoEvt" id="fireAction1"/>
+                        <ui:fireAction event="EnviarPorCorreoEvt" id="fireAction1" formSubmitted="true"/>
                      </ui:primaryClientAction>
                   </oa:button>
                   <oa:button id="RevisarPDFBtn" text="Revisar PDF" prompt="Revisar PDF">
                      <ui:primaryClientAction>
-                        <ui:fireAction event="RevisarPDFEvt"/>
+                        <ui:fireAction event="RevisarPDFEvt" formSubmitted="true"/>
                      </ui:primaryClientAction>
                   </oa:button>
                </ui:contents>

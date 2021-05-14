@@ -34,6 +34,7 @@ import javax.mail.util.ByteArrayDataSource;
 
 import oracle.apps.fnd.common.MessageToken;
 import oracle.apps.fnd.framework.OAException;
+import oracle.apps.fnd.framework.OAFwkConstants;
 import oracle.apps.fnd.framework.server.OAApplicationModuleImpl;
 import oracle.apps.fnd.framework.server.OADBTransaction;
 import oracle.apps.fnd.framework.webui.OAPageContext;
@@ -52,6 +53,8 @@ import oracle.apps.xdo.delivery.UndefinedRequestTypeException;
 import oracle.jbo.Row;
 import oracle.jbo.RowSetIterator;
 import oracle.jbo.domain.BlobDomain;
+
+import oracle.jbo.domain.Number;
 
 import oracle.jdbc.OracleCallableStatement;
 // ---------------------------------------------------------------------
@@ -1102,7 +1105,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                          try {
                              source = new ByteArrayDataSource(inputStream,"application/pdf");
                          } catch (IOException e) {
-                             // TODO
+                              throw new OAException("inputStream to ByteArrayDataSource testDeliveryManager MYP:"+e.getMessage(),OAException.ERROR);
                          }
                        messageBodyPart.setDataHandler(new DataHandler(source));
                        if("Y".equals(strCrearFlag)){
@@ -1121,6 +1124,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                                            );
                         } catch (IOException e) {
                            System.out.println("Exception Contrato:"+e.getMessage());
+                            throw new OAException("Exception Contrato:"+e.getMessage(),OAException.ERROR);
                         }
                    }
                    if(null!=pXxqpPdftMypHeaderVORowImpl.getFileName1()&&!"".equals(pXxqpPdftMypHeaderVORowImpl.getFileName1())){
@@ -1132,6 +1136,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                                            );
                         } catch (IOException e) {
                            System.out.println("Exception File1:"+e.getMessage());
+                            throw new OAException("Exception File1:"+e.getMessage(),OAException.ERROR);
                         }
                   }
               if(null!=pXxqpPdftMypHeaderVORowImpl.getFileName2()&&!"".equals(pXxqpPdftMypHeaderVORowImpl.getFileName2())){
@@ -1143,6 +1148,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                                       );
                    } catch (IOException e) {
                       System.out.println("Exception File2:"+e.getMessage());
+                       throw new OAException("Exception File2:"+e.getMessage(),OAException.ERROR);
                    }
               }
               if(null!=pXxqpPdftMypHeaderVORowImpl.getFileName3()&&!"".equals(pXxqpPdftMypHeaderVORowImpl.getFileName3())){
@@ -1154,6 +1160,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                                       );
                    } catch (IOException e) {
                       System.out.println("Exception File3:"+e.getMessage());
+                       throw new OAException("Exception File3:"+e.getMessage(),OAException.ERROR); 
                    }
               }
 
@@ -1163,6 +1170,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
               Transport.send(message);
           } catch (MessagingException me) {
               System.out.println("MessagingException:"+me.getMessage());
+              throw new OAException("MessagingException:"+me.getMessage(),OAException.ERROR); 
           }
         
         System.out.println("Sale testDeliveryManager."); 
@@ -1512,5 +1520,116 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
            }
         }
         /** oADBTransaction.commit() **/
+    }
+
+
+    public String enviaCorreosReOn(InputStream pInputStream
+                                  ,Number pNumeroFtRef
+                                  ,String strStatusFT
+                                  ,Number pNumeroFt
+                                  ,OAPageContext pageContext
+                                  ,String pNombreDelCliente
+                                  ,String pArticuloOracle
+                                  ,XxqpPdftMypHeaderVORowImpl pXxqpPdftMypHeaderVORowImpl
+                                  ,String pStatusMail) {
+        pageContext.writeDiagnostics(this,"Entra enviaCorreosReOn",OAFwkConstants.STATEMENT);
+        String retval = null;
+        OADBTransaction  oADBTransaction = this.getOADBTransaction();
+        String strCrearFlag = "N"; 
+        String strActualizarFlag = "N"; 
+        oracle.jbo.domain.Number ref = new oracle.jbo.domain.Number(0);
+        String strNumeroFt = ""; 
+        if(null!=pNumeroFt){
+            strNumeroFt = pNumeroFt.toString();
+        }
+        String strSubject =""; 
+        String strBody="";
+        MessageToken[] msgtoken1 = {new MessageToken("NO_FT",strNumeroFt)};
+        MessageToken[] msgtoken2 = {new MessageToken("NO_FT",strNumeroFt)
+                                   ,new MessageToken("NOMBRE_CLIENTE",pNombreDelCliente)
+                                   ,new MessageToken("PRODUCT_ID",pArticuloOracle)
+                                   };
+        
+        if("MODIFICACION".equals(pStatusMail)){
+            strActualizarFlag = "Y";
+            strSubject = pageContext.getMessage("XXQP","XXQP_PDFT_CAMBI_FT_SUBJECT_MSG",msgtoken1);
+            strBody = pageContext.getMessage("XXQP","XXQP_PDFT_CAMBIO_FT_BODY_MSG",msgtoken2);
+            strBody = strBody+"\n\nMODIFICACIONES REALIZADAS:\n";
+            if(null!=pXxqpPdftMypHeaderVORowImpl.getModifRealiz()){
+                strBody = strBody+pXxqpPdftMypHeaderVORowImpl.getModifRealiz().toString();
+            }
+        }else if("ALTA".equals(pStatusMail)){
+            strCrearFlag = "Y";
+            strSubject = pageContext.getMessage("XXQP","XXQP_PDFT_ALTA_FT_SUBJECT_MSG",msgtoken1);
+            strBody = pageContext.getMessage("XXQP","XXQP_PDFT_ALTA_FT_BODY_MSG",msgtoken2);
+        }
+
+        Connection connection =   oADBTransaction.getJdbcConnection();
+          String strPrepStmt = " SELECT ID                     \n" + 
+                               "        ,RESPONSABILIDAD   \n" + 
+                               "        ,USUARIO               \n" + 
+                               "        ,AREA                  \n" + 
+                               "        ,CORREO               \n" + 
+                               "        ,IS_ENABLED               \n" + 
+                               "        ,CREATED_BY               \n" + 
+                               "        ,CREATION_DATE          \n" + 
+                               "        ,LAST_UPDATED_BY        \n" + 
+                               "        ,LAST_UPDATE_DATE      \n" + 
+                               "        ,LAST_UPDATE_LOGIN     \n" + 
+                               "        ,ATTRIBUTE_CATEGORY    \n" + 
+                               "        ,ATTRIBUTE1            \n" + 
+                               "        ,ATTRIBUTE2            \n" + 
+                               "        ,ATTRIBUTE3            \n" + 
+                               "        ,ATTRIBUTE4            \n" + 
+                               "        ,ATTRIBUTE5            \n" + 
+                               " FROM  XXQP_PDFT_DISTRIBUCION\n" + 
+                               " WHERE IS_ENABLED = 'Y' ";
+                if("Y".equals(strCrearFlag)){
+                    strPrepStmt =strPrepStmt+" AND ATTRIBUTE1 ='Y'";
+                }else if("Y".equals(strActualizarFlag)){
+                    strPrepStmt =strPrepStmt+" AND ATTRIBUTE2 ='Y'";
+                }
+           
+              int count = 0; 
+              PreparedStatement prepStmt = null;
+              ResultSet resultSet = null;
+              try
+              {
+                prepStmt = connection.prepareStatement(strPrepStmt,ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_READ_ONLY);
+                resultSet = prepStmt.executeQuery();
+                while(resultSet.next()){
+                    String strCorreo = null; 
+                    strCorreo = resultSet.getString("CORREO");  
+                    if(count>0){
+                        retval = retval+","+strCorreo;
+                    }else if(count==0){
+                        retval = strCorreo; 
+                    }
+                   count = count +1; 
+               }
+                
+             } catch (SQLException sqle)
+             {
+              throw new OAException("EXCEPTION metodo enviaCorreos clase MasivoYPlatinumAMImpl:"+sqle.getErrorCode()+" , "+sqle.getMessage(),OAException.ERROR);
+             }
+            closeResultSet(resultSet);
+            closePreparedStatement(prepStmt);
+         
+        
+        java.util.Map<String,String> map = new java.util.HashMap<String,String>();
+        map.put("Responsablidad",""); 
+        map.put("Usuario",""); 
+        map.put("Area",""); 
+        map.put("Correo",retval); 
+        map.put("strSubject",strSubject);
+        map.put("strBody",strBody);
+        map.put("strCrearFlag",strCrearFlag);
+        map.put("strNumeroFt",strNumeroFt); 
+        if(count>0){
+        testDeliveryManager(pInputStream,map,pXxqpPdftMypHeaderVORowImpl);
+        }
+        pageContext.writeDiagnostics(this,"Sale enviaCorreosReOn:"+retval,OAFwkConstants.STATEMENT);
+         return retval; 
+        
     }
 }

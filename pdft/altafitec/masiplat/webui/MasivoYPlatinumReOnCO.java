@@ -160,7 +160,15 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
           masivoYPlatinumAMImpl.initMypComentsProcesosVO(strMyPHeaderId);
           masivoYPlatinumAMImpl.initReglasDeNegocioVO(strMyPHeaderId);
       }else{
-      
+          /** Se Agrega porque falla cuando se conuslta pdf y despues se envia por correo 13052021 **/
+          xxqpPdftMypHeaderVORowImpl = masivoYPlatinumAMImpl.initMypHeaderVO(strMyPHeaderId);
+          xxqpPdftMypGeneralVORowImpl = masivoYPlatinumAMImpl.initMypGeneralVO(strMyPHeaderId);
+          masivoYPlatinumAMImpl.initMypCoberturaVO(strMyPHeaderId); 
+          masivoYPlatinumAMImpl.initMypDistribucionVO(strMyPHeaderId); 
+          masivoYPlatinumAMImpl.initMypProcesosVO(strMyPHeaderId);
+          masivoYPlatinumAMImpl.initMypOtrosProcesosVO(strMyPHeaderId);
+          masivoYPlatinumAMImpl.initMypComentsProcesosVO(strMyPHeaderId);
+          masivoYPlatinumAMImpl.initReglasDeNegocioVO(strMyPHeaderId);
       }
       
       if(null==xxqpPdftMypHeaderVORowImpl){
@@ -298,17 +306,31 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                                   ); 
     } /** END if("ModificarEvt".equals(strEventParam)){ **/
       if("RevisarPDFEvt".equals(strEventParam)){
+          
+              XxqpPdftMypHeaderVORowImpl xxqpPdftMypHeaderVORowImpl = (XxqpPdftMypHeaderVORowImpl)masivoYPlatinumAMImpl.getXxqpPdftMypHeaderVO1().getCurrentRow();
+              String statusMail = xxqpPdftMypHeaderVORowImpl.getStatusMail();
+             
+              
           DataObject sessionDictionary = (DataObject)pageContext.getNamedDataObject("_SessionParameters");
           HttpServletResponse response = (HttpServletResponse)sessionDictionary.selectValue(null,"HttpServletResponse");
-          String contentDisposition = "attachment;filename=AltaFichaTecnicaMyP.pdf";
-          response.setHeader("Content-Disposition",contentDisposition);
-          response.setContentType("application/pdf");
-          ServletOutputStream os=null;
+          String contentDisposition = "";
          
-           String strXML = null;
-              System.out.println("Llamar executeMypGetInfo.");
-              strXML = masivoYPlatinumAMImpl.executeMypGetInfo("N");
-              System.out.println("strXML:"+strXML);
+         
+              String strXML = null;
+              if("MODIFICACION".equals(statusMail)){
+                  contentDisposition = "attachment;filename=CambioFichaTecnicaMyP.pdf";
+                  strXML = masivoYPlatinumAMImpl.executeMypGetInfo("Y");
+              }else if("ALTA".equals(statusMail)){
+                  contentDisposition = "attachment;filename=AltaFichaTecnicaMyP.pdf";
+                  strXML = masivoYPlatinumAMImpl.executeMypGetInfo("N");
+              }else{
+                  throw new OAException("No se pudo determinar el status mail:"+statusMail,OAException.ERROR); 
+              }
+             
+              response.setHeader("Content-Disposition",contentDisposition);
+              response.setContentType("application/pdf");
+              ServletOutputStream os=null; 
+              
               try {
                   os = response.getOutputStream();
                   byte[] aByte = strXML.getBytes();
@@ -364,8 +386,17 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
           } /** END if("CancelarFTEvt".equals(strEventParam)){ **/
           
            if("EnviarPorCorreoEvt".equals(strEventParam)){
+               XxqpPdftMypHeaderVORowImpl xxqpPdftMypHeaderVORowImpl = (XxqpPdftMypHeaderVORowImpl)masivoYPlatinumAMImpl.getXxqpPdftMypHeaderVO1().getCurrentRow();
+               String statusMail = xxqpPdftMypHeaderVORowImpl.getStatusMail();
                String strXML = null;
-               strXML = masivoYPlatinumAMImpl.executeMypGetInfo("N");
+               if("MODIFICACION".equals(statusMail)){
+                   strXML = masivoYPlatinumAMImpl.executeMypGetInfo("Y");
+               }else if("ALTA".equals(statusMail)){
+                   strXML = masivoYPlatinumAMImpl.executeMypGetInfo("N");
+               }else{
+                   throw new OAException("No se pudo determinar el status mail:"+statusMail,OAException.ERROR); 
+               }
+               
                try {
                    byte[] aByte = strXML.getBytes();
                    ByteArrayInputStream inputStream = new ByteArrayInputStream(aByte);
@@ -387,7 +418,6 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                    
                    byte[] a2Byte =pdfFile.toByteArray(); 
                    InputStream inputStream2 = new ByteArrayInputStream(a2Byte);
-                   XxqpPdftMypHeaderVORowImpl xxqpPdftMypHeaderVORowImpl = (XxqpPdftMypHeaderVORowImpl)masivoYPlatinumAMImpl.getXxqpPdftMypHeaderVO1().getCurrentRow();
                    oracle.jbo.domain.Number numMypHeaderId =  (oracle.jbo.domain.Number)xxqpPdftMypHeaderVORowImpl.getAttribute("NumeroFtReferencia");
                    oracle.jbo.domain.Number oracleNumeroFt = (oracle.jbo.domain.Number)xxqpPdftMypHeaderVORowImpl.getAttribute("NumeroFt");
                    String strNombreCliente = (String)xxqpPdftMypHeaderVORowImpl.getAttribute("NombreDelCliente");
@@ -397,7 +427,7 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                    }
                    String strStatusFT = (String)masivoYPlatinumAMImpl.getXxqpPdftMypHeaderVO1().getCurrentRow().getAttribute("Status");
                    System.out.println("strStatusFT:"+strStatusFT);
-                   String strCorreos = masivoYPlatinumAMImpl.enviaCorreos(inputStream2
+                   String strCorreos = masivoYPlatinumAMImpl.enviaCorreosReOn(inputStream2
                                                                          ,numMypHeaderId
                                                                          ,strStatusFT
                                                                          ,oracleNumeroFt
@@ -405,6 +435,7 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                                                                          ,strNombreCliente
                                                                          ,strArticuloOracle
                                                                          ,xxqpPdftMypHeaderVORowImpl
+                                                                         ,statusMail
                                                                          ); 
                    System.out.println("strCorreos:"+strCorreos);
                    

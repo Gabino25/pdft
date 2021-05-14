@@ -148,8 +148,8 @@ public class BpoReOnCO extends OAControllerImpl
       }
       
     if(!pageContext.isFormSubmission()){
+      
       if(null!=bpoAMImpl){
-          
           xxqpPdftBpoHeaderVORowImpl = bpoAMImpl.initBpoHeaderVO(strBpoHeaderId);
           xxqpPdftBpoPrecioVORowImpl = bpoAMImpl.initBpoPrecioVO(strBpoHeaderId);
           bpoAMImpl.initBpoServicioVO(strBpoHeaderId);
@@ -168,10 +168,32 @@ public class BpoReOnCO extends OAControllerImpl
               PageLayoutRNBean.setTitle("Detalle de Ficha Tecnica > "+strUnidadDeNegocioM);
             }
           }
-          
       }
+      
     }else{
     
+     /** Se agrega porque despues de revisar pdf y envair correo no se inicalizan los view objects **/
+      if(null!=bpoAMImpl){
+          xxqpPdftBpoHeaderVORowImpl = bpoAMImpl.initBpoHeaderVO(strBpoHeaderId);
+          xxqpPdftBpoPrecioVORowImpl = bpoAMImpl.initBpoPrecioVO(strBpoHeaderId);
+          bpoAMImpl.initBpoServicioVO(strBpoHeaderId);
+          bpoAMImpl.intiAllBpoRequeAdicioVOS(strBpoHeaderId); 
+          bpoAMImpl.initBpoPagoVO(strBpoHeaderId); 
+          bpoAMImpl.initReglasDeNegocioVO(strBpoHeaderId);
+          
+          String strUnidadDeNegocioM = xxqpPdftBpoHeaderVORowImpl.getUnidadDeNegocioM();
+          
+          if(null==PageLayoutRNBean){
+           PageLayoutRNBean = pageContext.getPageLayoutBean();
+          }
+          if(null!=PageLayoutRNBean){
+            if(null!=strUnidadDeNegocioM){
+              PageLayoutRNBean.setWindowTitle("Detalle de Ficha Tecnica > "+strUnidadDeNegocioM);
+              PageLayoutRNBean.setTitle("Detalle de Ficha Tecnica > "+strUnidadDeNegocioM);
+            }
+          }
+      }
+      
     }
     
     if(null==xxqpPdftBpoHeaderVORowImpl){
@@ -300,13 +322,25 @@ public class BpoReOnCO extends OAControllerImpl
       if("RevisarPDFEvt".equals(strEventParam)){
           DataObject sessionDictionary = (DataObject)pageContext.getNamedDataObject("_SessionParameters");
           HttpServletResponse response = (HttpServletResponse)sessionDictionary.selectValue(null,"HttpServletResponse");
-          String contentDisposition = "attachment;filename=AltaFichaTecnicaBpo.pdf";
-          response.setHeader("Content-Disposition",contentDisposition);
-          response.setContentType("application/pdf");
-          ServletOutputStream os=null;
-         
+          String contentDisposition = "";
+          
            String strXML = null;
-              strXML = bpoAMImpl.executeBpoGetInfo("N");
+              String statusMail = xxqpPdftBpoHeaderVORowImpl.getStatusMail();
+              System.out.println("statusMail:"+statusMail);
+              if("MODIFICACION".equals(statusMail)){
+                  contentDisposition = "attachment;filename=CambioFichaTecnicaBpo.pdf";
+                  strXML = bpoAMImpl.executeBpoGetInfo("Y");
+              }else if("ALTA".equals(statusMail)){
+                  contentDisposition = "attachment;filename=AltaFichaTecnicaBpo.pdf";
+                  strXML = bpoAMImpl.executeBpoGetInfo("N");
+              }else{
+                  throw new OAException("No se pudo determinar el status mail:"+statusMail,OAException.ERROR); 
+              }
+             
+              response.setHeader("Content-Disposition",contentDisposition);
+              response.setContentType("application/pdf");
+              ServletOutputStream os=null; 
+              
               try {
                   os = response.getOutputStream();
                   byte[] aByte = strXML.getBytes();
@@ -341,7 +375,15 @@ public class BpoReOnCO extends OAControllerImpl
           
     if("EnviarPorCorreoEvt".equals(strEventParam)){
         String strXML = null;
-        strXML = bpoAMImpl.executeBpoGetInfo("N");
+        String statusMail = xxqpPdftBpoHeaderVORowImpl.getStatusMail();
+        if("MODIFICACION".equals(statusMail)){
+            strXML = bpoAMImpl.executeBpoGetInfo("Y");
+        }else if("ALTA".equals(statusMail)){
+            strXML = bpoAMImpl.executeBpoGetInfo("N");
+        }else{
+            throw new OAException("No se pudo determinar el status mail:"+statusMail,OAException.ERROR); 
+        }
+      
         try {
             byte[] aByte = strXML.getBytes();
             ByteArrayInputStream inputStream = new ByteArrayInputStream(aByte);
@@ -374,8 +416,8 @@ public class BpoReOnCO extends OAControllerImpl
                 numBpoNumeroFt = new oracle.jbo.domain.Number(0);
             }
             String strStatusFT = (String)bpoAMImpl.getXxqpPdftBpoHeaderVO1().getCurrentRow().getAttribute("Status");
-            System.out.println("strStatusFT:"+strStatusFT);
-            String strCorreos = bpoAMImpl.enviaCorreos(inputStream2
+            pageContext.writeDiagnostics(this,"strStatusFT:"+strStatusFT,OAFwkConstants.STATEMENT);
+            String strCorreos = bpoAMImpl.enviaCorreosReOn(inputStream2
                                                       ,numBpoNumeroFtReferencia
                                                       ,strStatusFT
                                                       ,numBpoNumeroFt
@@ -383,9 +425,10 @@ public class BpoReOnCO extends OAControllerImpl
                                                       ,strNombreCliente
                                                       ,strArticuloOracle
                                                       ,xxqpPdftBpoHeaderVORowImpl
+                                                      ,statusMail
                                                       ); 
-            System.out.println("strCorreos:"+strCorreos);
-            
+            pageContext.writeDiagnostics(this,"strCorreos:"+strCorreos,OAFwkConstants.STATEMENT);
+           
             if(null!=pdfFile){
                 pdfFile.close();
             }
