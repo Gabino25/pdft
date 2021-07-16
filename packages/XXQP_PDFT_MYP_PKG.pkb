@@ -683,7 +683,7 @@ begin
  */ 
  
 exception when others then 
- pso_errmsg := 'Excepcion Paquete APPS.xxqp_pdft_myp_pkg metodo main:'||sqlerrm||', '||sqlcode;
+ pso_errmsg := 'Excepcion Paquete xxqp_pdft_myp_pkg metodo main:'||sqlerrm||', '||sqlcode;
  pso_errcod := 2; 
 end main; 
 
@@ -772,7 +772,7 @@ begin
  dbms_lob.append(lc_info,'<CONTACTO_PARA_CIERRE>'||myp_gral_info_rec.contacto_para_cierre||'</CONTACTO_PARA_CIERRE>');
  dbms_lob.append(lc_info,'<NOMBRE_PRODUCTO>'||myp_gral_info_rec.nombre_producto||'</NOMBRE_PRODUCTO>');
  dbms_lob.append(lc_info,'<VOLUMEN_APORX>'||myp_gral_info_rec.volumen_aprox||'</VOLUMEN_APORX>');
-  dbms_lob.append(lc_info,'<PERIODICIDAD>'||myp_gral_info_rec.periodicidad_m||'</PERIODICIDAD>'); 
+ dbms_lob.append(lc_info,'<PERIODICIDAD>'||myp_gral_info_rec.periodicidad_m||'</PERIODICIDAD>'); 
  dbms_lob.append(lc_info,'<SE_FACTURA>'||myp_gral_info_rec.se_factura_m||'</SE_FACTURA>');
  dbms_lob.append(lc_info,'<FORMATO_PARA_CIERRE>'||replace_char_esp(myp_gral_info_rec.formato_para_cierre_m)||'</FORMATO_PARA_CIERRE>');
  dbms_lob.append(lc_info,'<DIAS_HABILES_PAGO>'||myp_gral_info_rec.dias_habiles_pago||'</DIAS_HABILES_PAGO>');
@@ -801,13 +801,13 @@ dbms_lob.append(lc_info,'<PLAZA_PROPIETARIA>'||myp_cob_info_rec.PLAZA_PROPIETARI
  dbms_lob.append(lc_info,'<TC_NACIONAL>'||myp_cob_info_rec.TC_NACIONAL||'</TC_NACIONAL>'); 
  dbms_lob.append(lc_info,'<TC_REGIONAL>'||myp_cob_info_rec.TC_REGIONAL||'</TC_REGIONAL>'); 
  dbms_lob.append(lc_info,'<TC_LOCAL>'||myp_cob_info_rec.TC_LOCAL||'</TC_LOCAL>'); 
---  lc_info := lc_info||'<MENCIONAR_ESTADOS>'||'<![CDATA' || '['|| 'Hola<br/>Hola' || ']' || ']>'||'</MENCIONAR_ESTADOS>';
+-- lc_info := lc_info||'<MENCIONAR_ESTADOS>'||'<![CDATA' || '['|| 'Hola<br/>Hola' || ']' || ']>'||'</MENCIONAR_ESTADOS>';
  /** dbms_lob.append(lc_info,'<MENCIONAR_ESTADOS>'||myp_cob_info_rec.MENCIONAR_ESTADOS||'</MENCIONAR_ESTADOS>'); **/
- xxqp_pdft_myp_pkg.split_varchar2(PCI_CLOB_REP          => lc_info
-                                                 ,PSI_VARCHAR_ALIM   => myp_cob_info_rec.MENCIONAR_ESTADOS
-                                                 ,PSI_NODE                  => 'MEN_EST_R'
-                                                 ,PSI_NODE_CHILD        => 'MEN_EST'
-                                                  );
+ xxqp_pdft_myp_pkg.split_varchar2(PCI_CLOB_REP => lc_info
+ ,PSI_VARCHAR_ALIM => myp_cob_info_rec.MENCIONAR_ESTADOS
+ ,PSI_NODE => 'MEN_EST_R'
+ ,PSI_NODE_CHILD => 'MEN_EST'
+ );
  dbms_lob.append(lc_info,'<ENTREGA_LOCAL>'||trim(to_char(myp_cob_info_rec.ENTREGA_LOCAL,gs_currency_format))||'</ENTREGA_LOCAL>');
  dbms_lob.append(lc_info,'<ENTREGA_FORANEO>'||trim(to_char(myp_cob_info_rec.ENTREGA_FORANEO,gs_currency_format))||'</ENTREGA_FORANEO>');
  dbms_lob.append(lc_info,'<DR_LOCAL>'||trim(to_char(myp_cob_info_rec.DR_LOCAL,gs_currency_format))||'</DR_LOCAL>');
@@ -816,61 +816,61 @@ dbms_lob.append(lc_info,'<PLAZA_PROPIETARIA>'||myp_cob_info_rec.PLAZA_PROPIETARI
  dbms_lob.append(lc_info,'<DI_FORANEO>'||trim(to_char(myp_cob_info_rec.DI_FORANEO,gs_currency_format))||'</DI_FORANEO>'); 
  fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info));
  
- xxqp_pdft_myp_pkg.split_ilim(PCI_CLOB_REP     => lc_info
-                                           ,PCI_CLOB_ALIM    => myp_cob_info_rec.comentarios_ilim
-                                           ,PSI_NODE            => 'COB_COM_R'
-                                           ,PSI_NODE_CHILD  => 'COB_COM'
-                                           );
+ xxqp_pdft_myp_pkg.split_ilim(PCI_CLOB_REP => lc_info
+ ,PCI_CLOB_ALIM => myp_cob_info_rec.comentarios_ilim
+ ,PSI_NODE => 'COB_COM_R'
+ ,PSI_NODE_CHILD => 'COB_COM'
+ );
  fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info));
 --/** dbms_lob.append(lc_info,myp_cob_info_rec.comentarios_ilim); **/
 --v_length_clob := dbms_lob.getlength(myp_cob_info_rec.comentarios_ilim);
 -- fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(v_length_clob):'||v_length_clob);
 --v_offset := 1;
 --v_offsetTmp := 1;
---     DBMS_LOB.CREATETEMPORARY(       lob_loc => lc_clob_tmp     , cache   => true     , dur     => dbms_lob.call);
---     DBMS_LOB.OPEN(       lob_loc    => lc_clob_tmp     , open_mode  => DBMS_LOB.LOB_READWRITE);
---     while(v_offset<=v_length_clob) LOOP
---        v_char := dbms_lob.substr(myp_cob_info_rec.comentarios_ilim, 1, v_offset);
---        fnd_file.put_line(fnd_file.log,'v_char:'||v_char);
---        dbms_lob.append(lc_clob_tmp,replace_char_esp(v_char));
---        v_offset := v_offset + 1;
---        if v_char = chr(10) then 
---         ln_nth := ln_nth+1;
---         fnd_file.put_line(fnd_file.log,'v_offsetTmp:'||v_offsetTmp||', ln_nth:'||ln_nth||', ln_instr_clob_tmp:'||ln_instr_clob_tmp);
---         ln_instr_clob := dbms_lob.instr(lc_clob_tmp,chr(10),1,ln_nth);
---         fnd_file.put_line(fnd_file.log,'dbms_lob.instr(lc_clob_tmp,chr(10),1,ln_nth):'||dbms_lob.instr(lc_clob_tmp,chr(10),1,ln_nth));
---         ls_substr_clob := dbms_lob.substr(lc_clob_tmp,ln_instr_clob-ln_instr_clob_tmp-1,v_offsetTmp);
---         fnd_file.put_line(fnd_file.log,'dbms_lob.substr(lc_clob_tmp,ln_instr_clob,v_offsetTmp):'||ls_substr_clob);
---         dbms_lob.append(lc_info,'<COBERTURA_COMENTARIOS>');     
---         dbms_lob.append(lc_info,'<COB_COM>'||ls_substr_clob||'</COB_COM>');     
---         dbms_lob.append(lc_info,'</COBERTURA_COMENTARIOS>');
---         v_offsetTmp := ln_instr_clob+1;
---         ln_instr_clob_tmp := ln_instr_clob;
---         
---        end if; 
---        
---        
---     END LOOP; 
---     
---      if (v_offset-1) = v_length_clob AND ln_nth>0  then 
---           fnd_file.put_line(fnd_file.log,'v_offsetTmp:'||v_offsetTmp);
---         --  fnd_file.put_line(fnd_file.log,'v_offset-ln_instr_clob_tmp-1:'||v_offset-ln_instr_clob_tmp-1);
---           ls_substr_clob := dbms_lob.substr(lc_clob_tmp,v_offset-ln_instr_clob_tmp,v_offsetTmp);
---             fnd_file.put_line(fnd_file.log,'v_offset = v_length_clob:'||ls_substr_clob);
---           dbms_lob.append(lc_info,'<COBERTURA_COMENTARIOS>');     
---         dbms_lob.append(lc_info,'<COB_COM>'||ls_substr_clob||'</COB_COM>');     
---         dbms_lob.append(lc_info,'</COBERTURA_COMENTARIOS>');
---        end if;
-     
-     
---       for idx in ( SELECT LEVEL AS id, REGEXP_SUBSTR(lc_clob_tmp, '[^'||chr(10)||']+', 1, LEVEL) AS data
---                                FROM dual
---                           CONNECT BY REGEXP_SUBSTR(lc_clob_tmp, '[^'||chr(10)||']+', 1, LEVEL) IS NOT NULL) loop
---                 dbms_lob.append(lc_info,'<COBERTURA_COMENTARIOS>');     
---                   lc_info := lc_info||'<COB_COM>'||idx.data||'</COB_COM>';
---                 dbms_lob.append(lc_info,'</COBERTURA_COMENTARIOS>');
---              end loop; 
-      
+-- DBMS_LOB.CREATETEMPORARY( lob_loc => lc_clob_tmp , cache => true , dur => dbms_lob.call);
+-- DBMS_LOB.OPEN( lob_loc => lc_clob_tmp , open_mode => DBMS_LOB.LOB_READWRITE);
+-- while(v_offset<=v_length_clob) LOOP
+-- v_char := dbms_lob.substr(myp_cob_info_rec.comentarios_ilim, 1, v_offset);
+-- fnd_file.put_line(fnd_file.log,'v_char:'||v_char);
+-- dbms_lob.append(lc_clob_tmp,replace_char_esp(v_char));
+-- v_offset := v_offset + 1;
+-- if v_char = chr(10) then 
+-- ln_nth := ln_nth+1;
+-- fnd_file.put_line(fnd_file.log,'v_offsetTmp:'||v_offsetTmp||', ln_nth:'||ln_nth||', ln_instr_clob_tmp:'||ln_instr_clob_tmp);
+-- ln_instr_clob := dbms_lob.instr(lc_clob_tmp,chr(10),1,ln_nth);
+-- fnd_file.put_line(fnd_file.log,'dbms_lob.instr(lc_clob_tmp,chr(10),1,ln_nth):'||dbms_lob.instr(lc_clob_tmp,chr(10),1,ln_nth));
+-- ls_substr_clob := dbms_lob.substr(lc_clob_tmp,ln_instr_clob-ln_instr_clob_tmp-1,v_offsetTmp);
+-- fnd_file.put_line(fnd_file.log,'dbms_lob.substr(lc_clob_tmp,ln_instr_clob,v_offsetTmp):'||ls_substr_clob);
+-- dbms_lob.append(lc_info,'<COBERTURA_COMENTARIOS>'); 
+-- dbms_lob.append(lc_info,'<COB_COM>'||ls_substr_clob||'</COB_COM>'); 
+-- dbms_lob.append(lc_info,'</COBERTURA_COMENTARIOS>');
+-- v_offsetTmp := ln_instr_clob+1;
+-- ln_instr_clob_tmp := ln_instr_clob;
+-- 
+-- end if; 
+-- 
+-- 
+-- END LOOP; 
+-- 
+-- if (v_offset-1) = v_length_clob AND ln_nth>0 then 
+-- fnd_file.put_line(fnd_file.log,'v_offsetTmp:'||v_offsetTmp);
+-- -- fnd_file.put_line(fnd_file.log,'v_offset-ln_instr_clob_tmp-1:'||v_offset-ln_instr_clob_tmp-1);
+-- ls_substr_clob := dbms_lob.substr(lc_clob_tmp,v_offset-ln_instr_clob_tmp,v_offsetTmp);
+-- fnd_file.put_line(fnd_file.log,'v_offset = v_length_clob:'||ls_substr_clob);
+-- dbms_lob.append(lc_info,'<COBERTURA_COMENTARIOS>'); 
+-- dbms_lob.append(lc_info,'<COB_COM>'||ls_substr_clob||'</COB_COM>'); 
+-- dbms_lob.append(lc_info,'</COBERTURA_COMENTARIOS>');
+-- end if;
+ 
+ 
+-- for idx in ( SELECT LEVEL AS id, REGEXP_SUBSTR(lc_clob_tmp, '[^'||chr(10)||']+', 1, LEVEL) AS data
+-- FROM dual
+-- CONNECT BY REGEXP_SUBSTR(lc_clob_tmp, '[^'||chr(10)||']+', 1, LEVEL) IS NOT NULL) loop
+-- dbms_lob.append(lc_info,'<COBERTURA_COMENTARIOS>'); 
+-- lc_info := lc_info||'<COB_COM>'||idx.data||'</COB_COM>';
+-- dbms_lob.append(lc_info,'</COBERTURA_COMENTARIOS>');
+-- end loop; 
+ 
  END LOOP;
  CLOSE get_myp_cob_info;
 
@@ -896,11 +896,11 @@ dbms_lob.append(lc_info,'<PLAZA_PROPIETARIA>'||myp_cob_info_rec.PLAZA_PROPIETARI
  dbms_lob.append(lc_info,'<ENVIO_PIEZAS_FISICAS>'||myp_dist_info_rec.ENVIO_PIEZAS_FISICAS||'</ENVIO_PIEZAS_FISICAS>'); 
  
  /*dbms_lob.append(lc_info,'<COMENTARIOS_DISTRIBUCION>'||replace_char_esp(myp_dist_info_rec.COMENTARIOS_DISTRIBUCION)||'</COMENTARIOS_DISTRIBUCION>');*/
-  xxqp_pdft_myp_pkg.split_ilim(PCI_CLOB_REP           => lc_info
-                                                    ,PCI_CLOB_ALIM   => myp_dist_info_rec.COMENTARIOS_DISTRIBUCION_ILIM
-                                                    ,PSI_NODE                  => 'COM_DIST_R'
-                                                    ,PSI_NODE_CHILD        => 'COM_DIST'
-                                                    );
+ xxqp_pdft_myp_pkg.split_ilim(PCI_CLOB_REP => lc_info
+ ,PCI_CLOB_ALIM => myp_dist_info_rec.COMENTARIOS_DISTRIBUCION_ILIM
+ ,PSI_NODE => 'COM_DIST_R'
+ ,PSI_NODE_CHILD => 'COM_DIST'
+ );
  END LOOP;
  CLOSE get_myp_dist_info;
 
@@ -944,35 +944,35 @@ dbms_lob.append(lc_info,'<PLAZA_PROPIETARIA>'||myp_cob_info_rec.PLAZA_PROPIETARI
  FETCH get_myp_instr_info INTO myp_instr_info_rec;
  EXIT WHEN get_myp_instr_info%NOTFOUND;
  
-  fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info));
-   xxqp_pdft_myp_pkg.split_ilim(PCI_CLOB_REP     => lc_info
-                                           ,PCI_CLOB_ALIM    => myp_instr_info_rec.COMENTARIOS_INSTRUCC_ILIM
-                                           ,PSI_NODE            => 'COM_INST_R'
-                                           ,PSI_NODE_CHILD  => 'COM_INST'
-                                           );
-   fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info));                                        
+ fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info));
+ APPS.xxqp_pdft_myp_pkg.split_ilim(PCI_CLOB_REP => lc_info
+ ,PCI_CLOB_ALIM => myp_instr_info_rec.COMENTARIOS_INSTRUCC_ILIM
+ ,PSI_NODE => 'COM_INST_R'
+ ,PSI_NODE_CHILD => 'COM_INST'
+ );
+ fnd_file.put_line(fnd_file.log,'dbms_lob.getlength(lc_info):'||dbms_lob.getlength(lc_info)); 
  
  END LOOP;
  CLOSE get_myp_instr_info;
  
-            begin       
-           OPEN getRNInfo(ln_myp_header_id);
-           LOOP
-              FETCH getRNInfo INTO RNInfo_rec;
-              EXIT WHEN getRNInfo%NOTFOUND;
-              dbms_lob.append(lc_info,'<G_REGNEG>');  
-              dbms_lob.append(lc_info,'<RN_CONCEPTO1>'||RNInfo_rec.RN_CONCEPTO1||'</RN_CONCEPTO1>');  
-              dbms_lob.append(lc_info,'<RN_CONCEPTO2>'||RNInfo_rec.RN_CONCEPTO2||'</RN_CONCEPTO2>');  
-              ls_regneg_precio :=trim(to_char(RNInfo_rec.PRECIO,gs_currency_format));
-              dbms_lob.append(lc_info,'<RN_PRECIO>'||ls_regneg_precio||'</RN_PRECIO>');  
-              dbms_lob.append(lc_info,'</G_REGNEG>'||CHR(10));  
-           END LOOP;
-           CLOSE getRNInfo;
-           exception when others then 
-            pso_errmsg := 'Excepcion Paquete APPS.xxqp_pdft_myp_pkg metodo getRNInfo:'||sqlerrm||', '||sqlcode||',RNInfo_rec.PRECIO:'||RNInfo_rec.PRECIO;
-            pso_errcod := 2; 
-            fnd_file.put_line(fnd_file.log,pso_errmsg);
-            return;
+ begin 
+ OPEN getRNInfo(ln_myp_header_id);
+ LOOP
+ FETCH getRNInfo INTO RNInfo_rec;
+ EXIT WHEN getRNInfo%NOTFOUND;
+ dbms_lob.append(lc_info,'<G_REGNEG>'); 
+ dbms_lob.append(lc_info,'<RN_CONCEPTO1>'||RNInfo_rec.RN_CONCEPTO1||'</RN_CONCEPTO1>'); 
+ dbms_lob.append(lc_info,'<RN_CONCEPTO2>'||RNInfo_rec.RN_CONCEPTO2||'</RN_CONCEPTO2>'); 
+ ls_regneg_precio :=trim(to_char(RNInfo_rec.PRECIO,gs_currency_format));
+ dbms_lob.append(lc_info,'<RN_PRECIO>'||ls_regneg_precio||'</RN_PRECIO>'); 
+ dbms_lob.append(lc_info,'</G_REGNEG>'||CHR(10)); 
+ END LOOP;
+ CLOSE getRNInfo;
+ exception when others then 
+ pso_errmsg := 'Excepcion Paquete APPS.xxqp_pdft_myp_pkg metodo getRNInfo:'||sqlerrm||', '||sqlcode||',RNInfo_rec.PRECIO:'||RNInfo_rec.PRECIO;
+ pso_errcod := 2; 
+ fnd_file.put_line(fnd_file.log,pso_errmsg);
+ return;
             
            end; 
  
