@@ -3,6 +3,9 @@ CREATE OR REPLACE package body xxqp_pdft_myp_pkg is
 /** 15042020 se agrega nvl al nombre del cliente **/
 /** 17042020 se agrega nvl al nombre del cliente en obtiene reportes **/
 /** 24042020 se re-direcciona a la vista custom **/
+/** 03052022 se filtra nombre de cliente tambien por numeros **/
+/** 16072021 se deja de concatenar en el procedimiento reportes y se usa la libreria dbms_lob , create, update y close **/
+/** 16072021 se agregan 2 nuevos campos PRECIO_CD y PRECIO_PROTON_CD **/ 
 
 /** gs_currency_format varchar2(2000) := '$999,999,999,999,999,999.99'; **/
  gs_currency_format varchar2(2000) := '$999,999,999,999,999,999.99'; 
@@ -376,14 +379,19 @@ WHERE myp_instr.REGION = 'COMENTARIOS'
  CONCEPTO,
  PRODUCTO,
  DIAS_DE_CREDITO,
- CNT_REG_NEG
+ CNT_REG_NEG,
+ PRECIO_CD,
+ PRECIO_PROTON_CD
 from XXQP_PDFT_REPORTES_V
-where upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
+where (upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
+ OR upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'1') and nvl(upper(substr(cur_cliente_hasta,0,1)),'9') )
  and trunc(creation_date) between nvl(cur_fecha_desde,to_date ('01/01/0001','DD/MM/YYYY')) and nvl(cur_fecha_hasta,to_date ('31/12/4712','DD/MM/YYYY'))
  and NUMERO_FT between nvl(cur_ficha_tecnica_desde,0) and nvl(cur_ficha_tecnica_hasta,9999999999999999999999999999)
  and upper(substr(FRECUENCIA_FACTURACION_C,0,1)) between nvl(upper(substr(cur_fre_fact_desde,0,1)),'A') and nvl(upper(substr(cur_fre_fact_hasta,0,1)),'Z')
  and upper(substr(STATUS,0,1)) between nvl(upper(substr(cur_status_desde,0,1)),'A') and nvl(upper(substr(cur_status_hasta,0,1)),'Z')
- and upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
+ and (upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
+ OR upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'1') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'9')
+ )
 order by NOMBRE_DEL_CLIENTE asc;
 
 CURSOR get_info_reportes_v2 (cur_cliente_desde varchar2
@@ -435,14 +443,19 @@ CURSOR get_info_reportes_v2 (cur_cliente_desde varchar2
  CONCEPTO,
  PRODUCTO,
  DIAS_DE_CREDITO,
- CNT_REG_NEG
+ CNT_REG_NEG,
+ PRECIO_CD,
+ PRECIO_PROTON_CD
 from XXQP_PDFT_REPORTES_V
-where upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
+where (upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
+ OR upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'1') and nvl(upper(substr(cur_cliente_hasta,0,1)),'9'))
  and trunc(creation_date) between nvl(cur_fecha_desde,to_date ('01/01/0001','DD/MM/YYYY')) and nvl(cur_fecha_hasta,to_date ('31/12/4712','DD/MM/YYYY'))
  and NUMERO_FT between nvl(cur_ficha_tecnica_desde,0) and nvl(cur_ficha_tecnica_hasta,9999999999999999999999999999)
  and upper(substr(FRECUENCIA_FACTURACION_C,0,1)) between nvl(upper(substr(cur_fre_fact_desde,0,1)),'A') and nvl(upper(substr(cur_fre_fact_hasta,0,1)),'Z')
  and upper(substr(STATUS,0,1)) between nvl(upper(substr(cur_status_desde,0,1)),'A') and nvl(upper(substr(cur_status_hasta,0,1)),'Z')
- and upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
+ and (upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
+ OR upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'1') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'9')
+ )
 order by PRODUCTO asc;
  
  CURSOR get_info_reportes_v3 (cur_cliente_desde varchar2
@@ -494,14 +507,19 @@ order by PRODUCTO asc;
  CONCEPTO,
  PRODUCTO,
  DIAS_DE_CREDITO,
- CNT_REG_NEG
+ CNT_REG_NEG,
+ PRECIO_CD,
+ PRECIO_PROTON_CD
 from XXQP_PDFT_REPORTES_V
-where upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
+where (upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
+ OR upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'1') and nvl(upper(substr(cur_cliente_hasta,0,1)),'9'))
  and trunc(creation_date) between nvl(cur_fecha_desde,to_date ('01/01/0001','DD/MM/YYYY')) and nvl(cur_fecha_hasta,to_date ('31/12/4712','DD/MM/YYYY'))
  and NUMERO_FT between nvl(cur_ficha_tecnica_desde,0) and nvl(cur_ficha_tecnica_hasta,9999999999999999999999999999)
  and upper(substr(FRECUENCIA_FACTURACION_C,0,1)) between nvl(upper(substr(cur_fre_fact_desde,0,1)),'A') and nvl(upper(substr(cur_fre_fact_hasta,0,1)),'Z')
  and upper(substr(STATUS,0,1)) between nvl(upper(substr(cur_status_desde,0,1)),'A') and nvl(upper(substr(cur_status_hasta,0,1)),'Z')
- and upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
+ and (upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
+ OR upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'1') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'9')
+ )
 order by NUMERO_FT asc;
 
 CURSOR get_info_reportes_v4 (cur_cliente_desde varchar2
@@ -553,14 +571,20 @@ CURSOR get_info_reportes_v4 (cur_cliente_desde varchar2
  CONCEPTO,
  PRODUCTO,
  DIAS_DE_CREDITO,
- CNT_REG_NEG
+ CNT_REG_NEG,
+ PRECIO_CD,
+ PRECIO_PROTON_CD
 from XXQP_PDFT_REPORTES_V
-where upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
+where (upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'A') and nvl(upper(substr(cur_cliente_hasta,0,1)),'Z')
+ OR upper(substr(NOMBRE_DEL_CLIENTE,0,1)) between nvl(upper(substr(cur_cliente_desde,0,1)),'1') and nvl(upper(substr(cur_cliente_hasta,0,1)),'9'))
  and trunc(creation_date) between nvl(cur_fecha_desde,to_date ('01/01/0001','DD/MM/YYYY')) and nvl(cur_fecha_hasta,to_date ('31/12/4712','DD/MM/YYYY'))
  and NUMERO_FT between nvl(cur_ficha_tecnica_desde,0) and nvl(cur_ficha_tecnica_hasta,9999999999999999999999999999)
  and upper(substr(FRECUENCIA_FACTURACION_C,0,1)) between nvl(upper(substr(cur_fre_fact_desde,0,1)),'A') and nvl(upper(substr(cur_fre_fact_hasta,0,1)),'Z')
  and upper(substr(STATUS,0,1)) between nvl(upper(substr(cur_status_desde,0,1)),'A') and nvl(upper(substr(cur_status_hasta,0,1)),'Z')
- and upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
+ and ( 
+ upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'A') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'Z')
+ OR upper(substr(PARTY_NAME,0,1)) between nvl(upper(substr(cur_raz_soc_desde,0,1)),'1') and nvl(upper(substr(cur_raz_soc_hasta,0,1)),'9')
+ )
 order by FRECUENCIA_FACTURACION_M asc;
 
  
@@ -620,7 +644,7 @@ procedure main (pso_errmsg out varchar2
  v_chunk_length number := 32767;
  v_length_clob number := 0; 
  v_offset number :=1;
- v_char char(10); /** PL/SQL: error : character string buffer too small numérico o de valor, -6502 **/
+ v_char char(10); /** PL/SQL: error : character string buffer too small num?rico o de valor, -6502 **/
  ln_instr_clob number := 0;
  ls_substr_clob varchar2(20000) :=0;
 begin 
@@ -659,7 +683,7 @@ begin
  */ 
  
 exception when others then 
- pso_errmsg := 'Excepcion Paquete xxqp_pdft_myp_pkg metodo main:'||sqlerrm||', '||sqlcode;
+ pso_errmsg := 'Excepcion Paquete APPS.xxqp_pdft_myp_pkg metodo main:'||sqlerrm||', '||sqlcode;
  pso_errcod := 2; 
 end main; 
 
@@ -985,7 +1009,7 @@ procedure obtiene_reportes ( pso_errmsg out varchar2
 
  
   info_reportes_rec        rep_info_typ;
-   lc_info clob := '';     
+   lc_clob_tmp clob ;     
   
   /**************************************************************
   (1) Tipo Reporte Por Cliente 
@@ -993,8 +1017,18 @@ procedure obtiene_reportes ( pso_errmsg out varchar2
   **************************************************************/                                         
      
 begin 
-  lc_info := lc_info||'<REPORTES_PDFT>'; 
-  lc_info := lc_info||'<TIPO_REPORTE>'||psi_tipo_reporte||'</TIPO_REPORTE>'; 
+
+   DBMS_LOB.CREATETEMPORARY(lob_loc  => lc_clob_tmp    
+                                                     ,cache   => true     
+                                                     ,dur       => dbms_lob.call
+                                                     );
+                                                     
+  DBMS_LOB.OPEN(lob_loc    => lc_clob_tmp
+                            ,open_mode  => DBMS_LOB.LOB_READWRITE
+                            );
+                    
+  dbms_lob.append(lc_clob_tmp,'<REPORTES_PDFT>'); 
+  dbms_lob.append(lc_clob_tmp,'<TIPO_REPORTE>'||psi_tipo_reporte||'</TIPO_REPORTE>'); 
    
    dbms_output.put_line('Comienza Procedimiento OBTIENE_REPORTES'); 
   
@@ -1017,43 +1051,47 @@ begin
       EXIT WHEN get_info_reportes_v1%NOTFOUND;
       dbms_output.put_line('Entra Loop Numero Ft:'||info_reportes_rec.NUMERO_FT);
       
-        lc_info := lc_info||'<PDFT_RECORD>'; 
+        dbms_lob.append(lc_clob_tmp,'<PDFT_RECORD>'); 
         
-        lc_info := lc_info||'<CREATION_DATE>'||to_char(info_reportes_rec.creation_date,'YYYY/MM/DD')||'</CREATION_DATE>';  /** (1)  (4)**/
+       dbms_lob.append(lc_clob_tmp,'<CREATION_DATE>'||to_char(info_reportes_rec.creation_date,'YYYY/MM/DD')||'</CREATION_DATE>');  /** (1)  (4)**/
          dbms_output.put_line('*');
-        lc_info := lc_info||'<NUMERO_FT>'||to_char(info_reportes_rec.NUMERO_FT)||'</NUMERO_FT>';  /** (1)  (4)**/
+        dbms_lob.append(lc_clob_tmp,'<NUMERO_FT>'||to_char(info_reportes_rec.NUMERO_FT)||'</NUMERO_FT>');  /** (1)  (4)**/
          dbms_output.put_line('**');
-        lc_info := lc_info||'<REV>'||to_char(info_reportes_rec.REV)||'</REV>';  /** (1)  (4) **/
+        dbms_lob.append(lc_clob_tmp,'<REV>'||to_char(info_reportes_rec.REV)||'</REV>');  /** (1)  (4) **/
          dbms_output.put_line('***');
-        lc_info := lc_info||'<ARTICULO_ORACLE>'||replace_char_esp(info_reportes_rec.articulo_oracle)||'</ARTICULO_ORACLE>';  /** (1) (4) **/
-        lc_info := lc_info||'<NOMBRE_DEL_CLIENTE>'||replace_char_esp(info_reportes_rec.NOMBRE_DEL_CLIENTE)||'</NOMBRE_DEL_CLIENTE>';  /** (1) (4) **/
-        lc_info := lc_info||'<PRECIO>'||to_char(info_reportes_rec.precio)||'</PRECIO>';  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error numérico o de valor, -6502 **/
+        dbms_lob.append(lc_clob_tmp,'<ARTICULO_ORACLE>'||replace_char_esp(info_reportes_rec.articulo_oracle)||'</ARTICULO_ORACLE>');  /** (1) (4) **/
+        dbms_lob.append(lc_clob_tmp,'<NOMBRE_DEL_CLIENTE>'||replace_char_esp(info_reportes_rec.NOMBRE_DEL_CLIENTE)||'</NOMBRE_DEL_CLIENTE>');  /** (1) (4) **/
+        dbms_lob.append(lc_clob_tmp,'<PRECIO>'||to_char(info_reportes_rec.precio)||'</PRECIO>');  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error num?rico o de valor, -6502 **/
         
         if info_reportes_rec.CNT_REG_NEG > 0 then 
-          lc_info := lc_info||'<REGLA_NEG>SI</REGLA_NEG>'; 
+          dbms_lob.append(lc_clob_tmp,'<REGLA_NEG>SI</REGLA_NEG>'); 
         else
-          lc_info := lc_info||'<REGLA_NEG>NO</REGLA_NEG>';  
+          dbms_lob.append(lc_clob_tmp,'<REGLA_NEG>NO</REGLA_NEG>');  
         end if; 
         
-        lc_info := lc_info||'<CONCEPTO>'||to_char(info_reportes_rec.concepto)||'</CONCEPTO>';
-        lc_info := lc_info||'<PRODUCTO>'||to_char(info_reportes_rec.producto)||'</PRODUCTO>';
-         lc_info := lc_info||'<DIAS_DE_CREDITO>'||to_char(info_reportes_rec.dias_de_credito)||'</DIAS_DE_CREDITO>';
+        dbms_lob.append(lc_clob_tmp,'<CONCEPTO>'||to_char(info_reportes_rec.concepto)||'</CONCEPTO>');
+        dbms_lob.append(lc_clob_tmp,'<PRODUCTO>'||to_char(info_reportes_rec.producto)||'</PRODUCTO>');
+         dbms_lob.append(lc_clob_tmp,'<DIAS_DE_CREDITO>'||to_char(info_reportes_rec.dias_de_credito)||'</DIAS_DE_CREDITO>');
          dbms_output.put_line('****');
-        lc_info := lc_info||'<EMPRESA_QUE_FACTURA_M>'||replace_char_esp(info_reportes_rec.EMPRESA_QUE_FACTURA_M)||'</EMPRESA_QUE_FACTURA_M>';  /** (1) **/
+        dbms_lob.append(lc_clob_tmp,'<EMPRESA_QUE_FACTURA_M>'||replace_char_esp(info_reportes_rec.EMPRESA_QUE_FACTURA_M)||'</EMPRESA_QUE_FACTURA_M>');  /** (1) **/
         dbms_output.put_line('*****');
-        lc_info := lc_info||'<FRECUENCIA_FACTURACION_M>'||replace_char_esp(info_reportes_rec.FRECUENCIA_FACTURACION_M)||'</FRECUENCIA_FACTURACION_M>';  /** (1) (4) **/
+        dbms_lob.append(lc_clob_tmp,'<FRECUENCIA_FACTURACION_M>'||replace_char_esp(info_reportes_rec.FRECUENCIA_FACTURACION_M)||'</FRECUENCIA_FACTURACION_M>');  /** (1) (4) **/
           dbms_output.put_line('******');
-        lc_info := lc_info||'<UNIDAD_DE_NEGOCIO_M>'||replace_char_esp(info_reportes_rec.UNIDAD_DE_NEGOCIO_M)||'</UNIDAD_DE_NEGOCIO_M>';  /** (1)  (4) **/
+        dbms_lob.append(lc_clob_tmp,'<UNIDAD_DE_NEGOCIO_M>'||replace_char_esp(info_reportes_rec.UNIDAD_DE_NEGOCIO_M)||'</UNIDAD_DE_NEGOCIO_M>');  /** (1)  (4) **/
          dbms_output.put_line('*******');
-        lc_info := lc_info||'<EJECUTIVO>'||replace_char_esp(info_reportes_rec.EJECUTIVO)||'</EJECUTIVO>';  /** (1) **/
+        dbms_lob.append(lc_clob_tmp,'<EJECUTIVO>'||replace_char_esp(info_reportes_rec.EJECUTIVO)||'</EJECUTIVO>');  /** (1) **/
          dbms_output.put_line('********');
-        lc_info := lc_info||'<STATUS_M>'||info_reportes_rec.STATUS_M||'</STATUS_M>';  /** (1) **/
+        dbms_lob.append(lc_clob_tmp,'<STATUS_M>'||info_reportes_rec.STATUS_M||'</STATUS_M>');  /** (1) **/
          dbms_output.put_line('*********');
-         lc_info := lc_info||'<FECHA_INICIAL_OPERACION>'||to_char(info_reportes_rec.FECHA_INICIAL_OPERACION,'YYYY/MM/DD')||'</FECHA_INICIAL_OPERACION>';  /** (4) **/
+         dbms_lob.append(lc_clob_tmp,'<FECHA_INICIAL_OPERACION>'||to_char(info_reportes_rec.FECHA_INICIAL_OPERACION,'YYYY/MM/DD')||'</FECHA_INICIAL_OPERACION>');  /** (4) **/
            dbms_output.put_line('**********');
-            lc_info := lc_info||'<CONTRATO>'||info_reportes_rec.contrato_flag||'</CONTRATO>';  /** (4) **/
-                
-        lc_info := lc_info||'</PDFT_RECORD>'; 
+            dbms_lob.append(lc_clob_tmp,'<CONTRATO>'||info_reportes_rec.contrato_flag||'</CONTRATO>');  /** (4) **/
+          
+          dbms_lob.append(lc_clob_tmp,'<PRECIO_CD>'||to_char(info_reportes_rec.precio_cd)||'</PRECIO_CD>');  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error num?rico o de valor, -6502 **/
+          dbms_lob.append(lc_clob_tmp,'<PRECIO_PROTON_CD>'||to_char(info_reportes_rec.precio_proton_cd)||'</PRECIO_PROTON_CD>');  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error num?rico o de valor, -6502 **/
+     
+            
+        dbms_lob.append(lc_clob_tmp,'</PDFT_RECORD>'); 
    END LOOP;
     dbms_output.put_line('Total Registros:'||get_info_reportes_v1%ROWCOUNT);
    CLOSE get_info_reportes_v1;
@@ -1079,43 +1117,46 @@ begin
       EXIT WHEN get_info_reportes_v2%NOTFOUND;
       dbms_output.put_line('Entra Loop Numero Ft:'||info_reportes_rec.NUMERO_FT);
       
-        lc_info := lc_info||'<PDFT_RECORD>'; 
+        dbms_lob.append(lc_clob_tmp,'<PDFT_RECORD>'); 
         
-        lc_info := lc_info||'<CREATION_DATE>'||to_char(info_reportes_rec.creation_date,'YYYY/MM/DD')||'</CREATION_DATE>';  /** (1)  (4)**/
+        dbms_lob.append(lc_clob_tmp,'<CREATION_DATE>'||to_char(info_reportes_rec.creation_date,'YYYY/MM/DD')||'</CREATION_DATE>');  /** (1)  (4)**/
          dbms_output.put_line('*');
-        lc_info := lc_info||'<NUMERO_FT>'||to_char(info_reportes_rec.NUMERO_FT)||'</NUMERO_FT>';  /** (1)  (4)**/
+        dbms_lob.append(lc_clob_tmp,'<NUMERO_FT>'||to_char(info_reportes_rec.NUMERO_FT)||'</NUMERO_FT>');  /** (1)  (4)**/
          dbms_output.put_line('**');
-        lc_info := lc_info||'<REV>'||to_char(info_reportes_rec.REV)||'</REV>';  /** (1)  (4) **/
+        dbms_lob.append(lc_clob_tmp,'<REV>'||to_char(info_reportes_rec.REV)||'</REV>');  /** (1)  (4) **/
          dbms_output.put_line('***');
-        lc_info := lc_info||'<ARTICULO_ORACLE>'||replace_char_esp(info_reportes_rec.articulo_oracle)||'</ARTICULO_ORACLE>';  /** (1) (4) **/
-        lc_info := lc_info||'<NOMBRE_DEL_CLIENTE>'||replace_char_esp(info_reportes_rec.NOMBRE_DEL_CLIENTE)||'</NOMBRE_DEL_CLIENTE>';  /** (1) (4) **/
-        lc_info := lc_info||'<PRECIO>'||to_char(info_reportes_rec.precio)||'</PRECIO>';  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error numérico o de valor, -6502 **/
+        dbms_lob.append(lc_clob_tmp,'<ARTICULO_ORACLE>'||replace_char_esp(info_reportes_rec.articulo_oracle)||'</ARTICULO_ORACLE>');  /** (1) (4) **/
+        dbms_lob.append(lc_clob_tmp,'<NOMBRE_DEL_CLIENTE>'||replace_char_esp(info_reportes_rec.NOMBRE_DEL_CLIENTE)||'</NOMBRE_DEL_CLIENTE>');  /** (1) (4) **/
+        dbms_lob.append(lc_clob_tmp,'<PRECIO>'||to_char(info_reportes_rec.precio)||'</PRECIO>');  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error num?rico o de valor, -6502 **/
        
        if info_reportes_rec.CNT_REG_NEG > 0 then 
-          lc_info := lc_info||'<REGLA_NEG>SI</REGLA_NEG>'; 
+          dbms_lob.append(lc_clob_tmp,'<REGLA_NEG>SI</REGLA_NEG>'); 
         else
-          lc_info := lc_info||'<REGLA_NEG>NO</REGLA_NEG>';  
+          dbms_lob.append(lc_clob_tmp,'<REGLA_NEG>NO</REGLA_NEG>');  
         end if; 
        
-        lc_info := lc_info||'<CONCEPTO>'||to_char(info_reportes_rec.concepto)||'</CONCEPTO>';
-        lc_info := lc_info||'<PRODUCTO>'||to_char(info_reportes_rec.producto)||'</PRODUCTO>';
-         lc_info := lc_info||'<DIAS_DE_CREDITO>'||to_char(info_reportes_rec.dias_de_credito)||'</DIAS_DE_CREDITO>';
+        dbms_lob.append(lc_clob_tmp,'<CONCEPTO>'||to_char(info_reportes_rec.concepto)||'</CONCEPTO>');
+        dbms_lob.append(lc_clob_tmp,'<PRODUCTO>'||to_char(info_reportes_rec.producto)||'</PRODUCTO>');
+         dbms_lob.append(lc_clob_tmp,'<DIAS_DE_CREDITO>'||to_char(info_reportes_rec.dias_de_credito)||'</DIAS_DE_CREDITO>');
          dbms_output.put_line('****');
-        lc_info := lc_info||'<EMPRESA_QUE_FACTURA_M>'||replace_char_esp(info_reportes_rec.EMPRESA_QUE_FACTURA_M)||'</EMPRESA_QUE_FACTURA_M>';  /** (1) **/
+        dbms_lob.append(lc_clob_tmp,'<EMPRESA_QUE_FACTURA_M>'||replace_char_esp(info_reportes_rec.EMPRESA_QUE_FACTURA_M)||'</EMPRESA_QUE_FACTURA_M>');  /** (1) **/
         dbms_output.put_line('*****');
-        lc_info := lc_info||'<FRECUENCIA_FACTURACION_M>'||replace_char_esp(info_reportes_rec.FRECUENCIA_FACTURACION_M)||'</FRECUENCIA_FACTURACION_M>';  /** (1) (4) **/
+        dbms_lob.append(lc_clob_tmp,'<FRECUENCIA_FACTURACION_M>'||replace_char_esp(info_reportes_rec.FRECUENCIA_FACTURACION_M)||'</FRECUENCIA_FACTURACION_M>');  /** (1) (4) **/
           dbms_output.put_line('******');
-        lc_info := lc_info||'<UNIDAD_DE_NEGOCIO_M>'||replace_char_esp(info_reportes_rec.UNIDAD_DE_NEGOCIO_M)||'</UNIDAD_DE_NEGOCIO_M>';  /** (1)  (4) **/
+        dbms_lob.append(lc_clob_tmp,'<UNIDAD_DE_NEGOCIO_M>'||replace_char_esp(info_reportes_rec.UNIDAD_DE_NEGOCIO_M)||'</UNIDAD_DE_NEGOCIO_M>');  /** (1)  (4) **/
          dbms_output.put_line('*******');
-        lc_info := lc_info||'<EJECUTIVO>'||replace_char_esp(info_reportes_rec.EJECUTIVO)||'</EJECUTIVO>';  /** (1) **/
+        dbms_lob.append(lc_clob_tmp,'<EJECUTIVO>'||replace_char_esp(info_reportes_rec.EJECUTIVO)||'</EJECUTIVO>');  /** (1) **/
          dbms_output.put_line('********');
-        lc_info := lc_info||'<STATUS_M>'||info_reportes_rec.STATUS_M||'</STATUS_M>';  /** (1) **/
+        dbms_lob.append(lc_clob_tmp,'<STATUS_M>'||info_reportes_rec.STATUS_M||'</STATUS_M>');  /** (1) **/
          dbms_output.put_line('*********');
-         lc_info := lc_info||'<FECHA_INICIAL_OPERACION>'||to_char(info_reportes_rec.FECHA_INICIAL_OPERACION,'YYYY/MM/DD')||'</FECHA_INICIAL_OPERACION>';  /** (4) **/
+         dbms_lob.append(lc_clob_tmp,'<FECHA_INICIAL_OPERACION>'||to_char(info_reportes_rec.FECHA_INICIAL_OPERACION,'YYYY/MM/DD')||'</FECHA_INICIAL_OPERACION>');  /** (4) **/
            dbms_output.put_line('**********');
-            lc_info := lc_info||'<CONTRATO>'||info_reportes_rec.contrato_flag||'</CONTRATO>';  /** (4) **/
-                
-        lc_info := lc_info||'</PDFT_RECORD>'; 
+            dbms_lob.append(lc_clob_tmp,'<CONTRATO>'||info_reportes_rec.contrato_flag||'</CONTRATO>');  /** (4) **/
+          dbms_lob.append(lc_clob_tmp,'<PRECIO_CD>'||to_char(info_reportes_rec.precio_cd)||'</PRECIO_CD>');  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error num?rico o de valor, -6502 **/
+          dbms_lob.append(lc_clob_tmp,'<PRECIO_PROTON_CD>'||to_char(info_reportes_rec.precio_proton_cd)||'</PRECIO_PROTON_CD>');  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error num?rico o de valor, -6502 **/
+     
+            
+        dbms_lob.append(lc_clob_tmp,'</PDFT_RECORD>'); 
    END LOOP;
     dbms_output.put_line('Total Registros:'||get_info_reportes_v2%ROWCOUNT);
    CLOSE get_info_reportes_v2;
@@ -1141,43 +1182,46 @@ begin
       EXIT WHEN get_info_reportes_v3%NOTFOUND;
       dbms_output.put_line('Entra Loop Numero Ft:'||info_reportes_rec.NUMERO_FT);
       
-        lc_info := lc_info||'<PDFT_RECORD>'; 
+        dbms_lob.append(lc_clob_tmp,'<PDFT_RECORD>'); 
         
-        lc_info := lc_info||'<CREATION_DATE>'||to_char(info_reportes_rec.creation_date,'YYYY/MM/DD')||'</CREATION_DATE>';  /** (1)  (4)**/
+        dbms_lob.append(lc_clob_tmp,'<CREATION_DATE>'||to_char(info_reportes_rec.creation_date,'YYYY/MM/DD')||'</CREATION_DATE>');  /** (1)  (4)**/
          dbms_output.put_line('*');
-        lc_info := lc_info||'<NUMERO_FT>'||to_char(info_reportes_rec.NUMERO_FT)||'</NUMERO_FT>';  /** (1)  (4)**/
+        dbms_lob.append(lc_clob_tmp,'<NUMERO_FT>'||to_char(info_reportes_rec.NUMERO_FT)||'</NUMERO_FT>');  /** (1)  (4)**/
          dbms_output.put_line('**');
-        lc_info := lc_info||'<REV>'||to_char(info_reportes_rec.REV)||'</REV>';  /** (1)  (4) **/
+        dbms_lob.append(lc_clob_tmp,'<REV>'||to_char(info_reportes_rec.REV)||'</REV>');  /** (1)  (4) **/
          dbms_output.put_line('***');
-        lc_info := lc_info||'<ARTICULO_ORACLE>'||replace_char_esp(info_reportes_rec.articulo_oracle)||'</ARTICULO_ORACLE>';  /** (1) (4) **/
-        lc_info := lc_info||'<NOMBRE_DEL_CLIENTE>'||replace_char_esp(info_reportes_rec.NOMBRE_DEL_CLIENTE)||'</NOMBRE_DEL_CLIENTE>';  /** (1) (4) **/
-        lc_info := lc_info||'<PRECIO>'||to_char(info_reportes_rec.precio)||'</PRECIO>';  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error numérico o de valor, -6502 **/
+        dbms_lob.append(lc_clob_tmp,'<ARTICULO_ORACLE>'||replace_char_esp(info_reportes_rec.articulo_oracle)||'</ARTICULO_ORACLE>');  /** (1) (4) **/
+        dbms_lob.append(lc_clob_tmp,'<NOMBRE_DEL_CLIENTE>'||replace_char_esp(info_reportes_rec.NOMBRE_DEL_CLIENTE)||'</NOMBRE_DEL_CLIENTE>');  /** (1) (4) **/
+        dbms_lob.append(lc_clob_tmp,'<PRECIO>'||to_char(info_reportes_rec.precio)||'</PRECIO>');  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error num?rico o de valor, -6502 **/
         
          if info_reportes_rec.CNT_REG_NEG > 0 then 
-          lc_info := lc_info||'<REGLA_NEG>SI</REGLA_NEG>'; 
+          dbms_lob.append(lc_clob_tmp,'<REGLA_NEG>SI</REGLA_NEG>'); 
         else
-          lc_info := lc_info||'<REGLA_NEG>NO</REGLA_NEG>';  
+          dbms_lob.append(lc_clob_tmp,'<REGLA_NEG>NO</REGLA_NEG>');  
         end if; 
         
-        lc_info := lc_info||'<CONCEPTO>'||to_char(info_reportes_rec.concepto)||'</CONCEPTO>';
-        lc_info := lc_info||'<PRODUCTO>'||to_char(info_reportes_rec.producto)||'</PRODUCTO>';
-         lc_info := lc_info||'<DIAS_DE_CREDITO>'||to_char(info_reportes_rec.dias_de_credito)||'</DIAS_DE_CREDITO>';
+        dbms_lob.append(lc_clob_tmp,'<CONCEPTO>'||to_char(info_reportes_rec.concepto)||'</CONCEPTO>');
+        dbms_lob.append(lc_clob_tmp,'<PRODUCTO>'||to_char(info_reportes_rec.producto)||'</PRODUCTO>');
+         dbms_lob.append(lc_clob_tmp,'<DIAS_DE_CREDITO>'||to_char(info_reportes_rec.dias_de_credito)||'</DIAS_DE_CREDITO>');
          dbms_output.put_line('****');
-        lc_info := lc_info||'<EMPRESA_QUE_FACTURA_M>'||replace_char_esp(info_reportes_rec.EMPRESA_QUE_FACTURA_M)||'</EMPRESA_QUE_FACTURA_M>';  /** (1) **/
+        dbms_lob.append(lc_clob_tmp,'<EMPRESA_QUE_FACTURA_M>'||replace_char_esp(info_reportes_rec.EMPRESA_QUE_FACTURA_M)||'</EMPRESA_QUE_FACTURA_M>');  /** (1) **/
         dbms_output.put_line('*****');
-        lc_info := lc_info||'<FRECUENCIA_FACTURACION_M>'||replace_char_esp(info_reportes_rec.FRECUENCIA_FACTURACION_M)||'</FRECUENCIA_FACTURACION_M>';  /** (1) (4) **/
+        dbms_lob.append(lc_clob_tmp,'<FRECUENCIA_FACTURACION_M>'||replace_char_esp(info_reportes_rec.FRECUENCIA_FACTURACION_M)||'</FRECUENCIA_FACTURACION_M>');  /** (1) (4) **/
           dbms_output.put_line('******');
-        lc_info := lc_info||'<UNIDAD_DE_NEGOCIO_M>'||replace_char_esp(info_reportes_rec.UNIDAD_DE_NEGOCIO_M)||'</UNIDAD_DE_NEGOCIO_M>';  /** (1)  (4) **/
+        dbms_lob.append(lc_clob_tmp,'<UNIDAD_DE_NEGOCIO_M>'||replace_char_esp(info_reportes_rec.UNIDAD_DE_NEGOCIO_M)||'</UNIDAD_DE_NEGOCIO_M>');  /** (1)  (4) **/
          dbms_output.put_line('*******');
-        lc_info := lc_info||'<EJECUTIVO>'||replace_char_esp(info_reportes_rec.EJECUTIVO)||'</EJECUTIVO>';  /** (1) **/
+        dbms_lob.append(lc_clob_tmp,'<EJECUTIVO>'||replace_char_esp(info_reportes_rec.EJECUTIVO)||'</EJECUTIVO>');  /** (1) **/
          dbms_output.put_line('********');
-        lc_info := lc_info||'<STATUS_M>'||info_reportes_rec.STATUS_M||'</STATUS_M>';  /** (1) **/
+        dbms_lob.append(lc_clob_tmp,'<STATUS_M>'||info_reportes_rec.STATUS_M||'</STATUS_M>');  /** (1) **/
          dbms_output.put_line('*********');
-         lc_info := lc_info||'<FECHA_INICIAL_OPERACION>'||to_char(info_reportes_rec.FECHA_INICIAL_OPERACION,'YYYY/MM/DD')||'</FECHA_INICIAL_OPERACION>';  /** (4) **/
+         dbms_lob.append(lc_clob_tmp,'<FECHA_INICIAL_OPERACION>'||to_char(info_reportes_rec.FECHA_INICIAL_OPERACION,'YYYY/MM/DD')||'</FECHA_INICIAL_OPERACION>');  /** (4) **/
            dbms_output.put_line('**********');
-            lc_info := lc_info||'<CONTRATO>'||info_reportes_rec.contrato_flag||'</CONTRATO>';  /** (4) **/
-                
-        lc_info := lc_info||'</PDFT_RECORD>'; 
+            dbms_lob.append(lc_clob_tmp,'<CONTRATO>'||info_reportes_rec.contrato_flag||'</CONTRATO>');  /** (4) **/
+           dbms_lob.append(lc_clob_tmp,'<PRECIO_CD>'||to_char(info_reportes_rec.precio_cd)||'</PRECIO_CD>');  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error num?rico o de valor, -6502 **/
+          dbms_lob.append(lc_clob_tmp,'<PRECIO_PROTON_CD>'||to_char(info_reportes_rec.precio_proton_cd)||'</PRECIO_PROTON_CD>');  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error num?rico o de valor, -6502 **/
+     
+           
+        dbms_lob.append(lc_clob_tmp,'</PDFT_RECORD>'); 
    END LOOP;
     dbms_output.put_line('Total Registros:'||get_info_reportes_v3%ROWCOUNT);
    CLOSE get_info_reportes_v3;
@@ -1202,50 +1246,54 @@ begin
       EXIT WHEN get_info_reportes_v4%NOTFOUND;
       dbms_output.put_line('Entra Loop Numero Ft:'||info_reportes_rec.NUMERO_FT);
       
-        lc_info := lc_info||'<PDFT_RECORD>'; 
+        dbms_lob.append(lc_clob_tmp,'<PDFT_RECORD>'); 
         
-        lc_info := lc_info||'<CREATION_DATE>'||to_char(info_reportes_rec.creation_date,'YYYY/MM/DD')||'</CREATION_DATE>';  /** (1)  (4)**/
+        dbms_lob.append(lc_clob_tmp,'<CREATION_DATE>'||to_char(info_reportes_rec.creation_date,'YYYY/MM/DD')||'</CREATION_DATE>');  /** (1)  (4)**/
          dbms_output.put_line('*');
-        lc_info := lc_info||'<NUMERO_FT>'||to_char(info_reportes_rec.NUMERO_FT)||'</NUMERO_FT>';  /** (1)  (4)**/
+        dbms_lob.append(lc_clob_tmp,'<NUMERO_FT>'||to_char(info_reportes_rec.NUMERO_FT)||'</NUMERO_FT>');  /** (1)  (4)**/
          dbms_output.put_line('**');
-        lc_info := lc_info||'<REV>'||to_char(info_reportes_rec.REV)||'</REV>';  /** (1)  (4) **/
+        dbms_lob.append(lc_clob_tmp,'<REV>'||to_char(info_reportes_rec.REV)||'</REV>');  /** (1)  (4) **/
          dbms_output.put_line('***');
-        lc_info := lc_info||'<ARTICULO_ORACLE>'||replace_char_esp(info_reportes_rec.articulo_oracle)||'</ARTICULO_ORACLE>';  /** (1) (4) **/
-        lc_info := lc_info||'<NOMBRE_DEL_CLIENTE>'||replace_char_esp(info_reportes_rec.NOMBRE_DEL_CLIENTE)||'</NOMBRE_DEL_CLIENTE>';  /** (1) (4) **/
-        lc_info := lc_info||'<PRECIO>'||to_char(info_reportes_rec.precio)||'</PRECIO>';  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error numérico o de valor, -6502 **/
+        dbms_lob.append(lc_clob_tmp,'<ARTICULO_ORACLE>'||replace_char_esp(info_reportes_rec.articulo_oracle)||'</ARTICULO_ORACLE>');  /** (1) (4) **/
+        dbms_lob.append(lc_clob_tmp,'<NOMBRE_DEL_CLIENTE>'||replace_char_esp(info_reportes_rec.NOMBRE_DEL_CLIENTE)||'</NOMBRE_DEL_CLIENTE>');  /** (1) (4) **/
+        dbms_lob.append(lc_clob_tmp,'<PRECIO>'||to_char(info_reportes_rec.precio)||'</PRECIO>');  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error num?rico o de valor, -6502 **/
         
          if info_reportes_rec.CNT_REG_NEG > 0 then 
-          lc_info := lc_info||'<REGLA_NEG>SI</REGLA_NEG>'; 
+          dbms_lob.append(lc_clob_tmp,'<REGLA_NEG>SI</REGLA_NEG>'); 
         else
-          lc_info := lc_info||'<REGLA_NEG>NO</REGLA_NEG>';  
+          dbms_lob.append(lc_clob_tmp,'<REGLA_NEG>NO</REGLA_NEG>');  
         end if; 
         
-        lc_info := lc_info||'<CONCEPTO>'||to_char(info_reportes_rec.concepto)||'</CONCEPTO>';
-        lc_info := lc_info||'<PRODUCTO>'||to_char(info_reportes_rec.producto)||'</PRODUCTO>';
-         lc_info := lc_info||'<DIAS_DE_CREDITO>'||to_char(info_reportes_rec.dias_de_credito)||'</DIAS_DE_CREDITO>';
+        dbms_lob.append(lc_clob_tmp,'<CONCEPTO>'||to_char(info_reportes_rec.concepto)||'</CONCEPTO>');
+        dbms_lob.append(lc_clob_tmp,'<PRODUCTO>'||to_char(info_reportes_rec.producto)||'</PRODUCTO>');
+         dbms_lob.append(lc_clob_tmp,'<DIAS_DE_CREDITO>'||to_char(info_reportes_rec.dias_de_credito)||'</DIAS_DE_CREDITO>');
          dbms_output.put_line('****');
-        lc_info := lc_info||'<EMPRESA_QUE_FACTURA_M>'||replace_char_esp(info_reportes_rec.EMPRESA_QUE_FACTURA_M)||'</EMPRESA_QUE_FACTURA_M>';  /** (1) **/
+        dbms_lob.append(lc_clob_tmp,'<EMPRESA_QUE_FACTURA_M>'||replace_char_esp(info_reportes_rec.EMPRESA_QUE_FACTURA_M)||'</EMPRESA_QUE_FACTURA_M>');  /** (1) **/
         dbms_output.put_line('*****');
-        lc_info := lc_info||'<FRECUENCIA_FACTURACION_M>'||replace_char_esp(info_reportes_rec.FRECUENCIA_FACTURACION_M)||'</FRECUENCIA_FACTURACION_M>';  /** (1) (4) **/
+        dbms_lob.append(lc_clob_tmp,'<FRECUENCIA_FACTURACION_M>'||replace_char_esp(info_reportes_rec.FRECUENCIA_FACTURACION_M)||'</FRECUENCIA_FACTURACION_M>');  /** (1) (4) **/
           dbms_output.put_line('******');
-        lc_info := lc_info||'<UNIDAD_DE_NEGOCIO_M>'||replace_char_esp(info_reportes_rec.UNIDAD_DE_NEGOCIO_M)||'</UNIDAD_DE_NEGOCIO_M>';  /** (1)  (4) **/
+        dbms_lob.append(lc_clob_tmp,'<UNIDAD_DE_NEGOCIO_M>'||replace_char_esp(info_reportes_rec.UNIDAD_DE_NEGOCIO_M)||'</UNIDAD_DE_NEGOCIO_M>');  /** (1)  (4) **/
          dbms_output.put_line('*******');
-        lc_info := lc_info||'<EJECUTIVO>'||replace_char_esp(info_reportes_rec.EJECUTIVO)||'</EJECUTIVO>';  /** (1) **/
+        dbms_lob.append(lc_clob_tmp,'<EJECUTIVO>'||replace_char_esp(info_reportes_rec.EJECUTIVO)||'</EJECUTIVO>');  /** (1) **/
          dbms_output.put_line('********');
-        lc_info := lc_info||'<STATUS_M>'||info_reportes_rec.STATUS_M||'</STATUS_M>';  /** (1) **/
+        dbms_lob.append(lc_clob_tmp,'<STATUS_M>'||info_reportes_rec.STATUS_M||'</STATUS_M>');  /** (1) **/
          dbms_output.put_line('*********');
-         lc_info := lc_info||'<FECHA_INICIAL_OPERACION>'||to_char(info_reportes_rec.FECHA_INICIAL_OPERACION,'YYYY/MM/DD')||'</FECHA_INICIAL_OPERACION>';  /** (4) **/
+         dbms_lob.append(lc_clob_tmp,'<FECHA_INICIAL_OPERACION>'||to_char(info_reportes_rec.FECHA_INICIAL_OPERACION,'YYYY/MM/DD')||'</FECHA_INICIAL_OPERACION>');  /** (4) **/
            dbms_output.put_line('**********');
-            lc_info := lc_info||'<CONTRATO>'||info_reportes_rec.contrato_flag||'</CONTRATO>';  /** (4) **/
-                
-        lc_info := lc_info||'</PDFT_RECORD>'; 
+            dbms_lob.append(lc_clob_tmp,'<CONTRATO>'||info_reportes_rec.contrato_flag||'</CONTRATO>');  /** (4) **/
+           dbms_lob.append(lc_clob_tmp,'<PRECIO_CD>'||to_char(info_reportes_rec.precio_cd)||'</PRECIO_CD>');  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error num?rico o de valor, -6502 **/
+          dbms_lob.append(lc_clob_tmp,'<PRECIO_PROTON_CD>'||to_char(info_reportes_rec.precio_proton_cd)||'</PRECIO_PROTON_CD>');  /** (1) (4) **/ /** Excepcion Paquete xxqp_pdft_myp_pkg metodo obtiene_reportes:ORA-06502: PL/SQL: error num?rico o de valor, -6502 **/
+            
+            
+        dbms_lob.append(lc_clob_tmp,'</PDFT_RECORD>'); 
    END LOOP;
     dbms_output.put_line('Total Registros:'||get_info_reportes_v4%ROWCOUNT);
    CLOSE get_info_reportes_v4;
   end if;    
  
-  lc_info := lc_info||'</REPORTES_PDFT>'; 
-   pco_info := lc_info;
+  dbms_lob.append(lc_clob_tmp,'</REPORTES_PDFT>'); 
+   DBMS_LOB.CLOSE(lob_loc    => lc_clob_tmp);
+   pco_info := lc_clob_tmp;
    
    dbms_output.put_line('Finaliza Procedimiento OBTIENE_REPORTES'); 
    
@@ -1271,6 +1319,8 @@ ln_nth          number := 0;
  ln_instr_clob  number := 0; 
  ln_instr_clob_tmp number := 0;
  ls_substr_clob varchar2(32767) := ''; 
+ ln_length_char number := 0; 
+ ln_length_char_tot  number := 0; 
  
  BEGIN 
   fnd_file.put_line(fnd_file.log,'Comienza split_ilim');
@@ -1291,8 +1341,14 @@ ln_nth          number := 0;
    while(v_offset<=v_length_clob) LOOP
         v_char := dbms_lob.substr(PCI_CLOB_ALIM, 1, v_offset);
         fnd_file.put_line(fnd_file.log,'v_char:'||v_char);
+        v_char := replace_char_esp(v_char);
+        ln_length_char := length(v_char); 
+        if ln_length_char > 1 then 
+         ln_length_char_tot := ln_length_char_tot+ln_length_char-1;
+        end if; 
         
-        dbms_lob.append(lc_clob_tmp,replace_char_esp(v_char));
+       /* dbms_lob.append(lc_clob_tmp,replace_char_esp(v_char));  */
+        dbms_lob.append(lc_clob_tmp,v_char);
          v_offset := v_offset + 1;
         if v_char = chr(10) then 
          ln_nth := ln_nth+1;
@@ -1330,7 +1386,7 @@ ln_nth          number := 0;
      if (v_offset-1) = v_length_clob AND ln_nth>0  then 
            fnd_file.put_line(fnd_file.log,'v_offsetTmp:'||v_offsetTmp);
          --  fnd_file.put_line(fnd_file.log,'v_offset-ln_instr_clob_tmp-1:'||v_offset-ln_instr_clob_tmp-1);
-           ls_substr_clob := dbms_lob.substr(lc_clob_tmp,v_offset-ln_instr_clob_tmp,v_offsetTmp);
+           ls_substr_clob := dbms_lob.substr(lc_clob_tmp,v_offset+ln_length_char_tot-ln_instr_clob_tmp,v_offsetTmp);
              fnd_file.put_line(fnd_file.log,'v_offset = v_length_clob:'||ls_substr_clob);
            dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE||'>');     
          dbms_lob.append(PCI_CLOB_REP,'<'||PSI_NODE_CHILD||'>'||ls_substr_clob||'</'||PSI_NODE_CHILD||'>');     
