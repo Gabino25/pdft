@@ -6,6 +6,7 @@ CREATE OR REPLACE package body xxqp_pdft_myp_pkg is
 /** 03052022 se filtra nombre de cliente tambien por numeros **/
 /** 16072021 se deja de concatenar en el procedimiento reportes y se usa la libreria dbms_lob , create, update y close **/
 /** 16072021 se agregan 2 nuevos campos PRECIO_CD y PRECIO_PROTON_CD **/ 
+/** 19072021 se muestran los campos Precios PROTON en el pdf **/
 
 /** gs_currency_format varchar2(2000) := '$999,999,999,999,999,999.99'; **/
  gs_currency_format varchar2(2000) := '$999,999,999,999,999,999.99'; 
@@ -245,6 +246,7 @@ where myp_dist.MYP_HEADER_ID = cur_myp_header_id;
  myp_proc.OTROS_PROCESOS, 
  decode(myp_proc.SELECCIONAR,'Y','X',null) SELECCIONAR,
  myp_proc.PRECIO, 
+ myp_proc.PRECIO_PROTON, 
  myp_proc.COMENTARIOS_INSTRUCC, 
  myp_proc.CREATED_BY, 
  myp_proc.CREATION_DATE, 
@@ -270,6 +272,7 @@ CURSOR get_myp_oproc_info (cur_myp_header_id number) IS
  myp_oproc.OTROS_PROCESOS, 
  decode(myp_oproc.SELECCIONAR,'Y','X',null) SELECCIONAR , 
  myp_oproc.PRECIO, 
+ myp_oproc.PRECIO_PROTON, 
  myp_oproc.COMENTARIOS_INSTRUCC, 
  myp_oproc.CREATED_BY, 
  myp_oproc.CREATION_DATE, 
@@ -683,7 +686,7 @@ begin
  */ 
  
 exception when others then 
- pso_errmsg := 'Excepcion Paquete xxqp_pdft_myp_pkg metodo main:'||sqlerrm||', '||sqlcode;
+ pso_errmsg := 'Excepcion Paquete APPS.xxqp_pdft_myp_pkg metodo main:'||sqlerrm||', '||sqlcode;
  pso_errcod := 2; 
 end main; 
 
@@ -705,8 +708,10 @@ procedure get_info(pso_errmsg out varchar2
  
  ln_proc_count number:=0; 
  ln_proc_precio_sub number:=0; 
+ ln_proc_precio_proton_sub number := 0; 
  ln_oproc_count number:=0; 
  ln_oproc_precio_sub number:=0; 
+ ln_oproc_precio_proton_sub number := 0; 
  ln_myp_header_id number := pni_myp_header_id; 
  ls_regneg_precio varchar2(200); 
  v_length_clob number := 0; 
@@ -723,7 +728,15 @@ begin
  pso_errcod := '0';
  
  fnd_file.put_line(fnd_file.log,'050320211619');
- lc_info :='<XXQP_PDFT_MYP>'; 
+ DBMS_LOB.CREATETEMPORARY(lob_loc  => lc_info    
+                                                     ,cache   => true     
+                                                     ,dur       => dbms_lob.call
+                                                     );
+                                                     
+  DBMS_LOB.OPEN(lob_loc    => lc_info
+                            ,open_mode  => DBMS_LOB.LOB_READWRITE
+                            );
+ dbms_lob.append(lc_info,'<XXQP_PDFT_MYP>'); 
  
  fnd_file.put_line(fnd_file.log,'050320211617');
  OPEN get_myp_head_info(ln_myp_header_id);
@@ -914,10 +927,13 @@ dbms_lob.append(lc_info,'<PLAZA_PROPIETARIA>'||myp_cob_info_rec.PLAZA_PROPIETARI
  dbms_lob.append(lc_info,'<NOMBRE_PROCESO'||ln_proc_count||'>'||myp_proc_info_rec.PROSESO||'</NOMBRE_PROCESO'||ln_proc_count||'>');
  dbms_lob.append(lc_info,'<SELECCIONAR'||ln_proc_count||'>'||myp_proc_info_rec.SELECCIONAR||'</SELECCIONAR'||ln_proc_count||'>');
  dbms_lob.append(lc_info,'<PRECIO'||ln_proc_count||'>'||trim(to_char(myp_proc_info_rec.PRECIO,gs_currency_format))||'</PRECIO'||ln_proc_count||'>');
+ dbms_lob.append(lc_info,'<PRECIO_PROTON'||ln_proc_count||'>'||trim(to_char(myp_proc_info_rec.PRECIO_PROTON,gs_currency_format))||'</PRECIO_PROTON'||ln_proc_count||'>');
  
  ln_proc_precio_sub := nvl(ln_proc_precio_sub,0) + nvl(myp_proc_info_rec.PRECIO,0);
+  ln_proc_precio_proton_sub := nvl(ln_proc_precio_proton_sub,0) + nvl(myp_proc_info_rec.PRECIO_PROTON,0);
  END LOOP;
  dbms_lob.append(lc_info,'<SUB_PRECIO>'||trim(to_char(ln_proc_precio_sub,gs_currency_format))||'</SUB_PRECIO>');
+  dbms_lob.append(lc_info,'<SUB_PRECIO_PROTON>'||trim(to_char(ln_proc_precio_proton_sub,gs_currency_format))||'</SUB_PRECIO_PROTON>');
  CLOSE get_myp_proc_info;
  
  
@@ -929,12 +945,15 @@ dbms_lob.append(lc_info,'<PLAZA_PROPIETARIA>'||myp_cob_info_rec.PLAZA_PROPIETARI
  dbms_lob.append(lc_info,'<O_NOMBRE_PROCESO'||ln_oproc_count||'>'||myp_oproc_info_rec.OTROS_PROCESOS||'</O_NOMBRE_PROCESO'||ln_oproc_count||'>');
  dbms_lob.append(lc_info,'<O_SELECCIONAR'||ln_oproc_count||'>'||myp_oproc_info_rec.SELECCIONAR||'</O_SELECCIONAR'||ln_oproc_count||'>');
  dbms_lob.append(lc_info,'<O_PRECIO'||ln_oproc_count||'>'||trim(to_char(myp_oproc_info_rec.PRECIO,gs_currency_format))||'</O_PRECIO'||ln_oproc_count||'>');
+dbms_lob.append(lc_info,'<O_PRECIO_PROTON'||ln_oproc_count||'>'||trim(to_char(myp_oproc_info_rec.PRECIO_PROTON,gs_currency_format))||'</O_PRECIO_PROTON'||ln_oproc_count||'>');
 
  ln_oproc_precio_sub := nvl(ln_oproc_precio_sub,0) + nvl(myp_oproc_info_rec.PRECIO,0);
-
+ ln_oproc_precio_proton_sub := nvl(ln_oproc_precio_proton_sub,0) + nvl(myp_oproc_info_rec.PRECIO_PROTON,0);
+ 
  END LOOP;
  dbms_lob.append(lc_info,'<O_SUB_PRECIO>'||trim(to_char(ln_oproc_precio_sub,gs_currency_format))||'</O_SUB_PRECIO>');
-
+ dbms_lob.append(lc_info,'<O_SUB_PRECIO_PROTON>'||trim(to_char(ln_oproc_precio_proton_sub,gs_currency_format))||'</O_SUB_PRECIO_PROTON>');
+ 
  CLOSE get_myp_oproc_info;
  
  fnd_file.put_line(fnd_file.log,'040320211628');
@@ -977,6 +996,7 @@ dbms_lob.append(lc_info,'<PLAZA_PROPIETARIA>'||myp_cob_info_rec.PLAZA_PROPIETARI
            end; 
  
 dbms_lob.append(lc_info,'</XXQP_PDFT_MYP>'); 
+  DBMS_LOB.CLOSE(lob_loc    => lc_info);
  pco_info := lc_info;
  exception when others then 
  fnd_file.put_line(fnd_file.log,'Excepcion Paquete APPS.xxqp_pdft_myp_pkg metodo get_info:'||sqlerrm||', '||sqlcode);
