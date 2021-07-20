@@ -1041,6 +1041,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
         String strBody = map.get("strBody"); 
         String strCrearFlag = map.get("strCrearFlag"); 
         String strNumeroFt = map.get("strNumeroFt"); 
+        String strCancelFlag = map.get("strCancelFlag");
         /***************************************************************************************************
         DeliveryManager deliveryManager = null;
         DeliveryRequest deliveryRequest = null; 
@@ -1108,10 +1109,14 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                               throw new OAException("inputStream to ByteArrayDataSource testDeliveryManager MYP:"+e.getMessage(),OAException.ERROR);
                          }
                        messageBodyPart.setDataHandler(new DataHandler(source));
-                       if("Y".equals(strCrearFlag)){
-                           messageBodyPart.setFileName("AltaFichaTecnicaMyP"+strNumeroFt+".pdf");
+                       if("Y".equals(strCancelFlag)){
+                           messageBodyPart.setFileName("CancelacionFichaTecnicaMyP"+strNumeroFt+".pdf");
                        }else{
-                           messageBodyPart.setFileName("CambioFichaTecnicaMyP"+strNumeroFt+".pdf");
+                           if("Y".equals(strCrearFlag)){
+                               messageBodyPart.setFileName("AltaFichaTecnicaMyP"+strNumeroFt+".pdf");
+                           }else{
+                               messageBodyPart.setFileName("CambioFichaTecnicaMyP"+strNumeroFt+".pdf");
+                           }
                        }
                        multipart.addBodyPart(messageBodyPart);
                   // Part three is attachment
@@ -1631,5 +1636,150 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
         pageContext.writeDiagnostics(this,"Sale enviaCorreosReOn:"+retval,OAFwkConstants.STATEMENT);
          return retval; 
         
+    }
+
+    /**
+     * 19072021
+     * Metodo para recuperar el xml de la ficha MYP por cancelacion
+     * @return
+     */
+    public String executeMypGetInfoCancel(XxqpPdftMypHeaderVORowImpl pXxqpPdftMypHeaderVORowImpl) {
+    
+        String retval = null; 
+        String strCallableStmt = " BEGIN \n" + 
+                                 "  APPS.XXQP_PDFT_MYP_PKG.GET_INFO ( PSO_ERRMSG             => :1\n" + 
+                                 "                                  , PSO_ERRCOD             => :2\n" + 
+                                 "                                  , PCO_INFO               => :3\n" + 
+                                 "                                  , PNI_MYP_HEADER_ID      => :4\n" + 
+                                 "                                  , PSI_CANCEL             => :5\n" + 
+                                 "                                  );\n" + 
+                                 " END; \n";
+        OADBTransaction oadbtransaction = (OADBTransaction)getTransaction();
+        OracleCallableStatement oraclecallablestatement =  (OracleCallableStatement)oadbtransaction.createCallableStatement(strCallableStmt, 1);
+        oracle.jbo.domain.Number numMypHeaderId = pXxqpPdftMypHeaderVORowImpl.getId();
+        try {
+            oraclecallablestatement.registerOutParameter(1,Types.VARCHAR);
+            oraclecallablestatement.registerOutParameter(2,Types.VARCHAR);
+            oraclecallablestatement.registerOutParameter(3,Types.CLOB);
+            oraclecallablestatement.setDouble(4,numMypHeaderId.doubleValue());
+            oraclecallablestatement.setString(5,"Y");
+            oraclecallablestatement.execute();
+            java.sql.Clob retvalClob = oraclecallablestatement.getClob(3);
+            java.io.Reader reader =retvalClob.getCharacterStream();
+            java.io.BufferedReader bufferReader = new java.io.BufferedReader(reader);
+            String retvalxml = "";
+            String line = null; 
+            while((line = bufferReader.readLine())!=null){
+                retvalxml = retvalxml+line;
+            }
+            
+            /** System.out.println(retvalxml); **/
+            retval = retvalxml;
+            bufferReader.close();
+            reader.close();
+                        
+        } catch (SQLException e) {
+            System.out.println("SQLException en el metodo executeMypGetInfoCancel:"+e.getErrorCode()+", "+e.getMessage());
+            throw new OAException("SQLException en el metodo executeMypGetInfoCancel:"+e.getErrorCode(),OAException.ERROR); 
+        }catch (IOException ioe) {
+            System.out.println("IOException en el metodo executeMypGetInfoCancel:"+ioe.getMessage());
+            throw new OAException("IOException en el metodo executeMypGetInfoCancel:"+ioe.getMessage(),OAException.ERROR);
+        }
+        
+        return retval;
+    
+    }
+
+    /**
+     * 19072021
+     * Metodo para enviar correos por cancelacion
+     * @param inputStream2
+     * @param pageContext
+     * @param xxqpPdftMypHeaderVORowImpl
+     * @return
+     */
+    public String enviaCorreosPorCancelacion(InputStream pInputStream, 
+                                             OAPageContext pageContext, 
+                                             XxqpPdftMypHeaderVORowImpl pXxqpPdftMypHeaderVORowImpl) {
+        
+        pageContext.writeDiagnostics(this,"Entra enviaCorreosPorCancelacion",OAFwkConstants.STATEMENT);
+        String retval = null;
+        OADBTransaction  oADBTransaction = this.getOADBTransaction();
+        String strSubject =""; 
+        String strBody="";
+        MessageToken[] msgtoken1 = {new MessageToken("NO_FT",pXxqpPdftMypHeaderVORowImpl.getNumeroFt().toString())};
+        MessageToken[] msgtoken2 = {new MessageToken("NO_FT",pXxqpPdftMypHeaderVORowImpl.getNumeroFt().toString())
+                                   ,new MessageToken("NOMBRE_CLIENTE",pXxqpPdftMypHeaderVORowImpl.getNombreDelCliente())
+                                   ,new MessageToken("PRODUCT_ID",pXxqpPdftMypHeaderVORowImpl.getArticuloOracle())
+                                   };
+        strSubject = pageContext.getMessage("XXQP","XXQP_PDFT_CANCE_FT_SUBJECT_MSG",msgtoken1);
+        strBody = pageContext.getMessage("XXQP","XXQP_PDFT_CANCE_FT_BODY_MSG",msgtoken2);
+        strBody = strBody+"\n\nRAZON DE CANCELACION:\n";
+        if(null!=pXxqpPdftMypHeaderVORowImpl.getAttribute1()){
+            strBody = strBody+pXxqpPdftMypHeaderVORowImpl.getAttribute1();
+        }
+        
+        Connection connection =   oADBTransaction.getJdbcConnection();
+          String strPrepStmt = " SELECT ID                     \n" + 
+                               "        ,RESPONSABILIDAD   \n" + 
+                               "        ,USUARIO               \n" + 
+                               "        ,AREA                  \n" + 
+                               "        ,CORREO               \n" + 
+                               "        ,IS_ENABLED               \n" + 
+                               "        ,CREATED_BY               \n" + 
+                               "        ,CREATION_DATE          \n" + 
+                               "        ,LAST_UPDATED_BY        \n" + 
+                               "        ,LAST_UPDATE_DATE      \n" + 
+                               "        ,LAST_UPDATE_LOGIN     \n" + 
+                               "        ,ATTRIBUTE_CATEGORY    \n" + 
+                               "        ,ATTRIBUTE1            \n" + 
+                               "        ,ATTRIBUTE2            \n" + 
+                               "        ,ATTRIBUTE3            \n" + 
+                               "        ,ATTRIBUTE4            \n" + 
+                               "        ,ATTRIBUTE5            \n" + 
+                               " FROM  XXQP_PDFT_DISTRIBUCION\n" + 
+                               " WHERE IS_ENABLED = 'Y'\n" +
+                               " AND ATTRIBUTE3 = 'Y'";
+            
+           
+              int count = 0; 
+              PreparedStatement prepStmt = null;
+              ResultSet resultSet = null;
+              try
+              {
+                prepStmt = connection.prepareStatement(strPrepStmt,ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_READ_ONLY);
+                resultSet = prepStmt.executeQuery();
+                while(resultSet.next()){
+                    String strCorreo = null; 
+                    strCorreo = resultSet.getString("CORREO");  
+                    if(count>0){
+                        retval = retval+","+strCorreo;
+                    }else if(count==0){
+                        retval = strCorreo; 
+                    }
+                   count = count +1; 
+               }
+                
+             } catch (SQLException sqle)
+             {
+              throw new OAException("EXCEPTION metodo enviaCorreosPorCancelacion clase MasivoYPlatinumAMImpl:"+sqle.getErrorCode()+" , "+sqle.getMessage(),OAException.ERROR);
+             }
+            closeResultSet(resultSet);
+            closePreparedStatement(prepStmt);
+     
+        java.util.Map<String,String> map = new java.util.HashMap<String,String>();
+        map.put("Responsablidad",""); 
+        map.put("Usuario",""); 
+        map.put("Area",""); 
+        map.put("Correo",retval); 
+        map.put("strSubject",strSubject);
+        map.put("strBody",strBody);
+        map.put("strCancelFlag","Y");
+        map.put("strNumeroFt",pXxqpPdftMypHeaderVORowImpl.getNumeroFt().toString()); 
+        if(count>0){
+        testDeliveryManager(pInputStream,map,pXxqpPdftMypHeaderVORowImpl);
+        }
+        pageContext.writeDiagnostics(this,"Sale enviaCorreosPorCancelacion:"+retval,OAFwkConstants.STATEMENT);
+        return retval; 
     }
 }

@@ -6,8 +6,19 @@
  +===========================================================================*/
 package xxqp.oracle.apps.ar.pdft.altafitec.masiplat.webui;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import java.sql.SQLException;
+
+import java.util.Locale;
+
+import oracle.apps.fnd.common.AppsContext;
 import oracle.apps.fnd.common.VersionInfo;
 import oracle.apps.fnd.framework.OAException;
+import oracle.apps.fnd.framework.server.OADBTransactionImpl;
 import oracle.apps.fnd.framework.webui.OAControllerImpl;
 import oracle.apps.fnd.framework.webui.OAPageContext;
 import oracle.apps.fnd.framework.webui.OAWebBeanConstants;
@@ -16,6 +27,10 @@ import oracle.apps.fnd.framework.webui.beans.layout.OASubTabLayoutBean;
 
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageTextInputBean;
 
+import oracle.apps.xdo.XDOException;
+import oracle.apps.xdo.oa.schema.server.TemplateHelper;
+
+import xxqp.oracle.apps.ar.pdft.altafitec.AltaFichaTecnicaUtils;
 import xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.MasivoYPlatinumAMImpl;
 import xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypHeaderVOImpl;
 import xxqp.oracle.apps.ar.pdft.altafitec.masiplat.server.XxqpPdftMypHeaderVORowImpl;
@@ -37,6 +52,22 @@ public class MasivoYPlatinumCancelCO extends OAControllerImpl
   public void processRequest(OAPageContext pageContext, OAWebBean webBean)
   {
     super.processRequest(pageContext, webBean);
+      MasivoYPlatinumAMImpl masivoYPlatinumAMImpl = (MasivoYPlatinumAMImpl)pageContext.getApplicationModule(webBean);
+      String strMyPHeaderId =  pageContext.getParameter("pMyPHeaderId");
+      System.out.println("strMyPHeaderId:"+strMyPHeaderId);
+      XxqpPdftMypHeaderVORowImpl xxqpPdftMypHeaderVORowImpl = null;
+      System.out.println("pageContext.isFormSubmission():"+pageContext.isFormSubmission());
+      if(!pageContext.isFormSubmission()){
+         if(null!=strMyPHeaderId&&!"".equals(strMyPHeaderId)){
+             xxqpPdftMypHeaderVORowImpl = masivoYPlatinumAMImpl.initMypHeaderVO(strMyPHeaderId);
+             masivoYPlatinumAMImpl.initMypCoberturaVO(strMyPHeaderId); 
+             masivoYPlatinumAMImpl.initMypDistribucionVO(strMyPHeaderId);
+             masivoYPlatinumAMImpl.initMypProcesosVO(strMyPHeaderId);
+             masivoYPlatinumAMImpl.initMypOtrosProcesosVO(strMyPHeaderId);
+             masivoYPlatinumAMImpl.initMypComentsProcesosVO(strMyPHeaderId);
+             masivoYPlatinumAMImpl.initReglasDeNegocioVO(strMyPHeaderId);
+         }
+      }
   }
 
   /**
@@ -72,6 +103,54 @@ public class MasivoYPlatinumCancelCO extends OAControllerImpl
         xxqpPdftMypHeaderVORowImpl.setAttribute1(strRazonCancelacion);
         xxqpPdftMypHeaderVORowImpl.setStatus("CANCELADA");
         masivoYPlatinumAMImpl.getOADBTransaction().commit();
+        
+        String strXML = null; 
+        strXML = masivoYPlatinumAMImpl.executeMypGetInfoCancel(xxqpPdftMypHeaderVORowImpl);
+       
+        try {
+            byte[] aByte = strXML.getBytes();
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(aByte);
+            ByteArrayOutputStream pdfFile = new ByteArrayOutputStream();
+            AppsContext appsContext = ((OADBTransactionImpl)masivoYPlatinumAMImpl.getOADBTransaction()).getAppsContext();
+            Locale locale = ((OADBTransactionImpl)masivoYPlatinumAMImpl.getOADBTransaction()).getUserLocale();
+            TemplateHelper.processTemplate(appsContext, 
+                                           AltaFichaTecnicaUtils.strShortApplication,//XxGQRecibosConstants.XXGQ_APP_SHORT_CUSTOM, 
+                                           "XXQP_PDFT_MYP", 
+                                           locale.getLanguage(), 
+                                           locale.getCountry(), 
+                                           inputStream, 
+                                           TemplateHelper.OUTPUT_TYPE_PDF, 
+                                            null, 
+                                           pdfFile);
+            if(null!=inputStream){
+            inputStream.close();
+            }
+            
+            byte[] a2Byte =pdfFile.toByteArray(); 
+            InputStream inputStream2 = new ByteArrayInputStream(a2Byte);
+            
+            String strCorreos = masivoYPlatinumAMImpl.enviaCorreosPorCancelacion(inputStream2
+                                                                                ,pageContext
+                                                                                ,xxqpPdftMypHeaderVORowImpl
+                                                                               ); 
+            System.out.println("strCorreos:"+strCorreos);
+            
+            if(null!=pdfFile){
+                pdfFile.close();
+            }
+            
+            if(null!=inputStream2){
+                inputStream2.close();
+            }
+           
+        } catch (IOException e) {
+           throw new OAException("IOException al obtener el ServletOutputStream.",OAException.ERROR); 
+        } catch (SQLException e) {
+            throw new OAException("SQLException al obtener el DataTemplate.",OAException.ERROR);
+        } catch (XDOException e) {
+            throw new OAException("XDOException al obtener el DataTemplate.",OAException.ERROR);
+        }
+        
         com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
         parameters.put("pMyPHeaderId",numMasiYPlatHeaderId.toString() );
         pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/masiplat/webui/MasivoYPlatinumReOnPG&"+OASubTabLayoutBean.OA_SELECTED_SUBTAB_IDX+"=0" /*url*/
