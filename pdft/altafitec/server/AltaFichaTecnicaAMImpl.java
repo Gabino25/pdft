@@ -566,7 +566,7 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
                       if(null!=fichasTecnicasVORowImpl.getStatus()){
                         if("CANCELADA".equals(fichasTecnicasVORowImpl.getStatus())
                           ||"CERRADA".equals(fichasTecnicasVORowImpl.getStatus())){
-                           throw new OAException("No se puede modificar una ficha tecnica con este status.",OAException.ERROR);
+                           throw new OAException("No se puede Cancelar una ficha tecnica con este status.",OAException.ERROR);
                         }
                       }
                     oracle.jbo.domain.Number numNumeroFt =  fichasTecnicasVORowImpl.getNumeroFt();

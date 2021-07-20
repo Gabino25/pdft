@@ -56,6 +56,14 @@
                         <oa:messageCheckBox id="IsUpdate" viewAttr="Attribute2"/>
                      </ui:contents>
                   </oa:column>
+                  <oa:column id="IsCancelCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="IsCancelSortHead" prompt="Cancelacion"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageCheckBox id="IsCancel" viewAttr="Attribute3"/>
+                     </ui:contents>
+                  </oa:column>
                   <oa:column id="DeleteActionCol">
                      <ui:columnHeader>
                         <oa:sortableHeader id="DeleteActionSortHead" prompt="Borrar"/>

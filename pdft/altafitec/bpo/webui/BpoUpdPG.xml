@@ -72,8 +72,8 @@
                            <ui:contents>
                               <oa:tableLayout id="TabLayEmpresaQueFactura" hAlign="center">
                                  <ui:contents>
-                                    <oa:messageChoice id="EmpresaQueFactura" prompt="Empresa que Factura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EmpresaQueFacturaVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftBpoHeaderVO1" viewAttr="EmpresaQueFacturaC" required="yes"/>
-                                    <oa:messageChoice id="CicloFacturacion" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CicloDeFacturacionVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Frecuencia de Facturacion" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftBpoHeaderVO1" viewAttr="FrecuenciaFacturacionC" required="yes"/>
+                                    <oa:messageChoice id="EmpresaQueFactura" prompt="Empresa que Factura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EmpresaQueFacturaVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftBpoHeaderVO1" viewAttr="EmpresaQueFacturaC" required="yes"/>
+                                    <oa:messageChoice id="CicloFacturacion" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CicloDeFacturacionVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Frecuencia de Facturacion" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftBpoHeaderVO1" viewAttr="FrecuenciaFacturacionC" required="yes"/>
                                  </ui:contents>
                               </oa:tableLayout>
                            </ui:contents>
