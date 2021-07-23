@@ -147,6 +147,31 @@ public class BpoCopiarCO extends OAControllerImpl {
           /**   newPdftBpoHeaderVORowImpl.setEjecutivo(xxqpPdftBpoHeaderVORowImpl.getEjecutivo());  010320211357 **/
              newPdftBpoHeaderVORowImpl.setEjecutivo(strPuserPdftId);
              
+             
+              if(null!=xxqpPdftBpoHeaderVORowImpl.getFile1()){
+                if(xxqpPdftBpoHeaderVORowImpl.getFile1().getLength()>0){
+                    newPdftBpoHeaderVORowImpl.setFileName1(xxqpPdftBpoHeaderVORowImpl.getFileName1());
+                    newPdftBpoHeaderVORowImpl.setContentType1(xxqpPdftBpoHeaderVORowImpl.getContentType1());
+                    newPdftBpoHeaderVORowImpl.setFile1(xxqpPdftBpoHeaderVORowImpl.getFile1());
+                }
+               }
+              
+               if(null!=xxqpPdftBpoHeaderVORowImpl.getFile2()){
+                if(xxqpPdftBpoHeaderVORowImpl.getFile2().getLength()>0){
+                    newPdftBpoHeaderVORowImpl.setFileName2(xxqpPdftBpoHeaderVORowImpl.getFileName2());
+                    newPdftBpoHeaderVORowImpl.setContentType2(xxqpPdftBpoHeaderVORowImpl.getContentType2());
+                    newPdftBpoHeaderVORowImpl.setFile2(xxqpPdftBpoHeaderVORowImpl.getFile2());
+                }
+               }
+              
+               if(null!=xxqpPdftBpoHeaderVORowImpl.getFile3()){
+                if(xxqpPdftBpoHeaderVORowImpl.getFile3().getLength()>0){
+                    newPdftBpoHeaderVORowImpl.setFileName3(xxqpPdftBpoHeaderVORowImpl.getFileName3());
+                    newPdftBpoHeaderVORowImpl.setContentType3(xxqpPdftBpoHeaderVORowImpl.getContentType3());
+                    newPdftBpoHeaderVORowImpl.setFile3(xxqpPdftBpoHeaderVORowImpl.getFile3());
+                }
+               }
+             
              xxqpPdftBpoHeaderVOImpl.insertRow(newPdftBpoHeaderVORowImpl);
              
              oADBTransaction.commit();

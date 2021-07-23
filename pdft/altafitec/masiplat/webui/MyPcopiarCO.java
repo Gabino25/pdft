@@ -150,15 +150,30 @@ public class MyPcopiarCO extends OAControllerImpl{
              /**  newPdftMypHeaderVORowImpl.setEjecutivo(xxqpPdftMypHeaderVORowImpl.getEjecutivo());  010320211346 **/
               newPdftMypHeaderVORowImpl.setEjecutivo(strPuserPdftId);
                
-                newPdftMypHeaderVORowImpl.setFileName1(xxqpPdftMypHeaderVORowImpl.getFileName1());
-                newPdftMypHeaderVORowImpl.setContentType1(xxqpPdftMypHeaderVORowImpl.getContentType1());
-                newPdftMypHeaderVORowImpl.setFile1(xxqpPdftMypHeaderVORowImpl.getFile1());
-               newPdftMypHeaderVORowImpl.setFileName2(xxqpPdftMypHeaderVORowImpl.getFileName2());
-               newPdftMypHeaderVORowImpl.setContentType2(xxqpPdftMypHeaderVORowImpl.getContentType2());
-               newPdftMypHeaderVORowImpl.setFile2(xxqpPdftMypHeaderVORowImpl.getFile2());
-               newPdftMypHeaderVORowImpl.setFileName3(xxqpPdftMypHeaderVORowImpl.getFileName3());
-               newPdftMypHeaderVORowImpl.setContentType3(xxqpPdftMypHeaderVORowImpl.getContentType3());
-               newPdftMypHeaderVORowImpl.setFile3(xxqpPdftMypHeaderVORowImpl.getFile3());
+               if(null!=xxqpPdftMypHeaderVORowImpl.getFile1()){
+                if(xxqpPdftMypHeaderVORowImpl.getFile1().getLength()>0){
+                    newPdftMypHeaderVORowImpl.setFileName1(xxqpPdftMypHeaderVORowImpl.getFileName1());
+                    newPdftMypHeaderVORowImpl.setContentType1(xxqpPdftMypHeaderVORowImpl.getContentType1());
+                    newPdftMypHeaderVORowImpl.setFile1(xxqpPdftMypHeaderVORowImpl.getFile1());
+                }
+               }
+              
+               if(null!=xxqpPdftMypHeaderVORowImpl.getFile2()){
+                if(xxqpPdftMypHeaderVORowImpl.getFile2().getLength()>0){
+                    newPdftMypHeaderVORowImpl.setFileName2(xxqpPdftMypHeaderVORowImpl.getFileName2());
+                    newPdftMypHeaderVORowImpl.setContentType2(xxqpPdftMypHeaderVORowImpl.getContentType2());
+                    newPdftMypHeaderVORowImpl.setFile2(xxqpPdftMypHeaderVORowImpl.getFile2());
+                }
+               }
+              
+               if(null!=xxqpPdftMypHeaderVORowImpl.getFile3()){
+                if(xxqpPdftMypHeaderVORowImpl.getFile3().getLength()>0){
+                    newPdftMypHeaderVORowImpl.setFileName3(xxqpPdftMypHeaderVORowImpl.getFileName3());
+                    newPdftMypHeaderVORowImpl.setContentType3(xxqpPdftMypHeaderVORowImpl.getContentType3());
+                    newPdftMypHeaderVORowImpl.setFile3(xxqpPdftMypHeaderVORowImpl.getFile3());
+                }
+               }
+              
                
               xxqpPdftMypHeaderVOImpl.insertRow(newPdftMypHeaderVORowImpl);
               oADBTransaction.commit();

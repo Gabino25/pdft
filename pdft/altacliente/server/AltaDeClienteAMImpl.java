@@ -696,9 +696,10 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             }
         } catch (SQLException sqle) {
             throw new OAException("SQLException Metodo validaClienteRFCRazonSocial:"+sqle.getErrorCode()+" ,"+sqle.getSQLState()+" ,"+sqle.getMessage(),OAException.ERROR); 
-        }
+        }finally{
         closeResultSet(sqlResultSet);
         closePreparedStatement(sqlPreparedStatement);
+        }
         
         /** Consulta Info del Modulo Custom PDFT **/
         try {
@@ -712,9 +713,10 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             }
         } catch (SQLException sqle) {
             throw new OAException("SQLException Metodo validaClienteRFCRazonSocial:"+sqle.getErrorCode()+" ,"+sqle.getSQLState()+" ,"+sqle.getMessage(),OAException.ERROR); 
-        }
+        }finally{
         closeResultSet(sqlResultSet);
         closePreparedStatement(sqlPreparedStatement);
+        }
         
         
         
@@ -740,6 +742,24 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             }
         }
     } /** END  private void closePreparedStatement **/
+    
+     /**
+      * Metodo que cierra un Oracle Callable Statement
+      * @param pPrepStmt
+      */
+     private void closeOracleCallableStatement(OracleCallableStatement pOracleCallableStatement)
+     {
+        if(null!=pOracleCallableStatement){
+         try
+         {
+           pOracleCallableStatement.close();
+         } catch (SQLException sqle)
+         {
+            throw new OAException(sqle.getErrorCode()+ " , "+sqle.getMessage(),OAException.ERROR);
+         }
+       }
+     }
+     
     
      public String[] callFromPdftToOracle() {
          String[] retval = new String[2];
@@ -769,6 +789,8 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
              retval[1]=strErrcode; 
          } catch (SQLException sqle) {
              throw new OAException("SQLException en el metodo callFromPdftToOracle:"+sqle.getMessage()+", "+sqle.getErrorCode(),OAException.ERROR); 
+         }finally{
+             closeOracleCallableStatement(oraclecallablestatement);
          }
          
          return retval; 
@@ -800,7 +822,10 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             System.out.println("strErrcode:"+strErrcode);
         } catch (SQLException sqle) {
             throw new OAException("SQLException en el metodo callUpdFromPdftToOracle:"+sqle.getMessage()+", "+sqle.getErrorCode(),OAException.ERROR); 
-        }
+        }finally{
+             closeOracleCallableStatement(oraclecallablestatement);
+         }
+         
     }
 
     public List validaContactosTmpVO() {
@@ -988,7 +1013,9 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
         }catch (IOException ioe) {
             System.out.println("IOException en el metodo getXxPdftCustomerInfo"+ioe.getMessage());
             throw new OAException("IOException en el metodo getXxPdftCustomerInfo:"+ioe.getMessage(),OAException.ERROR);
-        }
+        }finally{
+             closeOracleCallableStatement(oraclecallablestatement);
+         }
         
         return retval;
         
@@ -1034,10 +1061,10 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
              } catch (SQLException sqle)
              {
               throw new OAException("EXCEPTION metodo enviaCorreos clase AltaDeClientesAMIlm:"+sqle.getErrorCode()+" , "+sqle.getMessage(),OAException.ERROR);
+             }finally{
+              closeResultSet(resultSet);
+              closePreparedStatement(prepStmt);
              }
-             
-            closeResultSet(resultSet);
-            closePreparedStatement(prepStmt);
         
         java.util.Map<String,String> map = new java.util.HashMap<String,String>();
         map.put("Correos",strCorreos);
@@ -1161,7 +1188,10 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             System.out.println("SQLException en el metodo rollbackTrx:"+e.getErrorCode());
             throw new OAException("SQLException en el metodo rollbackTrx:"+e.getErrorCode(),OAException.ERROR); 
         }
-        
+        finally{
+             closeOracleCallableStatement(oraclecallablestatement);
+        }
+                 
     }
 
     /**Container's getter for HzCountryLOV1

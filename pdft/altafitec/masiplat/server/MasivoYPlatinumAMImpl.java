@@ -196,8 +196,10 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
               {
                throw new OAException("EXCEPTION metodo fillCamposHead clase MasivoYPlatinumAMImpl:"+sqle.getErrorCode()+" , "+sqle.getMessage(),OAException.ERROR);
               }
-             closeResultSet(resultSet);
-             closePreparedStatement(prepStmt);
+              finally{
+               closeResultSet(resultSet);
+               closePreparedStatement(prepStmt);
+              }
     
     }
     
@@ -235,6 +237,22 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
         }
       }
 
+    /**
+     * Metodo que cierra un Oracle Callable Statement
+     * @param pPrepStmt
+     */
+    private void closeOracleCallableStatement(OracleCallableStatement pOracleCallableStatement)
+    {
+       if(null!=pOracleCallableStatement){
+        try
+        {
+          pOracleCallableStatement.close();
+        } catch (SQLException sqle)
+        {
+           throw new OAException(sqle.getErrorCode()+ " , "+sqle.getMessage(),OAException.ERROR);
+        }
+      }
+    }
     
 
     public void fillHeader(StringBuilder pStrMasiYPlatHeaderId, 
@@ -873,10 +891,12 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                         
         } catch (SQLException e) {
             System.out.println("SQLException en el metodo executeMypGetInfo:"+e.getErrorCode()+", "+e.getMessage());
-            throw new OAException("SQLException en el metodo executeMypGetInfo:"+e.getErrorCode(),OAException.ERROR); 
+            throw new OAException("SQLException en el metodo executeMypGetInfo:"+e.getErrorCode()+", "+e.getMessage(),OAException.ERROR); 
         }catch (IOException ioe) {
             System.out.println("IOException en el metodo executeMypGetInfo:"+ioe.getMessage());
             throw new OAException("IOException en el metodo executeMypGetInfo:"+ioe.getMessage(),OAException.ERROR);
+        }finally{
+            closeOracleCallableStatement(oraclecallablestatement);
         }
       
       return retval;   
@@ -913,8 +933,10 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
               {
                throw new OAException("EXCEPTION metodo getUnidadNegocioM clase MasivoYPlatinumAMImpl:"+sqle.getErrorCode()+" , "+sqle.getMessage(),OAException.ERROR);
               }
-             closeResultSet(resultSet);
-             closePreparedStatement(prepStmt);
+              finally{
+               closeResultSet(resultSet);
+               closePreparedStatement(prepStmt);
+              }
          return retval; 
     }
 
@@ -1011,9 +1033,10 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
              {
               throw new OAException("EXCEPTION metodo enviaCorreos clase MasivoYPlatinumAMImpl:"+sqle.getErrorCode()+" , "+sqle.getMessage(),OAException.ERROR);
              }
-            closeResultSet(resultSet);
-            closePreparedStatement(prepStmt);
-         
+             finally{
+             closeResultSet(resultSet);
+             closePreparedStatement(prepStmt);
+             }
        
         java.util.Map<String,String> map = new java.util.HashMap<String,String>();
         map.put("Responsablidad",""); 
@@ -1121,6 +1144,8 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                        multipart.addBodyPart(messageBodyPart);
                   // Part three is attachment
                    if(null!=pXxqpPdftMypHeaderVORowImpl.getContratoFileName()&&!"".equals(pXxqpPdftMypHeaderVORowImpl.getContratoFileName())){
+                       if(null!=pXxqpPdftMypHeaderVORowImpl.getContratoFile()){
+                         if(pXxqpPdftMypHeaderVORowImpl.getContratoFile().getLength()>0){
                         try {
                             addAttachment(multipart
                                             ,pXxqpPdftMypHeaderVORowImpl.getContratoFile().getInputStream()
@@ -1131,20 +1156,30 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                            System.out.println("Exception Contrato:"+e.getMessage());
                             throw new OAException("Exception Contrato:"+e.getMessage(),OAException.ERROR);
                         }
+                      }
+                    }
                    }
+                   
                    if(null!=pXxqpPdftMypHeaderVORowImpl.getFileName1()&&!"".equals(pXxqpPdftMypHeaderVORowImpl.getFileName1())){
-                        try {
-                            addAttachment(multipart
-                                            ,pXxqpPdftMypHeaderVORowImpl.getFile1().getInputStream()
-                                            ,pXxqpPdftMypHeaderVORowImpl.getFileName1()
-                                            ,pXxqpPdftMypHeaderVORowImpl.getContentType1()
-                                           );
-                        } catch (IOException e) {
-                           System.out.println("Exception File1:"+e.getMessage());
-                            throw new OAException("Exception File1:"+e.getMessage(),OAException.ERROR);
-                        }
-                  }
+                     if(null!=pXxqpPdftMypHeaderVORowImpl.getFile1()){
+                       if(pXxqpPdftMypHeaderVORowImpl.getFile1().getLength()>0){
+                           try {
+                               addAttachment(multipart
+                                               ,pXxqpPdftMypHeaderVORowImpl.getFile1().getInputStream()
+                                               ,pXxqpPdftMypHeaderVORowImpl.getFileName1()
+                                               ,pXxqpPdftMypHeaderVORowImpl.getContentType1()
+                                              );
+                           } catch (IOException e) {
+                              System.out.println("Exception File1:"+e.getMessage());
+                               throw new OAException("Exception File1:"+e.getMessage(),OAException.ERROR);
+                           }
+                      }
+                     }
+                   }
+                  
               if(null!=pXxqpPdftMypHeaderVORowImpl.getFileName2()&&!"".equals(pXxqpPdftMypHeaderVORowImpl.getFileName2())){
+                  if(null!=pXxqpPdftMypHeaderVORowImpl.getFile2()){
+                    if(pXxqpPdftMypHeaderVORowImpl.getFile2().getLength()>0){
                    try {
                        addAttachment(multipart
                                        ,pXxqpPdftMypHeaderVORowImpl.getFile2().getInputStream()
@@ -1155,8 +1190,12 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                       System.out.println("Exception File2:"+e.getMessage());
                        throw new OAException("Exception File2:"+e.getMessage(),OAException.ERROR);
                    }
+                  }
+                }
               }
               if(null!=pXxqpPdftMypHeaderVORowImpl.getFileName3()&&!"".equals(pXxqpPdftMypHeaderVORowImpl.getFileName3())){
+                  if(null!=pXxqpPdftMypHeaderVORowImpl.getFile3()){
+                    if(pXxqpPdftMypHeaderVORowImpl.getFile3().getLength()>0){
                    try {
                        addAttachment(multipart
                                        ,pXxqpPdftMypHeaderVORowImpl.getFile3().getInputStream()
@@ -1167,6 +1206,8 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                       System.out.println("Exception File3:"+e.getMessage());
                        throw new OAException("Exception File3:"+e.getMessage(),OAException.ERROR); 
                    }
+                 }
+                }
               }
 
                        // Send the complete message parts
@@ -1393,8 +1434,10 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
         {
         throw new OAException("EXCEPTION metodo getCamposRequeridosByUnidadDeNegocio clase MasivoYPlatinumAMImpl:"+sqle.getErrorCode()+" , "+sqle.getMessage(),OAException.ERROR);
         }
+        finally{
         closeResultSet(resultSet);
         closePreparedStatement(prepStmt);
+        }
         return retval; 
     }
     
@@ -1423,8 +1466,10 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
         {
         throw new OAException("EXCEPTION metodo getPrefijoByUnidadDeNegocio clase MasivoYPlatinumAMImpl:"+sqle.getErrorCode()+" , "+sqle.getMessage(),OAException.ERROR);
         }
+        finally{
         closeResultSet(resultSet);
         closePreparedStatement(prepStmt);
+        }
         return retval; 
     }
     
@@ -1616,9 +1661,10 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
              } catch (SQLException sqle)
              {
               throw new OAException("EXCEPTION metodo enviaCorreos clase MasivoYPlatinumAMImpl:"+sqle.getErrorCode()+" , "+sqle.getMessage(),OAException.ERROR);
-             }
+             }finally{
             closeResultSet(resultSet);
             closePreparedStatement(prepStmt);
+             }
          
         
         java.util.Map<String,String> map = new java.util.HashMap<String,String>();
@@ -1680,10 +1726,12 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                         
         } catch (SQLException e) {
             System.out.println("SQLException en el metodo executeMypGetInfoCancel:"+e.getErrorCode()+", "+e.getMessage());
-            throw new OAException("SQLException en el metodo executeMypGetInfoCancel:"+e.getErrorCode(),OAException.ERROR); 
+            throw new OAException("SQLException en el metodo executeMypGetInfoCancel:"+e.getErrorCode()+", "+e.getMessage(),OAException.ERROR); 
         }catch (IOException ioe) {
             System.out.println("IOException en el metodo executeMypGetInfoCancel:"+ioe.getMessage());
             throw new OAException("IOException en el metodo executeMypGetInfoCancel:"+ioe.getMessage(),OAException.ERROR);
+        }finally{
+          closeOracleCallableStatement(oraclecallablestatement);
         }
         
         return retval;
@@ -1763,9 +1811,10 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
              } catch (SQLException sqle)
              {
               throw new OAException("EXCEPTION metodo enviaCorreosPorCancelacion clase MasivoYPlatinumAMImpl:"+sqle.getErrorCode()+" , "+sqle.getMessage(),OAException.ERROR);
+             }finally{
+              closeResultSet(resultSet);
+              closePreparedStatement(prepStmt);
              }
-            closeResultSet(resultSet);
-            closePreparedStatement(prepStmt);
      
         java.util.Map<String,String> map = new java.util.HashMap<String,String>();
         map.put("Responsablidad",""); 

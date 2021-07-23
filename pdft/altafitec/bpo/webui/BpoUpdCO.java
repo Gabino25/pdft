@@ -516,19 +516,7 @@ public class BpoUpdCO extends OAControllerImpl
       }
       
     if("GrabarEvt".equals(strEventParam)){
-        oracle.jbo.domain.BlobDomain blobContratoFile =xxqpPdftBpoHeaderVORowImpl.getContratoFile();
-       
-        if(null==blobContratoFile){
-            xxqpPdftBpoHeaderVORowImpl.setContratoFileName(null);
-            xxqpPdftBpoHeaderVORowImpl.setContratoContentType(null);
-           
-        }else{
-            System.out.println("blobContratoFile.getLength():"+blobContratoFile.getLength());
-        }
-        
-        if(null!=strContratoFileUploadContentType&&!"".equals(strContratoFileUploadContentType)){
-            xxqpPdftBpoHeaderVORowImpl.setContratoContentType(strContratoFileUploadContentType);
-        }
+        validarArchivos(pageContext,xxqpPdftBpoHeaderVORowImpl);
         /** No se estaba guardando el cambio de montos 03042018 **/
         if(null!=xxqpPdftBpoPagoVORowImpl.getSubtotal()
            &&!"".equals(xxqpPdftBpoPagoVORowImpl.getSubtotal())
@@ -626,6 +614,7 @@ public class BpoUpdCO extends OAControllerImpl
                  strModificacion = "Y";
                  strArticuloOracle = xxqpPdftBpoHeaderVORowImpl.getArticuloOracle();
                 }
+               validarArchivos(pageContext,xxqpPdftBpoHeaderVORowImpl);
                 bpoAMImpl.getOADBTransaction().commit();          /** Se solicito Cambiar el status antes de enviar el correo 25072018 **/
                strXML = bpoAMImpl.executeBpoGetInfo(strModificacion);
                try {
@@ -921,5 +910,87 @@ public class BpoUpdCO extends OAControllerImpl
             tmpBean.setRequired("no");
         }
     }
+
+    private void validarArchivos(OAPageContext pageContext
+                                ,XxqpPdftBpoHeaderVORowImpl pXxqpPdftBpoHeaderVORowImpl) {
+        
+            DataObject ContratoExamineUploadData =  pageContext.getNamedDataObject("ContratoFileUpload"); 
+            String strContratoExamineContentType = null; 
+            if(null!=ContratoExamineUploadData){
+                strContratoExamineContentType = ContratoExamineUploadData.selectValue(null,"UPLOAD_FILE_MIME_TYPE").toString();
+            }    
+            
+            DataObject FileUpload1Data =  pageContext.getNamedDataObject("FileUpload1"); 
+            String strFileUpload1ContentType = null; 
+            if(null!=FileUpload1Data){
+                strFileUpload1ContentType = FileUpload1Data.selectValue(null,"UPLOAD_FILE_MIME_TYPE").toString();
+            }    
+            
+            DataObject FileUpload2Data =  pageContext.getNamedDataObject("FileUpload2"); 
+            String strFileUpload2ContentType = null; 
+            if(null!=FileUpload2Data){
+                strFileUpload2ContentType = FileUpload2Data.selectValue(null,"UPLOAD_FILE_MIME_TYPE").toString();
+            }    
+            
+            DataObject FileUpload3Data =  pageContext.getNamedDataObject("FileUpload3"); 
+            String strFileUpload3ContentType = null; 
+            if(null!=FileUpload3Data){
+                strFileUpload3ContentType = FileUpload3Data.selectValue(null,"UPLOAD_FILE_MIME_TYPE").toString();
+            }    
+             
+        
+          if(null!=pXxqpPdftBpoHeaderVORowImpl.getContratoFile()){
+            if(pXxqpPdftBpoHeaderVORowImpl.getContratoFile().getLength()>0){
+               System.out.println("Archivo Contrato Valido");
+                pXxqpPdftBpoHeaderVORowImpl.setContratoContentType(strContratoExamineContentType);
+            }else{
+                pXxqpPdftBpoHeaderVORowImpl.setContratoFileName(null);
+                pXxqpPdftBpoHeaderVORowImpl.setContratoContentType(null);
+            }
+          }else{
+              pXxqpPdftBpoHeaderVORowImpl.setContratoFileName(null);
+              pXxqpPdftBpoHeaderVORowImpl.setContratoContentType(null);
+          }
+        
+            if(null!=pXxqpPdftBpoHeaderVORowImpl.getFile1()){
+              if(pXxqpPdftBpoHeaderVORowImpl.getFile1().getLength()>0){
+                System.out.println("Archivo File1 Valido");
+                  pXxqpPdftBpoHeaderVORowImpl.setContentType1(strFileUpload1ContentType);
+              }else{
+                  pXxqpPdftBpoHeaderVORowImpl.setFileName1(null);
+                  pXxqpPdftBpoHeaderVORowImpl.setContentType1(null);
+              }
+            }else{
+                pXxqpPdftBpoHeaderVORowImpl.setFileName1(null);
+                pXxqpPdftBpoHeaderVORowImpl.setContentType1(null);
+            }
+            
+            if(null!=pXxqpPdftBpoHeaderVORowImpl.getFile2()){
+              if(pXxqpPdftBpoHeaderVORowImpl.getFile2().getLength()>0){
+                System.out.println("Archivo File2 Valido");
+                  pXxqpPdftBpoHeaderVORowImpl.setContentType2(strFileUpload2ContentType);
+              }else{
+                  pXxqpPdftBpoHeaderVORowImpl.setFileName2(null);
+                  pXxqpPdftBpoHeaderVORowImpl.setContentType2(null);
+              }
+            }else{
+                pXxqpPdftBpoHeaderVORowImpl.setFileName2(null);
+                pXxqpPdftBpoHeaderVORowImpl.setContentType2(null);
+            }
+        
+            if(null!=pXxqpPdftBpoHeaderVORowImpl.getFile3()){
+              if(pXxqpPdftBpoHeaderVORowImpl.getFile3().getLength()>0){
+                System.out.println("Archivo File3 Valido");
+                  pXxqpPdftBpoHeaderVORowImpl.setContentType3(strFileUpload3ContentType);
+              }else{
+                  pXxqpPdftBpoHeaderVORowImpl.setFileName3(null);
+                  pXxqpPdftBpoHeaderVORowImpl.setContentType3(null);
+              }
+            }else{
+                pXxqpPdftBpoHeaderVORowImpl.setFileName3(null);
+                pXxqpPdftBpoHeaderVORowImpl.setContentType3(null);
+            }
+            
+        }
     
 }

@@ -218,9 +218,10 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
             } catch (SQLException sqle)
             {
              throw new OAException("EXCEPTION metodo fillCampos:"+sqle.getErrorCode()+" , "+sqle.getMessage(),OAException.ERROR);
+            }finally{
+             closeResultSet(resultSet);
+             closePreparedStatement(prepStmt);
             }
-           closeResultSet(resultSet);
-           closePreparedStatement(prepStmt);
            
        }  
             
@@ -258,7 +259,22 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
             }
           }
 
-   
+    /**
+     * Metodo que cierra un Oracle Callable Statement
+     * @param pPrepStmt
+     */
+    private void closeOracleCallableStatement(OracleCallableStatement pOracleCallableStatement)
+    {
+       if(null!=pOracleCallableStatement){
+        try
+        {
+          pOracleCallableStatement.close();
+        } catch (SQLException sqle)
+        {
+           throw new OAException(sqle.getErrorCode()+ " , "+sqle.getMessage(),OAException.ERROR);
+        }
+      }
+    }
 
     public void initFichasTecnicasVO(String pStrNoFichaTecnicaValue
                                     ,String pStrStatusValue
@@ -469,6 +485,8 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
         }catch (IOException ioe) {
             System.out.println("IOException en el metodo generaPdftReporte"+ioe.getMessage());
             throw new OAException("IOException en el metodo generaPdftReporte:"+ioe.getMessage(),OAException.ERROR);
+        }finally{
+            closeOracleCallableStatement(oraclecallablestatement);
         }
         
       return retval; 
@@ -922,9 +940,10 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
              } catch (SQLException sqle)
              {
               throw new OAException("EXCEPTION metodo enviaCorreos clase MasivoYPlatinumAMImpl:"+sqle.getErrorCode()+" , "+sqle.getMessage(),OAException.ERROR);
+             }finally{
+              closeResultSet(resultSet);
+              closePreparedStatement(prepStmt);
              }
-            closeResultSet(resultSet);
-            closePreparedStatement(prepStmt);
          
         
         java.util.Map<String,String> map = new java.util.HashMap<String,String>();

@@ -103,6 +103,7 @@ public class MasivoYPlatinumCancelCO extends OAControllerImpl
         xxqpPdftMypHeaderVORowImpl.setAttribute1(strRazonCancelacion);
         xxqpPdftMypHeaderVORowImpl.setStatus("CANCELADA");
         masivoYPlatinumAMImpl.getOADBTransaction().commit();
+        /***** COMIENZA ENVIO CORREO ******/
         
         String strXML = null; 
         strXML = masivoYPlatinumAMImpl.executeMypGetInfoCancel(xxqpPdftMypHeaderVORowImpl);
@@ -151,6 +152,7 @@ public class MasivoYPlatinumCancelCO extends OAControllerImpl
             throw new OAException("XDOException al obtener el DataTemplate.",OAException.ERROR);
         }
         
+        /***** FINALIZA ENVIO CORREO *****/
         com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
         parameters.put("pMyPHeaderId",numMasiYPlatHeaderId.toString() );
         pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/masiplat/webui/MasivoYPlatinumReOnPG&"+OASubTabLayoutBean.OA_SELECTED_SUBTAB_IDX+"=0" /*url*/
