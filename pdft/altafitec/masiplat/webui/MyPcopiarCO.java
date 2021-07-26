@@ -137,9 +137,14 @@ public class MyPcopiarCO extends OAControllerImpl{
               newPdftMypHeaderVORowImpl.setUnidadDeNegocioC(xxqpPdftMypHeaderVORowImpl.getUnidadDeNegocioC());
               newPdftMypHeaderVORowImpl.setFrecuenciaFacturacionC(xxqpPdftMypHeaderVORowImpl.getFrecuenciaFacturacionC());
               newPdftMypHeaderVORowImpl.setContratoFlag(xxqpPdftMypHeaderVORowImpl.getContratoFlag());
-              newPdftMypHeaderVORowImpl.setContratoFileName(xxqpPdftMypHeaderVORowImpl.getContratoFileName());
-              newPdftMypHeaderVORowImpl.setContratoContentType(xxqpPdftMypHeaderVORowImpl.getContratoContentType());
-              newPdftMypHeaderVORowImpl.setContratoFile(xxqpPdftMypHeaderVORowImpl.getContratoFile());
+              
+              if(null!=xxqpPdftMypHeaderVORowImpl.getContratoFile()){
+               if(xxqpPdftMypHeaderVORowImpl.getContratoFile().getLength()>0){
+                   newPdftMypHeaderVORowImpl.setContratoFileName(xxqpPdftMypHeaderVORowImpl.getContratoFileName());
+                   newPdftMypHeaderVORowImpl.setContratoContentType(xxqpPdftMypHeaderVORowImpl.getContratoContentType());
+                   newPdftMypHeaderVORowImpl.setContratoFile(xxqpPdftMypHeaderVORowImpl.getContratoFile());  
+               }
+              }
               newPdftMypHeaderVORowImpl.setFechaInicialOperacion(xxqpPdftMypHeaderVORowImpl.getFechaInicialOperacion());
               newPdftMypHeaderVORowImpl.setAttributeCategory(xxqpPdftMypHeaderVORowImpl.getAttributeCategory());
              /** newPdftMypHeaderVORowImpl.setAttribute1(xxqpPdftMypHeaderVORowImpl.getAttribute1());   Razon de Cancelacion **/
