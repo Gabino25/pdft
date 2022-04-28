@@ -21,10 +21,16 @@
                                           <lovMap id="lovMap2" lovItem="PartyId" resultTo="PartyId"/>
                                        </lovMappings>
                                     </oa:messageLovInput>
+                                    <oa:messageLovInput id="RazonSocialLov" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/RazonSocialRN" prompt="Razon Social" styleClass="OraFieldText" readOnly="true">
+                                       <lovMappings>
+                                          <lovMap id="lovMap12" resultTo="RazonSocialLov" criteriaFrom="RazonSocialLov" lovItem="RazonSocial"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
                                     <oa:messageTextInput id="NombreDelCliente" readOnly="true" prompt="Nombre del Cliente" vAlign="top" styleClass="OraFieldText" required="yes" rendered="false"/>
                                     <oa:messageChoice id="UnidadDeNegocio" prompt="Unidad de Negocio" styleClass="OraFieldText" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.UnidadDeNegocioVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" required="yes"/>
                                     <oa:messageChoice id="EmpresaQueFactura" prompt="Empresa que Factura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EmpresaQueFacturaVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" styleClass="OraFieldText" readOnly="false" required="yes"/>
                                     <oa:messageChoice id="CicloFacturacion" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CicloDeFacturacionVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Frecuencia de Facturacion" styleClass="OraFieldText" required="yes"/>
+                                    <oa:messageChoice id="Currency" pickListViewDef="xxqp.oracle.apps.ar.pdft.altafitec.server.CurrencyVO" pickListDispAttr="CurrencyName" pickListValAttr="CurrencyCode" prompt="Tipo de Moneda" styleClass="OraFieldText" required="yes"/>
                                  </ui:contents>
                               </oa:tableLayout>
                            </ui:contents>

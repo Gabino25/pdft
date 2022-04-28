@@ -123,9 +123,17 @@ public class ConsultaDeClienteAMImpl extends OAApplicationModuleImpl
             System.out.println("strClientesHeaderId:"+strClientesHeaderId);
         } catch (SQLException sqle) {
             throw new OAException("SQLException en el metodo callFromOracleToPdft:"+sqle.getMessage()+", "+sqle.getErrorCode(),OAException.ERROR); 
+        }finally{
+          if(null!=oraclecallablestatement){
+              try {
+                  oraclecallablestatement.close();
+              } catch (SQLException e) {
+                  e.printStackTrace();
+              }
+          } 
         }
         
-        if(null!=strErrmsg){
+        if (null!=strErrmsg){
           throw new OAException(strErrmsg,OAException.ERROR);
         }
         
@@ -179,7 +187,14 @@ public class ConsultaDeClienteAMImpl extends OAApplicationModuleImpl
         } catch (SQLException sqle) {
             retval[0] = "SQLException en el metodo callFromOracleToPdft:"+sqle.getMessage()+", "+sqle.getErrorCode(); 
             retval[1] = "2"; 
-             
+        }finally{
+          if(null!=oraclecallablestatement){
+              try {
+                  oraclecallablestatement.close();
+              } catch (SQLException e) {
+                  e.printStackTrace();
+              }
+          } 
         }
         
         return retval;

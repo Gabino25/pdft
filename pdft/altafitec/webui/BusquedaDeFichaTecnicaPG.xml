@@ -45,7 +45,16 @@
                            <ui:contents>
                               <oa:tableLayout id="TabLayNombreDelCliente" hAlign="center">
                                  <ui:contents>
-                                    <oa:messageTextInput id="pNombreDelCliente" prompt="Nombre del Cliente" styleClass="OraFieldText"/>
+                                    <oa:messageLovInput id="pNombreDelCliente" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/NombreDelClienteRN" prompt="Nombre del Cliente" styleClass="OraFieldText" readOnly="false">
+                                       <lovMappings>
+                                          <lovMap id="lovMap11" lovItem="PartyName" resultTo="pNombreDelCliente" criteriaFrom="pNombreDelCliente"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
+                                    <oa:messageLovInput id="pRazonSocial" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/RazonSocialRN" prompt="Razon Social" styleClass="OraFieldText" readOnly="false">
+                                       <lovMappings>
+                                          <lovMap id="lovMap12" resultTo="pRazonSocial" criteriaFrom="pRazonSocial" lovItem="RazonSocial"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
                                     <oa:messageChoice id="pUnidadDeNegocio" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.UnidadDeNegocioVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Unidad de Negocio" styleClass="OraFieldText"/>
                                     <oa:messageChoice id="pEmpresaQueFactura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EmpresaQueFacturaVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Empresa que Factura" styleClass="OraFieldText"/>
                                     <oa:messageChoice id="pCicloFacturacion" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CicloDeFacturacionVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Frecuencia de Facturacion" styleClass="OraFieldText" readOnly="false"/>
@@ -140,6 +149,14 @@
                      </ui:columnHeader>
                      <ui:contents>
                         <oa:messageStyledText id="NombreDelCliente" prompt="" styleClass="OraFieldText" viewAttr="NombreDelCliente" dataType="VARCHAR2"/>
+                     </ui:contents>
+                  </oa:column>
+                  <oa:column id="RazonSocialCol">
+                     <ui:columnHeader>
+                        <oa:sortableHeader id="RazonSocialSort" prompt="Razon Social"/>
+                     </ui:columnHeader>
+                     <ui:contents>
+                        <oa:messageStyledText id="RazonSocial" prompt="" styleClass="OraFieldText" viewAttr="RazonSocial" dataType="VARCHAR2"/>
                      </ui:contents>
                   </oa:column>
                   <oa:column id="UnidadDeNegocioCol">

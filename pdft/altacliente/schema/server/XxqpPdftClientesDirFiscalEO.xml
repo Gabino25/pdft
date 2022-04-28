@@ -547,17 +547,6 @@
       </DesignTime>
    </Attribute>
    <Attribute
-      Name="PrimIdInternacional"
-      ColumnName="PRIM_ID_INTERNACIONAL"
-      Type="oracle.jbo.domain.Number"
-      ColumnType="NUMBER"
-      SQLType="NUMERIC"
-      TableName="XXQP_PDFT_CLIENTES_DIR_FISCAL" >
-      <DesignTime>
-         <Attr Name="_DisplaySize" Value="22" />
-      </DesignTime>
-   </Attribute>
-   <Attribute
       Name="SecCountry"
       Precision="200"
       ColumnName="SEC_COUNTRY"
@@ -570,14 +559,27 @@
       </DesignTime>
    </Attribute>
    <Attribute
-      Name="SecIdInternacional"
-      ColumnName="SEC_ID_INTERNACIONAL"
-      Type="oracle.jbo.domain.Number"
-      ColumnType="NUMBER"
-      SQLType="NUMERIC"
+      Name="PrimIdInternacional"
+      Precision="25"
+      ColumnName="PRIM_ID_INTERNACIONAL"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
       TableName="XXQP_PDFT_CLIENTES_DIR_FISCAL" >
       <DesignTime>
-         <Attr Name="_DisplaySize" Value="22" />
+         <Attr Name="_DisplaySize" Value="25" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="SecIdInternacional"
+      Precision="25"
+      ColumnName="SEC_ID_INTERNACIONAL"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_DIR_FISCAL" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="25" />
       </DesignTime>
    </Attribute>
    <AccessorAttribute

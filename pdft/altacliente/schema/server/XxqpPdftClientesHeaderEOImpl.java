@@ -40,10 +40,11 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
     public static final int RAZONSOCIAL = 21;
     public static final int EJECUTIVO = 22;
     public static final int STATUS = 23;
-    public static final int XXQPPDFTCLIENTESDIRFISCALEO = 24;
-    public static final int XXQPPDFTCLIENTESPUNTORECOEO = 25;
-    public static final int XXQPPDFTCLIENTESCONTACTOSEO = 26;
-    public static final int XXQPPDFTCLIENTESFACTPAGEO = 27;
+    public static final int REGIMENFISCAL = 24;
+    public static final int XXQPPDFTCLIENTESDIRFISCALEO = 25;
+    public static final int XXQPPDFTCLIENTESPUNTORECOEO = 26;
+    public static final int XXQPPDFTCLIENTESCONTACTOSEO = 27;
+    public static final int XXQPPDFTCLIENTESFACTPAGEO = 28;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -411,6 +412,8 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
             return getEjecutivo();
         case STATUS:
             return getStatus();
+        case REGIMENFISCAL:
+            return getRegimenFiscal();
         case XXQPPDFTCLIENTESCONTACTOSEO:
             return getXxqpPdftClientesContactosEO();
         case XXQPPDFTCLIENTESDIRFISCALEO:
@@ -502,6 +505,9 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
         case STATUS:
             setStatus((String)value);
             return;
+        case REGIMENFISCAL:
+            setRegimenFiscal((String)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -591,6 +597,18 @@ public class XxqpPdftClientesHeaderEOImpl extends OAEntityImpl {
      */
     public void setStatus(String value) {
         setAttributeInternal(STATUS, value);
+    }
+
+    /**Gets the attribute value for RegimenFiscal, using the alias name RegimenFiscal
+     */
+    public String getRegimenFiscal() {
+        return (String)getAttributeInternal(REGIMENFISCAL);
+    }
+
+    /**Sets <code>value</code> as the attribute value for RegimenFiscal
+     */
+    public void setRegimenFiscal(String value) {
+        setAttributeInternal(REGIMENFISCAL, value);
     }
 
     /**Creates a Key object based on given key constituents

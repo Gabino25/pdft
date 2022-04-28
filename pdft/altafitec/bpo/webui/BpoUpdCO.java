@@ -551,13 +551,15 @@ public class BpoUpdCO extends OAControllerImpl
           response.setContentType("application/pdf");
           ServletOutputStream os=null;
          
-           String strXML = null;
+              String strXML = null;
               strXML = bpoAMImpl.executeBpoGetInfo("N");
+              ByteArrayInputStream bAIsXmlFile = null;
+              ByteArrayOutputStream bAoSPdfFile = null;
               try {
                   os = response.getOutputStream();
                   byte[] aByte = strXML.getBytes();
-                  ByteArrayInputStream inputStream = new ByteArrayInputStream(aByte);
-                  ByteArrayOutputStream pdfFile = new ByteArrayOutputStream();
+                  bAIsXmlFile = new ByteArrayInputStream(aByte);
+                  bAoSPdfFile = new ByteArrayOutputStream();
                   AppsContext appsContext = ((OADBTransactionImpl)bpoAMImpl.getOADBTransaction()).getAppsContext();
                   Locale locale = ((OADBTransactionImpl)bpoAMImpl.getOADBTransaction()).getUserLocale();
                   TemplateHelper.processTemplate(appsContext, 
@@ -565,12 +567,12 @@ public class BpoUpdCO extends OAControllerImpl
                                                  "XXQP_PDFT_BPO", 
                                                  locale.getLanguage(), 
                                                  locale.getCountry(), 
-                                                 inputStream, 
+                                                 bAIsXmlFile, 
                                                  TemplateHelper.OUTPUT_TYPE_PDF, 
                                                   null, 
-                                                 pdfFile);
+                                                 bAoSPdfFile);
 
-                                      byte[] b = pdfFile.toByteArray();
+                                      byte[] b = bAoSPdfFile.toByteArray();
                                       response.setContentLength(b.length);
                                       os.write(b, 0, b.length);
                                       os.flush();
@@ -582,8 +584,27 @@ public class BpoUpdCO extends OAControllerImpl
                   throw new OAException("SQLException al obtener el DataTemplate.",OAException.ERROR);
               } catch (XDOException e) {
                   throw new OAException("XDOException al obtener el DataTemplate.",OAException.ERROR);
+              } finally{
+                 /** Cerrar en Cascada **/
+                  if(null!=bAoSPdfFile){
+                      try {
+                          bAoSPdfFile.close();
+                      } catch (IOException e) {
+                         e.printStackTrace();
+                      }
+                  }
+                  if(null!=bAIsXmlFile){
+                      try {
+                          bAIsXmlFile.close();
+                      } catch (IOException e) {
+                         e.printStackTrace();
+                      }
+                  }
               }
-          } /** END if("RevisarPDFEvt".equals(strEventParam)){ **/
+
+
+          
+        } /** END if("RevisarPDFEvt".equals(strEventParam)){ **/
          
            if("ProcesarEvt".equals(strEventParam)){
                String strXML = null;
@@ -617,10 +638,13 @@ public class BpoUpdCO extends OAControllerImpl
                validarArchivos(pageContext,xxqpPdftBpoHeaderVORowImpl);
                 bpoAMImpl.getOADBTransaction().commit();          /** Se solicito Cambiar el status antes de enviar el correo 25072018 **/
                strXML = bpoAMImpl.executeBpoGetInfo(strModificacion);
+               ByteArrayInputStream bAIsXmlFile = null;
+               ByteArrayOutputStream bAoSPdfFile = null;
+               InputStream iSPdfFile = null;
                try {
                    byte[] aByte = strXML.getBytes();
-                   ByteArrayInputStream inputStream = new ByteArrayInputStream(aByte);
-                   ByteArrayOutputStream pdfFile = new ByteArrayOutputStream();
+                   bAIsXmlFile = new ByteArrayInputStream(aByte);
+                   bAoSPdfFile = new ByteArrayOutputStream();
                    AppsContext appsContext = ((OADBTransactionImpl)bpoAMImpl.getOADBTransaction()).getAppsContext();
                    Locale locale = ((OADBTransactionImpl)bpoAMImpl.getOADBTransaction()).getUserLocale();
                    TemplateHelper.processTemplate(appsContext, 
@@ -628,19 +652,16 @@ public class BpoUpdCO extends OAControllerImpl
                                                   "XXQP_PDFT_BPO", 
                                                   locale.getLanguage(), 
                                                   locale.getCountry(), 
-                                                  inputStream, 
+                                                  bAIsXmlFile, 
                                                   TemplateHelper.OUTPUT_TYPE_PDF, 
                                                    null, 
-                                                  pdfFile);
-                   if(null!=inputStream){
-                   inputStream.close();
-                   }
-                   
-                   byte[] a2Byte =pdfFile.toByteArray(); 
-                   InputStream inputStream2 = new ByteArrayInputStream(a2Byte);
+                                                  bAoSPdfFile);
+                 
+                   byte[] a2Byte =bAoSPdfFile.toByteArray(); 
+                   iSPdfFile = new ByteArrayInputStream(a2Byte);
                   
                    System.out.println("oracleNumeroFtRef:"+oracleNumeroFtRef);
-                   String strCorreos = bpoAMImpl.enviaCorreos(inputStream2
+                   String strCorreos = bpoAMImpl.enviaCorreos(iSPdfFile
                                                              ,oracleNumeroFtRef
                                                              ,strEstatusFTOld
                                                              ,oracleNumeroFt
@@ -650,14 +671,6 @@ public class BpoUpdCO extends OAControllerImpl
                                                              ,xxqpPdftBpoHeaderVORowImpl
                                                              ); 
                    System.out.println("strCorreos:"+strCorreos);
-                   
-                   if(null!=pdfFile){
-                       pdfFile.close();
-                   }
-                   
-                   if(null!=inputStream2){
-                       inputStream2.close();
-                   }
                    
                    xxqpPdftBpoHeaderVORowImpl.setStatus("ABIERTA");
                    bpoAMImpl.getOADBTransaction().commit();
@@ -683,6 +696,29 @@ public class BpoUpdCO extends OAControllerImpl
                    throw new OAException("SQLException al obtener el DataTemplate.",OAException.ERROR);
                } catch (XDOException e) {
                    throw new OAException("XDOException al obtener el DataTemplate.",OAException.ERROR);
+               }finally{
+                   /** Cerrar en Cascada **/
+                    if(null!=iSPdfFile){
+                        try {
+                            iSPdfFile.close();
+                        } catch (IOException e) {
+                           e.printStackTrace();
+                        }
+                    }
+                    if(null!=bAoSPdfFile){
+                        try {
+                            bAoSPdfFile.close();
+                        } catch (IOException e) {
+                           e.printStackTrace();
+                        }
+                    }
+                    if(null!=bAIsXmlFile){
+                        try {
+                            bAIsXmlFile.close();
+                        } catch (IOException e) {
+                           e.printStackTrace();
+                        }
+                    }
                }
                
            } /** END  if("ProcesarEvt".equals(strEventParam)){ **/
@@ -911,6 +947,12 @@ public class BpoUpdCO extends OAControllerImpl
         }
     }
 
+    /**
+     * 13092021
+     * getNamedDataObject solo aplica para archivos recien cargados, osea una actualizacion o modificacion de archivos
+     * @param pageContext
+     * @param pXxqpPdftBpoHeaderVORowImpl
+     */
     private void validarArchivos(OAPageContext pageContext
                                 ,XxqpPdftBpoHeaderVORowImpl pXxqpPdftBpoHeaderVORowImpl) {
         
@@ -918,78 +960,74 @@ public class BpoUpdCO extends OAControllerImpl
             String strContratoExamineContentType = null; 
             if(null!=ContratoExamineUploadData){
                 strContratoExamineContentType = ContratoExamineUploadData.selectValue(null,"UPLOAD_FILE_MIME_TYPE").toString();
+                if(null!=pXxqpPdftBpoHeaderVORowImpl.getContratoFile()){
+                  if(pXxqpPdftBpoHeaderVORowImpl.getContratoFile().getLength()>0){
+                     System.out.println("Archivo Contrato Valido");
+                      pXxqpPdftBpoHeaderVORowImpl.setContratoContentType(strContratoExamineContentType);
+                  }else{
+                      pXxqpPdftBpoHeaderVORowImpl.setContratoFileName(null);
+                      pXxqpPdftBpoHeaderVORowImpl.setContratoContentType(null);
+                  }
+                }else{
+                    pXxqpPdftBpoHeaderVORowImpl.setContratoFileName(null);
+                    pXxqpPdftBpoHeaderVORowImpl.setContratoContentType(null);
+                }
             }    
             
             DataObject FileUpload1Data =  pageContext.getNamedDataObject("FileUpload1"); 
             String strFileUpload1ContentType = null; 
             if(null!=FileUpload1Data){
                 strFileUpload1ContentType = FileUpload1Data.selectValue(null,"UPLOAD_FILE_MIME_TYPE").toString();
+                if(null!=pXxqpPdftBpoHeaderVORowImpl.getFile1()){
+                  if(pXxqpPdftBpoHeaderVORowImpl.getFile1().getLength()>0){
+                    System.out.println("Archivo File1 Valido");
+                      pXxqpPdftBpoHeaderVORowImpl.setContentType1(strFileUpload1ContentType);
+                  }else{
+                      pXxqpPdftBpoHeaderVORowImpl.setFileName1(null);
+                      pXxqpPdftBpoHeaderVORowImpl.setContentType1(null);
+                  }
+                }else{
+                    pXxqpPdftBpoHeaderVORowImpl.setFileName1(null);
+                    pXxqpPdftBpoHeaderVORowImpl.setContentType1(null);
+                }
             }    
             
             DataObject FileUpload2Data =  pageContext.getNamedDataObject("FileUpload2"); 
             String strFileUpload2ContentType = null; 
             if(null!=FileUpload2Data){
                 strFileUpload2ContentType = FileUpload2Data.selectValue(null,"UPLOAD_FILE_MIME_TYPE").toString();
+                if(null!=pXxqpPdftBpoHeaderVORowImpl.getFile2()){
+                  if(pXxqpPdftBpoHeaderVORowImpl.getFile2().getLength()>0){
+                    System.out.println("Archivo File2 Valido");
+                      pXxqpPdftBpoHeaderVORowImpl.setContentType2(strFileUpload2ContentType);
+                  }else{
+                      pXxqpPdftBpoHeaderVORowImpl.setFileName2(null);
+                      pXxqpPdftBpoHeaderVORowImpl.setContentType2(null);
+                  }
+                }else{
+                    pXxqpPdftBpoHeaderVORowImpl.setFileName2(null);
+                    pXxqpPdftBpoHeaderVORowImpl.setContentType2(null);
+                }
             }    
             
             DataObject FileUpload3Data =  pageContext.getNamedDataObject("FileUpload3"); 
             String strFileUpload3ContentType = null; 
             if(null!=FileUpload3Data){
                 strFileUpload3ContentType = FileUpload3Data.selectValue(null,"UPLOAD_FILE_MIME_TYPE").toString();
+                if(null!=pXxqpPdftBpoHeaderVORowImpl.getFile3()){
+                  if(pXxqpPdftBpoHeaderVORowImpl.getFile3().getLength()>0){
+                    System.out.println("Archivo File3 Valido");
+                      pXxqpPdftBpoHeaderVORowImpl.setContentType3(strFileUpload3ContentType);
+                  }else{
+                      pXxqpPdftBpoHeaderVORowImpl.setFileName3(null);
+                      pXxqpPdftBpoHeaderVORowImpl.setContentType3(null);
+                  }
+                }else{
+                    pXxqpPdftBpoHeaderVORowImpl.setFileName3(null);
+                    pXxqpPdftBpoHeaderVORowImpl.setContentType3(null);
+                }
             }    
-             
-        
-          if(null!=pXxqpPdftBpoHeaderVORowImpl.getContratoFile()){
-            if(pXxqpPdftBpoHeaderVORowImpl.getContratoFile().getLength()>0){
-               System.out.println("Archivo Contrato Valido");
-                pXxqpPdftBpoHeaderVORowImpl.setContratoContentType(strContratoExamineContentType);
-            }else{
-                pXxqpPdftBpoHeaderVORowImpl.setContratoFileName(null);
-                pXxqpPdftBpoHeaderVORowImpl.setContratoContentType(null);
-            }
-          }else{
-              pXxqpPdftBpoHeaderVORowImpl.setContratoFileName(null);
-              pXxqpPdftBpoHeaderVORowImpl.setContratoContentType(null);
-          }
-        
-            if(null!=pXxqpPdftBpoHeaderVORowImpl.getFile1()){
-              if(pXxqpPdftBpoHeaderVORowImpl.getFile1().getLength()>0){
-                System.out.println("Archivo File1 Valido");
-                  pXxqpPdftBpoHeaderVORowImpl.setContentType1(strFileUpload1ContentType);
-              }else{
-                  pXxqpPdftBpoHeaderVORowImpl.setFileName1(null);
-                  pXxqpPdftBpoHeaderVORowImpl.setContentType1(null);
-              }
-            }else{
-                pXxqpPdftBpoHeaderVORowImpl.setFileName1(null);
-                pXxqpPdftBpoHeaderVORowImpl.setContentType1(null);
-            }
-            
-            if(null!=pXxqpPdftBpoHeaderVORowImpl.getFile2()){
-              if(pXxqpPdftBpoHeaderVORowImpl.getFile2().getLength()>0){
-                System.out.println("Archivo File2 Valido");
-                  pXxqpPdftBpoHeaderVORowImpl.setContentType2(strFileUpload2ContentType);
-              }else{
-                  pXxqpPdftBpoHeaderVORowImpl.setFileName2(null);
-                  pXxqpPdftBpoHeaderVORowImpl.setContentType2(null);
-              }
-            }else{
-                pXxqpPdftBpoHeaderVORowImpl.setFileName2(null);
-                pXxqpPdftBpoHeaderVORowImpl.setContentType2(null);
-            }
-        
-            if(null!=pXxqpPdftBpoHeaderVORowImpl.getFile3()){
-              if(pXxqpPdftBpoHeaderVORowImpl.getFile3().getLength()>0){
-                System.out.println("Archivo File3 Valido");
-                  pXxqpPdftBpoHeaderVORowImpl.setContentType3(strFileUpload3ContentType);
-              }else{
-                  pXxqpPdftBpoHeaderVORowImpl.setFileName3(null);
-                  pXxqpPdftBpoHeaderVORowImpl.setContentType3(null);
-              }
-            }else{
-                pXxqpPdftBpoHeaderVORowImpl.setFileName3(null);
-                pXxqpPdftBpoHeaderVORowImpl.setContentType3(null);
-            }
+          
             
         }
     

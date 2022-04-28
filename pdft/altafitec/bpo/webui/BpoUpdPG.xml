@@ -63,6 +63,7 @@
                               <oa:tableLayout id="TabLayNombreCliente" hAlign="center">
                                  <ui:contents>
                                     <oa:messageTextInput id="NombreDelCliente" prompt="Nombre del Cliente" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftBpoHeaderVO1" viewAttr="NombreDelCliente" maximumLength="240" required="yes"/>
+                                    <oa:messageTextInput id="RazonSocialDelCliente" prompt="Razon Social" styleClass="OraFieldText" readOnly="true" required="yes" viewName="XxqpPdftBpoHeaderVO1" viewAttr="RazonSocial" maximumLength="360"/>
                                     <oa:messageChoice id="UnidadDeNegocio" prompt="Unidad de Negocio" styleClass="OraFieldText" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.UnidadDeNegocioVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" readOnly="true" viewName="XxqpPdftBpoHeaderVO1" viewAttr="UnidadDeNegocioC" required="yes"/>
                                  </ui:contents>
                               </oa:tableLayout>
@@ -74,6 +75,7 @@
                                  <ui:contents>
                                     <oa:messageChoice id="EmpresaQueFactura" prompt="Empresa que Factura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EmpresaQueFacturaVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftBpoHeaderVO1" viewAttr="EmpresaQueFacturaC" required="yes"/>
                                     <oa:messageChoice id="CicloFacturacion" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.CicloDeFacturacionVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Frecuencia de Facturacion" styleClass="OraFieldText" readOnly="false" viewName="XxqpPdftBpoHeaderVO1" viewAttr="FrecuenciaFacturacionC" required="yes"/>
+                                    <oa:messageChoice id="Currency" pickListViewDef="xxqp.oracle.apps.ar.pdft.altafitec.server.CurrencyVO" pickListDispAttr="CurrencyName" pickListValAttr="CurrencyCode" prompt="Tipo de Moneda" styleClass="OraFieldText" required="yes" readOnly="false" viewName="XxqpPdftBpoHeaderVO1" viewAttr="CurrencyCode"/>
                                  </ui:contents>
                               </oa:tableLayout>
                            </ui:contents>

@@ -330,12 +330,13 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
               response.setHeader("Content-Disposition",contentDisposition);
               response.setContentType("application/pdf");
               ServletOutputStream os=null; 
-              
+              ByteArrayInputStream bAiSxml = null; 
+              ByteArrayOutputStream bAoSpdfFile = null;
               try {
                   os = response.getOutputStream();
                   byte[] aByte = strXML.getBytes();
-                  ByteArrayInputStream inputStream = new ByteArrayInputStream(aByte);
-                  ByteArrayOutputStream pdfFile = new ByteArrayOutputStream();
+                  bAiSxml = new ByteArrayInputStream(aByte);
+                  bAoSpdfFile = new ByteArrayOutputStream();
                   AppsContext appsContext = ((OADBTransactionImpl)masivoYPlatinumAMImpl.getOADBTransaction()).getAppsContext();
                   Locale locale = ((OADBTransactionImpl)masivoYPlatinumAMImpl.getOADBTransaction()).getUserLocale();
                   TemplateHelper.processTemplate(appsContext, 
@@ -343,12 +344,13 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                                                  "XXQP_PDFT_MYP", 
                                                  locale.getLanguage(), 
                                                  locale.getCountry(), 
-                                                 inputStream, 
+                                                 bAiSxml, 
                                                  TemplateHelper.OUTPUT_TYPE_PDF, 
                                                   null, 
-                                                 pdfFile);
+                                                 bAoSpdfFile
+                                                 );
 
-                                      byte[] b = pdfFile.toByteArray();
+                                      byte[] b = bAoSpdfFile.toByteArray();
                                       response.setContentLength(b.length);
                                       os.write(b, 0, b.length);
                                       os.flush();
@@ -360,7 +362,23 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                   throw new OAException("SQLException al obtener el DataTemplate.",OAException.ERROR);
               } catch (XDOException e) {
                   throw new OAException("XDOException al obtener el DataTemplate.",OAException.ERROR);
-              }
+              }finally{
+                if(null!=bAoSpdfFile){
+                    try {
+                        bAoSpdfFile.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if(null!=bAiSxml){
+                    try {
+                        bAiSxml.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+              
           } /** END if("RevisarPDFEvt".equals(strEventParam)){ **/
           
           if("CopiarEvt".equals(strEventParam)){
@@ -397,10 +415,13 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                    throw new OAException("No se pudo determinar el status mail:"+statusMail,OAException.ERROR); 
                }
                
+               ByteArrayInputStream bAiSxml = null;
+               ByteArrayOutputStream bAoSpdfFile = null; 
+               InputStream iSpdfFile = null; 
                try {
                    byte[] aByte = strXML.getBytes();
-                   ByteArrayInputStream inputStream = new ByteArrayInputStream(aByte);
-                   ByteArrayOutputStream pdfFile = new ByteArrayOutputStream();
+                   bAiSxml = new ByteArrayInputStream(aByte);
+                   bAoSpdfFile = new ByteArrayOutputStream();
                    AppsContext appsContext = ((OADBTransactionImpl)masivoYPlatinumAMImpl.getOADBTransaction()).getAppsContext();
                    Locale locale = ((OADBTransactionImpl)masivoYPlatinumAMImpl.getOADBTransaction()).getUserLocale();
                    TemplateHelper.processTemplate(appsContext, 
@@ -408,16 +429,15 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                                                   "XXQP_PDFT_MYP", 
                                                   locale.getLanguage(), 
                                                   locale.getCountry(), 
-                                                  inputStream, 
+                                                  bAiSxml, 
                                                   TemplateHelper.OUTPUT_TYPE_PDF, 
                                                    null, 
-                                                  pdfFile);
-                   if(null!=inputStream){
-                   inputStream.close();
-                   }
+                                                  bAoSpdfFile
+                                                  );
+                  
                    
-                   byte[] a2Byte =pdfFile.toByteArray(); 
-                   InputStream inputStream2 = new ByteArrayInputStream(a2Byte);
+                   byte[] a2Byte =bAoSpdfFile.toByteArray(); 
+                   iSpdfFile = new ByteArrayInputStream(a2Byte);
                    oracle.jbo.domain.Number numMypHeaderId =  (oracle.jbo.domain.Number)xxqpPdftMypHeaderVORowImpl.getAttribute("NumeroFtReferencia");
                    oracle.jbo.domain.Number oracleNumeroFt = (oracle.jbo.domain.Number)xxqpPdftMypHeaderVORowImpl.getAttribute("NumeroFt");
                    String strNombreCliente = (String)xxqpPdftMypHeaderVORowImpl.getAttribute("NombreDelCliente");
@@ -427,7 +447,7 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                    }
                    String strStatusFT = (String)masivoYPlatinumAMImpl.getXxqpPdftMypHeaderVO1().getCurrentRow().getAttribute("Status");
                    System.out.println("strStatusFT:"+strStatusFT);
-                   String strCorreos = masivoYPlatinumAMImpl.enviaCorreosReOn(inputStream2
+                   String strCorreos = masivoYPlatinumAMImpl.enviaCorreosReOn(iSpdfFile
                                                                          ,numMypHeaderId
                                                                          ,strStatusFT
                                                                          ,oracleNumeroFt
@@ -438,16 +458,8 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                                                                          ,statusMail
                                                                          ); 
                    System.out.println("strCorreos:"+strCorreos);
-                   
-                   if(null!=pdfFile){
-                       pdfFile.close();
-                   }
-                   
-                   if(null!=inputStream2){
-                       inputStream2.close();
-                   }
-                   
-                  return;
+                
+                 
                   
                } catch (IOException e) {
                   throw new OAException("IOException al obtener el ServletOutputStream.",OAException.ERROR); 
@@ -455,7 +467,34 @@ public class MasivoYPlatinumReOnCO extends OAControllerImpl
                    throw new OAException("SQLException al obtener el DataTemplate.",OAException.ERROR);
                } catch (XDOException e) {
                    throw new OAException("XDOException al obtener el DataTemplate.",OAException.ERROR);
-               }
+               }finally{
+            
+                if(null!=iSpdfFile){
+                    try {
+                        iSpdfFile.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                
+                if(null!=bAoSpdfFile){
+                    try {
+                        bAoSpdfFile.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                
+                if(null!=bAiSxml){
+                    try {
+                        bAiSxml.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+               
+               return;
                
            } /** END if("EnviarPorCorreoEvt".equals(strEventParam)){ **/
            

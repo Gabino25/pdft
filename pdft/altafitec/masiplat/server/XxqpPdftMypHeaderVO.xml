@@ -35,7 +35,7 @@ SELECT XxqpPdftMypHeaderEO.ID,
        XxqpPdftMypHeaderEO.ATTRIBUTE3, 
        XxqpPdftMypHeaderEO.ATTRIBUTE4, 
        XxqpPdftMypHeaderEO.ATTRIBUTE5,
-       (select p.party_name 
+       (select nvl(p.known_as,p.party_name) 
           from hz_parties p
          where p.party_id = XxqpPdftMypHeaderEO.party_id) nombre_del_cliente,
       /* (select  fu.user_name||' - '||fu.description
@@ -64,7 +64,11 @@ XxqpPdftMypHeaderEO.FILE_NAME3,
        XxqpPdftMypHeaderEO.CONTENT_TYPE3, 
        XxqpPdftMypHeaderEO.FILE3,
        XxqpPdftMypHeaderEO.MODIF_REALIZ,
-        XXQP_PDFT_MYP_STATUS_MAIL(XxqpPdftMypHeaderEO.NUMERO_FT,XxqpPdftMypHeaderEO.NUMERO_FT_REFERENCIA) STATUS_MAIL
+        XXQP_PDFT_MYP_STATUS_MAIL(XxqpPdftMypHeaderEO.NUMERO_FT,XxqpPdftMypHeaderEO.NUMERO_FT_REFERENCIA) STATUS_MAIL,
+XxqpPdftMypHeaderEO.CURRENCY_CODE,
+ (select p.party_name
+          from hz_parties p
+         where p.party_id = XxqpPdftMypHeaderEO.party_id) razon_social
 FROM XXQP_PDFT_MYP_HEADER XxqpPdftMypHeaderEO
    ]]></SQLQuery>
    <DesignTime>
@@ -364,6 +368,25 @@ FROM XXQP_PDFT_MYP_HEADER XxqpPdftMypHeaderEO
       SQLType="VARCHAR" >
       <DesignTime>
          <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CurrencyCode"
+      EntityAttrName="CurrencyCode"
+      EntityUsage="XxqpPdftMypHeaderEO"
+      AliasName="CURRENCY_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RazonSocial"
+      IsPersistent="false"
+      Precision="360"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="RAZON_SOCIAL"
+      Expression="RAZON_SOCIAL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="360" />
       </DesignTime>
    </ViewAttribute>
 </ViewObject>

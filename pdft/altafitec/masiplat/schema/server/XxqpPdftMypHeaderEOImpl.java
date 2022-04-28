@@ -56,11 +56,12 @@ public class XxqpPdftMypHeaderEOImpl extends OAEntityImpl {
     public static final int CONTENTTYPE3 = 35;
     public static final int FILE3 = 36;
     public static final int MODIFREALIZ = 37;
-    public static final int XXQPPDFTMYPGENERALEO = 38;
-    public static final int XXQPPDFTMYPCOBERTURAEO = 39;
-    public static final int XXQPPDFTMYPDISTRIBUCIONEO = 40;
-    public static final int XXQPPDFTMYPPROCESOSEO = 41;
-    public static final int XXQPPDFTMYPREGNEGEO = 42;
+    public static final int CURRENCYCODE = 38;
+    public static final int XXQPPDFTMYPGENERALEO = 39;
+    public static final int XXQPPDFTMYPCOBERTURAEO = 40;
+    public static final int XXQPPDFTMYPDISTRIBUCIONEO = 41;
+    public static final int XXQPPDFTMYPPROCESOSEO = 42;
+    public static final int XXQPPDFTMYPREGNEGEO = 43;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -492,6 +493,8 @@ public class XxqpPdftMypHeaderEOImpl extends OAEntityImpl {
             return getFile3();
         case MODIFREALIZ:
             return getModifRealiz();
+        case CURRENCYCODE:
+            return getCurrencyCode();
         case XXQPPDFTMYPCOBERTURAEO:
             return getXxqpPdftMypCoberturaEO();
         case XXQPPDFTMYPDISTRIBUCIONEO:
@@ -625,6 +628,9 @@ public class XxqpPdftMypHeaderEOImpl extends OAEntityImpl {
             return;
         case MODIFREALIZ:
             setModifRealiz((ClobDomain)value);
+            return;
+        case CURRENCYCODE:
+            setCurrencyCode((String)value);
             return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
@@ -807,6 +813,18 @@ public class XxqpPdftMypHeaderEOImpl extends OAEntityImpl {
      */
     public void setModifRealiz(ClobDomain value) {
         setAttributeInternal(MODIFREALIZ, value);
+    }
+
+    /**Gets the attribute value for CurrencyCode, using the alias name CurrencyCode
+     */
+    public String getCurrencyCode() {
+        return (String)getAttributeInternal(CURRENCYCODE);
+    }
+
+    /**Sets <code>value</code> as the attribute value for CurrencyCode
+     */
+    public void setCurrencyCode(String value) {
+        setAttributeInternal(CURRENCYCODE, value);
     }
 
     /**Creates a Key object based on given key constituents

@@ -30,6 +30,20 @@
                         </oa:cellFormat>
                      </ui:contents>
                   </oa:rowLayout>
+                  <oa:rowLayout id="RowLayRazonSocial">
+                     <ui:contents>
+                        <oa:cellFormat id="CellInputRazonSocial" hAlign="right">
+                           <ui:contents>
+                              <oa:messageLovInput id="RazonSocialSearch" externalListOfValues="/xxqp/oracle/apps/ar/pdft/conscliente/webui/RazonSocialRN" prompt="Razon Social" styleClass="OraFieldText" readOnly="false">
+                                 <lovMappings>
+                                    <lovMap id="lovMap12" resultTo="RazonSocialSearch" criteriaFrom="RazonSocialSearch" lovItem="RazonSocial"/>
+                                 </lovMappings>
+                              </oa:messageLovInput>
+                           </ui:contents>
+                        </oa:cellFormat>
+                        <oa:cellFormat id="region1"/>
+                     </ui:contents>
+                  </oa:rowLayout>
                   <oa:rowLayout id="RowLayHeight1">
                      <ui:contents>
                         <oa:cellFormat id="CellHeight1" height="10"/>

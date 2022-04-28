@@ -9,20 +9,15 @@
    ComponentClass="xxqp.oracle.apps.ar.pdft.poplist.server.BpoElMensajeroManejeVOImpl"
    UseGlueCode="false" >
    <SQLQuery><![CDATA[
-select 1 record_id
-         ,'MOTOCICLETA' lookup_code
-         ,'Motocicleta'    meaning
-  from dual
- union 
- select 2 record_id
-        , 'AUTOMOVIL'   lookup_code
-         ,'Automovil'      meaning
-  from dual
- union
-  select 3 record_id
-        , 'CAMION'   lookup_code
-         ,'Camion'      meaning
-  from dual
+select FLV.tag record_id
+         ,FLV.lookup_code
+         ,FLV.meaning
+   from fnd_lookup_values FLV
+ where FLV.lookup_type = 'XXQP_BPO_EL_MENSAJERO_MANEJE'
+    and FLV.language = USERENV('LANG')
+    and FLV.ENABLED_FLAG = 'Y'
+    and trunc(sysdate) between nvl(FLV.start_date_active,to_date('01/01/0001','DD/MM/YYYY')) and  nvl(FLV.end_date_active,to_date('31/12/4712','DD/MM/YYYY'))
+    order by FLV.tag asc
    ]]></SQLQuery>
    <DesignTime>
       <Attr Name="_isExpertMode" Value="true" />

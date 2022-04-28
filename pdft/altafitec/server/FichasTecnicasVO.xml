@@ -13,7 +13,7 @@ select myp.id
         ,myp.numero_ft 
         ,myp.status
         ,myp.party_id
-       ,(select p.party_name 
+       ,(select nvl(p.known_as,p.party_name)
           from hz_parties p
          where p.party_id = myp.party_id) nombre_del_cliente
        ,myp.unidad_de_negocio_c
@@ -27,13 +27,16 @@ where id = myp.ejecutivo) ejecutivo
        ,trunc(myp.creation_date) creation_date
        ,'MYP' origin
        ,myp.ejecutivo ejecutivo_code
+       ,(select p.party_name
+          from hz_parties p
+         where p.party_id = myp.party_id) razon_social
    from xxqp_pdft_myp_header myp
  union
      select bpo.id
         ,bpo.numero_ft 
         ,bpo.status
         ,bpo.party_id
-       ,(select p.party_name 
+       ,(select nvl(p.known_as,p.party_name)
           from hz_parties p
          where p.party_id = bpo.party_id) nombre_del_cliente
        ,bpo.unidad_de_negocio_c
@@ -47,13 +50,16 @@ where id = bpo.ejecutivo) ejecutivo
        ,trunc(bpo.creation_date) creation_date
          ,'BPO' origin
          ,bpo.ejecutivo ejecutivo_code
+,(select p.party_name
+          from hz_parties p
+         where p.party_id = bpo.party_id) razon_social
    from xxqp_pdft_bpo_header bpo
    union
      select qplabs.id
         ,qplabs.numero_ft 
         ,qplabs.status
         ,qplabs.party_id
-       ,(select p.party_name
+       ,(select nvl(p.known_as,p.party_name)
           from hz_parties p
          where p.party_id = qplabs.party_id) nombre_del_cliente
        ,qplabs.unidad_de_negocio_c
@@ -67,6 +73,9 @@ where id = bpo.ejecutivo) ejecutivo
        ,trunc(qplabs.creation_date) creation_date
         ,'QP_LABS' origin
         ,null ejecutivo_code
+,(select p.party_name
+          from hz_parties p
+         where p.party_id = qplabs.party_id) razon_social
    from xxqp_pdft_qplabs_header qplabs
    order by numero_ft desc
    ]]></SQLQuery>
@@ -264,6 +273,19 @@ where id = bpo.ejecutivo) ejecutivo
       SQLType="VARCHAR" >
       <DesignTime>
          <Attr Name="_DisplaySize" Value="50" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RazonSocial"
+      IsPersistent="false"
+      Precision="360"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="RAZON_SOCIAL"
+      Expression="RAZON_SOCIAL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="360" />
       </DesignTime>
    </ViewAttribute>
    <ViewAttribute

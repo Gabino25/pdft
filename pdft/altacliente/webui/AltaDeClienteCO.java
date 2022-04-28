@@ -27,6 +27,7 @@ import oracle.apps.fnd.framework.webui.beans.message.OAMessageCheckBoxBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageChoiceBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageDateFieldBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageFileUploadBean;
+import oracle.apps.fnd.framework.webui.beans.message.OAMessageLovInputBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageRadioGroupBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageStyledTextBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageTextInputBean;
@@ -292,6 +293,10 @@ public class AltaDeClienteCO extends OAControllerImpl
     String strEjecutivoValue = null; 
     String strEjecutivoText = null; 
     
+    String strRegimenFiscalValue = null; 
+    String strRegimenFiscalText = null; 
+      
+    
     OAMessageTextInputBean NombreClienteBean = (OAMessageTextInputBean)webBean.findChildRecursive("NombreCliente"); 
     if(null!=NombreClienteBean){
      if(null!=NombreClienteBean.getValue(pageContext)){
@@ -372,6 +377,18 @@ public class AltaDeClienteCO extends OAControllerImpl
        }
       } 
       
+      strRegimenFiscalValue = pageContext.getParameter("RegimenFiscalFV");
+      
+      OAMessageLovInputBean  RegimenFiscalBean = (OAMessageLovInputBean)webBean.findChildRecursive("RegimenFiscal");
+      if(null!=RegimenFiscalBean){
+       if(null!=RegimenFiscalBean.getValue(pageContext)){
+        strRegimenFiscalText = RegimenFiscalBean.getValue(pageContext).toString();
+       }
+      } 
+      
+     
+      
+      
     System.out.println("strNombreCLiente:"+strNombreCLiente);
     
     System.out.println("strGiroEmpresarialValue:"+strGiroEmpresarialValue);
@@ -393,6 +410,9 @@ public class AltaDeClienteCO extends OAControllerImpl
     System.out.println("strTipoComercialValue:"+strTipoComercialValue);
     System.out.println("strTipoComercialText:"+strTipoComercialText);
 
+    System.out.println("strRegimenFiscalValue:"+strRegimenFiscalValue);
+    System.out.println("strRegimenFiscalText:"+strRegimenFiscalText);
+      
      if("LegalEntityEvt".equals(pageContext.getParameter(this.EVENT_PARAM))){
         OAMessageChoiceBean OperatingUnitPBean = (OAMessageChoiceBean)webBean.findChildRecursive("OperatingUnitP");
          if(null!=OperatingUnitPBean){
@@ -1347,6 +1367,7 @@ public class AltaDeClienteCO extends OAControllerImpl
                                         ,strRFC
                                         ,strRazonSocial
                                         ,strEjecutivoValue
+                                        ,strRegimenFiscalValue
                                        );
        
          DataObject CedulaExaminePUploadData =  pageContext.getNamedDataObject("CedulaExamineP"); 

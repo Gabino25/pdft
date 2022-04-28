@@ -163,7 +163,8 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                                    String pStrTipoComercialText,
                                    String pStrRFC,
                                    String pRazonSocial,
-                                   String pEjecutivo
+                                   String pEjecutivo,
+                                   String pRegimenFiscal
                                    ) {
         XxqpPdftClientesHeaderVOImpl xxqpPdftClientesHeaderVOImpl =getXxqpPdftClientesHeaderVO1();
         XxqpPdftClientesHeaderVORowImpl xxqpPdftClientesHeaderVORowImpl =null; 
@@ -190,6 +191,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             xxqpPdftClientesHeaderVORowImpl.setTipoComercialC(pStrTipoComercialValue);       
             xxqpPdftClientesHeaderVORowImpl.setRazonSocial(pRazonSocial);
             xxqpPdftClientesHeaderVORowImpl.setEjecutivo(pEjecutivo);
+            xxqpPdftClientesHeaderVORowImpl.setRegimenFiscal(pRegimenFiscal);
             xxqpPdftClientesHeaderVORowImpl.setStatus("CREATE");
             
             xxqpPdftClientesHeaderVOImpl.insertRow(xxqpPdftClientesHeaderVORowImpl);
@@ -291,6 +293,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             
             xxqpPdftClientesDirFiscalVORowImpl.setPrimCountry(pStrPaisP);
             xxqpPdftClientesDirFiscalVORowImpl.setSecCountry(pStrPaisS);
+            /**** 11042022 Se cambia tipo de dato numerico por cadena de texto tamnio 25
             oracle.jbo.domain.Number numIdInternacionalP = null; 
             oracle.jbo.domain.Number numIdInternacionalS = null; 
             if(null!=pStrIdInternacionalP){
@@ -307,9 +310,9 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                     System.out.println("new oracle.jbo.domain.Number("+pStrIdInternacionalS+"):"+e.toString());
                 }
             }
-            xxqpPdftClientesDirFiscalVORowImpl.setPrimIdInternacional(numIdInternacionalP);
-            xxqpPdftClientesDirFiscalVORowImpl.setSecIdInternacional(numIdInternacionalS);
-            
+            ***/
+            xxqpPdftClientesDirFiscalVORowImpl.setPrimIdInternacional(pStrIdInternacionalP);
+            xxqpPdftClientesDirFiscalVORowImpl.setSecIdInternacional(pStrIdInternacionalS);
             xxqpPdftClientesDirFiscalVOImpl.insertRow(xxqpPdftClientesDirFiscalVORowImpl);
             
             this.getOADBTransaction().commit();
@@ -1029,6 +1032,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
                             ,String pPrimCedulaFileName
                             ,String pPrimCedulaContentType
                             ,String pOperacion
+                            ,String pRazonSocial
                             ) {
         System.out.println("Entra AltaDeClienteAMImpl.enviaCorreos");
         OADBTransaction  oADBTransaction = this.getOADBTransaction();
@@ -1074,7 +1078,7 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
             map.put("Subject","Modificacion de cliente");
         }
         
-        map.put("Body","Nombre del cliente:"+pNombreCliente+"\nRFC:"+pRFC);
+        map.put("Body","Nombre del cliente:"+pNombreCliente+"\nRFC:"+pRFC+"\nRaz\u00f3n Social:"+pRazonSocial);
         map.put("NombrePDF",pNombrePdf);
         map.put("PrimCedulaFileName",pPrimCedulaFileName);
         map.put("PrimCedulaContentType",pPrimCedulaContentType);
@@ -1204,5 +1208,11 @@ public class AltaDeClienteAMImpl extends OAApplicationModuleImpl {
      */
     public ExtBanksLovImpl getExtBanksLov1() {
         return (ExtBanksLovImpl)findViewObject("ExtBanksLov1");
+    }
+
+    /**Container's getter for QpSatRegimenFiscalVO1
+     */
+    public QpSatRegimenFiscalVOImpl getQpSatRegimenFiscalVO1() {
+        return (QpSatRegimenFiscalVOImpl)findViewObject("QpSatRegimenFiscalVO1");
     }
 }

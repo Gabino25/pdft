@@ -59,8 +59,8 @@ public class XxqpPdftClientesDirFiscalEOImpl extends OAEntityImpl {
     public static final int SECNUMEROEXT = 41;
     public static final int SECNUMEROINT = 42;
     public static final int PRIMCOUNTRY = 43;
-    public static final int PRIMIDINTERNACIONAL = 44;
-    public static final int SECCOUNTRY = 45;
+    public static final int SECCOUNTRY = 44;
+    public static final int PRIMIDINTERNACIONAL = 45;
     public static final int SECIDINTERNACIONAL = 46;
     public static final int XXQPPDFTCLIENTESHEADEREO = 47;
 
@@ -576,10 +576,10 @@ public class XxqpPdftClientesDirFiscalEOImpl extends OAEntityImpl {
             return getSecNumeroInt();
         case PRIMCOUNTRY:
             return getPrimCountry();
-        case PRIMIDINTERNACIONAL:
-            return getPrimIdInternacional();
         case SECCOUNTRY:
             return getSecCountry();
+        case PRIMIDINTERNACIONAL:
+            return getPrimIdInternacional();
         case SECIDINTERNACIONAL:
             return getSecIdInternacional();
         case XXQPPDFTCLIENTESHEADEREO:
@@ -726,14 +726,14 @@ public class XxqpPdftClientesDirFiscalEOImpl extends OAEntityImpl {
         case PRIMCOUNTRY:
             setPrimCountry((String)value);
             return;
-        case PRIMIDINTERNACIONAL:
-            setPrimIdInternacional((Number)value);
-            return;
         case SECCOUNTRY:
             setSecCountry((String)value);
             return;
+        case PRIMIDINTERNACIONAL:
+            setPrimIdInternacional((String)value);
+            return;
         case SECIDINTERNACIONAL:
-            setSecIdInternacional((Number)value);
+            setSecIdInternacional((String)value);
             return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
@@ -885,17 +885,6 @@ public class XxqpPdftClientesDirFiscalEOImpl extends OAEntityImpl {
         setAttributeInternal(PRIMCOUNTRY, value);
     }
 
-    /**Gets the attribute value for PrimIdInternacional, using the alias name PrimIdInternacional
-     */
-    public Number getPrimIdInternacional() {
-        return (Number)getAttributeInternal(PRIMIDINTERNACIONAL);
-    }
-
-    /**Sets <code>value</code> as the attribute value for PrimIdInternacional
-     */
-    public void setPrimIdInternacional(Number value) {
-        setAttributeInternal(PRIMIDINTERNACIONAL, value);
-    }
 
     /**Gets the attribute value for SecCountry, using the alias name SecCountry
      */
@@ -909,15 +898,28 @@ public class XxqpPdftClientesDirFiscalEOImpl extends OAEntityImpl {
         setAttributeInternal(SECCOUNTRY, value);
     }
 
+
+    /**Gets the attribute value for PrimIdInternacional, using the alias name PrimIdInternacional
+     */
+    public String getPrimIdInternacional() {
+        return (String)getAttributeInternal(PRIMIDINTERNACIONAL);
+    }
+
+    /**Sets <code>value</code> as the attribute value for PrimIdInternacional
+     */
+    public void setPrimIdInternacional(String value) {
+        setAttributeInternal(PRIMIDINTERNACIONAL, value);
+    }
+
     /**Gets the attribute value for SecIdInternacional, using the alias name SecIdInternacional
      */
-    public Number getSecIdInternacional() {
-        return (Number)getAttributeInternal(SECIDINTERNACIONAL);
+    public String getSecIdInternacional() {
+        return (String)getAttributeInternal(SECIDINTERNACIONAL);
     }
 
     /**Sets <code>value</code> as the attribute value for SecIdInternacional
      */
-    public void setSecIdInternacional(Number value) {
+    public void setSecIdInternacional(String value) {
         setAttributeInternal(SECIDINTERNACIONAL, value);
     }
 

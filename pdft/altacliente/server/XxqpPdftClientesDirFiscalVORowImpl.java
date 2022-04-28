@@ -58,11 +58,11 @@ public class XxqpPdftClientesDirFiscalVORowImpl extends OAViewRowImpl {
     public static final int SECNUMEROEXT = 41;
     public static final int SECNUMEROINT = 42;
     public static final int PRIMCOUNTRY = 43;
-    public static final int PRIMIDINTERNACIONAL = 44;
-    public static final int SECCOUNTRY = 45;
-    public static final int SECIDINTERNACIONAL = 46;
-    public static final int PRIMCOUNTRYD = 47;
-    public static final int SECCOUNTRYD = 48;
+    public static final int SECCOUNTRY = 44;
+    public static final int PRIMCOUNTRYD = 45;
+    public static final int SECCOUNTRYD = 46;
+    public static final int PRIMIDINTERNACIONAL = 47;
+    public static final int SECIDINTERNACIONAL = 48;
 
     /**This is the default constructor (do not remove)
      */
@@ -580,16 +580,16 @@ public class XxqpPdftClientesDirFiscalVORowImpl extends OAViewRowImpl {
             return getSecNumeroInt();
         case PRIMCOUNTRY:
             return getPrimCountry();
-        case PRIMIDINTERNACIONAL:
-            return getPrimIdInternacional();
         case SECCOUNTRY:
             return getSecCountry();
-        case SECIDINTERNACIONAL:
-            return getSecIdInternacional();
         case PRIMCOUNTRYD:
             return getPrimCountryD();
         case SECCOUNTRYD:
             return getSecCountryD();
+        case PRIMIDINTERNACIONAL:
+            return getPrimIdInternacional();
+        case SECIDINTERNACIONAL:
+            return getSecIdInternacional();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -732,20 +732,20 @@ public class XxqpPdftClientesDirFiscalVORowImpl extends OAViewRowImpl {
         case PRIMCOUNTRY:
             setPrimCountry((String)value);
             return;
-        case PRIMIDINTERNACIONAL:
-            setPrimIdInternacional((Number)value);
-            return;
         case SECCOUNTRY:
             setSecCountry((String)value);
-            return;
-        case SECIDINTERNACIONAL:
-            setSecIdInternacional((Number)value);
             return;
         case PRIMCOUNTRYD:
             setPrimCountryD((String)value);
             return;
         case SECCOUNTRYD:
             setSecCountryD((String)value);
+            return;
+        case PRIMIDINTERNACIONAL:
+            setPrimIdInternacional((String)value);
+            return;
+        case SECIDINTERNACIONAL:
+            setSecIdInternacional((String)value);
             return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
@@ -885,17 +885,6 @@ public class XxqpPdftClientesDirFiscalVORowImpl extends OAViewRowImpl {
         setAttributeInternal(PRIMCOUNTRY, value);
     }
 
-    /**Gets the attribute value for PRIM_ID_INTERNACIONAL using the alias name PrimIdInternacional
-     */
-    public Number getPrimIdInternacional() {
-        return (Number) getAttributeInternal(PRIMIDINTERNACIONAL);
-    }
-
-    /**Sets <code>value</code> as attribute value for PRIM_ID_INTERNACIONAL using the alias name PrimIdInternacional
-     */
-    public void setPrimIdInternacional(Number value) {
-        setAttributeInternal(PRIMIDINTERNACIONAL, value);
-    }
 
     /**Gets the attribute value for SEC_COUNTRY using the alias name SecCountry
      */
@@ -909,17 +898,6 @@ public class XxqpPdftClientesDirFiscalVORowImpl extends OAViewRowImpl {
         setAttributeInternal(SECCOUNTRY, value);
     }
 
-    /**Gets the attribute value for SEC_ID_INTERNACIONAL using the alias name SecIdInternacional
-     */
-    public Number getSecIdInternacional() {
-        return (Number) getAttributeInternal(SECIDINTERNACIONAL);
-    }
-
-    /**Sets <code>value</code> as attribute value for SEC_ID_INTERNACIONAL using the alias name SecIdInternacional
-     */
-    public void setSecIdInternacional(Number value) {
-        setAttributeInternal(SECIDINTERNACIONAL, value);
-    }
 
     /**Gets the attribute value for the calculated attribute PrimCountryD
      */
@@ -943,5 +921,30 @@ public class XxqpPdftClientesDirFiscalVORowImpl extends OAViewRowImpl {
      */
     public void setSecCountryD(String value) {
         setAttributeInternal(SECCOUNTRYD, value);
+    }
+
+
+    /**Gets the attribute value for the calculated attribute PrimIdInternacional
+     */
+    public String getPrimIdInternacional() {
+        return (String) getAttributeInternal(PRIMIDINTERNACIONAL);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute PrimIdInternacional
+     */
+    public void setPrimIdInternacional(String value) {
+        setAttributeInternal(PRIMIDINTERNACIONAL, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute SecIdInternacional
+     */
+    public String getSecIdInternacional() {
+        return (String) getAttributeInternal(SECIDINTERNACIONAL);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute SecIdInternacional
+     */
+    public void setSecIdInternacional(String value) {
+        setAttributeInternal(SECIDINTERNACIONAL, value);
     }
 }

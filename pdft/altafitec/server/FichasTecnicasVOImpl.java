@@ -25,6 +25,7 @@ public class FichasTecnicasVOImpl extends OAViewObjectImpl {
                       ,String pStrUnidadDeNegocio
                       ,String pStrEmpresaQueFactura
                       ,String pStrCicloFacturacion
+                      ,String pStrRazonSocialValue
                       ) {
         if((null==pNumNoFichaTecnica||"".equals(pNumNoFichaTecnica))
           &&(null==pStrStatusValue||"".equals(pStrStatusValue))
@@ -35,6 +36,7 @@ public class FichasTecnicasVOImpl extends OAViewObjectImpl {
           &&(null==pStrUnidadDeNegocio||"".equals(pStrUnidadDeNegocio))
           &&(null==pStrEmpresaQueFactura||"".equals(pStrEmpresaQueFactura))
           &&(null==pStrCicloFacturacion||"".equals(pStrCicloFacturacion))
+          &&(null==pStrRazonSocialValue||"".equals(pStrRazonSocialValue))
           ){
          return; 
         }
@@ -68,6 +70,9 @@ public class FichasTecnicasVOImpl extends OAViewObjectImpl {
             vcr1.setAttribute("EmpresaQueFacturaC",pStrEmpresaQueFactura); 
         } 
         if(null!=pStrCicloFacturacion&&!"".equals(pStrCicloFacturacion)){
+            vcr1.setAttribute("FrecuenciaFacturacionC",pStrCicloFacturacion); 
+        } 
+        if(null!=pStrRazonSocialValue&&!"".equals(pStrRazonSocialValue)){
             vcr1.setAttribute("FrecuenciaFacturacionC",pStrCicloFacturacion); 
         } 
         /* 5. Add the view criteria rows to the view critera row set */

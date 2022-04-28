@@ -108,10 +108,13 @@ public class MasivoYPlatinumCancelCO extends OAControllerImpl
         String strXML = null; 
         strXML = masivoYPlatinumAMImpl.executeMypGetInfoCancel(xxqpPdftMypHeaderVORowImpl);
        
+        ByteArrayInputStream bAiSxml = null; 
+        ByteArrayOutputStream bAoSpdfFile = null; 
+        InputStream iSpdfFile = null; 
         try {
             byte[] aByte = strXML.getBytes();
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(aByte);
-            ByteArrayOutputStream pdfFile = new ByteArrayOutputStream();
+            bAiSxml = new ByteArrayInputStream(aByte);
+            bAoSpdfFile = new ByteArrayOutputStream();
             AppsContext appsContext = ((OADBTransactionImpl)masivoYPlatinumAMImpl.getOADBTransaction()).getAppsContext();
             Locale locale = ((OADBTransactionImpl)masivoYPlatinumAMImpl.getOADBTransaction()).getUserLocale();
             TemplateHelper.processTemplate(appsContext, 
@@ -119,30 +122,21 @@ public class MasivoYPlatinumCancelCO extends OAControllerImpl
                                            "XXQP_PDFT_MYP", 
                                            locale.getLanguage(), 
                                            locale.getCountry(), 
-                                           inputStream, 
+                                           bAiSxml, 
                                            TemplateHelper.OUTPUT_TYPE_PDF, 
                                             null, 
-                                           pdfFile);
-            if(null!=inputStream){
-            inputStream.close();
-            }
+                                           bAoSpdfFile);
+           
             
-            byte[] a2Byte =pdfFile.toByteArray(); 
-            InputStream inputStream2 = new ByteArrayInputStream(a2Byte);
+            byte[] a2Byte =bAoSpdfFile.toByteArray(); 
+            iSpdfFile = new ByteArrayInputStream(a2Byte);
             
-            String strCorreos = masivoYPlatinumAMImpl.enviaCorreosPorCancelacion(inputStream2
+            String strCorreos = masivoYPlatinumAMImpl.enviaCorreosPorCancelacion(iSpdfFile
                                                                                 ,pageContext
                                                                                 ,xxqpPdftMypHeaderVORowImpl
                                                                                ); 
             System.out.println("strCorreos:"+strCorreos);
             
-            if(null!=pdfFile){
-                pdfFile.close();
-            }
-            
-            if(null!=inputStream2){
-                inputStream2.close();
-            }
            
         } catch (IOException e) {
            throw new OAException("IOException al obtener el ServletOutputStream.",OAException.ERROR); 
@@ -150,8 +144,36 @@ public class MasivoYPlatinumCancelCO extends OAControllerImpl
             throw new OAException("SQLException al obtener el DataTemplate.",OAException.ERROR);
         } catch (XDOException e) {
             throw new OAException("XDOException al obtener el DataTemplate.",OAException.ERROR);
+        } finally{
+        
+            if(null!=iSpdfFile){
+                    try {
+                        iSpdfFile.close();
+                    } catch (IOException e) {
+                       e.printStackTrace();
+                    }
+                }
+            
+            if(null!=bAoSpdfFile){
+                    try {
+                        bAoSpdfFile.close();
+                    } catch (IOException e) {
+                       e.printStackTrace();
+                    }
+                }
+            
+            if(null!=bAiSxml){
+                    try {
+                        bAiSxml.close();
+                    } catch (IOException e) {
+                       e.printStackTrace();
+                    }
+                }
+        
         }
         
+       
+            
         /***** FINALIZA ENVIO CORREO *****/
         com.sun.java.util.collections.HashMap parameters = new com.sun.java.util.collections.HashMap();
         parameters.put("pMyPHeaderId",numMasiYPlatHeaderId.toString() );

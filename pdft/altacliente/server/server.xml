@@ -45,6 +45,11 @@
       ObjectType="ViewObject" >
    </Containee>
    <Containee
+      Name="QpSatRegimenFiscalVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altacliente.server.QpSatRegimenFiscalVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
       Name="XxqpPdftClientesContactosVO"
       FullName="xxqp.oracle.apps.ar.pdft.altacliente.server.XxqpPdftClientesContactosVO"
       ObjectType="ViewObject" >

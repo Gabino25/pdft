@@ -20,6 +20,11 @@
       ObjectType="ViewObject" >
    </Containee>
    <Containee
+      Name="CurrencyVO"
+      FullName="xxqp.oracle.apps.ar.pdft.altafitec.server.CurrencyVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
       Name="EjecutivosVO"
       FullName="xxqp.oracle.apps.ar.pdft.altafitec.server.EjecutivosVO"
       ObjectType="ViewObject" >

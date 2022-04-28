@@ -125,6 +125,7 @@ public class BpoCO extends OAControllerImpl
       String strPUnidadDeNegocio = pageContext.getParameter("pUnidadDeNegocio");
       String strPEmpresaQueFactura = pageContext.getParameter("pEmpresaQueFactura");
       String strpCicloFacturacion = pageContext.getParameter("pCicloFacturacion");
+      String strpCurrencyCode = pageContext.getParameter("pCurrencyCode");
       String strpEjecutivo = pageContext.getParameter("pEjecutivo");
       
       environmentCurrencyFormat(pageContext,webBean);
@@ -332,6 +333,11 @@ public class BpoCO extends OAControllerImpl
                CicloFacturacionBean.setValue(pageContext,strpCicloFacturacion);
              }
             
+            OAMessageChoiceBean CurrencyBean = (OAMessageChoiceBean)webBean.findChildRecursive("Currency");
+             if(null!=CurrencyBean){
+                 if(null!=strpCurrencyCode&&!"".equals(strpCurrencyCode))
+                 CurrencyBean.setValue(pageContext,strpCurrencyCode);
+             }
              
             if(null!=bpoAMImpl){
                 bpoAMImpl.fillCamposHead(pageContext,webBean);
@@ -484,7 +490,8 @@ public class BpoCO extends OAControllerImpl
       String strEstatusValue = null; 
       String strUnidadDeNegocioValue = null; 
       String strEmpresaQueFacturaValue = null; 
-      String strCicloFacturacionValue = null; 
+      String strCicloFacturacionValue = null;
+      String strCurrencyValue = null;
       String strFechaInicioOperacionValue = null; 
       String strPartyID = null; 
       String strEjecutivoValue = null; 
@@ -545,8 +552,9 @@ public class BpoCO extends OAControllerImpl
         
        strUnidadDeNegocioValue = getValueFromOAMessageChoiceBean(pageContext,webBean,"UnidadDeNegocio");
        strEmpresaQueFacturaValue = getValueFromOAMessageChoiceBean(pageContext,webBean,"EmpresaQueFactura");
-       strCicloFacturacionValue =   getValueFromOAMessageChoiceBean(pageContext,webBean,"CicloFacturacion");
-       
+       strCicloFacturacionValue = getValueFromOAMessageChoiceBean(pageContext,webBean,"CicloFacturacion");
+       strCurrencyValue = getValueFromOAMessageChoiceBean(pageContext,webBean,"Currency");
+      
        strEjecutivoValue =   getValueFromOAMessageChoiceBean(pageContext,webBean,"Ejecutivo");
        
       if(null!=strUnidadDeNegocioValue){
@@ -1107,6 +1115,7 @@ public class BpoCO extends OAControllerImpl
                                            , strExamine3FileName 
                                            , strExamine3ContentType 
                                            , Examine3ByteStream 
+                                           , strCurrencyValue
                                            );
                       
                       bpoAMImpl.fillPrecio(strBpoHeaderId);  

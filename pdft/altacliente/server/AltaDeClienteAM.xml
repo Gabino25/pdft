@@ -53,4 +53,8 @@
       Name="ExtBanksLov1"
       ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.ExtBanksLov" >
    </ViewUsage>
+   <ViewUsage
+      Name="QpSatRegimenFiscalVO1"
+      ViewObjectName="xxqp.oracle.apps.ar.pdft.altacliente.server.QpSatRegimenFiscalVO" >
+   </ViewUsage>
 </AppModule>

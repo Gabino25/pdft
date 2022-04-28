@@ -28,6 +28,12 @@
                                        </ui:primaryClientAction>
                                     </oa:messageTextInput>
                                     <oa:messageTextInput id="RazonSocial" required="yes" prompt="Razon Social"/>
+                                    <oa:messageLovInput id="RegimenFiscal" externalListOfValues="/xxqp/oracle/apps/ar/pdft/altacliente/webui/QpSatRegimenFiscalRN" required="yes" prompt="Regimen Fiscal">
+                                       <lovMappings>
+                                          <lovMap id="lovMap16" lovItem="FlexValue" resultTo="RegimenFiscalFV"/>
+                                          <lovMap id="lovMap17" lovItem="FlexDescription" resultTo="RegimenFiscal" criteriaFrom="RegimenFiscal"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
                                  </ui:contents>
                               </oa:tableLayout>
                            </ui:contents>
@@ -82,7 +88,7 @@
                                                             <lovMap id="lovMap12" lovItem="TerritoryCode" resultTo="PaisPFV"/>
                                                          </lovMappings>
                                                       </oa:messageLovInput>
-                                                      <oa:messageTextInput id="PrimIdInternacional" dataType="NUMBER" prompt="ID Internacional"/>
+                                                      <oa:messageTextInput id="PrimIdInternacional" dataType="VARCHAR2" prompt="ID Internacional" maximumLength="25"/>
                                                    </ui:contents>
                                                 </oa:tableLayout>
                                              </ui:contents>
@@ -160,7 +166,7 @@
                                                             <lovMap id="lovMap13" lovItem="TerritoryCode" resultTo="PaisSFV"/>
                                                          </lovMappings>
                                                       </oa:messageLovInput>
-                                                      <oa:messageTextInput id="SecIdInternacional" dataType="NUMBER" prompt="ID Internacional"/>
+                                                      <oa:messageTextInput id="SecIdInternacional" dataType="VARCHAR2" prompt="ID Internacional" maximumLength="25"/>
                                                    </ui:contents>
                                                 </oa:tableLayout>
                                              </ui:contents>
@@ -498,6 +504,7 @@
             <oa:formValue id="PaisPFV"/>
             <oa:formValue id="PaisSFV"/>
             <oa:formValue id="BankIdFV"/>
+            <oa:formValue id="RegimenFiscalFV"/>
          </ui:contents>
          <ui:userInfo>
             <oa:messageStyledText id="NombreUsuarioEBS" prompt="Nombre Usuario:" styleClass="OraFieldText"/>

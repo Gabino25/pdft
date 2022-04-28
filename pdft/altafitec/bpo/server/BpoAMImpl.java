@@ -131,6 +131,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
         OAMessageTextInputBean FechaActualBean = (OAMessageTextInputBean)webBean.findChildRecursive("Fecha");                 
        /** OAMessageTextInputBean EjecutivoBean = (OAMessageTextInputBean)webBean.findChildRecursive("Ejecutivo");  NA 13072018 **/
         OAMessageTextInputBean NombreDelClienteBean = (OAMessageTextInputBean)webBean.findChildRecursive("NombreDelCliente");  
+        OAMessageTextInputBean RazonSocialDelClienteBean = (OAMessageTextInputBean)webBean.findChildRecursive("RazonSocialDelCliente"); 
         OAMessageChoiceBean EstatusBean = (OAMessageChoiceBean)webBean.findChildRecursive("Estatus"); 
         OAFormValueBean PartyIdBean = (OAFormValueBean)webBean.findChildRecursive("PartyId"); 
         if(null!=EstatusBean){
@@ -148,6 +149,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                                "              and user_id = fnd_profile.value('USER_ID')\n" + 
                                "           ) ejecutivo\n" + 
                                "         ,nvl(p.known_as,p.party_name) nombre_del_cliente\n" + 
+                               "         ,razon_social\n" + 
                                "   from XXQP_PDFT_CLIENTES_INFO_V p\n" + 
                                "  where p.party_id = ? ";
 
@@ -177,7 +179,11 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                   if(null!=NombreDelClienteBean){
                       NombreDelClienteBean.setValue(pageContext,resultSet.getString("nombre_del_cliente"));
                   }
-                  
+                    
+                    if(null!=RazonSocialDelClienteBean){
+                      RazonSocialDelClienteBean.setValue(pageContext,resultSet.getString("razon_social"));
+                    }
+                    
                 }
                 
               } catch (SQLException sqle)
@@ -261,7 +267,8 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
                            BlobDomain Examine2ByteStream, 
                            String pStrExamine3FileName, 
                            String pStrExamine3ContentType, 
-                           BlobDomain Examine3ByteStream) {
+                           BlobDomain Examine3ByteStream,
+                           String pCurrencyValue) {
         
            
         XxqpPdftBpoHeaderVOImpl xxqpPdftBpoHeaderVOImpl = getXxqpPdftBpoHeaderVO1();  
@@ -308,6 +315,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
             xxqpPdftBpoHeaderVORowImpl.setFileName3(pStrExamine3FileName);
             xxqpPdftBpoHeaderVORowImpl.setContentType3(pStrExamine3ContentType);
             xxqpPdftBpoHeaderVORowImpl.setFile3(Examine3ByteStream);
+            xxqpPdftBpoHeaderVORowImpl.setCurrencyCode(pCurrencyValue);
           
             xxqpPdftBpoHeaderVOImpl.insertRow(xxqpPdftBpoHeaderVORowImpl);
             
@@ -900,6 +908,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
          MessageToken[] msgtoken1 = {new MessageToken("NO_FT",strNumeroFt)};
          MessageToken[] msgtoken2 = {new MessageToken("NO_FT",strNumeroFt)
                                    , new MessageToken("NOMBRE_CLIENTE",pStrNombreCliente)
+                                   , new MessageToken("RAZON_SOCIAL",pXxqpPdftBpoHeaderVORowImpl.getRazonSocial())
                                    , new MessageToken("PRODUCT_ID",pArticuloOracle)
                                    };
          
@@ -1493,17 +1502,31 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
         return retval; 
     }
     
+    /**
+     * 13092021 
+     * Se valida en content type para evitar exepciones
+     * @param pMultipart
+     * @param pInputStream
+     * @param pFilename
+     * @param pContentType
+     * @throws IOException
+     * @throws MessagingException
+     */
     private static void addAttachment(Multipart pMultipart
                                      ,InputStream pInputStream
                                      ,String pFilename
                                      ,String pContentType) throws IOException, 
                                                               MessagingException {
-        
-        DataSource source = new ByteArrayDataSource(pInputStream,pContentType);
-        BodyPart messageBodyPart = new MimeBodyPart();        
-        messageBodyPart.setDataHandler(new DataHandler(source));
-        messageBodyPart.setFileName(pFilename);
-        pMultipart.addBodyPart(messageBodyPart);
+        if(null!=pContentType&&!"".equals(pContentType)){
+            DataSource source = new ByteArrayDataSource(pInputStream,pContentType);
+            BodyPart messageBodyPart = new MimeBodyPart();        
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName(pFilename);
+            pMultipart.addBodyPart(messageBodyPart);
+            if(null!=pInputStream){
+                pInputStream.close();
+            }
+        }
     }
 
     public void createRowRegNeg(String[] pAttributes) {
@@ -1530,7 +1553,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
             try {
                 nPrecio = new oracle.jbo.domain.Number(pAttributes[2]);
             } catch (SQLException e) {
-                // TODO
+                e.printStackTrace();
             }
            reglasDeNegocioTmpRowVOImpl.setPrecio(nPrecio);
            reglasDeNegocioTmpVOImpl.insertRow(reglasDeNegocioTmpRowVOImpl);
@@ -1614,6 +1637,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
         MessageToken[] msgtoken1 = {new MessageToken("NO_FT",strNumeroFt)};
         MessageToken[] msgtoken2 = {new MessageToken("NO_FT",strNumeroFt)
                                   , new MessageToken("NOMBRE_CLIENTE",pStrNombreCliente)
+                                  , new MessageToken("RAZON_SOCIAL",pXxqpPdftBpoHeaderVORowImpl.getRazonSocial())
                                   , new MessageToken("PRODUCT_ID",pArticuloOracle)
                                   };
         
@@ -1773,6 +1797,7 @@ public class BpoAMImpl extends OAApplicationModuleImpl {
         MessageToken[] msgtoken1 = {new MessageToken("NO_FT",pXxqpPdftBpoHeaderVORowImpl.getNumeroFt().toString())};
         MessageToken[] msgtoken2 = {new MessageToken("NO_FT",pXxqpPdftBpoHeaderVORowImpl.getNumeroFt().toString())
                                    ,new MessageToken("NOMBRE_CLIENTE",pXxqpPdftBpoHeaderVORowImpl.getNombreDelCliente())
+                                   ,new MessageToken("RAZON_SOCIAL",pXxqpPdftBpoHeaderVORowImpl.getRazonSocial())
                                    ,new MessageToken("PRODUCT_ID",pXxqpPdftBpoHeaderVORowImpl.getArticuloOracle())
                                    };
         strSubject = pOAPageContext.getMessage("XXQP","XXQP_PDFT_CANCE_FT_SUBJECT_MSG",msgtoken1);

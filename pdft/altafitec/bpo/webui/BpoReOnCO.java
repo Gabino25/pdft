@@ -340,12 +340,13 @@ public class BpoReOnCO extends OAControllerImpl
               response.setHeader("Content-Disposition",contentDisposition);
               response.setContentType("application/pdf");
               ServletOutputStream os=null; 
-              
+              ByteArrayInputStream bAIsXmlFile = null;
+              ByteArrayOutputStream bAoSPdfFile = null;
               try {
                   os = response.getOutputStream();
                   byte[] aByte = strXML.getBytes();
-                  ByteArrayInputStream inputStream = new ByteArrayInputStream(aByte);
-                  ByteArrayOutputStream pdfFile = new ByteArrayOutputStream();
+                  bAIsXmlFile = new ByteArrayInputStream(aByte);
+                  bAoSPdfFile = new ByteArrayOutputStream();
                   AppsContext appsContext = ((OADBTransactionImpl)bpoAMImpl.getOADBTransaction()).getAppsContext();
                   Locale locale = ((OADBTransactionImpl)bpoAMImpl.getOADBTransaction()).getUserLocale();
                   TemplateHelper.processTemplate(appsContext, 
@@ -353,12 +354,12 @@ public class BpoReOnCO extends OAControllerImpl
                                                  "XXQP_PDFT_BPO", 
                                                  locale.getLanguage(), 
                                                  locale.getCountry(), 
-                                                 inputStream, 
+                                                 bAIsXmlFile, 
                                                  TemplateHelper.OUTPUT_TYPE_PDF, 
                                                   null, 
-                                                 pdfFile);
+                                                 bAoSPdfFile);
 
-                                      byte[] b = pdfFile.toByteArray();
+                                      byte[] b = bAoSPdfFile.toByteArray();
                                       response.setContentLength(b.length);
                                       os.write(b, 0, b.length);
                                       os.flush();
@@ -370,6 +371,22 @@ public class BpoReOnCO extends OAControllerImpl
                   throw new OAException("SQLException al obtener el DataTemplate.",OAException.ERROR);
               } catch (XDOException e) {
                   throw new OAException("XDOException al obtener el DataTemplate.",OAException.ERROR);
+              }finally{
+                 /** Cerrar en Cascada **/
+                  if(null!=bAoSPdfFile){
+                      try {
+                          bAoSPdfFile.close();
+                      } catch (IOException e) {
+                         e.printStackTrace();
+                      }
+                  }
+                  if(null!=bAIsXmlFile){
+                      try {
+                          bAIsXmlFile.close();
+                      } catch (IOException e) {
+                         e.printStackTrace();
+                      }
+                  }
               }
           } /** END if("RevisarPDFEvt".equals(strEventParam)){ **/
           
@@ -384,10 +401,13 @@ public class BpoReOnCO extends OAControllerImpl
             throw new OAException("No se pudo determinar el status mail:"+statusMail,OAException.ERROR); 
         }
       
+        ByteArrayInputStream bAIsXmlFile = null;
+        ByteArrayOutputStream bAoSPdfFile = null;
+        InputStream iSPdfFile = null;
         try {
             byte[] aByte = strXML.getBytes();
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(aByte);
-            ByteArrayOutputStream pdfFile = new ByteArrayOutputStream();
+            bAIsXmlFile = new ByteArrayInputStream(aByte);
+            bAoSPdfFile = new ByteArrayOutputStream();
             AppsContext appsContext = ((OADBTransactionImpl)bpoAMImpl.getOADBTransaction()).getAppsContext();
             Locale locale = ((OADBTransactionImpl)bpoAMImpl.getOADBTransaction()).getUserLocale();
             TemplateHelper.processTemplate(appsContext, 
@@ -395,16 +415,14 @@ public class BpoReOnCO extends OAControllerImpl
                                            "XXQP_PDFT_BPO", 
                                            locale.getLanguage(), 
                                            locale.getCountry(), 
-                                           inputStream, 
+                                           bAIsXmlFile, 
                                            TemplateHelper.OUTPUT_TYPE_PDF, 
                                             null, 
-                                           pdfFile);
-            if(null!=inputStream){
-            inputStream.close();
-            }
+                                           bAoSPdfFile);
+          
             
-            byte[] a2Byte =pdfFile.toByteArray(); 
-            InputStream inputStream2 = new ByteArrayInputStream(a2Byte);
+            byte[] a2Byte =bAoSPdfFile.toByteArray(); 
+            iSPdfFile = new ByteArrayInputStream(a2Byte);
             oracle.jbo.domain.Number numBpoNumeroFtReferencia =  (oracle.jbo.domain.Number)xxqpPdftBpoHeaderVORowImpl.getAttribute("NumeroFtReferencia");
             oracle.jbo.domain.Number numBpoNumeroFt =  (oracle.jbo.domain.Number)xxqpPdftBpoHeaderVORowImpl.getAttribute("NumeroFt");
             String strNombreCliente = (String)xxqpPdftBpoHeaderVORowImpl.getAttribute("NombreDelCliente");
@@ -417,7 +435,7 @@ public class BpoReOnCO extends OAControllerImpl
             }
             String strStatusFT = (String)bpoAMImpl.getXxqpPdftBpoHeaderVO1().getCurrentRow().getAttribute("Status");
             pageContext.writeDiagnostics(this,"strStatusFT:"+strStatusFT,OAFwkConstants.STATEMENT);
-            String strCorreos = bpoAMImpl.enviaCorreosReOn(inputStream2
+            String strCorreos = bpoAMImpl.enviaCorreosReOn(iSPdfFile
                                                       ,numBpoNumeroFtReferencia
                                                       ,strStatusFT
                                                       ,numBpoNumeroFt
@@ -429,15 +447,7 @@ public class BpoReOnCO extends OAControllerImpl
                                                       ); 
             pageContext.writeDiagnostics(this,"strCorreos:"+strCorreos,OAFwkConstants.STATEMENT);
            
-            if(null!=pdfFile){
-                pdfFile.close();
-            }
-            
-            if(null!=inputStream2){
-                inputStream2.close();
-            }
-            
-           return;
+           
            
         } catch (IOException e) {
            throw new OAException("IOException al obtener el ServletOutputStream.",OAException.ERROR); 
@@ -445,7 +455,36 @@ public class BpoReOnCO extends OAControllerImpl
             throw new OAException("SQLException al obtener el DataTemplate.",OAException.ERROR);
         } catch (XDOException e) {
             throw new OAException("XDOException al obtener el DataTemplate.",OAException.ERROR);
-        }
+        }finally{
+                 /** Cerrar en Cascada **/
+                  if(null!=iSPdfFile){
+                      try {
+                          iSPdfFile.close();
+                      } catch (IOException e) {
+                         e.printStackTrace();
+                      }
+                  }
+                  
+                  if(null!=bAoSPdfFile){
+                      try {
+                          bAoSPdfFile.close();
+                      } catch (IOException e) {
+                         e.printStackTrace();
+                      }
+                  }
+                  
+                  if(null!=bAIsXmlFile){
+                      try {
+                          bAIsXmlFile.close();
+                      } catch (IOException e) {
+                         e.printStackTrace();
+                      }
+                  }
+                  
+              }
+        
+        return;
+        
     } /** END if("EnviarPorCorreoEvt".equals(strEventParam)){ **/
           
        if("CopiarEvt".equals(strEventParam)){

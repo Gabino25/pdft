@@ -57,6 +57,8 @@ public class XxqpPdftMypHeaderVORowImpl extends OAViewRowImpl {
     public static final int FILE3 = 39;
     public static final int MODIFREALIZ = 40;
     public static final int STATUSMAIL = 41;
+    public static final int CURRENCYCODE = 42;
+    public static final int RAZONSOCIAL = 43;
 
     /**This is the default constructor (do not remove)
      */
@@ -475,6 +477,10 @@ public class XxqpPdftMypHeaderVORowImpl extends OAViewRowImpl {
             return getModifRealiz();
         case STATUSMAIL:
             return getStatusMail();
+        case CURRENCYCODE:
+            return getCurrencyCode();
+        case RAZONSOCIAL:
+            return getRazonSocial();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -610,6 +616,12 @@ public class XxqpPdftMypHeaderVORowImpl extends OAViewRowImpl {
             return;
         case STATUSMAIL:
             setStatusMail((String)value);
+            return;
+        case CURRENCYCODE:
+            setCurrencyCode((String)value);
+            return;
+        case RAZONSOCIAL:
+            setRazonSocial((String)value);
             return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
@@ -808,5 +820,29 @@ public class XxqpPdftMypHeaderVORowImpl extends OAViewRowImpl {
      */
     public void setStatusMail(String value) {
         setAttributeInternal(STATUSMAIL, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute CurrencyCode
+     */
+    public String getCurrencyCode() {
+        return (String) getAttributeInternal(CURRENCYCODE);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute CurrencyCode
+     */
+    public void setCurrencyCode(String value) {
+        setAttributeInternal(CURRENCYCODE, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute RazonSocial
+     */
+    public String getRazonSocial() {
+        return (String) getAttributeInternal(RAZONSOCIAL);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute RazonSocial
+     */
+    public void setRazonSocial(String value) {
+        setAttributeInternal(RAZONSOCIAL, value);
     }
 }

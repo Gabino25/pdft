@@ -20,6 +20,12 @@
                                     <oa:messageTextInput id="Comentarios" prompt="Comentarios" columns="90" rows="2" maximumLength="1000" viewName="XxqpPdftClientesHeaderVO1" viewAttr="Comentarios" disabled="false" styleClass="OraFieldText" readOnly="true"/>
                                     <oa:messageTextInput id="RFC" viewName="XxqpPdftClientesHeaderVO1" viewAttr="Rfc" prompt="RFC" readOnly="true" maximumLength="50"/>
                                     <oa:messageTextInput id="RazonSocial" viewName="XxqpPdftClientesHeaderVO1" viewAttr="RazonSocial" prompt="Razon Social" readOnly="true" maximumLength="500"/>
+                                    <oa:messageLovInput id="RegimenFiscal" externalListOfValues="/xxqp/oracle/apps/ar/pdft/altacliente/webui/QpSatRegimenFiscalRN" required="yes" prompt="Regimen Fiscal" readOnly="true" viewName="XxqpPdftClientesHeaderVO1" viewAttr="RegimenFiscalDesc">
+                                       <lovMappings>
+                                          <lovMap id="lovMap16" lovItem="FlexValue" resultTo="RegimenFiscalFV"/>
+                                          <lovMap id="lovMap17" lovItem="FlexDescription" resultTo="RegimenFiscal" criteriaFrom="RegimenFiscal"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
                                  </ui:contents>
                               </oa:tableLayout>
                            </ui:contents>
@@ -65,7 +71,7 @@
                                                       <oa:messageTextInput id="CiudadOMunicipioP" columns="90" maximumLength="150" required="yes" prompt="Ciudad o Municipio" readOnly="true" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCiudadOMpo" styleClass="OraFieldText"/>
                                                       <oa:messageChoice id="EstadoP" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EstadoVO" pickListValAttr="LookupCode" pickListDispAttr="Meaning" required="yes" prompt="Estado" viewName="XxqpPdftClientesDirFiscalVO1" readOnly="true" viewAttr="PrimEstadoC" styleClass="OraFieldText"/>
                                                       <oa:messageTextInput id="PrimCountryD" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCountryD" maximumLength="280" readOnly="true" prompt="Pais"/>
-                                                      <oa:messageTextInput id="PrimIdInternacional" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimIdInternacional" prompt="Id Internacional" readOnly="true" dataType="NUMBER"/>
+                                                      <oa:messageTextInput id="PrimIdInternacional" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimIdInternacional" readOnly="true" maximumLength="25"/>
                                                    </ui:contents>
                                                 </oa:tableLayout>
                                              </ui:contents>
@@ -134,7 +140,7 @@
                                                       <oa:messageTextInput id="CiudadOMunicipioS" columns="90" maximumLength="150" prompt="Ciudad o Municipio" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecCiudadOMpo"/>
                                                       <oa:messageChoice id="EstadoS" pickListDispAttr="Meaning" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.EstadoVO" pickListValAttr="LookupCode" prompt="Estado" styleClass="OraFieldText" readOnly="true" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecEstadoC"/>
                                                       <oa:messageTextInput id="SecCountryD" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecCountryD" prompt="Pais" readOnly="true" maximumLength="280"/>
-                                                      <oa:messageTextInput id="SecIdInternacional" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecIdInternacional" prompt="Id Internacional" readOnly="true" dataType="NUMBER"/>
+                                                      <oa:messageTextInput id="SecIdInternacional" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecIdInternacional" prompt="Id Internacional" readOnly="true" dataType="VARCHAR2" maximumLength="25"/>
                                                    </ui:contents>
                                                 </oa:tableLayout>
                                              </ui:contents>
@@ -248,7 +254,7 @@
                                                 <oa:messageRadioGroup id="RequiereFactura" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.SiNoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Requiere Factura" styleClass="OraFieldText" required="yes" readOnly="true" viewName="XxqpPdftClientesFactPagVO1" viewAttr="RequiereFacturaC"/>
                                                 <oa:messageRadioGroup id="MetodoDePago" pickListViewDef="xxqp.oracle.apps.ar.pdft.poplist.server.MetodoDePagoVO" pickListDispAttr="Meaning" pickListValAttr="LookupCode" prompt="Forma de Pago SAT" styleClass="OraFieldText" required="yes" readOnly="true" viewName="XxqpPdftClientesFactPagVO1" viewAttr="MetodoDePagoC"/>
                                                 <oa:messageTextInput id="NumCuenta" maximumLength="11" dataType="VARCHAR2" prompt="Num Cuenta de Pago" styleClass="OraFieldNumber" required="no" viewName="XxqpPdftClientesFactPagVO1" viewAttr="NumeroDeCuenta" readOnly="true"/>
-                                                <oa:messageLovInput id="NombreBanco" prompt="Razón Social del Banco Pagador" required="no" externalListOfValues="/xxqp/oracle/apps/ar/pdft/altacliente/webui/ExtBanksRN" columns="60" readOnly="true" viewName="XxqpPdftClientesFactPagVO1" viewAttr="NombreDelBancoD">
+                                                <oa:messageLovInput id="NombreBanco" prompt="Razón Social del Banco Pagador" required="no" externalListOfValues="/xxqp/oracle/apps/ar/pdft/altacliente/webui/ExtBanksRN" columns="60" readOnly="true" viewAttr="NombreDelBancoD" viewName="XxqpPdftClientesFactPagVO1">
                                                    <lovMappings>
                                                       <lovMap id="lovMap14" lovItem="BankName" resultTo="NombreBanco" criteriaFrom="NombreBanco"/>
                                                    </lovMappings>
@@ -393,6 +399,7 @@
                   </oa:button>
                </ui:contents>
             </oa:pageButtonBar>
+            <oa:formValue id="RegimenFiscalFV" viewName="XxqpPdftClientesHeaderVO1" viewAttr="RegimenFiscal"/>
          </ui:contents>
          <ui:userInfo>
             <oa:messageStyledText id="NombreUsuarioEBS" prompt="Nombre Usuario:" styleClass="OraFieldText"/>

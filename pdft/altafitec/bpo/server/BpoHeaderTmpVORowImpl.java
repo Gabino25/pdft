@@ -22,6 +22,7 @@ public class BpoHeaderTmpVORowImpl extends OAViewRowImpl {
     public static final int FILENAME2 = 7;
     public static final int FILE3 = 8;
     public static final int FILENAME3 = 9;
+    public static final int CURRENCYCODE = 10;
 
     /**This is the default constructor (do not remove)
      */
@@ -82,6 +83,8 @@ public class BpoHeaderTmpVORowImpl extends OAViewRowImpl {
             return getFile3();
         case FILENAME3:
             return getFileName3();
+        case CURRENCYCODE:
+            return getCurrencyCode();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -121,6 +124,9 @@ public class BpoHeaderTmpVORowImpl extends OAViewRowImpl {
             return;
         case FILENAME3:
             setFileName3((String)value);
+            return;
+        case CURRENCYCODE:
+            setCurrencyCode((String)value);
             return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
@@ -222,5 +228,17 @@ public class BpoHeaderTmpVORowImpl extends OAViewRowImpl {
      */
     public void setFileName3(String value) {
         setAttributeInternal(FILENAME3, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute CurrencyCode
+     */
+    public String getCurrencyCode() {
+        return (String) getAttributeInternal(CURRENCYCODE);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute CurrencyCode
+     */
+    public void setCurrencyCode(String value) {
+        setAttributeInternal(CURRENCYCODE, value);
     }
 }

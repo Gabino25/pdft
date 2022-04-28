@@ -53,9 +53,8 @@ SELECT XxqpPdftClientesDirFiscalEO.ID,
        XxqpPdftClientesDirFiscalEO.SEC_NUMERO_EXT, 
        XxqpPdftClientesDirFiscalEO.SEC_NUMERO_INT, 
        XxqpPdftClientesDirFiscalEO.PRIM_COUNTRY, 
-       XxqpPdftClientesDirFiscalEO.PRIM_ID_INTERNACIONAL, 
        XxqpPdftClientesDirFiscalEO.SEC_COUNTRY, 
-       XxqpPdftClientesDirFiscalEO.SEC_ID_INTERNACIONAL,  ( SELECT  T.TERRITORY_SHORT_NAME
+         ( SELECT  T.TERRITORY_SHORT_NAME
      FROM FND_TERRITORIES_TL T, FND_TERRITORIES B
     WHERE B.TERRITORY_CODE = T.TERRITORY_CODE
           AND T.LANGUAGE = 'ESA'   
@@ -64,7 +63,9 @@ SELECT XxqpPdftClientesDirFiscalEO.ID,
      FROM FND_TERRITORIES_TL T, FND_TERRITORIES B
     WHERE B.TERRITORY_CODE = T.TERRITORY_CODE
           AND T.LANGUAGE = 'ESA'   
-          AND B.TERRITORY_CODE = XxqpPdftClientesDirFiscalEO.SEC_COUNTRY ) SEC_COUNTRY_D
+          AND B.TERRITORY_CODE = XxqpPdftClientesDirFiscalEO.SEC_COUNTRY ) SEC_COUNTRY_D,
+XxqpPdftClientesDirFiscalEO.PRIM_ID_INTERNACIONAL,
+XxqpPdftClientesDirFiscalEO.SEC_ID_INTERNACIONAL  
 FROM XXQP_PDFT_CLIENTES_DIR_FISCAL XxqpPdftClientesDirFiscalEO
    ]]></SQLQuery>
    <DesignTime>
@@ -351,22 +352,10 @@ FROM XXQP_PDFT_CLIENTES_DIR_FISCAL XxqpPdftClientesDirFiscalEO
       AliasName="PRIM_COUNTRY" >
    </ViewAttribute>
    <ViewAttribute
-      Name="PrimIdInternacional"
-      EntityAttrName="PrimIdInternacional"
-      EntityUsage="XxqpPdftClientesDirFiscalEO"
-      AliasName="PRIM_ID_INTERNACIONAL" >
-   </ViewAttribute>
-   <ViewAttribute
       Name="SecCountry"
       EntityAttrName="SecCountry"
       EntityUsage="XxqpPdftClientesDirFiscalEO"
       AliasName="SEC_COUNTRY" >
-   </ViewAttribute>
-   <ViewAttribute
-      Name="SecIdInternacional"
-      EntityAttrName="SecIdInternacional"
-      EntityUsage="XxqpPdftClientesDirFiscalEO"
-      AliasName="SEC_ID_INTERNACIONAL" >
    </ViewAttribute>
    <ViewAttribute
       Name="PrimCountryD"
@@ -390,5 +379,17 @@ FROM XXQP_PDFT_CLIENTES_DIR_FISCAL XxqpPdftClientesDirFiscalEO
       AliasName="SEC_COUNTRY_D"
       Expression="SEC_COUNTRY_D"
       SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimIdInternacional"
+      EntityAttrName="PrimIdInternacional"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="PRIM_ID_INTERNACIONAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecIdInternacional"
+      EntityAttrName="SecIdInternacional"
+      EntityUsage="XxqpPdftClientesDirFiscalEO"
+      AliasName="SEC_ID_INTERNACIONAL" >
    </ViewAttribute>
 </ViewObject>

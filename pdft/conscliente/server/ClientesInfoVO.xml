@@ -19,7 +19,7 @@ SELECT DISTINCT p.party_id,
           p.tax_reference,
           NVL (p.attribute1, p.jgzz_fiscal_code) taxpayer_id,
           p.duns_number_c duns_number,
-          NVL (p.party_name, p.known_as) known_as,
+          NVL (p.known_as,p.party_name) known_as,
           /** 24042020 buscar por razon social **/
           p.known_as2,
           p.known_as3,

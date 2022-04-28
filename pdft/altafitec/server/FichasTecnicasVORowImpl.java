@@ -25,7 +25,8 @@ public class FichasTecnicasVORowImpl extends OAViewRowImpl {
     public static final int CREATIONDATE = 11;
     public static final int ORIGIN = 12;
     public static final int EJECUTIVOCODE = 13;
-    public static final int ISSELECTED = 14;
+    public static final int RAZONSOCIAL = 14;
+    public static final int ISSELECTED = 15;
 
     /**This is the default constructor (do not remove)
      */
@@ -209,6 +210,8 @@ public class FichasTecnicasVORowImpl extends OAViewRowImpl {
             return getOrigin();
         case EJECUTIVOCODE:
             return getEjecutivoCode();
+        case RAZONSOCIAL:
+            return getRazonSocial();
         case ISSELECTED:
             return getIsSelected();
         default:
@@ -226,6 +229,9 @@ public class FichasTecnicasVORowImpl extends OAViewRowImpl {
             return;
         case EJECUTIVOCODE:
             setEjecutivoCode((String)value);
+            return;
+        case RAZONSOCIAL:
+            setRazonSocial((String)value);
             return;
         case ISSELECTED:
             setIsSelected((String)value);
@@ -270,5 +276,17 @@ public class FichasTecnicasVORowImpl extends OAViewRowImpl {
      */
     public void setEjecutivoCode(String value) {
         setAttributeInternal(EJECUTIVOCODE, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute RazonSocial
+     */
+    public String getRazonSocial() {
+        return (String) getAttributeInternal(RAZONSOCIAL);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute RazonSocial
+     */
+    public void setRazonSocial(String value) {
+        setAttributeInternal(RAZONSOCIAL, value);
     }
 }

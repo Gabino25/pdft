@@ -78,11 +78,13 @@ public class Utils {
         if(null==strXML){
          return;
         }
+        ByteArrayInputStream bAiSXmlFile = null; 
+        ByteArrayOutputStream bAoSXmlFile = null; 
         try {
             os = response.getOutputStream();
             byte[] aByte = strXML.getBytes();
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(aByte);
-            ByteArrayOutputStream pdfFile = new ByteArrayOutputStream();
+            bAiSXmlFile = new ByteArrayInputStream(aByte);
+            bAoSXmlFile = new ByteArrayOutputStream();
             AppsContext appsContext = ((OADBTransactionImpl)altaDeClienteAMImpl.getOADBTransaction()).getAppsContext();
             Locale locale = ((OADBTransactionImpl)altaDeClienteAMImpl.getOADBTransaction()).getUserLocale();
             TemplateHelper.processTemplate(appsContext, 
@@ -90,12 +92,12 @@ public class Utils {
                                            "XXQP_PDFT_CUSTOMER", 
                                            locale.getLanguage(), 
                                            locale.getCountry(), 
-                                           inputStream, 
+                                           bAiSXmlFile, 
                                            TemplateHelper.OUTPUT_TYPE_PDF, 
                                             null, 
-                                           pdfFile);
+                                           bAoSXmlFile);
 
-                                byte[] b = pdfFile.toByteArray();
+                                byte[] b = bAoSXmlFile.toByteArray();
                                 response.setContentLength(b.length);
                                 os.write(b, 0, b.length);
                                 os.flush();
@@ -107,8 +109,28 @@ public class Utils {
             throw new OAException("SQLException revisarPDF al obtener el DataTemplate.",OAException.ERROR);
         } catch (XDOException e) {
             throw new OAException("XDOException revisarPDF al obtener el DataTemplate.",OAException.ERROR);
+        }finally{
+            /** Realizar cierre en cascada **/
+           if(null!=bAoSXmlFile){
+               try {
+                   bAoSXmlFile.close();
+               } catch (IOException e) {
+                   e.printStackTrace();
+               }
+           }
+           
+            if(null!=bAiSXmlFile){
+                try {
+                    bAiSXmlFile.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            
         }
-        
+
+
+      
     }
 
     public static void enviarPDFConCedula(AltaDeClienteAMImpl altaDeClienteAMImpl
@@ -145,12 +167,17 @@ public class Utils {
         String strPrimCedulaFileName = rowDirFiscal.getPrimCedulaFileName(); 
         String strPrimCedulaContentType = rowDirFiscal.getPrimCedulaContentType(); 
         BlobDomain blobPrimCedulaFile = rowDirFiscal.getPrimCedulaFile(); 
-        InputStream isPrimCedulaFile = blobPrimCedulaFile.getInputStream(); 
+        String strRazonSocial = rowHeader.getRazonSocial();
+         
+        ByteArrayInputStream bAiSxmlCliente = null;
+        ByteArrayOutputStream bAoSpdfFile = null; 
+        InputStream iSpdfFile = null; 
+        InputStream isPrimCedulaFile = blobPrimCedulaFile.getInputStream();
         
         try {
             byte[] aByte = strXML.getBytes();
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(aByte);
-            ByteArrayOutputStream pdfFile = new ByteArrayOutputStream();
+            bAiSxmlCliente = new ByteArrayInputStream(aByte);
+            bAoSpdfFile = new ByteArrayOutputStream();
             AppsContext appsContext = ((OADBTransactionImpl)altaDeClienteAMImpl.getOADBTransaction()).getAppsContext();
             Locale locale = ((OADBTransactionImpl)altaDeClienteAMImpl.getOADBTransaction()).getUserLocale();
             TemplateHelper.processTemplate(appsContext, 
@@ -158,14 +185,14 @@ public class Utils {
                                            "XXQP_PDFT_CUSTOMER", 
                                            locale.getLanguage(), 
                                            locale.getCountry(), 
-                                           inputStream, 
+                                           bAiSxmlCliente, 
                                            TemplateHelper.OUTPUT_TYPE_PDF, 
                                             null, 
-                                           pdfFile);
+                                           bAoSpdfFile);
 
-                                byte[] b = pdfFile.toByteArray();
-                                InputStream inputStream2 = new ByteArrayInputStream(b);
-                                altaDeClienteAMImpl.enviaCorreos(inputStream2
+                                byte[] b = bAoSpdfFile.toByteArray();
+                                 iSpdfFile = new ByteArrayInputStream(b);
+                                altaDeClienteAMImpl.enviaCorreos(iSpdfFile
                                                                 ,strNombreCliente
                                                                 ,strRFC
                                                                 ,strNombrePdf
@@ -173,14 +200,54 @@ public class Utils {
                                                                 ,strPrimCedulaFileName
                                                                 ,strPrimCedulaContentType
                                                                 ,pOperacion
+                                                                ,strRazonSocial
                                                                 );
+            
         } catch (IOException e) {
            throw new OAException("IOException revisarPDF al obtener el ServletOutputStream.",OAException.ERROR); 
         } catch (SQLException e) {
             throw new OAException("SQLException revisarPDF al obtener el DataTemplate.",OAException.ERROR);
         } catch (XDOException e) {
             throw new OAException("XDOException revisarPDF al obtener el DataTemplate.",OAException.ERROR);
+        }finally{
+        
+           /** Realizar cierre en cascada **/
+            if(null!=iSpdfFile){
+                try {
+                    iSpdfFile.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            
+            if(null!=bAoSpdfFile){
+                try {
+                    bAoSpdfFile.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            
+            if(null!=bAiSxmlCliente){
+                try {
+                    bAiSxmlCliente.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            
+           if(null!=isPrimCedulaFile){
+               try {
+                   isPrimCedulaFile.close();
+               } catch (IOException e) {
+                   e.printStackTrace();
+               }
+           }
+            
         }
+
+
+       
         System.out.println("Finaliza xxqp.oracle.apps.ar.pdft.altacliente.Utils.enviarPDFConCedula");
     }
 }

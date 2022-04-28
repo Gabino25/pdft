@@ -16,9 +16,11 @@ public class ClientesInfoFiTecVOImpl extends OAViewObjectImpl {
     }
 
     void filterClientesInfoFiTecVO(String pStrNombreDeCliente, 
+                                   String pStrRazonSocialSearch,
                                    String pStrRFC) {
         if((null==pStrNombreDeCliente||"".equals(pStrNombreDeCliente))
         &&(null==pStrRFC||"".equals(pStrRFC))
+        &&(null==pStrRazonSocialSearch||"".equals(pStrRazonSocialSearch))
           ){
          return;
         }
@@ -29,6 +31,9 @@ public class ClientesInfoFiTecVOImpl extends OAViewObjectImpl {
         /* 4. Set attribute values to filter on in appropriate view criteria rows */ 
         if(null!=pStrNombreDeCliente&&!"".equals(pStrNombreDeCliente)){
         vcr1.setAttribute("KnownAs",pStrNombreDeCliente); 
+        }
+        if(null!=pStrRazonSocialSearch&&!"".equals(pStrRazonSocialSearch)){
+        vcr1.setAttribute("RazonSocial",pStrRazonSocialSearch); 
         }
         if(null!=pStrRFC&&!"".equals(pStrRFC)){
         vcr1.setAttribute("JgzzFiscalCode",pStrRFC); 

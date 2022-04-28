@@ -119,6 +119,14 @@ public class AltaFichaTecnicaCO extends OAControllerImpl
           }
       }
       
+      OAMessageChoiceBean CurrencyBean = (OAMessageChoiceBean)webBean.findChildRecursive("Currency");
+      String strCurrencyCodeValue = null; 
+      if(null!=CurrencyBean){
+          if(null!=CurrencyBean.getValue(pageContext)){
+              strCurrencyCodeValue = CurrencyBean.getValue(pageContext).toString();
+          }
+      }
+      
       OAMessageChoiceBean EjecutivoBean = (OAMessageChoiceBean)webBean.findChildRecursive("Ejecutivo");
       String strEjecutivoValue = null; 
       if(null!=EjecutivoBean){
@@ -145,6 +153,7 @@ public class AltaFichaTecnicaCO extends OAControllerImpl
           parameters.put("pUnidadDeNegocio",strUnidadDeNegocioValue);
           parameters.put("pEmpresaQueFactura",strEmpresaQueFacturaValue);
           parameters.put("pCicloFacturacion",strCicloFacturacionValue);
+          parameters.put("pCurrencyCode",strCurrencyCodeValue);
           parameters.put("pPartyId",strPartyId);
           parameters.put("pEjecutivo",strEjecutivoValue);
           pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/masiplat/webui/MasivoYPlatinumPG&"+OASubTabLayoutBean.OA_SELECTED_SUBTAB_IDX+"=0" /*url*/
@@ -164,6 +173,7 @@ public class AltaFichaTecnicaCO extends OAControllerImpl
           parameters.put("pUnidadDeNegocio",strUnidadDeNegocioValue);
           parameters.put("pEmpresaQueFactura",strEmpresaQueFacturaValue);
           parameters.put("pCicloFacturacion",strCicloFacturacionValue);
+          parameters.put("pCurrencyCode",strCurrencyCodeValue);
           parameters.put("pPartyId",strPartyId);
           parameters.put("pEjecutivo",strEjecutivoValue);
           
@@ -183,6 +193,7 @@ public class AltaFichaTecnicaCO extends OAControllerImpl
           parameters.put("pUnidadDeNegocio",strUnidadDeNegocioValue);
           parameters.put("pEmpresaQueFactura",strEmpresaQueFacturaValue);
           parameters.put("pCicloFacturacion",strCicloFacturacionValue);
+          parameters.put("pCurrencyCode",strCurrencyCodeValue);
           parameters.put("pPartyId",strPartyId);
           pageContext.setForwardURL("OA.jsp?page=/xxqp/oracle/apps/ar/pdft/altafitec/qplabs/webui/QpLabsPG&"+OASubTabLayoutBean.OA_SELECTED_SUBTAB_IDX+"=0" /*url*/
                                     ,null /*functionName*/

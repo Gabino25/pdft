@@ -16,6 +16,7 @@ import oracle.apps.fnd.framework.webui.beans.OAWebBean;
 import oracle.apps.fnd.framework.webui.beans.form.OAFormValueBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageChoiceBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageDateFieldBean;
+import oracle.apps.fnd.framework.webui.beans.message.OAMessageLovInputBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageStyledTextBean;
 import oracle.apps.fnd.framework.webui.beans.message.OAMessageTextInputBean;
 
@@ -92,7 +93,8 @@ public class BusquedaDeFichaTecnicaCO extends OAControllerImpl
       java.sql.Timestamp sqlTimestampFechaInicialOperacionValue = null; 
       java.sql.Timestamp sqlTimestampFechaCreacionValue = null; 
       String strFvEjecutivoCode = null; 
-      String strNombreDelClienteValue = null; 
+      String strNombreDelClienteValue = null;
+      String strRazonSocialValue = null;
       String strUnidadDeNegocio = null; 
       String strEmpresaQueFactura = null;
       String strCicloFacturacion = null; 
@@ -150,12 +152,20 @@ public class BusquedaDeFichaTecnicaCO extends OAControllerImpl
       }
      }
       
-      OAMessageTextInputBean pNombreDelClienteBean = (OAMessageTextInputBean)webBean.findChildRecursive("pNombreDelCliente"); 
-      if(null!=pNombreDelClienteBean){
-       if(null!=pNombreDelClienteBean.getValue(pageContext)){
-           strNombreDelClienteValue = pNombreDelClienteBean.getValue(pageContext).toString();
+      
+      OAMessageLovInputBean NombreDeClienteBean = (OAMessageLovInputBean)webBean.findChildRecursive("pNombreDelCliente");
+       if(null!=NombreDeClienteBean){
+        if(null!=NombreDeClienteBean.getValue(pageContext)){
+         strNombreDelClienteValue = NombreDeClienteBean.getValue(pageContext).toString();
+        }
        }
-      }
+        
+        OAMessageLovInputBean RazonSocialSearchBean = (OAMessageLovInputBean)webBean.findChildRecursive("pRazonSocial");
+         if(null!=RazonSocialSearchBean){
+          if(null!=RazonSocialSearchBean.getValue(pageContext)){
+           strRazonSocialValue = RazonSocialSearchBean.getValue(pageContext).toString();
+          }
+         }
       
       OAMessageChoiceBean UnidadDeNegocioBean = (OAMessageChoiceBean)webBean.findChildRecursive("pUnidadDeNegocio"); 
       if(null!=UnidadDeNegocioBean){
@@ -190,6 +200,7 @@ public class BusquedaDeFichaTecnicaCO extends OAControllerImpl
                                                      ,strUnidadDeNegocio
                                                      ,strEmpresaQueFactura
                                                      ,strCicloFacturacion
+                                                     ,strRazonSocialValue
                                                      ); 
       }
      } /** END if("BuscarEvt".equals(strEventParam)){ **/

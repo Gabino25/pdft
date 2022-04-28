@@ -27,6 +27,12 @@
                                     <oa:messageTextInput id="Comentarios" prompt="Comentarios" columns="90" rows="2" maximumLength="1000" viewName="XxqpPdftClientesHeaderVO1" viewAttr="Comentarios" disabled="false" styleClass="OraFieldText" readOnly="false"/>
                                     <oa:messageTextInput id="RFC" prompt="RFC" columns="90" maximumLength="50" viewName="XxqpPdftClientesHeaderVO1" viewAttr="Rfc" readOnly="false" styleClass="OraFieldText" disabled="false" required="yes"/>
                                     <oa:messageTextInput id="RazonSocial" prompt="Razon Social" columns="90" maximumLength="500" viewName="XxqpPdftClientesHeaderVO1" viewAttr="RazonSocial" readOnly="false" styleClass="OraFieldText" disabled="false" required="yes"/>
+                                    <oa:messageLovInput id="RegimenFiscal" externalListOfValues="/xxqp/oracle/apps/ar/pdft/altacliente/webui/QpSatRegimenFiscalRN" required="yes" prompt="Regimen Fiscal" viewName="XxqpPdftClientesHeaderVO1" viewAttr="RegimenFiscalDesc">
+                                       <lovMappings>
+                                          <lovMap id="lovMap16" lovItem="FlexValue" resultTo="RegimenFiscalFV"/>
+                                          <lovMap id="lovMap17" lovItem="FlexDescription" resultTo="RegimenFiscal" criteriaFrom="RegimenFiscal"/>
+                                       </lovMappings>
+                                    </oa:messageLovInput>
                                  </ui:contents>
                               </oa:tableLayout>
                            </ui:contents>
@@ -77,7 +83,7 @@
                                                             <lovMap id="lovMap12" lovItem="TerritoryCode" resultTo="PaisPFV"/>
                                                          </lovMappings>
                                                       </oa:messageLovInput>
-                                                      <oa:messageTextInput id="PrimIdInternacional" dataType="NUMBER" prompt="ID Internacional" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimIdInternacional"/>
+                                                      <oa:messageTextInput id="PrimIdInternacional" dataType="VARCHAR2" prompt="ID Internacional" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimIdInternacional" maximumLength="25"/>
                                                    </ui:contents>
                                                 </oa:tableLayout>
                                              </ui:contents>
@@ -151,7 +157,7 @@
                                                             <lovMap id="lovMap13" lovItem="TerritoryCode" resultTo="PaisSFV"/>
                                                          </lovMappings>
                                                       </oa:messageLovInput>
-                                                      <oa:messageTextInput id="SecIdInternacional" dataType="NUMBER" prompt="ID Internacional" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecIdInternacional"/>
+                                                      <oa:messageTextInput id="SecIdInternacional" dataType="VARCHAR2" prompt="ID Internacional" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecIdInternacional" maximumLength="25"/>
                                                    </ui:contents>
                                                 </oa:tableLayout>
                                              </ui:contents>
@@ -479,6 +485,7 @@
             <oa:formValue id="PaisPFV" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="PrimCountry"/>
             <oa:formValue id="PaisSFV" viewName="XxqpPdftClientesDirFiscalVO1" viewAttr="SecCountry"/>
             <oa:formValue id="BankIdFV" viewName="XxqpPdftClientesFactPagVO1" viewAttr="NombreDelBanco"/>
+            <oa:formValue id="RegimenFiscalFV" viewName="XxqpPdftClientesHeaderVO1" viewAttr="RegimenFiscal"/>
          </ui:contents>
          <ui:returnNavigation>
             <oa:link id="RegresarPaginaAnterior" text="Regresar a Pagina Anterior" destination="" serverUnvalidated="true" rendered="true">

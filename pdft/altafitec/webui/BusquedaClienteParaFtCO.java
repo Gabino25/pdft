@@ -70,6 +70,7 @@ public class BusquedaClienteParaFtCO extends OAControllerImpl
     super.processFormRequest(pageContext, webBean);
     AltaFichaTecnicaAMImpl altaFichaTecnicaAMImpl = (AltaFichaTecnicaAMImpl)pageContext.getApplicationModule(webBean);
     String strNombreDeCliente = null; 
+    String strRazonSocialSearch = null;
     String strRFC = null; 
     
     OAMessageLovInputBean NombreDeClienteBean = (OAMessageLovInputBean)webBean.findChildRecursive("NombreDeCliente");
@@ -79,6 +80,13 @@ public class BusquedaClienteParaFtCO extends OAControllerImpl
       }
      }
       
+      OAMessageLovInputBean RazonSocialSearchBean = (OAMessageLovInputBean)webBean.findChildRecursive("RazonSocialSearch");
+       if(null!=RazonSocialSearchBean){
+        if(null!=RazonSocialSearchBean.getValue(pageContext)){
+         strRazonSocialSearch = RazonSocialSearchBean.getValue(pageContext).toString();
+        }
+       }
+       
       OAMessageLovInputBean RFCBean = (OAMessageLovInputBean)webBean.findChildRecursive("RFC");
       if(null!=RFCBean){
         if(null!=RFCBean.getValue(pageContext)){
@@ -87,6 +95,7 @@ public class BusquedaClienteParaFtCO extends OAControllerImpl
       }
     
     System.out.println("strNombreDeCliente:"+strNombreDeCliente);
+    System.out.println("strRazonSocialSearch:"+strRazonSocialSearch);
     System.out.println("strRFC:"+strRFC);
     
     String strEventParam = pageContext.getParameter(this.EVENT_PARAM);
@@ -95,6 +104,7 @@ public class BusquedaClienteParaFtCO extends OAControllerImpl
     if("BuscarEvt".equals(strEventParam)){
     if(null!=altaFichaTecnicaAMImpl){
         altaFichaTecnicaAMImpl.initClientesInfoFiTecVO(strNombreDeCliente
+                                                      ,strRazonSocialSearch
                                                       ,strRFC
                                                       );
      }

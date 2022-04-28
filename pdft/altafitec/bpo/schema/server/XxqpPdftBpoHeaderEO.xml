@@ -459,6 +459,18 @@
       SQLType="CLOB"
       TableName="XXQP_PDFT_BPO_HEADER" >
    </Attribute>
+   <Attribute
+      Name="CurrencyCode"
+      Precision="15"
+      ColumnName="CURRENCY_CODE"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_BPO_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="15" />
+      </DesignTime>
+   </Attribute>
    <AccessorAttribute
       Name="XxqpPdftBpoPrecioEO"
       Association="xxqp.oracle.apps.ar.pdft.altafitec.bpo.schema.server.XxqpPdftBpoPrecioFkAssoc"

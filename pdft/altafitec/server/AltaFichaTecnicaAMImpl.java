@@ -95,10 +95,12 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
     }
 
     public void initClientesInfoFiTecVO(String pStrNombreDeCliente, 
+                                        String pStrRazonSocialSearch,
                                         String pStrRFC) {
         ClientesInfoFiTecVOImpl clientesInfoFiTecVOImpl = getClientesInfoFiTecVO1(); 
         if(null!=clientesInfoFiTecVOImpl){
             clientesInfoFiTecVOImpl.filterClientesInfoFiTecVO(pStrNombreDeCliente
+                                                             ,pStrRazonSocialSearch
                                                              ,pStrRFC);
         }
     }
@@ -165,7 +167,8 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
       OAMessageTextInputBean FechaActualBean = (OAMessageTextInputBean)webBean.findChildRecursive("FechaActual");                 
       /** OAMessageTextInputBean EjecutivoBean = (OAMessageTextInputBean)webBean.findChildRecursive("Ejecutivo");  NA 17072018 **/ 
       OAMessageTextInputBean NombreDelClienteBean = (OAMessageTextInputBean)webBean.findChildRecursive("NombreDelCliente");  
-      OAMessageLovInputBean NombreDelClienteLovBean = (OAMessageLovInputBean)webBean.findChildRecursive("NombreDelClienteLov");  
+      OAMessageLovInputBean NombreDelClienteLovBean = (OAMessageLovInputBean)webBean.findChildRecursive("NombreDelClienteLov");
+      OAMessageLovInputBean RazonSocialLovBean = (OAMessageLovInputBean)webBean.findChildRecursive("RazonSocialLov");
       OAFormValueBean PartyIdBean = (OAFormValueBean)webBean.findChildRecursive("PartyId");
            
      OADBTransaction  oADBTransaction = this.getOADBTransaction();
@@ -179,6 +182,7 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
                              "              and user_id = fnd_profile.value('USER_ID')\n" + 
                              "           ) ejecutivo\n" + 
                              "         ,p.known_as nombre_del_cliente\n" + 
+                             "         ,p.razon_social \n" + 
                              "   from XXQP_PDFT_CLIENTES_INFO_V p\n" + 
                              "  where p.party_id = ? ";
 
@@ -208,6 +212,9 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
                 }
                 if(null!=NombreDelClienteLovBean){
                     NombreDelClienteLovBean.setValue(pageContext,resultSet.getString("nombre_del_cliente"));
+                }
+                if(null!=RazonSocialLovBean){
+                      RazonSocialLovBean.setValue(pageContext,resultSet.getString("razon_social"));
                 }
                 if(null!=PartyIdBean){
                     PartyIdBean.setValue(pageContext,resultSet.getString("party_id"));
@@ -285,6 +292,7 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
                                     ,String pStrUnidadDeNegocio
                                     ,String pStrEmpresaQueFactura
                                     ,String pStrCicloFacturacion
+                                    ,String pStrRazonSocialValue
                                     ) {
        oracle.jbo.domain.Number numNoFichaTecnica = null;
        oracle.jbo.domain.Date fechaInicialOperacion = null; 
@@ -316,6 +324,7 @@ public class AltaFichaTecnicaAMImpl extends OAApplicationModuleImpl {
                                               ,pStrUnidadDeNegocio
                                               ,pStrEmpresaQueFactura
                                               ,pStrCicloFacturacion
+                                              ,pStrRazonSocialValue
                                               ); 
         }  /** END if(null!=fichasTecnicasVOImpl){ **/
 

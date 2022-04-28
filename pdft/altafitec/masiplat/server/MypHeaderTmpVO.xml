@@ -132,4 +132,13 @@
       AliasName="VIEW_ATTR"
       SQLType="VARCHAR" >
    </ViewAttribute>
+   <ViewAttribute
+      Name="CurrencyCode"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
 </ViewObject>

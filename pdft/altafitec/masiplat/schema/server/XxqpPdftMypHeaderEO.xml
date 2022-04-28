@@ -459,6 +459,18 @@
       SQLType="CLOB"
       TableName="XXQP_PDFT_MYP_HEADER" >
    </Attribute>
+   <Attribute
+      Name="CurrencyCode"
+      Precision="15"
+      ColumnName="CURRENCY_CODE"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_MYP_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="15" />
+      </DesignTime>
+   </Attribute>
    <AccessorAttribute
       Name="XxqpPdftMypGeneralEO"
       Association="xxqp.oracle.apps.ar.pdft.altafitec.masiplat.schema.server.XxqpPdftMypGeneralFkAssoc"

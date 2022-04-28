@@ -37,6 +37,8 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
     public static final int RAZONSOCIAL = 21;
     public static final int EJECUTIVO = 22;
     public static final int STATUS = 23;
+    public static final int REGIMENFISCAL = 24;
+    public static final int REGIMENFISCALDESC = 25;
 
     /**This is the default constructor (do not remove)
      */
@@ -376,6 +378,10 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
             return getEjecutivo();
         case STATUS:
             return getStatus();
+        case REGIMENFISCAL:
+            return getRegimenFiscal();
+        case REGIMENFISCALDESC:
+            return getRegimenFiscalDesc();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -459,6 +465,9 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
         case STATUS:
             setStatus((String)value);
             return;
+        case REGIMENFISCAL:
+            setRegimenFiscal((String)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -523,5 +532,29 @@ public class XxqpPdftClientesHeaderVORowImpl extends OAViewRowImpl {
      */
     public void setStatus(String value) {
         setAttributeInternal(STATUS, value);
+    }
+
+    /**Gets the attribute value for REGIMEN_FISCAL using the alias name RegimenFiscal
+     */
+    public String getRegimenFiscal() {
+        return (String) getAttributeInternal(REGIMENFISCAL);
+    }
+
+    /**Sets <code>value</code> as attribute value for REGIMEN_FISCAL using the alias name RegimenFiscal
+     */
+    public void setRegimenFiscal(String value) {
+        setAttributeInternal(REGIMENFISCAL, value);
+    }
+
+    /**Gets the attribute value for the calculated attribute RegimenFiscalDesc
+     */
+    public String getRegimenFiscalDesc() {
+        return (String) getAttributeInternal(REGIMENFISCALDESC);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute RegimenFiscalDesc
+     */
+    public void setRegimenFiscalDesc(String value) {
+        setAttributeInternal(REGIMENFISCALDESC, value);
     }
 }

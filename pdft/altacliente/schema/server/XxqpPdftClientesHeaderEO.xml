@@ -318,6 +318,18 @@
          <Attr Name="_DisplaySize" Value="30" />
       </DesignTime>
    </Attribute>
+   <Attribute
+      Name="RegimenFiscal"
+      Precision="150"
+      ColumnName="REGIMEN_FISCAL"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXQP_PDFT_CLIENTES_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </Attribute>
    <AccessorAttribute
       Name="XxqpPdftClientesDirFiscalEO"
       Association="xxqp.oracle.apps.ar.pdft.altacliente.schema.server.XxqpPdftClientesDirFisFkAssoc"

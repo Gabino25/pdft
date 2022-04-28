@@ -88,6 +88,7 @@ public class MasivoYPlatinumCO extends OAControllerImpl
       String strPUnidadDeNegocio = pageContext.getParameter("pUnidadDeNegocio");
       String strPEmpresaQueFactura = pageContext.getParameter("pEmpresaQueFactura");
       String strpCicloFacturacion = pageContext.getParameter("pCicloFacturacion");
+      String strpCurrencyCode = pageContext.getParameter("pCurrencyCode");
       String strpEjecutivo = pageContext.getParameter("pEjecutivo");
       
       System.out.println("strpCicloFacturacion:"+strpCicloFacturacion);
@@ -279,7 +280,11 @@ public class MasivoYPlatinumCO extends OAControllerImpl
                  if(null!=strpCicloFacturacion&&!"".equals(strpCicloFacturacion))
                CicloFacturacionBean.setValue(pageContext,strpCicloFacturacion);
              }
-            
+            OAMessageChoiceBean CurrencyBean = (OAMessageChoiceBean)webBean.findChildRecursive("Currency");
+             if(null!=CurrencyBean){
+                 if(null!=strpCurrencyCode&&!"".equals(strpCurrencyCode))
+                 CurrencyBean.setValue(pageContext,strpCurrencyCode);
+             }
             
              
             if(null!=masivoYPlatinumAMImpl){
@@ -445,7 +450,8 @@ public class MasivoYPlatinumCO extends OAControllerImpl
     String strEstatusValue = null; 
     String strUnidadDeNegocioValue = null; 
     String strEmpresaQueFacturaValue = null; 
-    String strCicloFacturacionValue = null; 
+    String strCicloFacturacionValue = null;
+    String strCurrencyValue = null;
     String strFechaInicioOperacionValue = null; 
     String strPartyID = null; 
     String strEjecutivoValue = null; 
@@ -546,7 +552,9 @@ public class MasivoYPlatinumCO extends OAControllerImpl
       
      strEmpresaQueFacturaValue = getValueFromOAMessageChoiceBean(pageContext,webBean,"EmpresaQueFactura");
      strCicloFacturacionValue =   getValueFromOAMessageChoiceBean(pageContext,webBean,"CicloFacturacion");
-     
+     strCurrencyValue =   getValueFromOAMessageChoiceBean(pageContext,webBean,"Currency");
+      
+      
      OAMessageDateFieldBean FechaInicioOperacionBean = (OAMessageDateFieldBean)webBean.findChildRecursive("FechaInicioOperacion");
      if(null!=FechaInicioOperacionBean){
        if(null!=FechaInicioOperacionBean.getValue(pageContext)){
@@ -782,6 +790,7 @@ public class MasivoYPlatinumCO extends OAControllerImpl
                                     , strExamineFileName3  
                                     , strExamineContentType3
                                     , ExamineByteStream3 
+                                    , strCurrencyValue
                                     );
                                  
         masivoYPlatinumAMImpl.fillGeneral(strMasiYPlatHeaderId

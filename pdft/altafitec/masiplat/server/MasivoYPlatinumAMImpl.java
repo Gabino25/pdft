@@ -143,7 +143,8 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
     
         OAMessageTextInputBean FechaActualBean = (OAMessageTextInputBean)webBean.findChildRecursive("Fecha");                 
         /** OAMessageTextInputBean EjecutivoBean = (OAMessageTextInputBean)webBean.findChildRecursive("Ejecutivo"); NA 13072018 **/  
-        OAMessageTextInputBean NombreDelClienteBean = (OAMessageTextInputBean)webBean.findChildRecursive("NombreDelCliente");  
+        OAMessageTextInputBean NombreDelClienteBean = (OAMessageTextInputBean)webBean.findChildRecursive("NombreDelCliente"); 
+        OAMessageTextInputBean RazonSocialDelClienteBean = (OAMessageTextInputBean)webBean.findChildRecursive("RazonSocialDelCliente"); 
         OAMessageChoiceBean EstatusBean = (OAMessageChoiceBean)webBean.findChildRecursive("Estatus"); 
         OAFormValueBean PartyIdBean = (OAFormValueBean)webBean.findChildRecursive("PartyId"); 
         if(null!=EstatusBean){
@@ -161,6 +162,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                                "              and user_id = fnd_profile.value('USER_ID')\n" + 
                                "           ) ejecutivo\n" + 
                                "         ,nvl(p.known_as,p.party_name) nombre_del_cliente\n" + 
+                               "         ,razon_social \n" + 
                                "   from XXQP_PDFT_CLIENTES_INFO_V p\n" + 
                                "  where p.party_id = ? ";
 
@@ -188,6 +190,10 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                   } NA 13072018 **/
                   if(null!=NombreDelClienteBean){
                       NombreDelClienteBean.setValue(pageContext,resultSet.getString("nombre_del_cliente"));
+                  }
+                  
+                  if(null!=RazonSocialDelClienteBean){
+                    RazonSocialDelClienteBean.setValue(pageContext,resultSet.getString("razon_social"));
                   }
                   
                 }
@@ -275,7 +281,8 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
                            BlobDomain pExamineByteStream2, 
                            String pStrExamineFileName3, 
                            String pStrExamineContentType3, 
-                           BlobDomain pExamineByteStream3 
+                           BlobDomain pExamineByteStream3,
+                           String pCurrencyValue
                            ) {
      OADBTransaction oADBTransaction =this.getOADBTransaction();
      oracle.jbo.domain.Number numMasiYPlatHeaderId = oADBTransaction.getSequenceValue("XXQP_PDFT_MYP_HEADER_S");
@@ -324,6 +331,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
          xxqpPdftMypHeaderVORowImpl.setFileName3(pStrExamineFileName3);
          xxqpPdftMypHeaderVORowImpl.setContentType3(pStrExamineContentType3);
          xxqpPdftMypHeaderVORowImpl.setFile3(pExamineByteStream3);
+         xxqpPdftMypHeaderVORowImpl.setCurrencyCode(pCurrencyValue);
          
          xxqpPdftMypHeaderVOImpl.insertRow(xxqpPdftMypHeaderVORowImpl);
          
@@ -964,6 +972,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
         MessageToken[] msgtoken1 = {new MessageToken("NO_FT",strNumeroFt)};
         MessageToken[] msgtoken2 = {new MessageToken("NO_FT",strNumeroFt)
                                    ,new MessageToken("NOMBRE_CLIENTE",pNombreDelCliente)
+                                   ,new MessageToken("RAZON_SOCIAL",pXxqpPdftMypHeaderVORowImpl.getRazonSocial())
                                    ,new MessageToken("PRODUCT_ID",pArticuloOracle)
                                    };
         
@@ -1473,17 +1482,32 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
         return retval; 
     }
     
+    /**
+     * 13092021
+     * Se valida en content type para evitar exepciones
+     * @param pMultipart
+     * @param pInputStream
+     * @param pFilename
+     * @param pContentType
+     * @throws IOException
+     * @throws MessagingException
+     */
     private static void addAttachment(Multipart pMultipart
                                      ,InputStream pInputStream
                                      ,String pFilename
                                      ,String pContentType) throws IOException, 
                                                               MessagingException {
-        
-        DataSource source = new ByteArrayDataSource(pInputStream,pContentType);
-        BodyPart messageBodyPart = new MimeBodyPart();        
-        messageBodyPart.setDataHandler(new DataHandler(source));
-        messageBodyPart.setFileName(pFilename);
-        pMultipart.addBodyPart(messageBodyPart);
+        if(null!=pContentType&&!"".equals(pContentType)){
+            DataSource source = new ByteArrayDataSource(pInputStream,pContentType);
+            BodyPart messageBodyPart = new MimeBodyPart();        
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName(pFilename);
+            pMultipart.addBodyPart(messageBodyPart);
+            if(null!=pInputStream){
+                pInputStream.close();
+            }
+            
+       }
     }
 
 
@@ -1597,6 +1621,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
         MessageToken[] msgtoken1 = {new MessageToken("NO_FT",strNumeroFt)};
         MessageToken[] msgtoken2 = {new MessageToken("NO_FT",strNumeroFt)
                                    ,new MessageToken("NOMBRE_CLIENTE",pNombreDelCliente)
+                                   ,new MessageToken("RAZON_SOCIAL",pXxqpPdftMypHeaderVORowImpl.getRazonSocial())
                                    ,new MessageToken("PRODUCT_ID",pArticuloOracle)
                                    };
         
@@ -1758,6 +1783,7 @@ public class MasivoYPlatinumAMImpl extends OAApplicationModuleImpl {
         MessageToken[] msgtoken1 = {new MessageToken("NO_FT",pXxqpPdftMypHeaderVORowImpl.getNumeroFt().toString())};
         MessageToken[] msgtoken2 = {new MessageToken("NO_FT",pXxqpPdftMypHeaderVORowImpl.getNumeroFt().toString())
                                    ,new MessageToken("NOMBRE_CLIENTE",pXxqpPdftMypHeaderVORowImpl.getNombreDelCliente())
+                                   ,new MessageToken("RAZON_SOCIAL",pXxqpPdftMypHeaderVORowImpl.getRazonSocial())
                                    ,new MessageToken("PRODUCT_ID",pXxqpPdftMypHeaderVORowImpl.getArticuloOracle())
                                    };
         strSubject = pageContext.getMessage("XXQP","XXQP_PDFT_CANCE_FT_SUBJECT_MSG",msgtoken1);
