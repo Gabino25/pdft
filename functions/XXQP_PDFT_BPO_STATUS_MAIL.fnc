@@ -5,7 +5,7 @@ retval varchar2(200);
 LS_STATUS_NFT_REF     VARCHAR2(200);
 begin 
 retval := 'NA';
- 
+ 27042022 2112
   IF PSI_NUMERO_FT_REF IS NULL THEN 
    RETURN 'ALTA';
   ELSE
